@@ -1,0 +1,9 @@
+{
+  "name": "fibook",
+  "version": "0.0.1",
+  "description": "Book manager",
+  "main": "server.js",
+  "repository": "https://github.com/isdenmois/fibook.git",
+  "author": "Denis Moiseev <isdenmois@gmail.com>",
+  "license": "MIT"
+}
