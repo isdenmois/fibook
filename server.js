@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const setup = require('./server/middleware');
 const resolve = require('path').resolve;
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
 const app = express();
 setup(app);

@@ -46,7 +46,7 @@ module.exports = {
                 loader: 'babel',
                 exclude: /node_modules/,
                 query: {
-                    presets: ['react-hmre']
+                    presets: ['react-hmre', "react", require('../internal/babel/develop')],
                 },
             },
             {
@@ -67,7 +67,6 @@ module.exports = {
     resolve: {
         modules: ['app', 'node_modules'],
         extensions: [
-            '',
             '.js',
             '.jsx',
         ],

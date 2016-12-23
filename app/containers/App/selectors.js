@@ -10,7 +10,23 @@ export const selectLoading = () => createSelector(
     (globalState) => globalState.get('loading')
 );
 
-const selectError = () => createSelector(
+export const selectError = () => createSelector(
     selectGlobal(),
     (globalState) => globalState.get('error')
 );
+
+export const selectLocationState = () => {
+    let prevRoutingState;
+    let prevRoutingStateJS;
+
+    return (state) => {
+        const routingState = state.get('route'); // or state.route
+
+        if (!routingState.equals(prevRoutingState)) {
+            prevRoutingState = routingState;
+            prevRoutingStateJS = routingState.toJS();
+        }
+
+        return prevRoutingStateJS;
+    };
+};

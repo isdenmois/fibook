@@ -20,6 +20,15 @@ import 'sanitize.css/sanitize.css';
 const initialState = {};
 const store = configureStore(initialState, browserHistory);
 
+// Sync history and store, as the react-router-redux reducer
+// is under the non-default key ("routing"), selectLocationState
+// must be provided for resolving how to retrieve the "route" in the state
+import { selectLocationState } from './containers/App/selectors';
+const history = syncHistoryWithStore(browserHistory, store, {
+    selectLocationState: selectLocationState(),
+});
+
+// Set up the router, wrapping all Routes in the App component
 import App from './containers/App';
 import createRoutes from './routes';
 const rootRoute = {
@@ -27,30 +36,17 @@ const rootRoute = {
     childRoutes: createRoutes(store),
 };
 
-const render = () => {
-    ReactDOM.render(
-        <Provider store={store}>
-            <Router
-                history={history}
-                routes={rootRoute}
-                render={
-                    // Scroll to top when going to a new page, imitating default browser
-                    // behaviour
-                    applyRouterMiddleware(useScroll())
-                }
-            />
-        </Provider>,
-        document.getElementById('app')
-    );
-};
-
-// Hot reloadable translation json files
-if (module.hot) {
-    // modules.hot.accept does not accept dynamic dependencies,
-    // have to be constants at compile-time
-    module.hot.accept(() => {
-        render();
-    });
-}
-
-render();
+ReactDOM.render(
+    <Provider store={store}>
+        <Router
+            history={history}
+            routes={rootRoute}
+            render={
+                // Scroll to top when going to a new page, imitating default browser
+                // behaviour
+                applyRouterMiddleware(useScroll())
+            }
+        />
+    </Provider>,
+    document.getElementById('app')
+);

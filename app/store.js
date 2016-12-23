@@ -8,7 +8,7 @@ import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware.default();
 
 export default function configureStore(initialState = {}, history) {
     // Create the store with two middlewares
@@ -55,4 +55,6 @@ export default function configureStore(initialState = {}, history) {
             });
         });
     }
+
+    return store;
 }
