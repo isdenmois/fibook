@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 /* Added routeReducer from react-router-redux */
 /* This captures routes as state */
-import { routeReducer } from 'react-router-redux';
+// import { routeReducer } from 'react-router-redux';
 
 /**
  * combineReducers is important to understand. As your app might grow in size
@@ -21,7 +21,7 @@ import bookReducer from './books';
 
 const rootReducer = combineReducers({
     books: bookReducer,
-    routing: routeReducer, // add routeReducer as a prop on state
+    // routing: routeReducer, // add routeReducer as a prop on state
 });
 
 export default rootReducer;

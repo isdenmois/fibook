@@ -3,14 +3,19 @@
  */
 import { createSelector } from 'reselect';
 
-export const selectGlobal = () => (state) => state.get('global');
+export const selectGlobal = () => state => state.books;
 
 export const selectLoading = () => createSelector(
     selectGlobal(),
-    (globalState) => globalState.get('loading')
+    globalState => globalState.get('loading'),
 );
 
 export const selectError = () => createSelector(
     selectGlobal(),
-    (globalState) => globalState.get('error')
+    globalState => globalState.get('error'),
+);
+
+export const selectBooks = () => createSelector(
+    selectGlobal(),
+    globalState => globalState.get('list'),
 );

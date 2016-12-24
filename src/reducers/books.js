@@ -12,6 +12,7 @@ import {
 const initialState = fromJS({
     loading: false,
     error: false,
+    list: [],
 });
 
 function appReducer(state = initialState, action) {
@@ -23,7 +24,8 @@ function appReducer(state = initialState, action) {
 
         case LOAD_BOOKS_SUCCESS:
             return state
-                .set('loading', false);
+                .set('loading', false)
+                .set('list', action.books);
 
         case LOAD_BOOKS_ERROR:
             return state

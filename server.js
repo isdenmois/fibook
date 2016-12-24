@@ -6,7 +6,6 @@ const setup = require('./webpack/middleware');
 const PORT = process.env.PORT || 4000;
 
 const app = express();
-setup(app);
 
 /**
  * Use express logger.
@@ -17,6 +16,8 @@ app.use(logger('dev'));
  * SQL REST queries.
  */
 app.use('/api/sql', require('./api/sql'));
+
+setup(app);
 
 /**
  * Run app.

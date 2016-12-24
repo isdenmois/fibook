@@ -7,6 +7,9 @@ import { connect } from 'react-redux';
 import { loadBooks } from '../../actions/books';
 
 class App extends Component {
+    componentDidMount() {
+        this.props.loadBooks();
+    }
     render() {
         const { children } = this.props;
         return (

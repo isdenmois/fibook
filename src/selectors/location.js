@@ -6,7 +6,7 @@ export const selectLocationState = () => {
     let prevRoutingState;
     let prevRoutingStateJS;
 
-    return (state) => {
+    return state => {
         const routingState = state.get('route'); // or state.route
 
         if (!routingState.equals(prevRoutingState)) {

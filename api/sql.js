@@ -15,6 +15,7 @@ const router = express.Router();
  * where {String} WHERE statement.
  * limit {String} row count limit. Default 20.
  * offset {String} pagination offset. Default 0.
+ * order {String} order field.
  */
 router.get('/', (req, res) => {
     const q = req.query;
@@ -26,6 +27,7 @@ router.get('/', (req, res) => {
     const where = q.where || '';
     const limit = q.limit || 20;
     const offset = q.offset || 0;
+    const order = q.order || '';
 
     // Build SELECT query.
     let query = 'SELECT ';
@@ -40,7 +42,12 @@ router.get('/', (req, res) => {
     if (where) {
         query += `WHERE ${where} \n`;
     }
-    query += `LIMIT ${offset}, ${limit}`;
+
+    if (order) {
+        query += `ORDER BY ${order}\n`;
+    }
+
+    query += `LIMIT ${offset}, ${limit}\n`;
 
     console.log(query);
 

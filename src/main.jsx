@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import RedBox from 'redbox-react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // Both configureStore and Root are required conditionally.
 import configureStore from './store/configureStore';
@@ -13,6 +14,7 @@ const store = configureStore();
 store.runSaga(rootSaga);
 
 const rootEl = document.getElementById('root');
+injectTapEventPlugin();
 
 // necessary for hot reloading
 let renderDom = () => {
