@@ -2164,6 +2164,10 @@ ignore@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.2.0.tgz#8d88f03c3002a0ac52114db25d2c673b0bf1e435"
 
+immutable@^3.8.1:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
+
 imports-loader:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/imports-loader/-/imports-loader-0.7.0.tgz#468c04de8075941cfab28146c755c24cc1f36ccd"
@@ -3585,7 +3589,7 @@ react-router:
     loose-envify "^1.2.0"
     warning "^3.0.0"
 
-react-router-redux@2:
+react-router-redux@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-2.1.0.tgz#ac1e822ae0e7ecddd9499c5adde32dcbe5e67196"
 
@@ -3733,6 +3737,10 @@ redux-logger@^2.7.4:
   resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-2.7.4.tgz#891e5d29e7f111d08b5781a237b9965b5858c7f8"
   dependencies:
     deep-diff "0.3.4"
+
+redux-saga@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.13.0.tgz#9294386550deb0d56bc9a1b3c90a613e7ddb6593"
 
 redux-thunk@^2.1.0:
   version "2.1.0"

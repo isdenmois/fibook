@@ -1,12 +1,12 @@
 /**
- * App reducer.
+ * Books reducer.
  */
 import { fromJS } from 'immutable';
 import {
     LOAD_BOOKS,
     LOAD_BOOKS_ERROR,
-    LOAD_BOOKS_SUCCESS
-} from './constants';
+    LOAD_BOOKS_SUCCESS,
+} from '../constants/books';
 
 // Initial state of App.
 const initialState = fromJS({

@@ -1,3 +1,6 @@
 .idea
 onyx.db
 node_modules
+build
+yarn-error.log
+npm-debug.log

@@ -17,7 +17,10 @@ import { routeReducer } from 'react-router-redux';
  * More info: http://rackt.org/redux/docs/api/combineReducers.html
  */
 
+import bookReducer from './books';
+
 const rootReducer = combineReducers({
+    books: bookReducer,
     routing: routeReducer, // add routeReducer as a prop on state
 });
 

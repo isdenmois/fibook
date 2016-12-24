@@ -8,7 +8,7 @@ const APP_PATH = `${ROOT_PATH}/src`;
 module.exports = {
     context: APP_PATH,
     debug: true,
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     entry: [
         'webpack-hot-middleware/client',
         `${APP_PATH}/main`

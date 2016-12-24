@@ -1,5 +1,5 @@
 /**
- * App constants.
+ * Books constants.
  */
 
 export const LOAD_BOOKS = 'LOAD_BOOKS';

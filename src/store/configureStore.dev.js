@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createLogger from 'redux-logger';
-import thunk from 'redux-thunk';
 import { browserHistory } from 'react-router';
 import { syncHistory } from 'react-router-redux';
+import createSagaMiddleware, { END } from 'redux-saga';
 
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
@@ -10,11 +10,12 @@ import DevTools from '../containers/DevTools';
 // The reduxRouterMiddleware will look for route actions created by push, replace, etc.
 // and applies them to the history.
 const reduxRouterMiddleware = syncHistory(browserHistory);
+const sagaMiddleware = createSagaMiddleware();
 
 const logger = createLogger();
 
 const finalCreateStore = compose(
-    applyMiddleware(logger, thunk, reduxRouterMiddleware),
+    applyMiddleware(logger, reduxRouterMiddleware, sagaMiddleware),
     DevTools.instrument(),
 )(createStore);
 
@@ -27,5 +28,9 @@ module.exports = function configureStore(initialState) {
             store.replaceReducer(rootReducer),
         );
     }
+
+    store.runSaga = sagaMiddleware.run;
+    store.close = () => store.dispatch(END);
+
     return store;
 };

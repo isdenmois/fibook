@@ -4,11 +4,14 @@ import RedBox from 'redbox-react';
 
 // Both configureStore and Root are required conditionally.
 import configureStore from './store/configureStore';
+import rootSaga from './sagas';
 
 /* global document */
 /* eslint-disable global-require */
 
 const store = configureStore();
+store.runSaga(rootSaga);
+
 const rootEl = document.getElementById('root');
 
 // necessary for hot reloading

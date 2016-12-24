@@ -1,11 +1,11 @@
 /**
- * App actions.
+ * Books actions.
  */
 import {
     LOAD_BOOKS,
     LOAD_BOOKS_SUCCESS,
     LOAD_BOOKS_ERROR,
-} from './constants';
+} from '../constants/books';
 
 /**
  * Load the books.
@@ -18,14 +18,15 @@ export function loadBooks() {
 
 /**
  * Dispatched when books loaded.
- * 
+ *
  * @param {array} bookList
- * 
+ *
  * @returns {object}
  */
 export function booksLoaded(bookList) {
     return {
         type: LOAD_BOOKS_SUCCESS,
+        books: bookList,
     };
 }
 
