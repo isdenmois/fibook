@@ -8,6 +8,7 @@ const middleware = require('webpack-dev-middleware')(compiler, {
     publicPath: config.output.publicPath,
     silent: true,
 });
+const dllConfig = require('./config').dllPlugin;
 
 module.exports = function setup(app) {
     app.use(middleware);
