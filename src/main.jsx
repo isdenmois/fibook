@@ -15,7 +15,7 @@ store.runSaga(rootSaga);
 const rootEl = document.getElementById('root');
 
 // necessary for hot reloading
-let render = () => {
+let renderDom = () => {
     const Root = require('./containers/Root').default;
     ReactDOM.render(
         <Root store={store} />,
@@ -24,14 +24,14 @@ let render = () => {
 };
 
 if (module.hot) {
-    const renderApp = render;
+    const renderApp = renderDom;
     const renderError = (error) => {
         ReactDOM.render(
             <RedBox error={error} />,
             rootEl,
         );
     };
-    render = () => {
+    renderDom = () => {
         try {
             renderApp();
         } catch (error) {
@@ -39,8 +39,8 @@ if (module.hot) {
         }
     };
     module.hot.accept('./containers/Root', () => {
-        setTimeout(render);
+        setTimeout(renderDom);
     });
 }
 
-render();
+renderDom();

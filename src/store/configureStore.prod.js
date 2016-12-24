@@ -12,6 +12,5 @@ const finalCreateStore = compose(
 )(createStore);
 
 module.exports = function configureStore(initialState) {
-    const store = finalCreateStore(rootReducer, initialState);
-    return store;
+    return finalCreateStore(rootReducer, initialState);
 };

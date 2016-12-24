@@ -8,30 +8,32 @@ const ROOT_PATH = path.join(__dirname, '..');
 const APP_PATH = `${ROOT_PATH}/src`;
 
 module.exports = {
-    devtool: 'source-map',
     entry: `${APP_PATH}/main`,
     output: {
         path: `${ ROOT_PATH }/build`,
         publicPath: '/',
         filename: 'bundle-[hash].js'
     },
+    resolve: {
+        extensions: ['', '.js', '.jsx']
+    },
     module: {
         preLoaders: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 loader: 'eslint',
                 exclude: /node_modules/,
             }
         ],
-
         loaders: [
             {
                 test: /\.jsx?$/,
-                loaders: [strip.loader('debug'), 'babel'],
+                loaders: [strip.loader('debug'), 'babel?presets=es2015'],
                 exclude: /node_modules/,
             },
             {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000'
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                loader: 'url-loader?limit=100000',
             },
             {
                 test: /\.scss$/,
@@ -43,7 +45,7 @@ module.exports = {
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
         new HtmlWebpackPlugin({
-            template: `${APP_PATH}/template.html`
+            template: `${APP_PATH}/index.html`
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')

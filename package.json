@@ -6,7 +6,20 @@
     "repository": "https://github.com/isdenmois/fibook.git",
     "author": "Denis Moiseev <isdenmois@gmail.com>",
     "license": "MIT",
-    "scripts": {},
+    "scripts": {
+        "analyze:clean": "rimraf stats.json",
+        "preanalyze": "npm run analyze:clean",
+        "analyze": "node ./scripts/analyze.js",
+        "postinstall": "npm run build:dll",
+        "prebuild": "npm run build:clean",
+        "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.prod.js --color -p --progress",
+        "build:details": "npm run build -- --display-error-details",
+        "build:clean": "rimraf ./build",
+        "build:dll": "node ./webpack/dependencies.js",
+        "start": "cross-env NODE_ENV=development node server",
+        "start:prod": "cross-env NODE_ENV=production node server",
+        "lint": "eslint src"
+    },
     "dependencies": {
         "immutable": "^3.8.1",
         "lodash": "^4.17.3",
@@ -22,7 +35,8 @@
         "redux-devtools-log-monitor": "^1.1.1",
         "redux-logger": "^2.7.4",
         "redux-saga": "^0.13.0",
-        "redux-thunk": "^2.1.0"
+        "redux-thunk": "^2.1.0",
+        "reselect": "^2.5.4"
     },
     "devDependencies": {
         "add-asset-html-webpack-plugin": "^1.0.2",
@@ -40,6 +54,7 @@
         "eslint-plugin-import": "^2.2.0",
         "eslint-plugin-jsx-a11y": "^2.2.3",
         "eslint-plugin-react": "^6.8.0",
+        "exports-loader": "^0.6.3",
         "express": "^4.14.0",
         "extract-text-webpack-plugin": "^1.0.1",
         "file-loader": "^0.9.0",
