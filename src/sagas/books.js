@@ -4,10 +4,17 @@
 import { takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects';
 import { stringify } from 'querystring';
+import { normalize, Schema, arrayOf } from 'normalizr';
 
 import { LOAD_BOOKS } from '../constants/books';
 import { booksLoaded, booksLoadingError } from '../actions/books';
 import request from '../utils/request';
+
+/**
+ * Define book schema for normalizr.
+ */
+export const bookSchema = new Schema('book', { idAttribute: 'MD5' });
+export const bookArray = arrayOf(bookSchema);
 
 export function* getBooks() {
     const params = stringify({
@@ -24,8 +31,10 @@ export function* getBooks() {
     const requestURL = `/api/sql?${params}`;
 
     try {
-        const repos = yield call(request, requestURL);
-        yield put(booksLoaded(repos));
+        const books = yield call(request, requestURL);
+        const { result, entities } = normalize(books, bookArray);
+
+        yield put(booksLoaded(result, entities));
     } catch (err) {
         yield put(booksLoadingError(err));
     }

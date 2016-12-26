@@ -1,8 +1,11 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
+const bodyParser = require('body-parser');
 const db = new sqlite3.Database('onyx.db');
 
 const router = express.Router();
+
+router.use(bodyParser.json());
 
 /**
  * Get query.
@@ -60,6 +63,47 @@ router.get('/', (req, res) => {
         }
         else {
             res.send(data);
+        }
+    });
+});
+
+router.patch('/:table', (req, res) => {
+    const body = req.body;
+
+    // Collect query params.
+    const table = req.params.table;
+    let where;
+    let fields = [];
+
+    for (let field in body) {
+        if (field === 'where') {
+            where = body.where;
+        }
+        else {
+            fields.push(`${field}=${body[field]}`);
+        }
+    }
+
+    fields = fields.join(',');
+
+    // Build query.
+    let query = `UPDATE ${table}\n`;
+    query += `SET ${fields}\n`;
+
+    if (where) {
+        query += `WHERE ${where}`;
+    }
+
+    db.run(query, err => {
+        if (err) {
+            res.send({
+                error: err.message,
+            });
+        }
+        else {
+            res.send({
+                ok: true,
+            });
         }
     });
 });

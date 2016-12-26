@@ -18,9 +18,11 @@ import { combineReducers } from 'redux';
  */
 
 import bookReducer from './books';
+import entitiesReducer from './entities';
 
 const rootReducer = combineReducers({
     books: bookReducer,
+    entities: entitiesReducer,
     // routing: routeReducer, // add routeReducer as a prop on state
 });
 

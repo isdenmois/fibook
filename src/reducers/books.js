@@ -6,6 +6,7 @@ import {
     LOAD_BOOKS,
     LOAD_BOOKS_ERROR,
     LOAD_BOOKS_SUCCESS,
+    UPDATE_BOOK_STATUS,
 } from '../constants/books';
 
 // Initial state of App.
@@ -31,6 +32,9 @@ function appReducer(state = initialState, action) {
             return state
                 .set('error', action.error)
                 .set('loading', false);
+
+        case UPDATE_BOOK_STATUS:
+            return state;
 
     }
 
