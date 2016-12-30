@@ -9,10 +9,9 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { grey400 } from 'material-ui/styles/colors';
 
 import {
-    selectBooks,
     selectLoading,
 } from '../../selectors/books';
-import { selectBookEntities } from '../../selectors/entities';
+import { selectBookEntities, selectBooksByType } from '../../selectors/entities';
 import Loading from '../../components/Loading';
 import { updateBookStatus } from '../../actions/books';
 
@@ -41,8 +40,8 @@ class HomePage extends Component {
         );
     }
 
-    createListItem(MD5) {
-        const book = this.props.entities.get(MD5);
+    createListItem(book) {
+        const MD5 = book.get('MD5');
         const title = book.get('title');
         const author = book.get('author');
         const status = book.get('status');
@@ -83,12 +82,11 @@ class HomePage extends Component {
 HomePage.propTypes = {
     updateBookStatus: PropTypes.func.isRequired,
     books: PropTypes.object,
-    entities: PropTypes.object,
     loading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
-    books: selectBooks(),
+    books: selectBooksByType(1),
     entities: selectBookEntities(),
     loading: selectLoading(),
 });
