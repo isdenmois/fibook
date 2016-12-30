@@ -1,7 +1,7 @@
 const express = require('express');
 const logger = require('morgan');
 const resolve = require('path').resolve;
-const setup = require('./webpack/middleware');
+const webpackMiddleware = require('./webpack/middleware');
 
 const PORT = process.env.PORT || 4000;
 
@@ -16,8 +16,12 @@ app.use(logger('dev'));
  * SQL REST queries.
  */
 app.use('/api/sql', require('./api/sql'));
+app.use('/api/book', require('./api/book'));
 
-setup(app);
+/**
+ * Add webpack middleware.
+ */
+webpackMiddleware(app);
 
 /**
  * Run app.
