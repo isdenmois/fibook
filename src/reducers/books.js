@@ -8,13 +8,18 @@ import {
     LOAD_BOOKS_SUCCESS,
 } from '../constants/books';
 
-// Initial state of App.
+// Initial state of books list.
 const initialState = fromJS({
     loading: false,
     error: false,
     list: [],
 });
 
+/**
+ * Books reducer implementation.
+ * @param state
+ * @param action
+ */
 function appReducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_BOOKS:
