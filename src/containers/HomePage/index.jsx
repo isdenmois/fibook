@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { Tabs, Tab } from 'material-ui/Tabs';
 import { List, ListItem } from 'material-ui/List';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -66,27 +67,42 @@ class HomePage extends Component {
     }
 
     render() {
-        const { books, loading } = this.props;
+        const { newBooks, readBooks, loading } = this.props;
         if (loading) {
             return <Loading />;
         }
 
         return (
-            <List>
-                {books.map(this.createListItem)}
-            </List>
+            <Tabs>
+                <Tab
+                    label="Новые"
+                >
+                    <List>
+                        {newBooks.map(this.createListItem)}
+                    </List>
+                </Tab>
+                <Tab
+                    label="Прочитанные"
+                >
+                    <List>
+                        {readBooks.map(this.createListItem)}
+                    </List>
+                </Tab>
+            </Tabs>
         );
     }
 }
 
 HomePage.propTypes = {
     updateBookStatus: PropTypes.func.isRequired,
-    books: PropTypes.object,
+    newBooks: PropTypes.object,
+    readBooks: PropTypes.object,
     loading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
-    books: selectBooksByType(1),
+    newBooks: selectBooksByType(0),
+    readBooks: selectBooksByType(1),
     entities: selectBookEntities(),
     loading: selectLoading(),
 });
