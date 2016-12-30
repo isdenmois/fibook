@@ -23,10 +23,12 @@ export function* getBooks() {
             'Authors AS author',
             'Title AS title',
             'Status AS status',
+            'LastAccess',
         ],
         table: 'library_metadata',
         // where: 'Type IN ("fb2", "epub")',
-        order: 'LastModified DESC',
+        order: 'LastAccess DESC',
+        limit: 100,
     });
     const requestURL = `/api/sql?${params}`;
 

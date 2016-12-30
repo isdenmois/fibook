@@ -16,7 +16,9 @@ export const selectBooksByType = type => createSelector(
     (globalState) => {
         const books = globalState.get('book');
         if (books) {
-            return books.filter(data => data.get('status') === type);
+            return books
+                .filter(data => data.get('status') === type)
+                .sort((a, b) => b.get('LastAccess') - a.get('LastAccess'));
         }
 
         return new List();
