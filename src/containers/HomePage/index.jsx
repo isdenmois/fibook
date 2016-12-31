@@ -8,6 +8,7 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { grey400 } from 'material-ui/styles/colors';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import {
     selectLoading,
@@ -15,6 +16,7 @@ import {
 import { selectBookEntities, selectBooksByType } from '../../selectors/entities';
 import Loading from '../../components/Loading';
 import { updateBookStatus } from '../../actions/books';
+import FileInput from '../../components/FileInput';
 
 const iconButtonElement = (
     <IconButton>
@@ -66,6 +68,11 @@ class HomePage extends Component {
         console.log(MD5);
     }
 
+    fileSelected(file, contents) {
+        console.log(file);
+        console.log('contents length: ', contents.length);
+    }
+
     render() {
         const { newBooks, readBooks, loading } = this.props;
         if (loading) {
@@ -80,6 +87,9 @@ class HomePage extends Component {
                     <List>
                         {newBooks.map(this.createListItem)}
                     </List>
+                    <FileInput onFileSelect={this.fileSelected}>
+                        <ContentAdd />
+                    </FileInput>
                 </Tab>
                 <Tab
                     label="Прочитанные"

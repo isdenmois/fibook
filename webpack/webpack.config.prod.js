@@ -37,7 +37,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('style', 'css?modules!sass'),
+                loader: ExtractTextPlugin.extract('style', 'css?camelCase&modules!sass'),
                 exclude: /node_modules/
             }
         ]

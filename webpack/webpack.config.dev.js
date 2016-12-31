@@ -75,7 +75,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loader: 'style!css!sass',
+                loader: 'style!css?camelCase!sass',
                 exclude: /node_modules/
             }
         ]

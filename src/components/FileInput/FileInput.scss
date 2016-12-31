@@ -1,0 +1,19 @@
+$edgePadding: 50px;
+
+:local(.file-input) {
+    bottom: $edgePadding;
+    height: 56px;
+    overflow: hidden;
+    padding: 8px;
+    position: fixed;
+    right: $edgePadding;
+    width: 56px;
+
+    input {
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        z-index: 5;
+    }
+}
