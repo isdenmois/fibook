@@ -13,4 +13,14 @@ describe('Request', () => {
             expect(toJSON).toHaveBeenCalled();
         });
     });
+
+    it('should fail', () => {
+        global.fetch = jest.fn(() => Promise.resolve({
+            status: 404,
+        }));
+
+        return request('fail test', {}).catch(() => {
+            expect(global.fetch).toHaveBeenCalledWith('fail test', {});
+        });
+    });
 });
