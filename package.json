@@ -85,6 +85,7 @@
         "whatwg-fetch": "^2.0.1"
     },
     "jest": {
+        "automock": true,
         "collectCoverage": true,
         "collectCoverageFrom": [
             "src/**/*.js",
@@ -92,6 +93,14 @@
         ],
         "moduleNameMapper": {
             "\\.scss$": "identity-obj-proxy"
-        }
+        },
+        "unmockedModulePathPatterns": [
+            "immutable",
+            "enzyme",
+            "lodash",
+            "material-ui",
+            "react",
+            "src"
+        ]
     }
 }
