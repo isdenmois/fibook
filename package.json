@@ -87,7 +87,8 @@
     "jest": {
         "collectCoverage": true,
         "collectCoverageFrom": [
-            "src/**/*.js"
+            "src/**/*.js",
+            "src/**/*.jsx"
         ],
         "moduleNameMapper": {
             "\\.scss$": "identity-obj-proxy"
