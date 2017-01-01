@@ -41,6 +41,33 @@ describe('Books reducer', () => {
         expect(state.toJS()).toEqual(expectedState);
     });
 
+    it('should handle DELETE_BOOK action', () => {
+        const action = {
+            type: types.DELETE_BOOK,
+            MD5: '1234',
+        };
+        const initialState = fromJS({
+            book: {
+                123: {
+                    status: 0,
+                },
+                1234: {
+                    status: 0,
+                },
+            }
+        });
+        const state = reducer(initialState, action);
+        const expectedState = {
+            book: {
+                123: {
+                    status: 0,
+                },
+            }
+        };
+
+        expect(state.toJS()).toEqual(expectedState);
+    });
+
     it('should add entities', () => {
         const action = {
             entities: {
