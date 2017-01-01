@@ -21,6 +21,7 @@
         "lint": "eslint src"
     },
     "dependencies": {
+        "elementtree": "^0.1.6",
         "immutable": "^3.8.1",
         "lodash": "^4.17.3",
         "material-ui": "^0.16.5",
@@ -98,6 +99,7 @@
             "immutable",
             "enzyme",
             "lodash",
+            "elementtree",
             "material-ui",
             "react",
             "src"

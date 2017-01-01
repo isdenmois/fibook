@@ -17,6 +17,7 @@ import { selectBookEntities, selectBooksByType } from '../../selectors/entities'
 import Loading from '../../components/Loading';
 import { updateBookStatus } from '../../actions/books';
 import FileInput from '../../components/FileInput';
+import BookParser from '../../utils/BookParser';
 
 const iconButtonElement = (
     <IconButton>
@@ -69,8 +70,9 @@ class HomePage extends Component {
     }
 
     fileSelected(file, contents) {
-        console.log(file);
-        console.log('contents length: ', contents.length);
+        const book = new BookParser(contents);
+        console.log('title: ', book.title, '; author: ', book.author);
+        console.log('image: ', book.image);
     }
 
     render() {

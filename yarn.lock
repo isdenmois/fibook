@@ -1566,6 +1566,12 @@ ejs-loader@^0.3.0:
     loader-utils "^0.2.7"
     lodash "^3.6.0"
 
+elementtree@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/elementtree/-/elementtree-0.1.6.tgz#2ac4c46ea30516c8c4cbdb5e3ac7418e592de20c"
+  dependencies:
+    sax "0.3.5"
+
 emojis-list@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-2.1.0.tgz#4daa4d9db00f9819880c79fa457ae5b09a1fd389"
@@ -4895,6 +4901,10 @@ sass-loader@^4.1.1:
     async "^2.0.1"
     loader-utils "^0.2.15"
     object-assign "^4.1.0"
+
+sax@0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-0.3.5.tgz#88fcfc1f73c0c8bbd5b7c776b6d3f3501eed073d"
 
 sax@^1.1.4, sax@~1.2.1:
   version "1.2.1"
