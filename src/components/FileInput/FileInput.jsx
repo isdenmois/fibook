@@ -24,13 +24,29 @@ export default class FileInput extends Component {
         }
     }
 
-    readFile(file) {
+    readFile(file, encode = 'utf-8') {
         const reader = new FileReader();
+
         reader.onload = (event) => {
-            this.props.onFileSelect(file, event.target.result);
+            const result = event.target.result;
+
+            // Find file encoding.
+            const match = result.slice(0, 200).match(/encoding="(.*?)"/);
+            let encoding;
+            if (match && match[1]) {
+                encoding = match[1].toLowerCase();
+            } else {
+                encoding = 'utf-8';
+            }
+
+            if (encoding !== encode) {
+                this.readFile(file, encoding);
+            } else {
+                this.props.onFileSelect(file, result);
+            }
         };
 
-        reader.readAsText(file);
+        reader.readAsText(file, encode);
     }
 
     render() {

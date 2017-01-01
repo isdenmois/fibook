@@ -4,12 +4,13 @@ import FileInput from './index';
 
 describe('<FileInput />', () => {
     const fn = jest.fn();
+    const onload = {
+        result: 'test result',
+    };
     global.FileReader = function () {};
     global.FileReader.prototype.readAsText = function (file) {
         this.onload({
-            target: {
-                result: 'test result',
-            },
+            target: onload,
         });
     };
 
@@ -42,6 +43,16 @@ describe('<FileInput />', () => {
         };
 
         input.simulate('change', { target });
-        expect(fn).toHaveBeenCalledWith('test file', 'test result');
+        expect(fn).toHaveBeenCalledWith('test file', onload.result);
+    });
+
+    it('should correctly convert file', () => {
+        const target = {
+            files: ['test file'],
+        };
+        onload.result = '<xml encoding="windows-1251">';
+
+        input.simulate('change', { target });
+        expect(fn).toHaveBeenCalledWith('test file', onload.result);
     });
 });
