@@ -22,6 +22,7 @@
         "test": "jest"
     },
     "dependencies": {
+        "atob": "^2.0.3",
         "immutable": "^3.8.1",
         "lodash": "^4.17.3",
         "material-ui": "^0.16.5",
@@ -99,6 +100,7 @@
             "\\.scss$": "identity-obj-proxy"
         },
         "unmockedModulePathPatterns": [
+            "atob",
             "immutable",
             "enzyme",
             "lodash",

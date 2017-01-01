@@ -15,9 +15,8 @@ import {
 } from '../../selectors/books';
 import { selectBookEntities, selectBooksByType } from '../../selectors/entities';
 import Loading from '../../components/Loading';
-import { updateBookStatus } from '../../actions/books';
+import { updateBookStatus, createNewBook } from '../../actions/books';
 import FileInput from '../../components/FileInput';
-import BookParser from '../../utils/BookParser';
 
 const iconButtonElement = (
     <IconButton>
@@ -69,14 +68,14 @@ class HomePage extends Component {
         console.log(MD5);
     }
 
-    fileSelected(file, contents) {
-        const book = new BookParser(contents);
-        console.log('title: ', book.title, '; author: ', book.author);
-        console.log('image: ', book.image);
-    }
-
     render() {
-        const { newBooks, readBooks, loading } = this.props;
+        const {
+            createNewBook: fileSelect,
+            loading,
+            newBooks,
+            readBooks,
+        } = this.props;
+
         if (loading) {
             return <Loading />;
         }
@@ -89,7 +88,7 @@ class HomePage extends Component {
                     <List>
                         {newBooks.map(this.createListItem)}
                     </List>
-                    <FileInput onFileSelect={this.fileSelected}>
+                    <FileInput onFileSelect={fileSelect}>
                         <ContentAdd />
                     </FileInput>
                 </Tab>
@@ -106,6 +105,7 @@ class HomePage extends Component {
 }
 
 HomePage.propTypes = {
+    createNewBook: PropTypes.func.isRequired,
     updateBookStatus: PropTypes.func.isRequired,
     newBooks: PropTypes.object,
     readBooks: PropTypes.object,
@@ -120,6 +120,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapActionsToProps = {
+    createNewBook,
     updateBookStatus,
 };
 

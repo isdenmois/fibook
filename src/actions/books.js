@@ -6,7 +6,22 @@ import {
     LOAD_BOOKS_SUCCESS,
     LOAD_BOOKS_ERROR,
     UPDATE_BOOK_STATUS,
+    CREATE_NEW_BOOK,
 } from '../constants/books';
+
+/**
+ * Create new book from FB2.
+ * @param file
+ * @param contents
+ * @returns {{type, file: *}}
+ */
+export function createNewBook(file, contents) {
+    return {
+        type: CREATE_NEW_BOOK,
+        contents,
+        file,
+    };
+}
 
 /**
  * Load the books.

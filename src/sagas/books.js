@@ -6,15 +6,60 @@ import { call, put, fork } from 'redux-saga/effects';
 import { stringify } from 'querystring';
 import { normalize, Schema, arrayOf } from 'normalizr';
 
-import { LOAD_BOOKS, UPDATE_BOOK_STATUS } from '../constants/books';
+import {
+    CREATE_NEW_BOOK,
+    LOAD_BOOKS,
+    UPDATE_BOOK_STATUS,
+} from '../constants/books';
 import { booksLoaded, booksLoadingError } from '../actions/books';
 import request from '../utils/request';
+import BookParser from '../utils/BookParser';
+import base64 from '../utils/base64';
 
 /**
  * Define book schema for normalizr.
  */
 export const bookSchema = new Schema('book', { idAttribute: 'MD5' });
 export const bookArray = arrayOf(bookSchema);
+
+/**
+ * Create new book saga.
+ */
+export function* createNewBook({ contents, file }) {
+    const book = new BookParser(contents);
+    const {
+        author,
+        image: imageData,
+        title,
+    } = book;
+    let image;
+
+    /* global FormData */
+    const requestURL = '/api/book';
+    const body = new FormData();
+
+    body.append('author', author);
+    body.append('title', title);
+    body.append('file', file);
+
+    if (imageData && imageData.data) {
+        image = base64(imageData.data, imageData.type);
+        image.lastModifiedDate = new Date();
+
+        body.append('image', image);
+    }
+
+    const options = {
+        method: 'POST',
+        body,
+    };
+
+    try {
+        yield call(request, requestURL, options);
+    } catch (err) {
+        console.error(err);
+    }
+}
 
 /**
  * Get books saga.
@@ -73,6 +118,10 @@ export function* updateBookStatus({ MD5, status }) {
     } catch (err) {
         console.error(err);
     }
+}
+
+export function* createNewBookWatcher() {
+    yield fork(takeLatest, CREATE_NEW_BOOK, createNewBook);
 }
 
 export function* getBooksWatcher() {
