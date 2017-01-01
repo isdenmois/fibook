@@ -7,6 +7,7 @@ import {
     LOAD_BOOKS_ERROR,
     UPDATE_BOOK_STATUS,
     CREATE_NEW_BOOK,
+    DELETE_BOOK,
 } from '../constants/books';
 
 /**
@@ -18,6 +19,17 @@ export function createNewBook(file) {
     return {
         type: CREATE_NEW_BOOK,
         file,
+    };
+}
+
+/**
+ * Delete book by MD5.
+ * @param MD5
+ */
+export function deleteBook(MD5) {
+    return {
+        type: DELETE_BOOK,
+        MD5,
     };
 }
 

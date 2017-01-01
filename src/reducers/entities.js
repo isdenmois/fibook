@@ -1,7 +1,10 @@
 import { Map, fromJS } from 'immutable';
 import forEach from 'lodash/forEach';
 
-import { UPDATE_BOOK_STATUS } from '../constants/books';
+import {
+    UPDATE_BOOK_STATUS,
+    DELETE_BOOK,
+} from '../constants/books';
 
 const initialState = new Map();
 
@@ -10,6 +13,10 @@ export default function entitiesReducer(state = initialState, action) {
         case UPDATE_BOOK_STATUS:
             return state
                 .setIn(['book', action.MD5, 'status'], action.status);
+
+        case DELETE_BOOK:
+            return state
+                .deleteIn(['book', action.MD5]);
     }
 
     if (action.entities) {

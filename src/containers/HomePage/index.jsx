@@ -15,7 +15,11 @@ import {
 } from '../../selectors/books';
 import { selectBookEntities, selectBooksByType } from '../../selectors/entities';
 import Loading from '../../components/Loading';
-import { updateBookStatus, createNewBook } from '../../actions/books';
+import {
+    createNewBook,
+    deleteBook,
+    updateBookStatus,
+} from '../../actions/books';
 import FileInput from '../../components/FileInput';
 
 const iconButtonElement = (
@@ -33,7 +37,7 @@ class HomePage extends Component {
     createItemMenu(MD5, status) {
         const statusTitle = status > 0 ? 'Не прочитано' : 'Прочитано';
         const updateStatus = this.updateItemStatus.bind(this, MD5, status);
-        const deleteItem = this.deleteItem.bind(this, MD5);
+        const deleteItem = () => this.props.deleteBook(MD5);
 
         return (
             <IconMenu iconButtonElement={iconButtonElement}>
@@ -62,10 +66,6 @@ class HomePage extends Component {
     updateItemStatus(MD5, status) {
         const newStatus = status > 0 ? 0 : 1;
         this.props.updateBookStatus(MD5, newStatus);
-    }
-
-    deleteItem(MD5) {
-        console.log(MD5);
     }
 
     render() {
@@ -114,6 +114,7 @@ class HomePage extends Component {
 
 HomePage.propTypes = {
     createNewBook: PropTypes.func.isRequired,
+    deleteBook: PropTypes.func.isRequired,
     updateBookStatus: PropTypes.func.isRequired,
     newBooks: PropTypes.object,
     readBooks: PropTypes.object,
@@ -129,6 +130,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapActionsToProps = {
     createNewBook,
+    deleteBook,
     updateBookStatus,
 };
 
