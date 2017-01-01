@@ -40,4 +40,14 @@ describe('Books actions', () => {
 
         expect(actions.updateBookStatus(MD5, 1)).toEqual(expectedAction);
     });
+
+    it('should create an action for bookUploading', () => {
+        const file = '123456';
+        const expectedAction = {
+            type: types.CREATE_NEW_BOOK,
+            file,
+        };
+
+        expect(actions.createNewBook(file)).toEqual(expectedAction);
+    });
 });

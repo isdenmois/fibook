@@ -43,16 +43,6 @@ describe('<FileInput />', () => {
         };
 
         input.simulate('change', { target });
-        expect(fn).toHaveBeenCalledWith('test file', onload.result);
-    });
-
-    it('should correctly convert file', () => {
-        const target = {
-            files: ['test file'],
-        };
-        onload.result = '<xml encoding="windows-1251">';
-
-        input.simulate('change', { target });
-        expect(fn).toHaveBeenCalledWith('test file', onload.result);
+        expect(fn).toHaveBeenCalledWith('test file');
     });
 });

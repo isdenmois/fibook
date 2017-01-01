@@ -29,6 +29,22 @@ describe('Books reducer', () => {
         expect(state.toJS()).toEqual(expectedState);
     });
 
+
+    it('should handle CREATE_NEW_BOOK action', () => {
+        const action = { type: types.CREATE_NEW_BOOK };
+        const initialState = fromJS({
+            error: true,
+            loading: false,
+        });
+        const state = reducer(initialState, action);
+        const expectedState = {
+            error: false,
+            loading: true,
+        };
+
+        expect(state.toJS()).toEqual(expectedState);
+    });
+
     it('should handle LOAD_BOOKS_SUCCESS action', () => {
         const bookList = [1, 2, 4];
         const action = {
