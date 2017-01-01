@@ -17,8 +17,7 @@ import {
     loadBooks,
 } from '../actions/books';
 import request from '../utils/request';
-import BookParser from '../utils/BookParser';
-import base64 from '../utils/base64';
+import bookDataParser from '../utils/bookData';
 
 /**
  * Define book schema for normalizr.
@@ -29,14 +28,12 @@ export const bookArray = arrayOf(bookSchema);
 /**
  * Create new book saga.
  */
-export function* createNewBook({ contents, file }) {
-    const book = new BookParser(contents);
+export function* createNewBook({ file }) {
     const {
         author,
-        image: imageData,
+        image,
         title,
-    } = book;
-    let image;
+    } = yield call(bookDataParser, file);
 
     /* global FormData */
     const requestURL = '/api/book';
@@ -46,8 +43,7 @@ export function* createNewBook({ contents, file }) {
     body.append('title', title);
     body.append('file', file);
 
-    if (imageData && imageData.data) {
-        image = base64(imageData.data, imageData.fileName, imageData.type);
+    if (image) {
         body.append('image', image);
     }
 

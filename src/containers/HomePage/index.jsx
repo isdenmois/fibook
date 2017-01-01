@@ -77,7 +77,15 @@ class HomePage extends Component {
         } = this.props;
 
         if (loading) {
-            return <Loading />;
+            return (
+                <div>
+                    <Tabs>
+                        <Tab label="Новые" />
+                        <Tab label="Прочитанные" />
+                    </Tabs>
+                    <Loading />
+                </div>
+            );
         }
 
         return (

@@ -32,6 +32,10 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
+                test: /workers\/(.*)\.js$/,
+                loaders: ['webworker', strip.loader('debug'), 'babel'],
+            },
+            {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
                 loader: 'url-loader?limit=100000',
             },

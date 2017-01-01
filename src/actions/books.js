@@ -12,13 +12,11 @@ import {
 /**
  * Create new book from FB2.
  * @param file
- * @param contents
  * @returns {{type, file: *}}
  */
-export function createNewBook(file, contents) {
+export function createNewBook(file) {
     return {
         type: CREATE_NEW_BOOK,
-        contents,
         file,
     };
 }

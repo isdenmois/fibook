@@ -3,6 +3,7 @@
  */
 import { fromJS } from 'immutable';
 import {
+    CREATE_NEW_BOOK,
     LOAD_BOOKS,
     LOAD_BOOKS_ERROR,
     LOAD_BOOKS_SUCCESS,
@@ -22,6 +23,7 @@ const initialState = fromJS({
  */
 function appReducer(state = initialState, action) {
     switch (action.type) {
+        case CREATE_NEW_BOOK:
         case LOAD_BOOKS:
             return state
                 .set('loading', true)
