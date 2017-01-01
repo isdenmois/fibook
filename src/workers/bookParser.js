@@ -1,7 +1,7 @@
 import BookParser from '../utils/BookParser';
 import base64 from '../utils/base64';
 
-/* global window, FileReader */
+/* global self, FileReader */
 
 function readFile(file, callback, encode = 'utf-8') {
     const reader = new FileReader();
