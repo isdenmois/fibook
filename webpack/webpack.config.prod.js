@@ -39,6 +39,10 @@ module.exports = {
                 test: /\.scss$/,
                 loader: ExtractTextPlugin.extract('style', 'css?camelCase&modules!sass'),
                 exclude: /node_modules/
+            },
+            {
+                test: /\.json$/,
+                loader: 'json',
             }
         ]
     },

@@ -77,7 +77,11 @@ module.exports = {
                 test: /\.scss$/,
                 loader: 'style!css?camelCase!sass',
                 exclude: /node_modules/
-            }
+            },
+            {
+                test: /\.json$/,
+                loader: 'json',
+            },
         ]
     }
 };

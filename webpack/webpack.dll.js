@@ -46,4 +46,12 @@ module.exports = {
         extensions: ['', '.js']
     },
     target: 'web',
+    module: {
+        loaders: [
+            {
+                test: /\.json$/,
+                loader: 'json',
+            },
+        ]
+    },
 };
