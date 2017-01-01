@@ -34,6 +34,7 @@ module.exports = {
             {
                 test: /workers\/(.*)\.js$/,
                 loaders: ['webworker', strip.loader('debug'), 'babel'],
+                exclude: /workers\/tests/,
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,

@@ -4,16 +4,6 @@ import FileInput from './index';
 
 describe('<FileInput />', () => {
     const fn = jest.fn();
-    const onload = {
-        result: 'test result',
-    };
-    global.FileReader = function () {};
-    global.FileReader.prototype.readAsText = function (file) {
-        this.onload({
-            target: onload,
-        });
-    };
-
     const file = shallow(
         <FileInput
             name="test"
