@@ -1,5 +1,9 @@
 import XmlReader from 'xml-reader';
 import xmlQuery from 'xml-query';
+import translit from 'translit';
+import translitRussian from 'translit-russian';
+
+const t = translit(translitRussian);
 
 /**
  * Book parser class.
@@ -55,8 +59,14 @@ class BookParser {
             return null;
         }
 
+        let fileName = `${this.author}_${this.title}.jpg`;
+        fileName = fileName.replace(/ /g, '_');
+        fileName = t(fileName);
+        fileName = fileName.toLowerCase();
+
         return {
             data: binary.text(),
+            fileName,
             type: binary.attr('content-type'),
         };
     }

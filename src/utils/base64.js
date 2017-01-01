@@ -6,10 +6,11 @@ const sliceSize = 512;
 /**
  * Convert BASE64 to Blob.
  * @param data
+ * @param fileName
  * @param contentType
  * @returns {Blob}
  */
-export default function convertToBlob(data, contentType = '') {
+export default function convertToBlob(data, fileName, contentType = '') {
     /* global atob */
     const byteCharacters = atob(data);
     const byteArrays = [];
@@ -27,6 +28,6 @@ export default function convertToBlob(data, contentType = '') {
         byteArrays.push(byteArray);
     }
 
-    /* global Blob */
-    return new Blob(byteArrays, { type: contentType });
+    /* global File */
+    return new File(byteArrays, fileName, { type: contentType });
 }

@@ -11,7 +11,11 @@ import {
     LOAD_BOOKS,
     UPDATE_BOOK_STATUS,
 } from '../constants/books';
-import { booksLoaded, booksLoadingError } from '../actions/books';
+import {
+    booksLoaded,
+    booksLoadingError,
+    loadBooks,
+} from '../actions/books';
 import request from '../utils/request';
 import BookParser from '../utils/BookParser';
 import base64 from '../utils/base64';
@@ -43,9 +47,7 @@ export function* createNewBook({ contents, file }) {
     body.append('file', file);
 
     if (imageData && imageData.data) {
-        image = base64(imageData.data, imageData.type);
-        image.lastModifiedDate = new Date();
-
+        image = base64(imageData.data, imageData.fileName, imageData.type);
         body.append('image', image);
     }
 
@@ -56,6 +58,7 @@ export function* createNewBook({ contents, file }) {
 
     try {
         yield call(request, requestURL, options);
+        yield put(loadBooks());
     } catch (err) {
         console.error(err);
     }

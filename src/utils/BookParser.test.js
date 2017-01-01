@@ -37,6 +37,7 @@ describe('BookParser', () => {
     it('should parse book image', () => {
         expect(parser.image).toEqual({
             data: bookImage,
+            fileName: 'testovyy_avtor_testovoe_nazvanie.jpg',
             type: contentType,
         });
     });
