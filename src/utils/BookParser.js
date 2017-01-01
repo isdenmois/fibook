@@ -10,6 +10,8 @@ class BookParser {
         const ast = XmlReader.parseSync(xml);
         this.xq = xmlQuery(ast);
         this.description = this.xq.find('description');
+        this.titleInfo = this.description.find('title-info');
+        this.publishInfo = this.description.find('publish-info');
     }
 
     /**
@@ -17,7 +19,7 @@ class BookParser {
      * @returns {string}
      */
     get author() {
-        const author = this.description.find('author');
+        const author = this.titleInfo.find('author');
         const firstName = author.find('first-name').text();
         const lastName = author.find('last-name').text();
 
@@ -29,7 +31,7 @@ class BookParser {
      * @returns {*}
      */
     get title() {
-        return this.description.find('book-title').text();
+        return this.titleInfo.find('book-title').text();
     }
 
     /**
@@ -37,7 +39,7 @@ class BookParser {
      * @returns {*}
      */
     get image() {
-        let id = this.description
+        let id = this.titleInfo
             .find('coverpage')
             .find('image')
             .attr('l:href');
