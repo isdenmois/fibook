@@ -79,15 +79,19 @@ export function* deleteBook({ MD5 }) {
  */
 export function* getBooks() {
     const params = stringify({
-        fields: [
+        'fields[]': [
             'MD5',
             'Authors AS author',
             'Title AS title',
             'Status AS status',
             'LastAccess',
+            't._data AS thumbnail',
         ],
         table: 'library_metadata',
-        // where: 'Type IN ("fb2", "epub")',
+        'joins[]': [
+            'library_thumbnail|t|t.Source_MD5 = tbl.MD5 AND t.Thumbnail_Kind="Original"',
+        ],
+        // where: 'Type = "fb2"',
         order: 'LastAccess DESC',
         limit: 100,
     });

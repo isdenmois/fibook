@@ -9,6 +9,8 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { grey400 } from 'material-ui/styles/colors';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import Avatar from 'material-ui/Avatar';
+import { stringify } from 'querystring';
 
 import {
     selectLoading,
@@ -52,10 +54,13 @@ class HomePage extends Component {
         const title = book.get('title');
         const author = book.get('author');
         const status = book.get('status');
+        const thumbnail = book.get('thumbnail');
+        const image = `/image?${stringify({ path: thumbnail })}`;
 
         return (
             <ListItem
                 key={MD5}
+                leftAvatar={<Avatar src={image} />}
                 primaryText={title}
                 secondaryText={author}
                 rightIconButton={this.createItemMenu(MD5, status)}
