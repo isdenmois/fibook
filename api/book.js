@@ -71,4 +71,35 @@ router.post('/', multipart(), (req, res) => {
     });
 });
 
+/**
+ * DELETE request handler.
+ */
+router.delete('/:MD5', (req, res) => {
+    const MD5 = req.params.MD5;
+    const query = `SELECT Location AS book, _data AS thumb
+    FROM library_metadata m
+    LEFT JOIN library_thumbnail t ON t.Source_MD5 = m.MD5
+    WHERE m.MD5 = "${MD5}"`;
+
+    db.get(query, (err, data) => {
+        if (err) {
+            res.send({ error: err });
+            return;
+        }
+        if (fs.existsSync(data.book)) {
+            fs.unlinkSync(data.book);
+        }
+        if (fs.existsSync(data.thumb)) {
+            fs.unlinkSync(data.thumb);
+        }
+
+        const deleteThumb = `DELETE FROM library_thumbnail WHERE Source_MD5 = "${MD5}"`;
+        const deleteBook = `DELETE FROM library_metadata WHERE MD5 = "${MD5}"`;
+        db.run(deleteThumb);
+        db.run(deleteBook);
+
+        res.send({ message: 'ok' });
+    });
+});
+
 module.exports = router;

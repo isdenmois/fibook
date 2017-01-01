@@ -8,6 +8,7 @@ import { normalize, Schema, arrayOf } from 'normalizr';
 
 import {
     CREATE_NEW_BOOK,
+    DELETE_BOOK,
     LOAD_BOOKS,
     UPDATE_BOOK_STATUS,
 } from '../constants/books';
@@ -55,6 +56,19 @@ export function* createNewBook({ file }) {
     try {
         yield call(request, requestURL, options);
         yield put(loadBooks());
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export function* deleteBook({ MD5 }) {
+    const requestURL = `/api/book/${MD5}`;
+    const options = {
+        method: 'DELETE',
+    };
+
+    try {
+        yield call(request, requestURL, options);
     } catch (err) {
         console.error(err);
     }
@@ -121,6 +135,10 @@ export function* updateBookStatus({ MD5, status }) {
 
 export function* createNewBookWatcher() {
     yield fork(takeLatest, CREATE_NEW_BOOK, createNewBook);
+}
+
+export function* deleteBookWatcher() {
+    yield fork(takeLatest, DELETE_BOOK, deleteBook);
 }
 
 export function* getBooksWatcher() {
