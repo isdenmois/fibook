@@ -1,4 +1,5 @@
-import et from 'elementtree';
+import XmlReader from 'xml-reader';
+import xmlQuery from 'xml-query';
 
 /**
  * Book parser class.
@@ -6,7 +7,9 @@ import et from 'elementtree';
  */
 class BookParser {
     constructor(xml) {
-        this.book = et.parse(xml);
+        const ast = XmlReader.parseSync(xml);
+        this.xq = xmlQuery(ast);
+        this.description = this.xq.find('description');
     }
 
     /**
@@ -14,8 +17,9 @@ class BookParser {
      * @returns {string}
      */
     get author() {
-        const firstName = this.book.findtext('description//author/first-name');
-        const lastName = this.book.findtext('description//author/last-name');
+        const author = this.description.find('author');
+        const firstName = author.find('first-name').text();
+        const lastName = author.find('last-name').text();
 
         return `${firstName} ${lastName}`;
     }
@@ -25,7 +29,7 @@ class BookParser {
      * @returns {*}
      */
     get title() {
-        return this.book.findtext('description//book-title');
+        return this.description.find('book-title').text();
     }
 
     /**
@@ -33,29 +37,39 @@ class BookParser {
      * @returns {*}
      */
     get image() {
-        const coverPath = 'description//coverpage/image';
-        const bookCover = this.book.find(coverPath);
+        let id = this.description
+            .find('coverpage')
+            .find('image')
+            .attr('l:href');
 
-        if (!bookCover) {
+        if (!id) {
             return null;
         }
 
-        let link = bookCover.get('l:href');
-        link = link.replace('#', '');
-        link = `binary/[@id="${link}"]`;
+        id = id.replace('#', '');
+        const binary = this.findByAttr('binary', 'id', id);
 
-        const binary = this.book.find(link);
-        if (!binary) {
+        if (binary.length === 0) {
             return null;
         }
-
-        const data = binary.text;
-        const type = binary.get('content-type');
 
         return {
-            data,
-            type,
+            data: binary.text(),
+            type: binary.attr('content-type'),
         };
+    }
+
+    findByAttr(name, attr, value) {
+        const result = [];
+        this.xq
+            .find(name)
+            .each((node) => {
+                if (node.attributes[attr] === value) {
+                    result.push(node);
+                }
+            });
+
+        return xmlQuery(result);
     }
 }
 

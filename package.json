@@ -18,10 +18,10 @@
         "build:dll": "node ./webpack/dependencies.js",
         "start": "cross-env NODE_ENV=development node server",
         "start:prod": "cross-env NODE_ENV=production node server",
-        "lint": "eslint src"
+        "lint": "eslint src",
+        "test": "jest"
     },
     "dependencies": {
-        "elementtree": "^0.1.6",
         "immutable": "^3.8.1",
         "lodash": "^4.17.3",
         "material-ui": "^0.16.5",
@@ -41,7 +41,9 @@
         "redux-logger": "^2.7.4",
         "redux-saga": "^0.13.0",
         "redux-thunk": "^2.1.0",
-        "reselect": "^2.5.4"
+        "reselect": "^2.5.4",
+        "xml-query": "^1.4.0",
+        "xml-reader": "^2.4.3"
     },
     "devDependencies": {
         "add-asset-html-webpack-plugin": "^1.0.2",
@@ -71,6 +73,7 @@
         "identity-obj-proxy": "^3.0.0",
         "imports-loader": "^0.7.0",
         "jest": "^18.1.0",
+        "json-loader": "^0.5.4",
         "morgan": "^1.7.0",
         "node-sass": "^4.1.1",
         "react-addons-test-utils": "^15.4.1",
@@ -99,9 +102,10 @@
             "immutable",
             "enzyme",
             "lodash",
-            "elementtree",
             "material-ui",
             "react",
+            "xml-reader",
+            "xml-query",
             "src"
         ]
     }

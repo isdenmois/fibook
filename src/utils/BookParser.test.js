@@ -22,6 +22,7 @@ describe('BookParser', () => {
       </title-info>
     </description>
     <binary id="cover.jpg" content-type="${contentType}">${bookImage}</binary>
+    <binary id="test.jpg" content-type="${contentType}">123</binary>
     </FictionBook>`;
     const parser = new BookParser(bookData);
 
