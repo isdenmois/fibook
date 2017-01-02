@@ -6,7 +6,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { loadBooks } from '../../actions/books';
 
-class App extends Component {
+export class App extends Component {
     componentDidMount() {
         this.props.loadBooks();
     }

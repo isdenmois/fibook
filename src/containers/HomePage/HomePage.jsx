@@ -30,7 +30,7 @@ const iconButtonElement = (
     </IconButton>
 );
 
-class HomePage extends Component {
+export class HomePage extends Component {
     constructor(props) {
         super(props);
         this.createListItem = this.createListItem.bind(this);
@@ -43,8 +43,8 @@ class HomePage extends Component {
 
         return (
             <IconMenu iconButtonElement={iconButtonElement}>
-                <MenuItem onTouchTap={updateStatus}>{statusTitle}</MenuItem>
-                <MenuItem onTouchTap={deleteItem}>Удалить</MenuItem>
+                <MenuItem className="update" onTouchTap={updateStatus}>{statusTitle}</MenuItem>
+                <MenuItem className="delete" onTouchTap={deleteItem}>Удалить</MenuItem>
             </IconMenu>
         );
     }
