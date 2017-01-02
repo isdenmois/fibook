@@ -110,6 +110,7 @@
             "lodash",
             "material-ui",
             "react",
+            "reselect",
             "translit",
             "translit-russian",
             "xml-reader",

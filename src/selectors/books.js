@@ -14,8 +14,3 @@ export const selectError = () => createSelector(
     selectGlobal(),
     globalState => globalState.get('error'),
 );
-
-export const selectBooks = () => createSelector(
-    selectGlobal(),
-    globalState => globalState.get('list'),
-);

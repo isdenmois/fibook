@@ -2,7 +2,7 @@
  * The entities selectors.
  */
 import { createSelector } from 'reselect';
-import { List } from 'immutable';
+import { Map } from 'immutable';
 
 export const selectGlobal = () => state => state.entities;
 
@@ -21,6 +21,6 @@ export const selectBooksByType = type => createSelector(
                 .sort((a, b) => b.get('LastAccess') - a.get('LastAccess'));
         }
 
-        return new List();
+        return new Map();
     },
 );
