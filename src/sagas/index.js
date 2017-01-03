@@ -2,9 +2,11 @@ import { fork } from 'redux-saga/effects';
 import {
     createNewBookWatcher,
     deleteBookWatcher,
-    getBooksWatcher,
     updateBookStatusWatcher,
-} from './books';
+} from './details';
+import {
+    getBooksWatcher,
+} from './list';
 
 export default function* root() {
     yield [

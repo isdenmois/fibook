@@ -4,11 +4,16 @@ import forEach from 'lodash/forEach';
 import {
     UPDATE_BOOK_STATUS,
     DELETE_BOOK,
-} from '../constants/books';
+} from '../constants/actionsTypes/details';
+import {
+    LOADING_SUCCESS,
+} from '../constants/actionsTypes/main';
 
 const initialState = new Map();
 
 export default function entitiesReducer(state = initialState, action) {
+    let newState = state;
+
     switch (action.type) {
         case UPDATE_BOOK_STATUS:
             return state
@@ -17,15 +22,13 @@ export default function entitiesReducer(state = initialState, action) {
         case DELETE_BOOK:
             return state
                 .deleteIn(['book', action.MD5]);
-    }
 
-    if (action.entities) {
-        let newState = state;
-        forEach(action.entities, (list, type) => {
-            newState = state.set(type, fromJS(list));
-        });
+        case LOADING_SUCCESS:
+            forEach(action.entities, (list, type) => {
+                newState = state.set(type, fromJS(list));
+            });
 
-        return newState;
+            return newState;
     }
 
     return state;

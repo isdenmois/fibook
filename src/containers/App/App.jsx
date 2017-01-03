@@ -4,16 +4,23 @@
 /* eslint-disable */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { loadBooks } from '../../actions/books';
+import { createStructuredSelector } from 'reselect';
+import { loadBooks } from '../../actions/list';
+import {
+    selectError,
+} from '../../selectors/main';
 
 export class App extends Component {
     componentDidMount() {
         this.props.loadBooks();
     }
     render() {
-        const { children } = this.props;
+        const { children, error, loading } = this.props;
         return (
             <div>
+                {
+                    error ? error : ''
+                }
                 {React.Children.toArray(children)}
             </div>
         );
@@ -22,12 +29,17 @@ export class App extends Component {
 
 App.propTypes = {
     loadBooks: PropTypes.func.isRequired,
+    error: PropTypes.string,
     children: PropTypes.node,
 };
 
 
-function mapStateToProps() {
-    return {};
-}
+const mapStateToProps = createStructuredSelector({
+    error: selectError,
+});
 
-export default connect(mapStateToProps, { loadBooks })(App);
+const mapActionsToProps = {
+    loadBooks,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(App);

@@ -4,7 +4,7 @@ describe('Index reducer', () => {
         const combineReducers = jest.fn();
         redux.combineReducers = combineReducers;
 
-        const rootReducer = require('./index').default;
+        const rootReducer = require('./../index').default;
         expect(combineReducers).toHaveBeenCalled();
     });
 });

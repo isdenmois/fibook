@@ -103,6 +103,10 @@
         "moduleNameMapper": {
             "\\.scss$": "identity-obj-proxy"
         },
+        "testPathDirs": [
+            "src"
+        ],
+        "testRegex": "(/test/.*|(\\.|/)(test|spec))\\.jsx?$",
         "unmockedModulePathPatterns": [
             "atob",
             "immutable",

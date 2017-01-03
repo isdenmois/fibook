@@ -4,20 +4,17 @@ import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import {
     DELETE_BOOK,
     CREATE_NEW_BOOK,
-    LOAD_BOOKS,
     UPDATE_BOOK_STATUS,
-} from '../constants/books';
+} from '../../constants/actionsTypes/details';
 import {
     createNewBook,
     createNewBookWatcher,
     deleteBook,
     deleteBookWatcher,
-    getBooks,
-    getBooksWatcher,
     updateBookStatus,
     updateBookStatusWatcher,
-} from './books';
-import request from '../utils/request';
+} from '../details';
+import request from '../../utils/request';
 
 describe('deleteBook Saga', () => {
     it('should call request with DELETE method', () => {
@@ -47,16 +44,6 @@ describe('deleteBookWatcher Saga', () => {
         expect(takeDescriptor).toEqual(fork(takeLatest, DELETE_BOOK, deleteBook));
     });
 });
-
-describe('getBooksWatcher Saga', () => {
-    const getBooksWatcherGenerator = getBooksWatcher();
-
-    it('should watch for DELETE_BOOK action', () => {
-        const takeDescriptor = getBooksWatcherGenerator.next().value;
-        expect(takeDescriptor).toEqual(fork(takeLatest, LOAD_BOOKS, getBooks));
-    });
-});
-
 
 describe('updateBookStatusWatcher Saga', () => {
     const updateBookStatusWatcherGenerator = updateBookStatusWatcher();

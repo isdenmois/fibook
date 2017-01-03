@@ -1,6 +1,13 @@
 import { fromJS } from 'immutable';
-import reducer from './entities';
-import * as types from '../constants/books';
+import reducer from '../entities';
+import {
+    loadingSuccess,
+} from '../../actions/main';
+import {
+    createNewBook,
+    updateBookStatus,
+    deleteBook,
+} from '../../actions/details';
 
 describe('Books reducer', () => {
     it('should return the initial state', () => {
@@ -10,12 +17,8 @@ describe('Books reducer', () => {
         expect(state.toJS()).toEqual(expectedState);
     });
 
-    it('should handle UPDATE_BOOK_STATUS action', () => {
-        const action = {
-            type: types.UPDATE_BOOK_STATUS,
-            MD5: '1234',
-            status: 1,
-        };
+    it('should handle update book status action', () => {
+        const action = updateBookStatus(1234, 1);
         const initialState = fromJS({
             book: {
                 123: {
@@ -41,11 +44,8 @@ describe('Books reducer', () => {
         expect(state.toJS()).toEqual(expectedState);
     });
 
-    it('should handle DELETE_BOOK action', () => {
-        const action = {
-            type: types.DELETE_BOOK,
-            MD5: '1234',
-        };
+    it('should handle delete book action', () => {
+        const action = deleteBook('1234');
         const initialState = fromJS({
             book: {
                 123: {
@@ -69,15 +69,13 @@ describe('Books reducer', () => {
     });
 
     it('should add entities', () => {
-        const action = {
-            entities: {
-                test: {
-                    t1: {
-                        status: 2,
-                    }
+        const action = loadingSuccess({
+            test: {
+                t1: {
+                    status: 2,
                 }
             }
-        };
+        });
         const initialState = fromJS({
             book: {
                 b1: {

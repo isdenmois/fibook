@@ -1,35 +1,22 @@
-/**
- * Gets books from server.
- */
 import { takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects';
-import { stringify } from 'querystring';
-import { normalize, Schema, arrayOf } from 'normalizr';
 
 import {
     CREATE_NEW_BOOK,
     DELETE_BOOK,
-    LOAD_BOOKS,
     UPDATE_BOOK_STATUS,
-} from '../constants/books';
-import {
-    booksLoaded,
-    booksLoadingError,
-    loadBooks,
-} from '../actions/books';
+} from '../constants/actionsTypes/details';
+import { startLoading } from '../actions/main';
+import { loadBooks } from '../actions/list';
 import request from '../utils/request';
 import bookDataParser from '../utils/bookData';
-
-/**
- * Define book schema for normalizr.
- */
-export const bookSchema = new Schema('book', { idAttribute: 'MD5' });
-export const bookArray = arrayOf(bookSchema);
 
 /**
  * Create new book saga.
  */
 export function* createNewBook({ file }) {
+    yield put(startLoading());
+
     const {
         author,
         image,
@@ -75,39 +62,6 @@ export function* deleteBook({ MD5 }) {
 }
 
 /**
- * Get books saga.
- */
-export function* getBooks() {
-    const params = stringify({
-        'fields[]': [
-            'MD5',
-            'Authors AS author',
-            'Title AS title',
-            'Status AS status',
-            'LastAccess',
-            't._data AS thumbnail',
-        ],
-        table: 'library_metadata',
-        'joins[]': [
-            'library_thumbnail|t|t.Source_MD5 = tbl.MD5 AND t.Thumbnail_Kind="Original"',
-        ],
-        // where: 'Type = "fb2"',
-        order: 'LastAccess DESC',
-        limit: 100,
-    });
-    const requestURL = `/api/sql?${params}`;
-
-    try {
-        const books = yield call(request, requestURL);
-        const { result, entities } = normalize(books, bookArray);
-
-        yield put(booksLoaded(result, entities));
-    } catch (err) {
-        yield put(booksLoadingError(err));
-    }
-}
-
-/**
  * Update book status saga.
  * Sends PATCH request to API for change book status.
  * @param MD5
@@ -143,10 +97,6 @@ export function* createNewBookWatcher() {
 
 export function* deleteBookWatcher() {
     yield fork(takeLatest, DELETE_BOOK, deleteBook);
-}
-
-export function* getBooksWatcher() {
-    yield fork(takeLatest, LOAD_BOOKS, getBooks);
 }
 
 export function* updateBookStatusWatcher() {

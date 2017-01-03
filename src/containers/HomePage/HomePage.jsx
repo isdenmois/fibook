@@ -14,14 +14,16 @@ import { stringify } from 'querystring';
 
 import {
     selectLoading,
-} from '../../selectors/books';
-import { selectBookEntities, selectBooksByType } from '../../selectors/entities';
+} from '../../selectors/main';
+import { selectBookEntities } from '../../selectors/entities';
+import { selectStatus } from '../../selectors/list';
 import Loading from '../../components/Loading';
 import {
     createNewBook,
     deleteBook,
     updateBookStatus,
-} from '../../actions/books';
+} from '../../actions/details';
+import { bookListStatus } from '../../actions/list';
 import FileInput from '../../components/FileInput';
 
 const iconButtonElement = (
@@ -34,6 +36,8 @@ export class HomePage extends Component {
     constructor(props) {
         super(props);
         this.createListItem = this.createListItem.bind(this);
+        this.openNewBookList = this.openNewBookList.bind(this);
+        this.openReadBookList = this.openReadBookList.bind(this);
     }
 
     createItemMenu(MD5, status) {
@@ -68,6 +72,14 @@ export class HomePage extends Component {
         );
     }
 
+    openNewBookList() {
+        this.props.bookListStatus(0);
+    }
+
+    openReadBookList() {
+        this.props.bookListStatus(1);
+    }
+
     updateItemStatus(MD5, status) {
         const newStatus = status > 0 ? 0 : 1;
         this.props.updateBookStatus(MD5, newStatus);
@@ -77,42 +89,47 @@ export class HomePage extends Component {
         const {
             createNewBook: fileSelect,
             loading,
-            newBooks,
-            readBooks,
+            status,
+            books,
         } = this.props;
 
+        let children = '';
+
         if (loading) {
-            return (
+            children = <Loading />;
+        } else if (status > 0) {
+            children = (
+                <List>
+                    {books.map(this.createListItem)}
+                </List>
+            );
+        } else {
+            children = (
                 <div>
-                    <Tabs>
-                        <Tab label="Новые" />
-                        <Tab label="Прочитанные" />
-                    </Tabs>
-                    <Loading />
+                    <List>
+                        {books.map(this.createListItem)}
+                    </List>
+                    <FileInput onFileSelect={fileSelect}>
+                        <ContentAdd />
+                    </FileInput>
                 </div>
             );
         }
 
         return (
-            <Tabs>
-                <Tab
-                    label="Новые"
-                >
-                    <List>
-                        {newBooks.map(this.createListItem)}
-                    </List>
-                    <FileInput onFileSelect={fileSelect}>
-                        <ContentAdd />
-                    </FileInput>
-                </Tab>
-                <Tab
-                    label="Прочитанные"
-                >
-                    <List>
-                        {readBooks.map(this.createListItem)}
-                    </List>
-                </Tab>
-            </Tabs>
+            <div>
+                <Tabs>
+                    <Tab
+                        label="Новые"
+                        onActive={this.openNewBookList}
+                    />
+                    <Tab
+                        label="Прочитанные"
+                        onActive={this.openReadBookList}
+                    />
+                </Tabs>
+                {children}
+            </div>
         );
     }
 }
@@ -121,22 +138,23 @@ HomePage.propTypes = {
     createNewBook: PropTypes.func.isRequired,
     deleteBook: PropTypes.func.isRequired,
     updateBookStatus: PropTypes.func.isRequired,
-    newBooks: PropTypes.object,
-    readBooks: PropTypes.object,
+    bookListStatus: PropTypes.func.isRequired,
+    books: PropTypes.object,
     loading: PropTypes.bool,
+    status: PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({
-    newBooks: selectBooksByType(0),
-    readBooks: selectBooksByType(1),
-    entities: selectBookEntities(),
-    loading: selectLoading(),
+    status: selectStatus,
+    books: selectBookEntities,
+    loading: selectLoading,
 });
 
 const mapActionsToProps = {
     createNewBook,
     deleteBook,
     updateBookStatus,
+    bookListStatus,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(HomePage);
