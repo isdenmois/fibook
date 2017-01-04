@@ -31,12 +31,8 @@ export function* getBooks() {
             'Title AS title',
             'Status AS status',
             'LastAccess',
-            't._data AS thumbnail',
         ],
         table: 'library_metadata',
-        'joins[]': [
-            'library_thumbnail|t|t.Source_MD5 = tbl.MD5 AND t.Thumbnail_Kind="Original"',
-        ],
         // where: 'Type = "fb2"',
         order: 'LastAccess DESC',
         limit: 100,
