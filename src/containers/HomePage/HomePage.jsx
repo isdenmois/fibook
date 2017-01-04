@@ -139,7 +139,7 @@ HomePage.propTypes = {
     deleteBook: PropTypes.func.isRequired,
     updateBookStatus: PropTypes.func.isRequired,
     bookListStatus: PropTypes.func.isRequired,
-    books: PropTypes.object,
+    books: PropTypes.array,
     loading: PropTypes.bool,
     status: PropTypes.number,
 };

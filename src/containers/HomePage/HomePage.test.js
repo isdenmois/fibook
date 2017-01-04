@@ -11,22 +11,22 @@ describe('<HomePage /> component', () => {
     const bookListStatus = jest.fn();
 
     it('should render', () => {
-        const books = fromJS({
-            book1: {
+        const books = [
+            fromJS({
                 MD5: 'book1',
                 author: 'test author',
                 title: 'test',
                 status: 0,
                 thumbnail: '',
-            },
-            book2: {
+            }),
+            fromJS({
                 MD5: 'book2',
                 author: 'test author 2',
                 title: 'test title 2',
                 status: 1,
                 thumbnail: '',
-            },
-        });
+            }),
+        ];
 
         const wrapper = shallow(
             <HomePage
@@ -49,6 +49,7 @@ describe('<HomePage /> component', () => {
                 createNewBook={createNewBook}
                 deleteBook={deleteBook}
                 updateBookStatus={updateBookStatus}
+                bookListStatus={bookListStatus}
                 loading
             />
         );
