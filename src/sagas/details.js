@@ -20,6 +20,7 @@ export function* createNewBook({ file }) {
     const {
         author,
         image,
+        imageName,
         title,
     } = yield call(bookDataParser, file);
 
@@ -33,6 +34,7 @@ export function* createNewBook({ file }) {
 
     if (image) {
         body.append('image', image);
+        body.append('image-name', imageName);
     }
 
     const options = {

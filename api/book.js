@@ -40,7 +40,7 @@ function insertThumbnail(path, MD5) {
  * POST-request handler.
  */
 router.post('/', multipart(), (req, res) => {
-    const { author, title } = req.body;
+    const { author, title, 'image-name': imageName } = req.body;
     const { file, image } = req.files;
     const path = resolve(`uploads/${file.name}`);
     const date = new Date();
@@ -62,7 +62,7 @@ router.post('/', multipart(), (req, res) => {
         });
 
         if (image) {
-            const imagePath = resolve(`uploads/${image.name}`);
+            const imagePath = resolve(`uploads/${imageName}`);
             fs.createReadStream(image.path)
                 .pipe(fs.createWriteStream(imagePath));
             insertThumbnail(imagePath, hash);

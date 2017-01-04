@@ -39,7 +39,7 @@ export function* getBooks() {
         ],
         // where: 'Type = "fb2"',
         order: 'LastAccess DESC',
-        limit: 20,
+        limit: 100,
     });
     const requestURL = `/api/sql?${params}`;
 

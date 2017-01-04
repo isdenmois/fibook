@@ -8,11 +8,12 @@ const ROOT_PATH = path.join(__dirname, '..');
 const APP_PATH = `${ROOT_PATH}/src`;
 
 module.exports = {
+    context: APP_PATH,
     entry: `${APP_PATH}/main`,
     output: {
         path: `${ ROOT_PATH }/build`,
         publicPath: '/',
-        filename: 'bundle-[hash].js'
+        filename: '[name].js'
     },
     resolve: {
         extensions: ['', '.js', '.jsx']
@@ -28,7 +29,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.jsx?$/,
-                loaders: [strip.loader('debug'), 'babel?presets=es2015'],
+                loaders: [strip.loader('debug'), 'babel'],
                 exclude: /node_modules/,
             },
             {
@@ -72,8 +73,37 @@ module.exports = {
             output: {
                 ascii_only: true,
                 comments: false
-            }
+            },
+            sourceMap: false,
+            comments: false,
+            test: /vendors/,
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                drop_console: true,
+                drop_debugger: true
+            },
+            output: {
+                ascii_only: true,
+                comments: false
+            },
+            sourceMap: false,
+            test: /vendors/,
         }),
         new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendors',
+            minChunks: isExternal,
+        }),
     ],
 };
+function isExternal(module) {
+    const  userRequest = module.userRequest;
+
+    if (typeof userRequest !== 'string') {
+        return false;
+    }
+
+    return userRequest.indexOf('node_modules') >= 0;
+}

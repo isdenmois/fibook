@@ -17,7 +17,7 @@ export const selectBookEntities = createSelector(
     (books, status) => {
         if (books) {
             return books
-                .filter(data => data.get('status') === status)
+                .filter(data => +data.get('status') === +status)
                 .sort((a, b) => b.get('LastAccess') - a.get('LastAccess'))
                 .toArray();
         }

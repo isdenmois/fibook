@@ -19,8 +19,8 @@ describe('bookParser worker', () => {
 
     // Mock base64.
     jest.mock('../../utils/base64', () => {
-        return function (image, fileName) {
-            return `parsed ${fileName}`;
+        return function () {
+            return `parsed image`;
         };
     });
 
@@ -62,7 +62,8 @@ describe('bookParser worker', () => {
         expect(global.self.mockedMessage).toHaveBeenCalledWith({
             author: 'test author',
             title: 'test title',
-            image: 'parsed test.img',
+            image: 'parsed image',
+            imageName: 'test.img',
         });
     });
 

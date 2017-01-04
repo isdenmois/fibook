@@ -41,7 +41,8 @@ self.onmessage = (event) => {
         const imageData = book.image;
 
         if (imageData) {
-            result.image = base64(imageData.data, imageData.fileName, imageData.type);
+            result.image = base64(imageData.data, imageData.type);
+            result.imageName = imageData.fileName;
         }
 
         const pm = self.mockedMessage ? self.mockedMessage : self.postMessage;
