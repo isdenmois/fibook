@@ -2,7 +2,6 @@ describe('configureStore', () => {
     jest.unmock('redux');
     jest.unmock('redux-saga');
     jest.unmock('redux-logger');
-    jest.unmock('redux-devtools');
     jest.mock('../reducers');
 
     it('should load configure function', () => {
@@ -26,7 +25,6 @@ describe('configure dev store', () => {
     jest.unmock('redux');
     jest.unmock('redux-saga');
     jest.unmock('redux-logger');
-    jest.unmock('redux-devtools');
     jest.mock('../reducers');
     const configureStore = require('./configureStore.dev');
     const rootReducer = require('../reducers');
