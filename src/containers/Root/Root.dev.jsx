@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import DevTools from '../DevTools';
 import Routes from '../../routes';
 
 /**
@@ -13,7 +12,6 @@ const Root = props => (
             <MuiThemeProvider>
                 <Routes />
             </MuiThemeProvider>
-            <DevTools />
         </div>
     </Provider>
 );
@@ -21,5 +19,8 @@ const Root = props => (
 Root.propTypes = {
     store: PropTypes.object.isRequired,
 };
+
+// eslint-disable-next-line no-undef
+window.React = React;
 
 export default Root;

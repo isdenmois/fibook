@@ -3,17 +3,20 @@ import createLogger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from '../reducers';
-import DevTools from '../containers/DevTools';
 
 // The reduxRouterMiddleware will look for route actions created by push, replace, etc.
 // and applies them to the history.
 const sagaMiddleware = createSagaMiddleware();
 
 const logger = createLogger();
+// eslint-disable-next-line
+const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
-const finalCreateStore = compose(
+const finalCreateStore = reduxDevtools ? compose(
     applyMiddleware(logger, sagaMiddleware),
-    DevTools.instrument(),
+    reduxDevtools,
+)(createStore) : compose(
+    applyMiddleware(logger, sagaMiddleware),
 )(createStore);
 
 module.exports = function configureStore(initialState) {

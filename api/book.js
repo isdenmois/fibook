@@ -43,7 +43,7 @@ router.post('/', multipart(), (req, res) => {
     const { author, title, 'image-name': imageName } = req.body;
     const { file, image } = req.files;
     const path = resolve(`uploads/${file.name}`);
-    const date = new Date();
+    const date = Date.now();
 
     fs.createReadStream(file.path)
         .pipe(fs.createWriteStream(path));

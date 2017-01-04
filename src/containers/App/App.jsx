@@ -1,7 +1,6 @@
 /**
  * App.react.js
  */
-/* eslint-disable */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -15,12 +14,10 @@ export class App extends Component {
         this.props.loadBooks();
     }
     render() {
-        const { children, error, loading } = this.props;
+        const { children, error } = this.props;
         return (
             <div>
-                {
-                    error ? error : ''
-                }
+                {error}
                 {React.Children.toArray(children)}
             </div>
         );
