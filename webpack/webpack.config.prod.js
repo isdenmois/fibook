@@ -13,7 +13,7 @@ module.exports = {
     entry: `${APP_PATH}/main`,
     output: {
         path: `${ ROOT_PATH }/build`,
-        publicPath: '/',
+        publicPath: '/public/',
         filename: '[name].js'
     },
     resolve: {
