@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const strip = require('strip-loader');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BabiliPlugin = require("babili-webpack-plugin");
 
 const ROOT_PATH = path.join(__dirname, '..');
 const APP_PATH = `${ROOT_PATH}/src`;
@@ -55,7 +56,13 @@ module.exports = {
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
         new HtmlWebpackPlugin({
-            template: `${APP_PATH}/index.html`
+            template: `${APP_PATH}/index.html`,
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true,
+                removeRedundantAttributes: true,
+                removeScriptTypeAttributes: true,
+            },
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
@@ -75,21 +82,11 @@ module.exports = {
                 comments: false
             },
             sourceMap: false,
-            comments: false,
             test: /vendors/,
         }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                drop_console: true,
-                drop_debugger: true
-            },
-            output: {
-                ascii_only: true,
-                comments: false
-            },
-            sourceMap: false,
-            test: /vendors/,
+        new BabiliPlugin({
+            test: /(main|worker).js$/,
+            comments: false,
         }),
         new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
         new webpack.optimize.CommonsChunkPlugin({
