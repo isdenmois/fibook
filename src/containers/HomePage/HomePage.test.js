@@ -61,4 +61,20 @@ describe('<HomePage /> component', () => {
         const loading = wrapper.find('Loading');
         expect(loading.node).toBeDefined();
     });
+
+    it('should render empty lists', () => {
+        const wrapper = shallow(
+            <HomePage
+                createNewBook={createNewBook}
+                deleteBook={deleteBook}
+                updateBookStatus={updateBookStatus}
+                bookListStatus={bookListStatus}
+                newBooks={[]}
+                readBooks={[]}
+            />
+        );
+
+        const loading = wrapper.find('EmptyList');
+        expect(loading.node).toBeDefined();
+    });
 });

@@ -11,6 +11,7 @@ import { grey400 } from 'material-ui/styles/colors';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import BookIcon from 'material-ui/svg-icons/editor/insert-drive-file';
 import Avatar from 'material-ui/Avatar';
+import EmptyList from '../../components/EmptyList';
 
 import {
     selectLoading,
@@ -91,14 +92,32 @@ export class HomePage extends Component {
             );
         }
 
+        let newBooksChildren = '';
+        if (newBooks.length) {
+            newBooksChildren = (
+                <List>{newBooks.map(this.createListItem)}</List>
+            );
+        } else if (!loading) {
+            newBooksChildren = <EmptyList />;
+        }
+
+        let readBooksChildren = '';
+        if (readBooks.length) {
+            readBooksChildren = (
+                <List>{readBooks.map(this.createListItem)}</List>
+            );
+        } else if (!loading) {
+            readBooksChildren = <EmptyList />;
+        }
+
         return (
             <div>
                 <Tabs>
                     <Tab label="Новые">
-                        <List>{newBooks.map(this.createListItem)}</List>
+                        {newBooksChildren}
                     </Tab>
                     <Tab label="Прочитанные">
-                        <List>{readBooks.map(this.createListItem)}</List>
+                        {readBooksChildren}
                     </Tab>
                 </Tabs>
                 {children}
