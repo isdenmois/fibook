@@ -24,19 +24,20 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 loader: 'eslint',
-                exclude: /node_modules/,
+                exclude: /(node_modules|workers)/,
             }
         ],
         loaders: [
             {
+                test: /\.js$/,
+                loaders: ['webworker', strip.loader('debug'), 'babel'],
+                include: /workers/,
+                exclude: /workers\/tests/,
+            },
+            {
                 test: /\.jsx?$/,
                 loaders: [strip.loader('debug'), 'babel'],
                 exclude: /node_modules/,
-            },
-            {
-                test: /workers\/(.*)\.js$/,
-                loaders: ['webworker', strip.loader('debug'), 'babel'],
-                exclude: /workers\/tests/,
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,

@@ -1,8 +1,8 @@
 describe('parseBookData()', () => {
     jest.mock('../workers/bookParser', () => {
         return class Worker {
-            postMessage(file) {
-                this.onmessage({ data: file });
+            postMessage(data) {
+                this.onmessage({ data: data.file });
             }
         };
     });

@@ -19,6 +19,8 @@ describe('Books reducer', () => {
 
     it('should handle update book status action', () => {
         const action = updateBookStatus(1234, 1);
+        const LastAccess = action.LastAccess;
+
         const initialState = fromJS({
             book: {
                 123: {
@@ -36,6 +38,7 @@ describe('Books reducer', () => {
                     status: 0,
                 },
                 1234: {
+                    LastAccess,
                     status: 1,
                 },
             }

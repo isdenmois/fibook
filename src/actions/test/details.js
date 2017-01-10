@@ -10,8 +10,10 @@ describe('details actions', () => {
             status: 1,
             MD5,
         };
+        const action = actions.updateBookStatus(MD5, 1);
+        expectedAction.LastAccess = action.LastAccess;
 
-        expect(actions.updateBookStatus(MD5, 1)).toEqual(expectedAction);
+        expect(action).toEqual(expectedAction);
     });
 
     it('should create an action for delete the book', () => {

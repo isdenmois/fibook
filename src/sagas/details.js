@@ -73,6 +73,7 @@ export function* updateBookStatus({ MD5, status }) {
     const requestURL = '/api/sql/library_metadata';
     const params = JSON.stringify({
         status,
+        LastAccess: Date.now(),
         where: `MD5 = "${MD5}"`,
     });
 

@@ -24,24 +24,47 @@ export const bookArray = arrayOf(bookSchema);
  * Get books saga.
  */
 export function* getBooks() {
-    const params = stringify({
+    const newBooksParams = stringify({
+        'fields[]': [
+            'MD5',
+            'Authors AS author',
+            'Title AS title',
+            'ifnull(Status, 0) AS status',
+            'LastAccess',
+            'LastModified',
+        ],
+        table: 'library_metadata',
+        where: 'Status = 0 OR Status IS NULL',
+        order: 'LastModified DESC',
+        limit: 50,
+    });
+
+    const readBooksparams = stringify({
         'fields[]': [
             'MD5',
             'Authors AS author',
             'Title AS title',
             'Status AS status',
             'LastAccess',
+            'LastModified',
         ],
         table: 'library_metadata',
-        // where: 'Type = "fb2"',
+        where: 'Status = 1',
         order: 'LastAccess DESC',
-        limit: 100,
+        limit: 50,
     });
-    const requestURL = `/api/sql?${params}`;
 
     try {
         yield put(startLoading());
-        const books = yield call(request, requestURL);
+
+        // Load new books.
+        const newBooks = yield call(request, `/api/sql?${newBooksParams}`);
+
+        // Load read books.
+        const readBooks = yield call(request, `/api/sql?${readBooksparams}`);
+
+        // Merge all books.
+        const books = [].concat(newBooks).concat(readBooks);
         const { entities } = normalize(books, bookArray);
 
         yield put(loadingSuccess(entities));

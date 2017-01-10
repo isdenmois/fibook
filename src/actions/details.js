@@ -40,5 +40,6 @@ export function updateBookStatus(MD5, status) {
         type: UPDATE_BOOK_STATUS,
         MD5,
         status,
+        LastAccess: Date.now(),
     };
 }

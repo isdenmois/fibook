@@ -67,11 +67,12 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 loader: 'babel',
-                exclude: /node_modules/,
+                exclude: /(node_modules|workers)/,
             },
             {
-                test: /workers\/(.*)\.js$/,
+                test: /\.js$/,
                 loaders: ['webworker', 'babel'],
+                include: /workers/,
                 exclude: /workers\/tests/,
             },
             {

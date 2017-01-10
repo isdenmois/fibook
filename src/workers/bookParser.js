@@ -1,5 +1,6 @@
 import BookParser from '../utils/BookParser';
 import base64 from '../utils/base64';
+import { PARSE_FILE } from '../constants/BookParser';
 
 /* global self, FileReader */
 
@@ -31,7 +32,11 @@ function readFile(file, callback, encode = 'utf-8') {
 // eslint-disable-next-line no-global-assign
 // noinspection JSAnnotator
 self.onmessage = (event) => {
-    const file = event.data;
+    const { file, type } = event.data;
+    if (type !== PARSE_FILE) {
+        return;
+    }
+
     readFile(file, (content) => {
         const book = new BookParser(content);
         const result = {

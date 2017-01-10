@@ -15,15 +15,13 @@ import Avatar from 'material-ui/Avatar';
 import {
     selectLoading,
 } from '../../selectors/main';
-import { selectBookEntities } from '../../selectors/entities';
-import { selectStatus } from '../../selectors/list';
+import { selectNewBooks, selectReadBooks } from '../../selectors/entities';
 import Loading from '../../components/Loading';
 import {
     createNewBook,
     deleteBook,
     updateBookStatus,
 } from '../../actions/details';
-import { bookListStatus } from '../../actions/list';
 import FileInput from '../../components/FileInput';
 
 const iconButtonElement = (
@@ -36,8 +34,6 @@ export class HomePage extends Component {
     constructor(props) {
         super(props);
         this.createListItem = this.createListItem.bind(this);
-        this.openNewBookList = this.openNewBookList.bind(this);
-        this.openReadBookList = this.openReadBookList.bind(this);
     }
 
     createItemMenu(MD5, status) {
@@ -70,14 +66,6 @@ export class HomePage extends Component {
         );
     }
 
-    openNewBookList() {
-        this.props.bookListStatus(0);
-    }
-
-    openReadBookList() {
-        this.props.bookListStatus(1);
-    }
-
     updateItemStatus(MD5, status) {
         const newStatus = status > 0 ? 0 : 1;
         this.props.updateBookStatus(MD5, newStatus);
@@ -87,44 +75,31 @@ export class HomePage extends Component {
         const {
             createNewBook: fileSelect,
             loading,
-            status,
-            books,
+            newBooks,
+            readBooks,
         } = this.props;
 
         let children = '';
 
         if (loading) {
             children = <Loading />;
-        } else if (status > 0) {
-            children = (
-                <List>
-                    {books.map(this.createListItem)}
-                </List>
-            );
         } else {
             children = (
-                <div>
-                    <List>
-                        {books.map(this.createListItem)}
-                    </List>
-                    <FileInput onFileSelect={fileSelect}>
-                        <ContentAdd />
-                    </FileInput>
-                </div>
+                <FileInput onFileSelect={fileSelect}>
+                    <ContentAdd />
+                </FileInput>
             );
         }
 
         return (
             <div>
                 <Tabs>
-                    <Tab
-                        label="Новые"
-                        onActive={this.openNewBookList}
-                    />
-                    <Tab
-                        label="Прочитанные"
-                        onActive={this.openReadBookList}
-                    />
+                    <Tab label="Новые">
+                        <List>{newBooks.map(this.createListItem)}</List>
+                    </Tab>
+                    <Tab label="Прочитанные">
+                        <List>{readBooks.map(this.createListItem)}</List>
+                    </Tab>
                 </Tabs>
                 {children}
             </div>
@@ -136,15 +111,14 @@ HomePage.propTypes = {
     createNewBook: PropTypes.func.isRequired,
     deleteBook: PropTypes.func.isRequired,
     updateBookStatus: PropTypes.func.isRequired,
-    bookListStatus: PropTypes.func.isRequired,
-    books: PropTypes.array,
+    newBooks: PropTypes.array,
+    readBooks: PropTypes.array,
     loading: PropTypes.bool,
-    status: PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({
-    status: selectStatus,
-    books: selectBookEntities,
+    newBooks: selectNewBooks,
+    readBooks: selectReadBooks,
     loading: selectLoading,
 });
 
@@ -152,7 +126,6 @@ const mapActionsToProps = {
     createNewBook,
     deleteBook,
     updateBookStatus,
-    bookListStatus,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(HomePage);

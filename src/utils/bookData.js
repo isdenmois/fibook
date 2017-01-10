@@ -1,4 +1,5 @@
 import BookParserWorker from '../workers/bookParser';
+import { PARSE_FILE } from '../constants/BookParser';
 
 export default function parseBookData(file) {
     let worker = new BookParserWorker();
@@ -9,6 +10,9 @@ export default function parseBookData(file) {
         };
     });
 
-    worker.postMessage(file);
+    worker.postMessage({
+        type: PARSE_FILE,
+        file,
+    });
     return promise;
 }

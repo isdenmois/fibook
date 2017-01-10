@@ -3,24 +3,14 @@
  */
 import {
     BOOK_LIST_LOAD,
-    BOOK_LIST_STATUS,
 } from '../constants/actionsTypes/list';
 
 /**
  * Load the books.
  */
+// eslint-disable-next-line import/prefer-default-export
 export function loadBooks() {
     return {
         type: BOOK_LIST_LOAD,
-    };
-}
-
-/**
- * Set filter status for book list.
- */
-export function bookListStatus(status) {
-    return {
-        type: BOOK_LIST_STATUS,
-        status,
     };
 }

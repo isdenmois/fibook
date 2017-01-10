@@ -51,12 +51,10 @@ router.post('/', multipart(), (req, res) => {
         insertBook({
             MD5: hash,
             Authors: author,
-            LastAccess: date,
             LastModified: date,
             Location: path,
             Name: file.name,
             Size: file.size,
-            Status: 0,
             Title: title,
             Type: 'fb2',
         });

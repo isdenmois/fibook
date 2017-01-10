@@ -11,7 +11,7 @@ describe('<HomePage /> component', () => {
     const bookListStatus = jest.fn();
 
     it('should render', () => {
-        const books = [
+        const newBooks = [
             fromJS({
                 MD5: 'book1',
                 author: 'test author',
@@ -19,6 +19,8 @@ describe('<HomePage /> component', () => {
                 status: 0,
                 thumbnail: '',
             }),
+        ];
+        const readBooks = [
             fromJS({
                 MD5: 'book2',
                 author: 'test author 2',
@@ -34,8 +36,8 @@ describe('<HomePage /> component', () => {
                 deleteBook={deleteBook}
                 updateBookStatus={updateBookStatus}
                 bookListStatus={bookListStatus}
-                books={books}
-                status={0}
+                newBooks={newBooks}
+                readBooks={readBooks}
             />
         );
 
@@ -51,6 +53,8 @@ describe('<HomePage /> component', () => {
                 updateBookStatus={updateBookStatus}
                 bookListStatus={bookListStatus}
                 loading
+                newBooks={[]}
+                readBooks={[]}
             />
         );
 

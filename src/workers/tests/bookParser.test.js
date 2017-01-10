@@ -1,5 +1,4 @@
-// import BookParser from '../utils/BookParser';
-// import base64 from '../utils/base64';
+import { PARSE_FILE } from '../../constants/BookParser';
 
 describe('bookParser worker', () => {
     // Mock BookParser.
@@ -43,7 +42,10 @@ describe('bookParser worker', () => {
     it('should parse files', () => {
         const file = 'file';
         window.onmessage({
-            data: file,
+            data: {
+                type: PARSE_FILE,
+                file,
+            },
         });
 
         expect(global.self.mockedMessage).toHaveBeenCalledWith({
@@ -56,7 +58,10 @@ describe('bookParser worker', () => {
         const file = 'file with image';
         global.self.mockedMessage.mockReset();
         window.onmessage({
-            data: file,
+            data: {
+                type: PARSE_FILE,
+                file,
+            },
         });
 
         expect(global.self.mockedMessage).toHaveBeenCalledWith({
@@ -71,7 +76,10 @@ describe('bookParser worker', () => {
         const file = 'encoding="windows-1251"';
         global.self.mockedMessage.mockReset();
         window.onmessage({
-            data: file,
+            data: {
+                type: PARSE_FILE,
+                file,
+            },
         });
 
         expect(global.self.mockedMessage).toHaveBeenCalledWith({
