@@ -3,9 +3,9 @@
  */
 import { takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects';
-import { stringify } from 'querystring';
 import { normalize, Schema, arrayOf } from 'normalizr';
 
+import queryParams from '../utils/queryParams';
 import { BOOK_LIST_LOAD } from '../constants/actionsTypes/list';
 import {
     startLoading,
@@ -20,8 +20,8 @@ import request from '../utils/request';
 export const bookSchema = new Schema('book', { idAttribute: 'MD5' });
 export const bookArray = arrayOf(bookSchema);
 
-const newBooksParams = stringify({
-    'fields[]': [
+const newBooksParams = queryParams({
+    fields: [
         'MD5',
         'Authors AS author',
         'Title AS title',
@@ -35,8 +35,8 @@ const newBooksParams = stringify({
     limit: 50,
 });
 
-const readBooksParams = stringify({
-    'fields[]': [
+const readBooksParams = queryParams({
+    fields: [
         'MD5',
         'Authors AS author',
         'Title AS title',
@@ -60,7 +60,6 @@ export function* getBooks() {
     yield put(startLoading());
 
     try {
-
         // Load new books.
         const newBooks = yield call(request, newBooksURL);
 
