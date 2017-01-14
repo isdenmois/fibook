@@ -6,7 +6,7 @@ import {
     DELETE_BOOK,
     UPDATE_BOOK_STATUS,
 } from '../constants/actionsTypes/details';
-import { startLoading } from '../actions/main';
+import { startLoading, loadingError } from '../actions/main';
 import { loadBooks } from '../actions/list';
 import request from '../utils/request';
 import bookDataParser from '../utils/bookData';
@@ -46,7 +46,7 @@ export function* createNewBook({ file }) {
         yield call(request, requestURL, options);
         yield put(loadBooks());
     } catch (err) {
-        console.error(err);
+        yield put(loadingError(err));
     }
 }
 
@@ -59,7 +59,7 @@ export function* deleteBook({ MD5 }) {
     try {
         yield call(request, requestURL, options);
     } catch (err) {
-        console.error(err);
+        yield put(loadingError(err));
     }
 }
 
@@ -68,12 +68,13 @@ export function* deleteBook({ MD5 }) {
  * Sends PATCH request to API for change book status.
  * @param MD5
  * @param status
+ * @param LastAccess
  */
-export function* updateBookStatus({ MD5, status }) {
+export function* updateBookStatus({ MD5, status, LastAccess }) {
     const requestURL = '/api/sql/library_metadata';
     const params = JSON.stringify({
         status,
-        LastAccess: Date.now(),
+        LastAccess: LastAccess || Date.now(),
         where: `MD5 = "${MD5}"`,
     });
 
@@ -90,7 +91,7 @@ export function* updateBookStatus({ MD5, status }) {
     try {
         yield call(request, requestURL, options);
     } catch (err) {
-        console.error(err);
+        yield put(loadingError(err));
     }
 }
 
