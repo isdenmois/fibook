@@ -1,5 +1,5 @@
 describe('parseBookData()', () => {
-    jest.mock('../workers/bookParser', () => {
+    jest.mock('../../workers/bookParser', () => {
         return class Worker {
             postMessage(data) {
                 this.onmessage({ data: data.file });
@@ -7,7 +7,7 @@ describe('parseBookData()', () => {
         };
     });
 
-    const parseBookData = require('./bookData').default;
+    const parseBookData = require('../bookData').default;
     it('should work', () => {
         return parseBookData('test')
             .then(data => expect(data).toEqual('test'));

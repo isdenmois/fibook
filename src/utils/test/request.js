@@ -1,4 +1,4 @@
-import request from './request';
+import request from '../request';
 
 describe('Request', () => {
     it('should work', () => {

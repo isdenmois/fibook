@@ -1,4 +1,4 @@
-import BookParser from './BookParser';
+import BookParser from '../BookParser';
 
 const firstName = 'Тестовый';
 const lastName = 'Автор';
