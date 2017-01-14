@@ -1,6 +1,6 @@
 {
     "name": "fibook",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "Book manager",
     "main": "server.js",
     "repository": "https://github.com/isdenmois/fibook.git",
