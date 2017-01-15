@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import RedBox from 'redbox-react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+
 // Both configureStore and Root are required conditionally.
 import configureStore from './store/configureStore';
 import rootSaga from './sagas';

@@ -1,13 +1,11 @@
-$edgePadding: 50px;
+@import "../../theme/variables";
 
 :local(.file-input) {
-    bottom: $edgePadding;
-    height: 56px;
-    overflow: hidden;
-    padding: 8px;
-    position: fixed;
-    right: $edgePadding;
-    width: 56px;
+    right: $fabRight;
+    bottom: $fabBottom;
+    .ios & {
+        background-color: $blueColor;
+    }
 
     input {
         height: 100%;
@@ -15,5 +13,7 @@ $edgePadding: 50px;
         position: absolute;
         width: 100%;
         z-index: 5;
+        top: 0;
+        left: 0;
     }
 }

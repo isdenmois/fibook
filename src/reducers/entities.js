@@ -18,7 +18,8 @@ export default function entitiesReducer(state = initialState, action) {
         case UPDATE_BOOK_STATUS:
             return state
                 .setIn(['book', action.MD5, 'status'], action.status)
-                .setIn(['book', action.MD5, 'LastAccess'], action.LastAccess);
+                .setIn(['book', action.MD5, 'LastAccess'], action.LastAccess)
+                .setIn(['book', action.MD5, 'LastModified'], action.LastAccess);
 
         case DELETE_BOOK:
             return state

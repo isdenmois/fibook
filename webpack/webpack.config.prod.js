@@ -44,8 +44,13 @@ module.exports = {
                 loader: 'url-loader?limit=100000',
             },
             {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract('style', 'css'),
+                include: /node_modules/
+            },
+            {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('style', 'css?camelCase&modules!sass'),
+                loader: ExtractTextPlugin.extract('style', 'css?camelCase!sass'),
                 exclude: /node_modules/
             },
             {

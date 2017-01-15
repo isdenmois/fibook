@@ -18,7 +18,20 @@ export const selectNewBooks = createSelector(
                 .filter((data) => {
                     const status = data.get('status');
                     return +status === 0 || status === undefined;
-                }).sort((a, b) => b.get('LastModified') - a.get('LastModified'))
+                }).toArray()
+                .sort((a, b) => b.get('LastModified') - a.get('LastModified'));
+        }
+
+        return [];
+    },
+);
+
+const filterReadBooks = createSelector(
+    selectBooks,
+    (books) => {
+        if (books) {
+            return books
+                .filter(data => +data.get('status') === 1)
                 .toArray();
         }
 
@@ -26,17 +39,8 @@ export const selectNewBooks = createSelector(
     },
 );
 
-
 export const selectReadBooks = createSelector(
-    selectBooks,
-    (books) => {
-        if (books) {
-            return books
-                .filter(data => +data.get('status') === 1)
-                .sort((a, b) => b.get('LastAccess') - a.get('LastAccess'))
-                .toArray();
-        }
-
-        return [];
-    },
+    filterReadBooks,
+    books => books
+        .sort((a, b) => b.get('LastAccess') - a.get('LastAccess')),
 );

@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const fs = require('fs');
 
 const ROOT_PATH = path.join(__dirname, '..');
@@ -51,9 +52,10 @@ module.exports = {
             context: process.cwd(),
             manifest: require(manifestPath),
         }),
-        // new webpack.ProvidePlugin({
-        //     'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-        // }),
+        new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
+        new webpack.ProvidePlugin({
+            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+        }),
     ],
     module: {
         preLoaders: [
@@ -78,6 +80,11 @@ module.exports = {
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
                 loader: 'url-loader?limit=100000',
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract('style', 'css'),
+                include: /node_modules/
             },
             {
                 test: /\.scss$/,

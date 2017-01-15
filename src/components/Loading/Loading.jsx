@@ -1,12 +1,12 @@
 import React from 'react';
-import CircularProgress from 'material-ui/CircularProgress';
+import { ProgressCircular } from 'react-onsenui';
 
 import { loading } from './Loading.scss';
 
-function Loading(props) {
+function Loading() {
     return (
         <div className={loading}>
-            <CircularProgress {...props} />
+            <ProgressCircular indeterminate />
         </div>
     );
 }

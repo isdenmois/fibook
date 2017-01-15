@@ -1,6 +1,6 @@
 /* global FileReader */
 import React, { Component, PropTypes } from 'react';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
+import { Fab } from 'react-onsenui';
 
 import { fileInput } from './FileInput.scss';
 
@@ -28,18 +28,19 @@ export default class FileInput extends Component {
         const { name, accept, children } = this.props;
 
         return (
-            <div className={fileInput}>
+            <Fab
+                position="bottom right"
+                className={fileInput}
+            >
                 <input
+                    ref="fileInput"
                     type="file"
                     name={name}
                     onChange={this.onChange}
                     accept={accept}
-                    className="file"
                 />
-                <FloatingActionButton secondary>
-                    {children}
-                </FloatingActionButton>
-            </div>
+                {children}
+            </Fab>
         );
     }
 }
