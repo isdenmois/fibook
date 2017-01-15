@@ -115,6 +115,7 @@ describe('updateBookStatus Saga', () => {
         MD5,
         status,
         LastAccess,
+        LastModified: LastAccess,
     }));
 
     it('should call request', () => {
@@ -122,6 +123,7 @@ describe('updateBookStatus Saga', () => {
         const params = JSON.stringify({
             status,
             LastAccess,
+            LastModified: LastAccess,
             where: `MD5 = "${MD5}"`,
         });
 

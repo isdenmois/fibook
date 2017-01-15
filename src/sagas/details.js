@@ -69,12 +69,14 @@ export function* deleteBook({ MD5 }) {
  * @param MD5
  * @param status
  * @param LastAccess
+ * @param LastModified
  */
-export function* updateBookStatus({ MD5, status, LastAccess }) {
+export function* updateBookStatus({ MD5, status, LastAccess, LastModified }) {
     const requestURL = '/api/sql/library_metadata';
     const params = JSON.stringify({
         status,
         LastAccess: LastAccess || Date.now(),
+        LastModified: LastModified || LastAccess || Date.now(),
         where: `MD5 = "${MD5}"`,
     });
 

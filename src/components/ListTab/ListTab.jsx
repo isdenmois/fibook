@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import {
     Input,
     ListItem,
@@ -6,7 +6,7 @@ import {
 
 import EmptyList from '../EmptyList';
 
-export default class ListTab extends Component {
+export default class ListTab extends PureComponent {
     constructor(props) {
         super(props);
         this.renderRow = this.renderRow.bind(this);

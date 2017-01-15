@@ -39,6 +39,7 @@ describe('Books reducer', () => {
                 },
                 1234: {
                     LastAccess,
+                    LastModified: LastAccess,
                     status: 1,
                 },
             }
