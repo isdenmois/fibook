@@ -3,7 +3,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const strip = require('strip-loader');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const BabiliPlugin = require("babili-webpack-plugin");
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const BabiliPlugin = require('babili-webpack-plugin');
 
 const ROOT_PATH = path.join(__dirname, '..');
 const APP_PATH = `${ROOT_PATH}/src`;
@@ -17,45 +18,67 @@ module.exports = {
         filename: '[name].js'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
     module: {
-        preLoaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
-                loader: 'eslint',
+                enforce: 'pre',
+                loader: 'eslint-loader',
                 exclude: /(node_modules|workers)/,
-            }
-        ],
-        loaders: [
+            },
             {
                 test: /\.js$/,
-                loaders: ['webworker', strip.loader('debug'), 'babel'],
+                use: [
+                    'webworker-loader',
+                    strip.loader('debug'),
+                    'babel-loader',
+                ],
                 include: /workers/,
                 exclude: /workers\/tests/,
             },
             {
                 test: /\.jsx?$/,
-                loaders: [strip.loader('debug'), 'babel'],
+                use: [
+                    strip.loader('debug'),
+                    'babel-loader',
+                ],
                 exclude: /node_modules/,
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-                loader: 'url-loader?limit=100000',
+                loader: 'url-loader',
+                options: {
+                    limit: 100000,
+                },
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: 'css-loader',
+                }),
+                include: /node_modules/
             },
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('style', 'css?camelCase&modules!sass'),
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: [
+                        'css-loader?importLoaders=1&modules&localIdentName=[hash:base64:5]&camelCase',
+                        'sass-loader'
+                    ],
+                }),
                 exclude: /node_modules/
             },
             {
                 test: /\.json$/,
-                loader: 'json',
+                loader: 'json-loader',
             }
         ]
     },
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
         new HtmlWebpackPlugin({
             template: `${APP_PATH}/index.html`,
             minify: {
@@ -69,27 +92,34 @@ module.exports = {
             'process.env.NODE_ENV': JSON.stringify('production')
         }),
         new webpack.ProvidePlugin({
-            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+            'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
         }),
-        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false,
                 drop_console: true,
-                drop_debugger: true
+                drop_debugger: true,
+                sequences     : true,
+                booleans      : true,
+                loops         : true,
+                unused      : true,
             },
             output: {
                 ascii_only: true,
                 comments: false
             },
             sourceMap: false,
-            test: /vendors/,
+            test: /vendors\.js/,
         }),
         new BabiliPlugin({
             test: /(main|worker).js$/,
             comments: false,
         }),
-        new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
+        new ExtractTextPlugin({
+            allChunks: true,
+            filename: '[name].css',
+        }),
+        new OptimizeCssAssetsPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendors',
             minChunks: isExternal,

@@ -19,7 +19,7 @@ const finalCreateStore = reduxDevtools ? compose(
     applyMiddleware(logger, sagaMiddleware),
 )(createStore);
 
-module.exports = function configureStore(initialState) {
+export default function configureStore(initialState) {
     const store = finalCreateStore(rootReducer, initialState);
 
     if (module.hot) {
@@ -31,4 +31,4 @@ module.exports = function configureStore(initialState) {
     store.runSaga = sagaMiddleware.run;
 
     return store;
-};
+}
