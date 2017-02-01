@@ -66,7 +66,7 @@ module.exports = {
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: 'style-loader',
                     loader: [
-                        'css-loader?importLoaders=1&modules&localIdentName=[hash:base64:5]&camelCase',
+                        'css-loader?importLoaders=1&localIdentName=[hash:base64:5]&camelCase',
                         'sass-loader'
                     ],
                 }),

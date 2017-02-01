@@ -109,7 +109,6 @@ export class HomePage extends Component {
         return (
             <div>
                 <Tabbar
-                    animation="slide"
                     index={index}
                     onPreChange={this.changeIndex}
                     renderTabs={this.renderTabs}

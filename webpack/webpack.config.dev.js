@@ -97,13 +97,7 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            camelCase: true,
-                            modules: true,
-                        }
-                    },
+                    'css-loader?importLoaders=1&localIdentName=[hash:base64:5]&camelCase',
                     'sass-loader',
                 ],
                 exclude: /node_modules/
