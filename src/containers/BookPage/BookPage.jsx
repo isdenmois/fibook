@@ -34,6 +34,7 @@ export class BookPage extends Component {
         this.deleteBook = ::this.deleteBook;
         this.renderBottomToolbar = ::this.renderBottomToolbar;
         this.updateItemStatus = ::this.updateItemStatus;
+        this.handleOrientation = ::this.handleOrientation;
 
         this.state = {
             selected: null,
@@ -47,6 +48,14 @@ export class BookPage extends Component {
         }
     }
 
+    componentDidMount() {
+        ons.orientation.on('change', this.handleOrientation);
+    }
+
+    componentWillUnmount() {
+        ons.orientation.off('change', this.handleOrientation);
+    }
+
     handleClick() {
         navigate('/');
     }
@@ -56,6 +65,11 @@ export class BookPage extends Component {
             selected: event.payload,
         });
     }
+
+    handleOrientation() {
+        this.setState({});
+    }
+
 
     updateItemStatus() {
         const { MD5 } = this.props.params;
