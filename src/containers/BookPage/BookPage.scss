@@ -1,0 +1,30 @@
+:local(.bookPage) {
+    .title {
+        font-size: 24px;
+    }
+
+    .pb {
+        width: 80%;
+        margin: auto;
+        margin-top: 10px;
+    }
+
+    .read {
+        font-size: 12px;
+    }
+
+    .primary {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .title,
+    .read,
+    .author {
+        text-align: center;
+    }
+
+    .right {
+        text-align: right;
+    }
+}

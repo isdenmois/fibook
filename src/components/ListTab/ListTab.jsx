@@ -5,6 +5,7 @@ import {
 } from 'react-onsenui';
 
 import EmptyList from '../EmptyList';
+import navigate from '../../utils/navigate';
 
 export default class ListTab extends PureComponent {
     constructor(props) {
@@ -20,11 +21,15 @@ export default class ListTab extends PureComponent {
         const onChange = () => {
             this.props.onChange(book);
         };
+        const onClick = () => {
+            navigate(`book/${MD5}`);
+        };
 
         return (
             <ListItem
                 key={MD5}
                 tappable
+                onClick={onClick}
             >
                 <div className="center">
                     <div className="list__item__title">

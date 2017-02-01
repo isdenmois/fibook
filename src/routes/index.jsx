@@ -3,6 +3,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import AppComponent from '../containers/App';
 import HomePageComponent from '../containers/HomePage';
+import BookPageComponent from '../containers/BookPage';
 import NotFound from '../containers/NotFound';
 
 export default () => (
@@ -13,6 +14,7 @@ export default () => (
              other routes are loaded according to the component
              property specified here */}
             <IndexRoute component={HomePageComponent} />
+            <Route path="/book/:MD5" component={BookPageComponent} />
             <Route path="*" component={NotFound} />
         </Route>
     </Router>

@@ -1,7 +1,8 @@
-import { Map, fromJS } from 'immutable';
+import { fromJS } from 'immutable';
 import forEach from 'lodash/forEach';
 
 import {
+    DETAILS_LOADING_SUCCESS,
     UPDATE_BOOK_STATUS,
     DELETE_BOOK,
 } from '../constants/actionsTypes/details';
@@ -9,7 +10,9 @@ import {
     LOADING_SUCCESS,
 } from '../constants/actionsTypes/main';
 
-const initialState = new Map();
+const initialState = fromJS({
+    details: {},
+});
 
 export default function entitiesReducer(state = initialState, action) {
     let newState = state;
@@ -31,6 +34,10 @@ export default function entitiesReducer(state = initialState, action) {
             });
 
             return newState;
+
+        case DETAILS_LOADING_SUCCESS:
+            return state
+                .setIn(['details', action.MD5], action.data);
     }
 
     return state;
