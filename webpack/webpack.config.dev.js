@@ -22,7 +22,6 @@ if (!fs.existsSync(manifestPath)) {
 
 module.exports = {
     context: APP_PATH,
-    debug: true,
     devtool: 'source-map',
     entry: [
         'webpack-hot-middleware/client',
@@ -34,7 +33,7 @@ module.exports = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
@@ -54,32 +53,38 @@ module.exports = {
         }),
         new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
         new webpack.ProvidePlugin({
-            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+            'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
         }),
     ],
     module: {
-        preLoaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
-                loader: "eslint-loader",
+                enforce: 'pre',
+                loader: 'eslint-loader',
                 exclude: /node_modules/
-            }
-        ],
-        loaders: [
+            },
             {
                 test: /\.jsx?$/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 exclude: /(node_modules|workers)/,
             },
             {
                 test: /\.js$/,
-                loaders: ['webworker', 'babel'],
+                use: ['webworker-loader', 'babel-loader'],
                 include: /workers/,
                 exclude: /workers\/tests/,
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-                loader: 'url-loader?limit=100000',
+                loader: 'url-loader',
+                options: {
+                    limit: 100000,
+                },
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
             },
             {
                 test: /\.css$/,
@@ -88,12 +93,22 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loader: 'style!css?camelCase!sass',
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            camelCase: true,
+                            modules: true,
+                        }
+                    },
+                    'sass-loader',
+                ],
                 exclude: /node_modules/
             },
             {
                 test: /\.json$/,
-                loader: 'json',
+                use: 'json-loader',
             },
         ]
     }

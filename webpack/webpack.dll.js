@@ -43,14 +43,14 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
     ],
     resolve: {
-        extensions: ['', '.js']
+        extensions: ['.js']
     },
     target: 'web',
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.json$/,
-                loader: 'json',
+                use: 'json-loader',
             },
         ]
     },

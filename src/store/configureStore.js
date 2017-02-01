@@ -4,9 +4,9 @@
 let loadedStore = null;
 
 if (process.env.NODE_ENV === 'production') {
-    loadedStore = require('./configureStore.prod');
+    loadedStore = require('./configureStore.prod').default;
 } else {
-    loadedStore = require('./configureStore.dev');
+    loadedStore = require('./configureStore.dev').default;
 }
 
 const configureStore = loadedStore;
