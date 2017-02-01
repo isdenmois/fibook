@@ -3,14 +3,20 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import {
     BackButton,
+    Button,
     Page,
     Toolbar,
     ProgressBar,
 } from 'react-onsenui';
 import { BarChart, Bar } from 'recharts';
+import ons from 'onsenui';
 
 import navigate from '../../utils/navigate';
-import { loadDetails } from '../../actions/details';
+import {
+    loadDetails,
+    updateBookStatus,
+    deleteBook,
+} from '../../actions/details';
 import { selectDetails } from '../../selectors/entities';
 import { selectLoading } from '../../selectors/details';
 import Loading from '../../components/Loading';
@@ -25,6 +31,9 @@ export class BookPage extends Component {
         this.renderToolbar = ::this.renderToolbar;
         this.renderDetails = ::this.renderDetails;
         this.handleSelect = ::this.handleSelect;
+        this.deleteBook = ::this.deleteBook;
+        this.renderBottomToolbar = ::this.renderBottomToolbar;
+        this.updateItemStatus = ::this.updateItemStatus;
 
         this.state = {
             selected: null,
@@ -48,6 +57,32 @@ export class BookPage extends Component {
         });
     }
 
+    updateItemStatus() {
+        const { MD5 } = this.props.params;
+        const book = this.props.details.get(MD5);
+        const newStatus = book.Status > 0 ? 0 : 1;
+
+        this.props.updateBookStatus(MD5, newStatus);
+        book.Status = newStatus;
+        this.setState({});
+    }
+
+    deleteBook() {
+        const callback = (button) => {
+            if (button > 0) {
+                const { MD5 } = this.props.params;
+                this.props.deleteBook(MD5);
+                navigate('/');
+            }
+        };
+
+        ons.notification.confirm('Действие нельзя отменить', {
+            buttonLabels: ['Отмена', 'OK'],
+            callback,
+            title: 'Удалить книгу?',
+        });
+    }
+
     renderToolbar() {
         return (
             <Toolbar>
@@ -58,6 +93,26 @@ export class BookPage extends Component {
                 </div>
                 <div className="center">Подробности</div>
             </Toolbar>
+        );
+    }
+
+    renderBottomToolbar() {
+        const { MD5 } = this.props.params;
+        const data = this.props.details.get(MD5);
+
+        return (
+            <div className="buttons tab-bar">
+                <Button
+                    onClick={this.updateItemStatus}
+                >
+                    {data.Status ? 'В новые' : 'В прочтенные' }
+                </Button>
+                <Button
+                    onClick={this.deleteBook}
+                >
+                    Удалить
+                </Button>
+            </div>
         );
     }
 
@@ -142,20 +197,19 @@ export class BookPage extends Component {
         const width = window.innerWidth;
         let progress = data.Progress || '0/1';
         progress = progress.split('/');
-        if (progress[1] - progress[0] < 5) {
-            data.Status = true;
-        }
+        const status = progress[1] - progress[0] < 5;
         progress = (progress[0] / progress[1]) * 100;
 
         return (
             <Page
                 renderToolbar={this.renderToolbar}
+                renderBottomToolbar={this.renderBottomToolbar}
                 className={bookPage}
             >
                 <div className="primary">
                     <div className="title">{data.Title}</div>
                     <div className="author">{data.Authors}</div>
-                    {data.Status ? (
+                    {status ? (
                         <div className="read">
                             Прочитано {new Date(data.LastAccess).toLocaleDateString()}
                         </div>
@@ -207,7 +261,9 @@ export class BookPage extends Component {
 BookPage.propTypes = {
     details: PropTypes.object,
     loading: PropTypes.bool,
+    deleteBook: PropTypes.func,
     loadDetails: PropTypes.func,
+    updateBookStatus: PropTypes.func,
     params: PropTypes.object.isRequired,
 };
 
@@ -218,6 +274,8 @@ const mapStateToProps = createStructuredSelector({
 
 const mapActionsToProps = {
     loadDetails,
+    deleteBook,
+    updateBookStatus,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(BookPage);

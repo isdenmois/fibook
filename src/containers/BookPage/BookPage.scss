@@ -1,4 +1,8 @@
 :local(.bookPage) {
+    .page__content {
+        padding-bottom: 52px;
+    }
+
     .title {
         font-size: 24px;
     }
@@ -26,5 +30,19 @@
 
     .right {
         text-align: right;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .button {
+        width: 40%;
+        text-align: center;
     }
 }
