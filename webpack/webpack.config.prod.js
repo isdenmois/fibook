@@ -62,14 +62,6 @@ module.exports = {
                 include: /node_modules/
             },
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract({
-                    fallbackLoader: 'style-loader',
-                    loader: 'css-loader?importLoaders=1&modules&localIdentName=[hash:base64:5]&camelCase',
-                }),
-                include: /node_modules/
-            },
-            {
                 test: /\.scss$/,
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: 'style-loader',

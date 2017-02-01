@@ -51,7 +51,10 @@ module.exports = {
             context: process.cwd(),
             manifest: require(manifestPath),
         }),
-        new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
+        new ExtractTextPlugin({
+            allChunks: true,
+            filename: '[name].css',
+        }),
         new webpack.ProvidePlugin({
             'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
         }),
@@ -84,11 +87,10 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
-            },
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style', 'css'),
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: 'css-loader',
+                }),
                 include: /node_modules/
             },
             {
