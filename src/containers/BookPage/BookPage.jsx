@@ -20,6 +20,7 @@ import {
 import { selectDetails } from '../../selectors/entities';
 import { selectLoading } from '../../selectors/details';
 import Loading from '../../components/Loading';
+import fileSizeConvert from '../../utils/FileSize';
 
 import { bookPage } from './BookPage.scss';
 
@@ -250,7 +251,7 @@ export class BookPage extends Component {
                     </ons-list-item>
                     <ons-list-item>
                         <div className="center">Размер</div>
-                        <div className="right">{data.Size}</div>
+                        <div className="right">{fileSizeConvert(data.Size)}</div>
                     </ons-list-item>
                 </ons-list>
 
