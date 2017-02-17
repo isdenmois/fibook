@@ -244,11 +244,13 @@ export class BookPage extends Component {
                     height={250}
                     width={width}
                     data={dataset}
+                    fill="#4383cd"
                 >
                     <Bar
                         dataKey="pages"
                         onClick={this.handleSelect}
                         isAnimationActive={false}
+                        maxBarSize={48}
                     />
                 </BarChart>
 
