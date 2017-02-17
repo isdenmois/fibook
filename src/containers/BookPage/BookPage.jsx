@@ -21,6 +21,7 @@ import { selectDetails } from '../../selectors/entities';
 import { selectLoading } from '../../selectors/details';
 import Loading from '../../components/Loading';
 import fileSizeConvert from '../../utils/FileSize';
+import formatTime from '../../utils/formatTime';
 
 import { bookPage } from './BookPage.scss';
 
@@ -140,6 +141,9 @@ export class BookPage extends Component {
             date,
             pages,
             speed,
+            percent,
+            progress,
+            time,
         } = this.state.selected;
 
         return (
@@ -156,6 +160,18 @@ export class BookPage extends Component {
                 <ons-list-item>
                     <div className="center">Скорость чтения</div>
                     <div className="right">{speed} c/м</div>
+                </ons-list-item>
+                <ons-list-item>
+                    <div className="center">Процент</div>
+                    <div className="right">{percent}%</div>
+                </ons-list-item>
+                <ons-list-item>
+                    <div className="center">Прогресс</div>
+                    <div className="right">{progress}</div>
+                </ons-list-item>
+                <ons-list-item>
+                    <div className="center">Время</div>
+                    <div className="right">{formatTime(time)}</div>
                 </ons-list-item>
             </ons-list>
         );
@@ -176,38 +192,7 @@ export class BookPage extends Component {
             );
         }
 
-        const dataset = [
-            {
-                date: '21.09.2017',
-                pages: 57,
-                speed: 31,
-            },
-            {
-                date: '22.09.2017',
-                pages: 91,
-                speed: 37,
-            },
-            {
-                date: '23.09.2017',
-                pages: 26,
-                speed: 42,
-            },
-            {
-                date: '24.09.2017',
-                pages: 37,
-                speed: 30,
-            },
-            {
-                date: '25.11.2017',
-                pages: 120,
-                speed: 34,
-            },
-            {
-                date: '01.11.2017',
-                pages: 45,
-                speed: 31,
-            },
-        ];
+        const dataset = data.history;
         /* global window */
         const width = window.innerWidth;
         let progress = data.Progress || '0/1';
