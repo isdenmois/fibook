@@ -10,7 +10,7 @@ import {
 } from '../actions/details';
 import queryParams from '../utils/queryParams';
 import request from '../utils/request';
-import processHistory from '../utils/processHistory';
+import processBook from '../utils/processBookDetails';
 
 export function getParams(MD5) {
     const params = {
@@ -48,7 +48,7 @@ export function* loadDetails({ MD5 }) {
         const history = yield call(request, historyURL);
 
         if (details && details[0]) {
-            details[0].history = processHistory(history);
+            processBook(details[0], history);
         }
 
         yield put(detailsLoaded(MD5, details && details[0]));

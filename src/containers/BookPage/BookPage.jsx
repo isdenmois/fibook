@@ -6,7 +6,6 @@ import {
     Button,
     Page,
     Toolbar,
-    ProgressBar,
 } from 'react-onsenui';
 import ons from 'onsenui';
 
@@ -19,7 +18,8 @@ import {
 import { selectDetails } from '../../selectors/entities';
 import { selectLoading } from '../../selectors/details';
 import Loading from '../../components/Loading';
-import fileSizeConvert from '../../utils/FileSize';
+import BookProgress from '../../components/BookProgress';
+import BookDetails from '../../components/BookDetails';
 import Chart from '../../components/Chart';
 import HistoryDetails from '../../components/HistoryDetails';
 
@@ -146,13 +146,8 @@ export class BookPage extends Component {
             );
         }
 
-        const dataset = data.history;
-        const historyItem = this.state.selected || dataset[0];
-
-        let progress = data.Progress || '0/1';
-        progress = progress.split('/');
-        const status = progress[1] - progress[0] < 5;
-        progress = (progress[0] / progress[1]) * 100;
+        const history = data.history;
+        const historyItem = this.state.selected || history[0];
 
         return (
             <Page
@@ -163,40 +158,18 @@ export class BookPage extends Component {
                 <div className="primary">
                     <div className="title">{data.Title}</div>
                     <div className="author">{data.Authors}</div>
-                    {status ? (
-                        <div className="read">
-                            Прочитано {new Date(data.LastAccess).toLocaleDateString()}
-                        </div>
-                        ) : (
-                            <ProgressBar className="pb" value={progress} />
-                        )}
+                    <BookProgress
+                        lastRead={data.lastRead}
+                        progress={data.Progress}
+                    />
                 </div>
-                <ons-list>
-                    <ons-list-item>
-                        <div className="center">Автор</div>
-                        <div className="right">{data.Authors}</div>
-                    </ons-list-item>
-                    <ons-list-item>
-                        <div className="center">Название</div>
-                        <div className="right">{data.Title}</div>
-                    </ons-list-item>
-                    <ons-list-item>
-                        <div className="center">Статус</div>
-                        <div className="right">{data.Status ? 'Прочитано' : 'Непрочитано'}</div>
-                    </ons-list-item>
-                    <ons-list-item>
-                        <div className="center">Прогресс</div>
-                        <div className="right">{data.Progress}</div>
-                    </ons-list-item>
-                    <ons-list-item>
-                        <div className="center">Размер</div>
-                        <div className="right">{fileSizeConvert(data.Size)}</div>
-                    </ons-list-item>
-                </ons-list>
+                <BookDetails
+                    data={data}
+                />
                 {
-                    dataset.length > 1 && (
+                    history.length > 1 && (
                         <Chart
-                            dataset={dataset}
+                            dataset={history}
                             onSelect={this.handleSelect}
                         />
                     )
