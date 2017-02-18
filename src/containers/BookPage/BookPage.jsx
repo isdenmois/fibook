@@ -20,8 +20,8 @@ import { selectDetails } from '../../selectors/entities';
 import { selectLoading } from '../../selectors/details';
 import Loading from '../../components/Loading';
 import fileSizeConvert from '../../utils/FileSize';
-import formatTime from '../../utils/formatTime';
 import Chart from '../../components/Chart';
+import HistoryDetails from '../../components/HistoryDetails';
 
 import { bookPage } from './BookPage.scss';
 
@@ -31,7 +31,6 @@ export class BookPage extends Component {
 
         this.handleClick = ::this.handleClick;
         this.renderToolbar = ::this.renderToolbar;
-        this.renderDetails = ::this.renderDetails;
         this.handleSelect = ::this.handleSelect;
         this.deleteBook = ::this.deleteBook;
         this.renderBottomToolbar = ::this.renderBottomToolbar;
@@ -132,51 +131,6 @@ export class BookPage extends Component {
         );
     }
 
-    renderDetails() {
-        if (!this.state.selected) {
-            return '';
-        }
-
-        const {
-            date,
-            pages,
-            speed,
-            percent,
-            progress,
-            time,
-        } = this.state.selected;
-
-        return (
-            <ons-list>
-                <ons-list-header>{date}</ons-list-header>
-                <ons-list-item>
-                    <div className="center">Дата</div>
-                    <div className="right">{date}</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Страницы</div>
-                    <div className="right">{pages}</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Скорость чтения</div>
-                    <div className="right">{speed} c/м</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Процент</div>
-                    <div className="right">{percent}%</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Прогресс</div>
-                    <div className="right">{progress}</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Время</div>
-                    <div className="right">{formatTime(time)}</div>
-                </ons-list-item>
-            </ons-list>
-        );
-    }
-
     render() {
         const { MD5 } = this.props.params;
         const data = this.props.details.get(MD5);
@@ -193,6 +147,8 @@ export class BookPage extends Component {
         }
 
         const dataset = data.history;
+        const historyItem = this.state.selected || dataset[0];
+
         let progress = data.Progress || '0/1';
         progress = progress.split('/');
         const status = progress[1] - progress[0] < 5;
@@ -245,7 +201,11 @@ export class BookPage extends Component {
                         />
                     )
                 }
-                {this.renderDetails()}
+                { historyItem && (
+                    <HistoryDetails
+                        item={historyItem}
+                    />
+                )}
             </Page>
         );
     }
