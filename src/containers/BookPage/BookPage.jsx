@@ -8,7 +8,6 @@ import {
     Toolbar,
     ProgressBar,
 } from 'react-onsenui';
-import { BarChart, Bar } from 'recharts';
 import ons from 'onsenui';
 
 import navigate from '../../utils/navigate';
@@ -22,6 +21,7 @@ import { selectLoading } from '../../selectors/details';
 import Loading from '../../components/Loading';
 import fileSizeConvert from '../../utils/FileSize';
 import formatTime from '../../utils/formatTime';
+import Chart from '../../components/Chart';
 
 import { bookPage } from './BookPage.scss';
 
@@ -193,8 +193,6 @@ export class BookPage extends Component {
         }
 
         const dataset = data.history;
-        /* global window */
-        const width = window.innerWidth;
         let progress = data.Progress || '0/1';
         progress = progress.split('/');
         const status = progress[1] - progress[0] < 5;
@@ -239,21 +237,14 @@ export class BookPage extends Component {
                         <div className="right">{fileSizeConvert(data.Size)}</div>
                     </ons-list-item>
                 </ons-list>
-
-                <BarChart
-                    height={250}
-                    width={width}
-                    data={dataset}
-                    fill="#4383cd"
-                >
-                    <Bar
-                        dataKey="pages"
-                        onClick={this.handleSelect}
-                        isAnimationActive={false}
-                        maxBarSize={48}
-                    />
-                </BarChart>
-
+                {
+                    dataset.length > 1 && (
+                        <Chart
+                            dataset={dataset}
+                            onSelect={this.handleSelect}
+                        />
+                    )
+                }
                 {this.renderDetails()}
             </Page>
         );
