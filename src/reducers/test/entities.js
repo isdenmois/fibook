@@ -12,7 +12,7 @@ import {
 describe('Books reducer', () => {
     it('should return the initial state', () => {
         const state = reducer(undefined, {});
-        const expectedState = {};
+        const expectedState = { "details": {} };
 
         expect(state.toJS()).toEqual(expectedState);
     });
