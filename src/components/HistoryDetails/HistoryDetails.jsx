@@ -1,5 +1,8 @@
 import React, { PureComponent, PropTypes } from 'react';
 
+import List from '../List';
+import ListItem from '../List/ListItem';
+import ListHeader from '../List/ListHeader';
 import formatTime from '../../utils/formatTime';
 
 export default class HistoryDetails extends PureComponent {
@@ -14,33 +17,15 @@ export default class HistoryDetails extends PureComponent {
         } = this.props.item;
 
         return (
-            <ons-list>
-                <ons-list-header>{date}</ons-list-header>
-                <ons-list-item>
-                    <div className="center">Дата</div>
-                    <div className="right">{date}</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Страницы</div>
-                    <div className="right">{pages}</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Скорость чтения</div>
-                    <div className="right">{speed} c/м</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Процент</div>
-                    <div className="right">{percent}%</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Прогресс</div>
-                    <div className="right">{progress}</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Время</div>
-                    <div className="right">{formatTime(time)}</div>
-                </ons-list-item>
-            </ons-list>
+            <List>
+                <ListHeader>{date}</ListHeader>
+                <ListItem center="Дата" right={date} />
+                <ListItem center="Страницы" right={pages} />
+                <ListItem center="Скорость чтения" right={speed} />
+                <ListItem center="Процент" right={`${percent}%`} />
+                <ListItem center="Прогресс" right={progress} />
+                <ListItem center="Время" right={formatTime(time)} />
+            </List>
         );
     }
 }

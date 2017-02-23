@@ -1,7 +1,7 @@
 import React, { PropTypes, PureComponent } from 'react';
 
 import List from '../List';
-import ListItem from '../ListItem';
+import ListItem from '../List/ListItem';
 import fileSizeConvert from '../../utils/FileSize';
 
 export default class BookDetails extends PureComponent {
