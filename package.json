@@ -45,6 +45,7 @@
         "redux-saga": "^0.14.3",
         "redux-thunk": "^2.1.0",
         "reselect": "^2.5.4",
+        "svg-inline-react": "^1.0.3",
         "translit": "^0.0.1",
         "translit-russian": "^0.0.2",
         "xml-query": "^1.4.0",
@@ -80,13 +81,16 @@
         "html-webpack-plugin": "^2.24.1",
         "identity-obj-proxy": "^3.0.0",
         "imports-loader": "^0.7.0",
-        "jest": "^18.1.0",
+        "jest": "^19.0.1",
         "json-loader": "^0.5.4",
         "md5-file": "^3.1.1",
         "morgan": "^1.7.0",
         "node-sass": "^4.1.1",
         "node-zopfli": "^2.0.2",
         "optimize-css-assets-webpack-plugin": "^1.3.0",
+        "postcss-import": "^9.1.0",
+        "postcss-loader": "^1.3.1",
+        "postcss-modules-values": "^1.2.2",
         "react-addons-test-utils": "^15.4.1",
         "rimraf": "^2.5.4",
         "sass-loader": "^4.1.1",
@@ -94,6 +98,7 @@
         "sqlite3": "^3.1.8",
         "strip-loader": "^0.1.2",
         "style-loader": "^0.13.1",
+        "svg-inline-loader": "^0.7.1",
         "uglify-js": "mishoo/UglifyJS2#harmony",
         "url-loader": "^0.5.7",
         "webpack": "2.2.1",
@@ -110,9 +115,13 @@
             "src/**/*.jsx"
         ],
         "moduleNameMapper": {
-            "\\.scss$": "identity-obj-proxy"
+            "\\.s?css$": "identity-obj-proxy"
         },
-        "testPathDirs": [
+        "transform": {
+            "^.+\\.svg$": "<rootDir>/scripts/fileTransformer.js",
+            "^.+\\.jsx?$": "babel-jest"
+        },
+        "roots": [
             "src"
         ],
         "testRegex": "(/test/.*|(\\.|/)(test|spec))\\.jsx?$",
@@ -138,7 +147,8 @@
             "translit-russian",
             "xml-reader",
             "xml-query",
-            "src"
+            "src",
+            "<rootDir>/scripts/fileTransformer.js"
         ]
     }
 }

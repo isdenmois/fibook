@@ -79,11 +79,15 @@ module.exports = {
                 exclude: /workers\/tests/,
             },
             {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                test: /\.(png|woff|woff2|eot|ttf)$/,
                 loader: 'url-loader',
                 options: {
                     limit: 100000,
                 },
+            },
+            {
+                test: /\.svg$/,
+                loader: 'svg-inline-loader',
             },
             {
                 test: /\.css$/,
@@ -101,6 +105,15 @@ module.exports = {
                     'sass-loader',
                 ],
                 exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader?importLoaders=1&localIdentName=[path]--[local]&camelCase&modules&sourceMap',
+                    'postcss-loader',
+                ],
+                exclude: /node_modules/,
             },
             {
                 test: /\.json$/,
