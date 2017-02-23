@@ -1,6 +1,7 @@
 import React, { PropTypes, PureComponent } from 'react';
 
 import List from '../List';
+import ListItem from '../ListItem';
 import fileSizeConvert from '../../utils/FileSize';
 
 export default class BookDetails extends PureComponent {
@@ -12,29 +13,15 @@ export default class BookDetails extends PureComponent {
             Progress,
             Size,
         } = this.props.data;
+        const status = Status ? 'Прочитано' : 'Непрочитано';
 
         return (
             <List>
-                <ons-list-item>
-                    <div className="center">Автор</div>
-                    <div className="right">{Authors}</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Название</div>
-                    <div className="right">{Title}</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Статус</div>
-                    <div className="right">{Status ? 'Прочитано' : 'Непрочитано'}</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Прогресс</div>
-                    <div className="right">{Progress}</div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div className="center">Размер</div>
-                    <div className="right">{fileSizeConvert(Size)}</div>
-                </ons-list-item>
+                <ListItem center="Автор" right={Authors} />
+                <ListItem center="Название" right={Title} />
+                <ListItem center="Статус" right={status} />
+                <ListItem center="Прогресс" right={Progress} />
+                <ListItem center="Размер" right={fileSizeConvert(Size)} />
             </List>
         );
     }
