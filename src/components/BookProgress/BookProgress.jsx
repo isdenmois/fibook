@@ -1,11 +1,13 @@
 import React, { PropTypes, PureComponent } from 'react';
-import { ProgressBar } from 'react-onsenui';
+import InlineSVG from 'svg-inline-react';
+import svg from './BookProgress.svg';
+import css from './BookProgress.css';
 
 export default class BookProgress extends PureComponent {
     render() {
         let progress = this.props.progress || '0/1';
         progress = progress.split('/');
-        if (progress[1] - progress[0] < 5) {
+        if (+progress[0] && progress[1] - progress[0] < 5) {
             const lastRead = this.props.lastRead;
             const date = new Date(lastRead).toLocaleDateString();
 
@@ -18,10 +20,13 @@ export default class BookProgress extends PureComponent {
         progress = (progress[0] / progress[1]) * 100;
 
         return (
-            <ProgressBar
-                className="pb"
-                value={progress}
-            />
+            <div className={css.progress}>
+                <InlineSVG
+                    className={css.wrapper}
+                    src={svg}
+                    style={{ left: `${progress - 100}%` }}
+                />
+            </div>
         );
     }
 }
