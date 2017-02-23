@@ -1,5 +1,6 @@
 import React, { PropTypes, PureComponent } from 'react';
 
+import List from '../List';
 import fileSizeConvert from '../../utils/FileSize';
 
 export default class BookDetails extends PureComponent {
@@ -13,7 +14,7 @@ export default class BookDetails extends PureComponent {
         } = this.props.data;
 
         return (
-            <ons-list>
+            <List>
                 <ons-list-item>
                     <div className="center">Автор</div>
                     <div className="right">{Authors}</div>
@@ -34,7 +35,7 @@ export default class BookDetails extends PureComponent {
                     <div className="center">Размер</div>
                     <div className="right">{fileSizeConvert(Size)}</div>
                 </ons-list-item>
-            </ons-list>
+            </List>
         );
     }
 }
