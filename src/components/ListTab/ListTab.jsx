@@ -1,7 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
-import {
-    ListItem,
-} from 'react-onsenui';
+import { List, ListItem } from 'components/List';
 
 import EmptyList from '../EmptyList';
 import navigate from '../../utils/navigate';
@@ -23,18 +21,10 @@ export default class ListTab extends PureComponent {
         return (
             <ListItem
                 key={MD5}
-                tappable
+                center={title}
+                subtitle={author}
                 onClick={onClick}
-            >
-                <div className="center">
-                    <div className="list__item__title">
-                        {title}
-                    </div>
-                    <div className="list__item__subtitle">
-                        {author}
-                    </div>
-                </div>
-            </ListItem>
+            />
         );
     }
 
@@ -46,9 +36,9 @@ export default class ListTab extends PureComponent {
         }
 
         return (
-            <ons-list modifier="noborder">
+            <List>
                 {data.map(this.renderRow)}
-            </ons-list>
+            </List>
         );
     }
 }

@@ -33,7 +33,8 @@ module.exports = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        modules: ['src', 'node_modules'],
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),

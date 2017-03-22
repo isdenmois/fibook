@@ -7,7 +7,6 @@ import {
     Page,
     Toolbar,
 } from 'react-onsenui';
-import ons from 'onsenui';
 
 import navigate from '../../utils/navigate';
 import {
@@ -25,6 +24,7 @@ import HistoryDetails from '../../components/HistoryDetails';
 
 import { bookPage } from './BookPage.scss';
 
+/* global window, confirm */
 export class BookPage extends Component {
     constructor(props) {
         super(props);
@@ -50,11 +50,11 @@ export class BookPage extends Component {
     }
 
     componentDidMount() {
-        ons.orientation.on('change', this.handleOrientation);
+        window.addEventListener('resize', this.handleOrientation);
     }
 
     componentWillUnmount() {
-        ons.orientation.off('change', this.handleOrientation);
+        window.removeEventListener('resize', this.handleOrientation);
     }
 
     handleClick() {
@@ -83,19 +83,11 @@ export class BookPage extends Component {
     }
 
     deleteBook() {
-        const callback = (button) => {
-            if (button > 0) {
-                const { MD5 } = this.props.params;
-                this.props.deleteBook(MD5);
-                navigate('/');
-            }
-        };
-
-        ons.notification.confirm('Действие нельзя отменить', {
-            buttonLabels: ['Отмена', 'OK'],
-            callback,
-            title: 'Удалить книгу?',
-        });
+        if (confirm('Удалить книгу?')) {
+            const { MD5 } = this.props.params;
+            this.props.deleteBook(MD5);
+            navigate('/');
+        }
     }
 
     renderToolbar() {

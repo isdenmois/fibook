@@ -1,8 +1,7 @@
 /* global FileReader */
 import React, { Component, PropTypes } from 'react';
-import { Fab } from 'react-onsenui';
 
-import { fileInput } from './FileInput.scss';
+import css from './FileInput.css';
 
 /**
  *
@@ -28,19 +27,19 @@ export default class FileInput extends Component {
         const { name, accept, children } = this.props;
 
         return (
-            <Fab
-                position="bottom right"
-                className={fileInput}
-            >
+            <div className={css.wrapper}>
                 <input
+                    className={css.input}
                     ref="fileInput"
                     type="file"
                     name={name}
                     onChange={this.onChange}
                     accept={accept}
                 />
-                {children}
-            </Fab>
+                <span className={css.icon}>
+                    {children}
+                </span>
+            </div>
         );
     }
 }
