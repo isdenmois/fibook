@@ -48,7 +48,7 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                test: /\.(png|woff|woff2|eot|ttf)$/,
                 loader: 'url-loader',
                 options: {
                     limit: 100000,
@@ -78,7 +78,7 @@ module.exports = {
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: 'style-loader',
                     loader: [
-                        'css-loader?importLoaders=1&localIdentName=[hash:base64:5]&camelCase',
+                        'css-loader?importLoaders=1&localIdentName=[hash:base64:5]&camelCase&modules',
                         'postcss-loader',
                     ],
                 }),
@@ -87,7 +87,11 @@ module.exports = {
             {
                 test: /\.json$/,
                 loader: 'json-loader',
-            }
+            },
+            {
+                test: /\.svg$/,
+                loader: 'svg-inline-loader',
+            },
         ]
     },
     plugins: [
