@@ -1,0 +1,28 @@
+/* Button */
+.wrapper {
+    background: 0 0;
+    border: 1px solid #007aff;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #007aff;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    height: 29px;
+    line-height: 27px;
+    margin: 0;
+    min-width: 130px;
+    outline: 0;
+    overflow: hidden;
+    padding: 0 10px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wrapper:active {
+    color: #FFFFFF;
+    background-color: #007aff;
+}

@@ -1,12 +1,28 @@
 @import "../../theme/variables.css";
+@import "../Page/Page.css";
 
 .tab-left,
 .tab-right,
 .tab-active {
-    height: 100vh;
+    bottom: 0;
+    left: 0;
     position: fixed;
+    right: 0;
+    top: 0;
     transition: transform 200ms ease;
     width: 100vw;
+}
+
+.pageWithToolbar .tab-left,
+.pageWithToolbar .tab-right,
+.pageWithToolbar .tab-active {
+    top: 44px;
+}
+
+.pageWithTabbar .tab-left,
+.pageWithTabbar .tab-right,
+.pageWithTabbar .tab-active {
+    bottom: 51px;
 }
 
 .tab-left {

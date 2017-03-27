@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Timeline from 'components/Timeline';
+import Button from 'components/Button';
 import Page from '../../components/Page';
 
 import navigate from '../../utils/navigate';
@@ -16,7 +17,7 @@ import Loading from '../../components/Loading';
 import BookProgress from '../../components/BookProgress';
 import BookDetails from '../../components/BookDetails';
 
-import { bookPage } from './BookPage.scss';
+import css from './BookPage.css';
 
 /* global window, confirm */
 export class BookPage extends Component {
@@ -101,20 +102,18 @@ export class BookPage extends Component {
         const { MD5 } = this.props.params;
         const data = this.props.details.get(MD5);
 
-        return (
-            <div className="buttons tab-bar">
-                <button
-                    onClick={this.updateItemStatus}
-                >
-                    {data.Status ? 'В новые' : 'В прочтенные' }
-                </button>
-                <button
-                    onClick={this.deleteBook}
-                >
-                    Удалить
-                </button>
-            </div>
-        );
+        return [
+            <Button
+                onClick={this.updateItemStatus}
+            >
+                {data.Status ? 'В новые' : 'В прочтенные' }
+            </Button>,
+            <Button
+                onClick={this.deleteBook}
+            >
+                Удалить
+            </Button>,
+        ];
     }
 
     render() {
@@ -125,7 +124,6 @@ export class BookPage extends Component {
             return (
                 <Page
                     toolbar={this.renderToolbar()}
-                    className={bookPage}
                 >
                     <Loading />
                 </Page>
@@ -137,11 +135,10 @@ export class BookPage extends Component {
                 toolbar={this.renderToolbar()}
                 tabbar={this.renderBottomToolbar()}
                 bottomToolbar={this.renderBottomToolbar}
-                className={bookPage}
             >
-                <div className="primary">
-                    <div className="title">{data.Title}</div>
-                    <div className="author">{data.Authors}</div>
+                <div className={css.primary}>
+                    <div className={css.title}>{data.Title}</div>
+                    <div className={css.author}>{data.Authors}</div>
                     <BookProgress
                         lastRead={data.lastRead}
                         progress={data.Progress}

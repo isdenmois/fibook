@@ -12,7 +12,7 @@ export default class BookProgress extends PureComponent {
             const date = new Date(lastRead).toLocaleDateString();
 
             return (
-                <div className="read">
+                <div className={css.read}>
                     Прочитано {date}
                 </div>
             );

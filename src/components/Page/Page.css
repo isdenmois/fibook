@@ -64,15 +64,8 @@
 }
 
 .toolbar {
-    font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-weight: 400;
-    font-size: 17px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+    position: absolute;
     box-sizing: border-box;
-    -webkit-background-clip: padding-box;
     background-clip: padding-box;
     white-space: nowrap;
     overflow: hidden;
@@ -80,34 +73,29 @@
     padding: 0;
     margin: 0;
     font: inherit;
-    color: inherit;
-    background: transparent;
     border: none;
     line-height: normal;
     cursor: default;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     z-index: 2;
     display: block;
     height: 44px;
-    padding-left: 0;
-    padding-right: 0;
     background: #fff;
     color: #1f1f21;
-    -webkit-box-shadow: none;
     box-shadow: none;
     font-weight: 400;
     width: 100%;
-    white-space: nowrap;
     border-bottom: none;
-    -webkit-background-size: 100% 1px;
     background-size: 100% 1px;
     background-repeat: no-repeat;
     background-position: bottom;
-    background-image: -webkit-linear-gradient(90deg, #bbb, #bbb 100%);
-    background-image: -moz-linear-gradient(90deg, #bbb, #bbb 100%);
-    background-image: -o-linear-gradient(90deg, #bbb, #bbb 100%);
     background-image: linear-gradient(0deg, #bbb, #bbb 100%);
+}
+
+.pageWithTabbar .content {
+    bottom: 51px;
+}
+
+.pageWithToolbar .content {
+    top: 44px;
 }
