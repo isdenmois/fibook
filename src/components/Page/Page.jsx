@@ -38,8 +38,15 @@ class Page extends PureComponent {
     }
 
     render() {
+        let className;
+        if (this.props.className) {
+            className = `${css.page} ${this.props.className}`;
+        } else {
+            className = css.page;
+        }
+
         return (
-            <div className={css.page}>
+            <div className={className}>
                 {this.props.fixed}
                 {this.props.toolbar && (
                     <div className={css.toolbar}>
@@ -69,6 +76,7 @@ class Page extends PureComponent {
 }
 
 Page.propTypes = {
+    className: PropTypes.string,
     children: PropTypes.node,
     toolbar: PropTypes.node,
     tabbar: PropTypes.node,

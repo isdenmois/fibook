@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 
-import List from '../List';
+import { List } from '../List';
 import ListItem from '../List/ListItem';
 import ListHeader from '../List/ListHeader';
 import formatTime from '../../utils/formatTime';

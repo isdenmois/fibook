@@ -66,7 +66,7 @@ module.exports = {
                 test: /\.jsx?$/,
                 enforce: 'pre',
                 loader: 'eslint-loader',
-                exclude: /node_modules/
+                include: /src/,
             },
             {
                 test: /\.jsx?$/,
@@ -105,7 +105,7 @@ module.exports = {
                     'css-loader?importLoaders=1&localIdentName=[hash:base64:5]&camelCase',
                     'sass-loader',
                 ],
-                exclude: /node_modules/
+                include: /src/,
             },
             {
                 test: /\.css$/,
@@ -114,7 +114,7 @@ module.exports = {
                     'css-loader?importLoaders=1&localIdentName=[path]--[local]&camelCase&modules&sourceMap',
                     'postcss-loader',
                 ],
-                exclude: /node_modules/,
+                include: /src/,
             },
             {
                 test: /\.json$/,

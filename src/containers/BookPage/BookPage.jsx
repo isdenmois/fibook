@@ -1,12 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import {
-    BackButton,
-    Button,
-    Page,
-    Toolbar,
-} from 'react-onsenui';
+import Page from '../../components/Page';
 
 import navigate from '../../utils/navigate';
 import {
@@ -92,14 +87,14 @@ export class BookPage extends Component {
 
     renderToolbar() {
         return (
-            <Toolbar>
+            <div>
                 <div className="left">
-                    <BackButton onClick={this.handleClick}>
+                    <div onClick={this.handleClick}>
                         Назад
-                    </BackButton>
+                    </div>
                 </div>
                 <div className="center">Подробности</div>
-            </Toolbar>
+            </div>
         );
     }
 
@@ -109,16 +104,16 @@ export class BookPage extends Component {
 
         return (
             <div className="buttons tab-bar">
-                <Button
+                <button
                     onClick={this.updateItemStatus}
                 >
                     {data.Status ? 'В новые' : 'В прочтенные' }
-                </Button>
-                <Button
+                </button>
+                <button
                     onClick={this.deleteBook}
                 >
                     Удалить
-                </Button>
+                </button>
             </div>
         );
     }
@@ -130,7 +125,7 @@ export class BookPage extends Component {
         if (this.props.loading || !data) {
             return (
                 <Page
-                    renderToolbar={this.renderToolbar}
+                    toolbar={this.renderToolbar()}
                     className={bookPage}
                 >
                     <Loading />
@@ -143,8 +138,9 @@ export class BookPage extends Component {
 
         return (
             <Page
-                renderToolbar={this.renderToolbar}
-                renderBottomToolbar={this.renderBottomToolbar}
+                toolbar={this.renderToolbar()}
+                tabbar={this.renderBottomToolbar()}
+                bottomToolbar={this.renderBottomToolbar}
                 className={bookPage}
             >
                 <div className="primary">

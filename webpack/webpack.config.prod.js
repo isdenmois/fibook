@@ -18,7 +18,8 @@ module.exports = {
         filename: '[name].js'
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        modules: ['src', 'node_modules'],
     },
     module: {
         rules: [
@@ -71,6 +72,17 @@ module.exports = {
                     ],
                 }),
                 exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: [
+                        'css-loader?importLoaders=1&localIdentName=[hash:base64:5]&camelCase',
+                        'postcss-loader',
+                    ],
+                }),
+                include: /src/,
             },
             {
                 test: /\.json$/,

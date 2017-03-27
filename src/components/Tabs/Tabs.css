@@ -1,0 +1,38 @@
+@import "../../theme/variables.css";
+
+.tab-left,
+.tab-right,
+.tab-active {
+    height: 100vh;
+    position: fixed;
+    transition: transform 200ms ease;
+    width: 100vw;
+}
+
+.tab-left {
+    transform: translateX(-40vw);
+}
+
+.tab-right {
+    transform: translateX(100vw);
+}
+
+.tab-active {
+    overflow-y: auto;
+}
+
+.button, .button-active {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.button {
+    color: #333333;
+}
+
+.button-active {
+    color: var(--blueColor);
+}
