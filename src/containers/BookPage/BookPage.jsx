@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import Timeline from 'components/Timeline';
 import Page from '../../components/Page';
 
 import navigate from '../../utils/navigate';
@@ -14,8 +15,6 @@ import { selectLoading } from '../../selectors/details';
 import Loading from '../../components/Loading';
 import BookProgress from '../../components/BookProgress';
 import BookDetails from '../../components/BookDetails';
-import Chart from '../../components/Chart';
-import HistoryDetails from '../../components/HistoryDetails';
 
 import { bookPage } from './BookPage.scss';
 
@@ -133,9 +132,6 @@ export class BookPage extends Component {
             );
         }
 
-        const history = data.history;
-        const historyItem = this.state.selected || history[0];
-
         return (
             <Page
                 toolbar={this.renderToolbar()}
@@ -154,19 +150,7 @@ export class BookPage extends Component {
                 <BookDetails
                     data={data}
                 />
-                {
-                    history.length > 1 && (
-                        <Chart
-                            dataset={history}
-                            onSelect={this.handleSelect}
-                        />
-                    )
-                }
-                { historyItem && (
-                    <HistoryDetails
-                        item={historyItem}
-                    />
-                )}
+                <Timeline data={data.history} />
             </Page>
         );
     }
