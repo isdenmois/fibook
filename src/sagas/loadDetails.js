@@ -31,6 +31,7 @@ export function getHistoryParams(MD5) {
         table: 'library_history',
         where: `MD5 = "${MD5}" AND time > 30000 AND progress <>  "5/5"`,
         order: 'StartTime',
+        limit: -1,
     };
 
     return queryParams(params);
