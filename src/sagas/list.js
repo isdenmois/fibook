@@ -3,7 +3,7 @@
  */
 import { takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects';
-import { normalize, Schema, arrayOf } from 'normalizr';
+import normalize from 'utils/normalize';
 
 import queryParams from '../utils/queryParams';
 import { BOOK_LIST_LOAD } from '../constants/actionsTypes/list';
@@ -13,12 +13,6 @@ import {
     loadingError,
 } from '../actions/main';
 import request from '../utils/request';
-
-/**
- * Define book schema for normalizr.
- */
-export const bookSchema = new Schema('book', { idAttribute: 'MD5' });
-export const bookArray = arrayOf(bookSchema);
 
 const newBooksParams = queryParams({
     fields: [
@@ -68,7 +62,7 @@ export function* getBooks() {
 
         // Merge all books.
         const books = [].concat(newBooks).concat(readBooks);
-        const { entities } = normalize(books, bookArray);
+        const entities = normalize(books, 'book', 'MD5');
 
         yield put(loadingSuccess(entities));
     } catch (err) {
