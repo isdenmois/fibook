@@ -92,10 +92,10 @@
     background-image: linear-gradient(0deg, #bbb, #bbb 100%);
 }
 
-.pageWithTabbar .content {
+:global(.tabbar) .content {
     bottom: 51px;
 }
 
-.pageWithToolbar .content {
+:global(.toolbar) .content {
     top: 44px;
 }

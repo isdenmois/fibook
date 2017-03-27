@@ -1,5 +1,4 @@
 @import "../../theme/variables.css";
-@import "../Page/Page.css";
 
 .tab-left,
 .tab-right,
@@ -13,15 +12,15 @@
     width: 100vw;
 }
 
-.pageWithToolbar .tab-left,
-.pageWithToolbar .tab-right,
-.pageWithToolbar .tab-active {
+:global(.toolbar) .tab-left,
+:global(.toolbar) .tab-right,
+:global(.toolbar) .tab-active {
     top: 44px;
 }
 
-.pageWithTabbar .tab-left,
-.pageWithTabbar .tab-right,
-.pageWithTabbar .tab-active {
+:global(.tabbar) .tab-left,
+:global(.tabbar) .tab-right,
+:global(.tabbar) .tab-active {
     bottom: 51px;
 }
 

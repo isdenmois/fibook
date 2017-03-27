@@ -40,10 +40,10 @@ class Page extends PureComponent {
     render() {
         let className = css.page;
         if (this.props.tabbar) {
-            className = `${className} ${css.pageWithTabbar}`;
+            className = `${className} tabbar`;
         }
         if (this.props.toolbar) {
-            className = `${className} ${css.pageWithToolbar}`;
+            className = `${className} toolbar`;
         }
         if (this.props.className) {
             className = `${className} ${this.props.className}`;

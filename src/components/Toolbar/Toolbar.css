@@ -1,1 +1,25 @@
 /* Toolbar */
+.wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.title, .back-button {
+    height: 44px;
+    line-height: 44px;
+}
+
+.title {
+    font-size: 17px;
+}
+
+.back-button {
+    position: absolute;
+    left: 0;
+    padding-left: 10px;
+}
+

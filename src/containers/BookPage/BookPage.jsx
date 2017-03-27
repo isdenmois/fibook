@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Timeline from 'components/Timeline';
 import Button from 'components/Button';
+import Toolbar from 'components/Toolbar';
 import Page from '../../components/Page';
 
 import navigate from '../../utils/navigate';
@@ -24,7 +25,6 @@ export class BookPage extends Component {
     constructor(props) {
         super(props);
 
-        this.handleClick = ::this.handleClick;
         this.renderToolbar = ::this.renderToolbar;
         this.handleSelect = ::this.handleSelect;
         this.deleteBook = ::this.deleteBook;
@@ -50,10 +50,6 @@ export class BookPage extends Component {
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleOrientation);
-    }
-
-    handleClick() {
-        navigate('/');
     }
 
     handleSelect(event) {
@@ -87,14 +83,10 @@ export class BookPage extends Component {
 
     renderToolbar() {
         return (
-            <div>
-                <div className="left">
-                    <div onClick={this.handleClick}>
-                        Назад
-                    </div>
-                </div>
-                <div className="center">Подробности</div>
-            </div>
+            <Toolbar
+                backButton
+                title="Подробности"
+            />
         );
     }
 
