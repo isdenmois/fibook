@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
-import map from 'lodash/map';
+import map from 'utils/map';
 
 import css from './Timeline.css';
 import TimeLineItem from './Item';

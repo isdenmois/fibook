@@ -1,4 +1,4 @@
-import each from 'lodash/each';
+import each from 'utils/each';
 
 export function formatDate(date) {
     return new Date(date).toLocaleDateString();

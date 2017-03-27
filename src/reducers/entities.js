@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import forEach from 'lodash/forEach';
+import each from 'utils/each';
 
 import {
     DETAILS_LOADING_SUCCESS,
@@ -29,7 +29,7 @@ export default function entitiesReducer(state = initialState, action) {
                 .deleteIn(['book', action.MD5]);
 
         case LOADING_SUCCESS:
-            forEach(action.entities, (list, type) => {
+            each(action.entities, (list, type) => {
                 newState = state.set(type, fromJS(list));
             });
 
