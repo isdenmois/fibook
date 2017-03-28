@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import AppComponent from '../containers/App';
 import HomePageComponent from '../containers/HomePage';
@@ -7,15 +7,13 @@ import BookPageComponent from '../containers/BookPage';
 import NotFound from '../containers/NotFound';
 
 export default () => (
-    <Router history={browserHistory}>
-        {/* 'App' acts as a wrapper for the child components */}
-        <Route path="/" component={AppComponent}>
-            {/* IndexRoute is the initial component that is loaded,
-             other routes are loaded according to the component
-             property specified here */}
-            <IndexRoute component={HomePageComponent} />
-            <Route path="/book/:MD5" component={BookPageComponent} />
-            <Route path="*" component={NotFound} />
-        </Route>
-    </Router>
+    <AppComponent>
+        <BrowserRouter>
+            <div>
+                <Route path="/" component={HomePageComponent} />
+                <Route path="/book/:MD5" component={BookPageComponent} />
+                <Route path="*" component={NotFound} />
+            </div>
+        </BrowserRouter>
+    </AppComponent>
 );

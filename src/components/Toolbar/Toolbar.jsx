@@ -10,7 +10,7 @@ class Toolbar extends PureComponent {
     }
 
     goBack() {
-        const router = this.context.router;
+        const router = this.context.router.history;
         router.push('/');
     }
 

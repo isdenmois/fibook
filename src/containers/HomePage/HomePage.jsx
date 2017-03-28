@@ -67,7 +67,12 @@ export class HomePage extends Component {
             return <Loading />;
         }
 
-        return <Tabs data={this.getData()} />;
+        return (
+            <span>
+                <Tabs data={this.getData()} />
+                {this.props.children}
+            </span>
+        );
     }
 }
 
@@ -76,6 +81,7 @@ HomePage.propTypes = {
     newBooks: PropTypes.array,
     readBooks: PropTypes.array,
     loading: PropTypes.bool,
+    children: PropTypes.node,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -17,7 +17,7 @@ export class App extends Component {
         return (
             <div className="ios">
                 {error}
-                {React.Children.toArray(children)}
+                {children}
             </div>
         );
     }

@@ -6,7 +6,6 @@ import Button from 'components/Button';
 import Toolbar from 'components/Toolbar';
 import Page from '../../components/Page';
 
-import navigate from '../../utils/navigate';
 import {
     loadDetails,
     updateBookStatus,
@@ -38,7 +37,7 @@ export class BookPage extends Component {
     }
 
     componentWillMount() {
-        const { MD5 } = this.props.params;
+        const { MD5 } = this.props.match.params;
         if (!this.props.details.get(MD5)) {
             this.props.loadDetails(MD5);
         }
@@ -64,7 +63,7 @@ export class BookPage extends Component {
 
 
     updateItemStatus() {
-        const { MD5 } = this.props.params;
+        const { MD5 } = this.props.match.params;
         const book = this.props.details.get(MD5);
         const newStatus = book.Status > 0 ? 0 : 1;
 
@@ -75,9 +74,9 @@ export class BookPage extends Component {
 
     deleteBook() {
         if (confirm('Удалить книгу?')) {
-            const { MD5 } = this.props.params;
+            const { MD5 } = this.props.match.params;
             this.props.deleteBook(MD5);
-            navigate('/');
+            this.context.router.history.push('/');
         }
     }
 
@@ -91,7 +90,7 @@ export class BookPage extends Component {
     }
 
     renderBottomToolbar() {
-        const { MD5 } = this.props.params;
+        const { MD5 } = this.props.match.params;
         const data = this.props.details.get(MD5);
 
         return [
@@ -109,7 +108,7 @@ export class BookPage extends Component {
     }
 
     render() {
-        const { MD5 } = this.props.params;
+        const { MD5 } = this.props.match.params;
         const data = this.props.details.get(MD5);
 
         if (this.props.loading || !data) {
@@ -151,7 +150,11 @@ BookPage.propTypes = {
     deleteBook: PropTypes.func,
     loadDetails: PropTypes.func,
     updateBookStatus: PropTypes.func,
-    params: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+};
+
+BookPage.contextTypes = {
+    router: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
