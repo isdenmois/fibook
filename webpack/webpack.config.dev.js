@@ -99,15 +99,6 @@ module.exports = {
                 include: /node_modules/
             },
             {
-                test: /\.scss$/,
-                use: [
-                    'style-loader',
-                    'css-loader?importLoaders=1&localIdentName=[hash:base64:5]&camelCase',
-                    'sass-loader',
-                ],
-                include: /src/,
-            },
-            {
                 test: /\.css$/,
                 use: [
                     'style-loader',
