@@ -4,6 +4,9 @@
 import {
     CREATE_NEW_BOOK,
     DELETE_BOOK,
+    DETAILS_LOADING_START,
+    DETAILS_LOADING_SUCCESS,
+    DETAILS_LOADING_ERROR,
     UPDATE_BOOK_STATUS,
 } from '../constants/actionsTypes/details';
 
@@ -27,6 +30,40 @@ export function deleteBook(MD5) {
     return {
         type: DELETE_BOOK,
         MD5,
+    };
+}
+
+/**
+ * Load details for book.
+ * @param MD5
+ */
+export function loadDetails(MD5) {
+    return {
+        type: DETAILS_LOADING_START,
+        MD5,
+    };
+}
+
+/**
+ * Details loaded.
+ * @param data
+ */
+export function detailsLoaded(MD5, data) {
+    return {
+        type: DETAILS_LOADING_SUCCESS,
+        MD5,
+        data,
+    };
+}
+
+/**
+ * Details not loaded.
+ * @param error
+ */
+export function detailsLoadError(error) {
+    return {
+        type: DETAILS_LOADING_ERROR,
+        error,
     };
 }
 

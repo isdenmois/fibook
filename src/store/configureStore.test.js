@@ -13,7 +13,7 @@ describe('configureStore', () => {
 describe('configure prod store', () => {
     jest.unmock('redux');
     jest.unmock('redux-saga');
-    const configureStore = require('./configureStore.prod');
+    const configureStore = require('./configureStore.prod').default;
 
     it('should contain a hook for `sagaMiddleware.run', () => {
         const store = configureStore({});
@@ -26,7 +26,7 @@ describe('configure dev store', () => {
     jest.unmock('redux-saga');
     jest.unmock('redux-logger');
     jest.mock('../reducers');
-    const configureStore = require('./configureStore.dev');
+    const configureStore = require('./configureStore.dev').default;
     const rootReducer = require('../reducers');
 
     it('should contain a hook for `sagaMiddleware.run', () => {

@@ -1,12 +1,16 @@
 import React from 'react';
-import { ProgressCircular } from 'react-onsenui';
+import InlineSVG from 'svg-inline-react';
 
-import { loading } from './Loading.scss';
+import css from './Loading.css';
+import svg from './Loading.svg';
 
 function Loading() {
     return (
-        <div className={loading}>
-            <ProgressCircular indeterminate />
+        <div className={css.loading}>
+            <InlineSVG
+                className="loading"
+                src={svg}
+            />
         </div>
     );
 }

@@ -1,0 +1,34 @@
+.wrapper {
+    border-radius: 50%;
+    bottom: var(--fabBottom);
+    color: #fff;
+    font-size: 25px;
+    height: 56px;
+    line-height: 56px;
+    position: fixed;
+    right: var(--fabRight);
+    text-align: center;
+    vertical-align: middle;
+    width: 56px;
+    z-index: 5;
+}
+
+:global(.ios) .wrapper {
+    background-color: var(--blueColor);
+}
+
+.icon {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.input {
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 5;
+    top: 0;
+    left: 0;
+}

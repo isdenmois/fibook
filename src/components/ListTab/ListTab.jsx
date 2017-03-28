@@ -1,8 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
-import {
-    Input,
-    ListItem,
-} from 'react-onsenui';
+import { List, ListItem } from 'components/List';
 
 import EmptyList from '../EmptyList';
 
@@ -16,32 +13,14 @@ export default class ListTab extends PureComponent {
         const MD5 = book.get('MD5');
         const title = book.get('title');
         const author = book.get('author');
-        const status = book.get('status');
-        const onChange = () => {
-            this.props.onChange(book);
-        };
 
         return (
             <ListItem
+                center={title}
+                subtitle={author}
+                to={`/book/${MD5}`}
                 key={MD5}
-                tappable
-            >
-                <div className="center">
-                    <div className="list__item__title">
-                        {title}
-                    </div>
-                    <div className="list__item__subtitle">
-                        {author}
-                    </div>
-                </div>
-                <div className="right">
-                    <Input
-                        checked={!!status}
-                        type="checkbox"
-                        onClick={onChange}
-                    />
-                </div>
-            </ListItem>
+            />
         );
     }
 
@@ -53,14 +32,13 @@ export default class ListTab extends PureComponent {
         }
 
         return (
-            <ons-list modifier="noborder">
+            <List>
                 {data.map(this.renderRow)}
-            </ons-list>
+            </List>
         );
     }
 }
 
 ListTab.propTypes = {
-    onChange: PropTypes.func.isRequired,
     data: PropTypes.array,
 };

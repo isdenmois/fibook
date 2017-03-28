@@ -33,7 +33,8 @@ module.exports = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        modules: ['src', 'node_modules'],
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
@@ -65,7 +66,7 @@ module.exports = {
                 test: /\.jsx?$/,
                 enforce: 'pre',
                 loader: 'eslint-loader',
-                exclude: /node_modules/
+                include: /src/,
             },
             {
                 test: /\.jsx?$/,
@@ -79,11 +80,15 @@ module.exports = {
                 exclude: /workers\/tests/,
             },
             {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                test: /\.(png|woff|woff2|eot|ttf)$/,
                 loader: 'url-loader',
                 options: {
                     limit: 100000,
                 },
+            },
+            {
+                test: /\.svg$/,
+                loader: 'svg-inline-loader',
             },
             {
                 test: /\.css$/,
@@ -94,13 +99,13 @@ module.exports = {
                 include: /node_modules/
             },
             {
-                test: /\.scss$/,
+                test: /\.css$/,
                 use: [
                     'style-loader',
-                    'css-loader?importLoaders=1&localIdentName=[hash:base64:5]&camelCase',
-                    'sass-loader',
+                    'css-loader?importLoaders=1&localIdentName=[path]--[local]&camelCase&modules&sourceMap',
+                    'postcss-loader',
                 ],
-                exclude: /node_modules/
+                include: /src/,
             },
             {
                 test: /\.json$/,

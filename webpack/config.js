@@ -10,8 +10,6 @@ module.exports = {
             "minimist",
             "sanitize.css",
         ],
-        include: [
-            "lodash",
-        ]
+        include: []
     }
 };

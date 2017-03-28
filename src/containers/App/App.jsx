@@ -4,18 +4,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import ons from 'onsenui';
 
-import { loadBooks } from '../../actions/list';
-import {
-selectError,
-} from '../../selectors/main';
+import { loadBooks } from 'actions/list';
+import { selectError } from '../../selectors/main';
 
-export function getDevice() {
-    return ons.platform.isAndroid() ? 'android' : 'ios';
-}
-
-const device = getDevice();
 export class App extends Component {
     componentDidMount() {
         this.props.loadBooks();
@@ -23,9 +15,9 @@ export class App extends Component {
     render() {
         const { children, error } = this.props;
         return (
-            <div className={device}>
+            <div className="ios">
                 {error}
-                {React.Children.toArray(children)}
+                {children}
             </div>
         );
     }

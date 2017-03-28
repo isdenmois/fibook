@@ -18,7 +18,8 @@ module.exports = {
         filename: '[name].js'
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        modules: ['src', 'node_modules'],
     },
     module: {
         rules: [
@@ -47,7 +48,7 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                test: /\.(png|woff|woff2|eot|ttf)$/,
                 loader: 'url-loader',
                 options: {
                     limit: 100000,
@@ -62,20 +63,24 @@ module.exports = {
                 include: /node_modules/
             },
             {
-                test: /\.scss$/,
+                test: /\.css$/,
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: 'style-loader',
                     loader: [
-                        'css-loader?importLoaders=1&localIdentName=[hash:base64:5]&camelCase',
-                        'sass-loader'
+                        'css-loader?importLoaders=1&localIdentName=[hash:base64:5]&camelCase&modules',
+                        'postcss-loader',
                     ],
                 }),
-                exclude: /node_modules/
+                include: /src/,
             },
             {
                 test: /\.json$/,
                 loader: 'json-loader',
-            }
+            },
+            {
+                test: /\.svg$/,
+                loader: 'svg-inline-loader',
+            },
         ]
     },
     plugins: [

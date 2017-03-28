@@ -1,0 +1,101 @@
+.page {
+    font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 17px;
+    background-color: #f9f9f9;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-x: visible;
+    overflow-y: hidden;
+    color: #1f1f21;
+    transform: translate3d(0, 0, 0);
+}
+
+.content {
+    background-color: #f9f9f9;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 0;
+}
+
+.tabs {
+    font-weight: 400;
+    font-size: 17px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    width: 100%;
+}
+
+.tab {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabSelected {
+    color: #007aff;
+}
+
+.toolbar {
+    position: absolute;
+    box-sizing: border-box;
+    background-clip: padding-box;
+    white-space: nowrap;
+    overflow: hidden;
+    word-spacing: 0;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    border: none;
+    line-height: normal;
+    cursor: default;
+    user-select: none;
+    z-index: 2;
+    display: block;
+    height: 44px;
+    background: #fff;
+    color: #1f1f21;
+    box-shadow: none;
+    font-weight: 400;
+    width: 100%;
+    border-bottom: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: linear-gradient(0deg, #bbb, #bbb 100%);
+}
+
+:global(.tabbar) .content {
+    bottom: 51px;
+}
+
+:global(.toolbar) .content {
+    top: 44px;
+}

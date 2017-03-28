@@ -1,0 +1,35 @@
+/* Toolbar */
+.wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.title, .back-button {
+    height: 44px;
+    line-height: 44px;
+}
+
+.title {
+    font-size: 17px;
+}
+
+.back-button {
+    align-items: center;
+    color: var(--blueColor);
+    display: flex;
+    position: absolute;
+    left: 0;
+}
+
+.icon {
+    display: flex;
+    margin-right: -5px;
+}
+.icon svg {
+    height: 32px;
+    fill: var(--blueColor);
+}

@@ -10,6 +10,11 @@ export const selectBooks = createSelector(
     entities => entities.get('book'),
 );
 
+export const selectDetails = createSelector(
+    selectGlobal,
+    entities => entities.get('details'),
+);
+
 export const selectNewBooks = createSelector(
     selectBooks,
     (books) => {

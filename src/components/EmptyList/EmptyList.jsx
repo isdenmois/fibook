@@ -1,5 +1,5 @@
 import React from 'react';
-import { emptyList } from './EmptyList.scss';
+import { emptyList } from './EmptyList.css';
 
 export default function EmptyList() {
     return (

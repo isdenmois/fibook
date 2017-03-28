@@ -7,7 +7,7 @@ describe('Saga runner test', () => {
     const rootSaga = require('../index').default();
 
     it('should works', () => {
-        expect(rootSaga.next().value).toHaveLength(4);
-        expect(fork).toHaveBeenCalledTimes(4);
+        expect(rootSaga.next().value).toHaveLength(5);
+        expect(fork).toHaveBeenCalledTimes(5);
     });
 });

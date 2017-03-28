@@ -1,0 +1,60 @@
+.tab-left,
+.tab-right,
+.tab-active {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transition: transform 200ms ease;
+    width: 100vw;
+}
+
+:global(.toolbar) .tab-left,
+:global(.toolbar) .tab-right,
+:global(.toolbar) .tab-active {
+    top: 44px;
+}
+
+:global(.tabbar) .tab-left,
+:global(.tabbar) .tab-right,
+:global(.tabbar) .tab-active {
+    bottom: 51px;
+}
+
+.tab-left {
+    transform: translateX(-40vw);
+}
+
+.tab-right {
+    transform: translateX(100vw);
+}
+
+.tab-active {
+    overflow-y: auto;
+}
+
+.button, .button-active {
+    align-items: center;
+    color: var(--greyColor);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 12px;
+    height: 100%;
+    width: 100%;
+}
+
+.icon svg {
+    height: 32px;
+    margin-bottom: -5px;
+    fill: var(--greyColor);
+}
+
+.button-active svg {
+    fill: var(--blueColor);
+}
+
+.button-active {
+    color: var(--blueColor);
+}
