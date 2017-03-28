@@ -1,13 +1,17 @@
 import React, { PureComponent, PropTypes } from 'react';
+import { Link } from 'react-router-dom';
 
 import css from './ListItem.css';
 
 class ListItem extends PureComponent {
     render() {
+        const Component = this.props.to ? Link : 'div';
+
         return (
-            <div
+            <Component
                 className={css.listItem}
                 onClick={this.props.onClick}
+                to={this.props.to}
             >
                 <div className={css.center}>
                     {this.props.center}
@@ -22,7 +26,7 @@ class ListItem extends PureComponent {
                         {this.props.right}
                     </div>
                 )}
-            </div>
+            </Component>
         );
     }
 }
@@ -32,6 +36,7 @@ ListItem.propTypes = {
     subtitle: PropTypes.node,
     right: PropTypes.node,
     onClick: PropTypes.func,
+    to: PropTypes.string,
 };
 
 export default ListItem;

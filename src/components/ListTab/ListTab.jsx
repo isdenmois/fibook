@@ -1,9 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { List, ListItem } from 'components/List';
-import { Link } from 'react-router-dom';
 
 import EmptyList from '../EmptyList';
-import css from './ListTab.css';
 
 export default class ListTab extends PureComponent {
     constructor(props) {
@@ -17,16 +15,12 @@ export default class ListTab extends PureComponent {
         const author = book.get('author');
 
         return (
-            <Link
-                className={css.link}
+            <ListItem
+                center={title}
+                subtitle={author}
                 to={`/book/${MD5}`}
                 key={MD5}
-            >
-                <ListItem
-                    center={title}
-                    subtitle={author}
-                />
-            </Link>
+            />
         );
     }
 
