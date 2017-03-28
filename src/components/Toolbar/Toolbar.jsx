@@ -1,5 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
+import InlineSVG from 'svg-inline-react';
 import css from './Toolbar.css';
+import backButton from './ios-arrow-back.svg';
 
 class Toolbar extends PureComponent {
     constructor(props, context) {
@@ -20,6 +22,10 @@ class Toolbar extends PureComponent {
                         className={css.backButton}
                         onClick={this.goBack}
                     >
+                        <InlineSVG
+                            className={css.icon}
+                            src={backButton}
+                        />
                         Назад
                     </div>
                 )}

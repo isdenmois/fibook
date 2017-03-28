@@ -5,6 +5,7 @@ import RedBox from 'redbox-react';
 // Both configureStore and Root are required conditionally.
 import configureStore from './store/configureStore';
 import rootSaga from './sagas';
+import './theme/variables.css';
 
 /* global document */
 /* eslint-disable global-require */

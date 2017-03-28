@@ -1,4 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
+import InlineSVG from 'svg-inline-react';
 import map from 'utils/map';
 import Page from '../Page';
 
@@ -40,12 +41,21 @@ class Tabs extends PureComponent {
 
     renderButton(data, i) {
         const active = this.state.active;
+        let icon = data.icon;
+        if (active && data.activeIcon) {
+            icon = data.activeIcon;
+        }
+
         return (
             <div
                 key={i}
                 onClick={() => this.setState({ active: i })}
                 className={i === active ? css.buttonActive : css.button}
             >
+                <InlineSVG
+                    className={css.icon}
+                    src={icon}
+                />
                 {data.title}
             </div>
         );

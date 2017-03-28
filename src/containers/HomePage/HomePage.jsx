@@ -12,7 +12,11 @@ import { createNewBook } from '../../actions/details';
 import FileInput from '../../components/FileInput';
 import ListTab from '../../components/ListTab';
 import Tabs from '../../components/Tabs';
-import fileUpload from './file_upload.svg';
+import fileUpload from './icons/file_upload.svg';
+import bookIcon from './icons/ios-book.svg';
+import bookIconOutline from './icons/ios-book-outline.svg';
+import flagIcon from './icons/ios-flag.svg';
+import flagIconOutline from './icons/ios-flag-outline.svg';
 import css from './HomePage.css';
 
 export class HomePage extends Component {
@@ -26,7 +30,8 @@ export class HomePage extends Component {
                     />
                 ),
                 fixed: this.renderFixed(),
-                icon: 'ion-ios-book',
+                icon: bookIcon,
+                activeIcon: bookIconOutline,
             },
             {
                 title: 'Прочтенные',
@@ -36,7 +41,8 @@ export class HomePage extends Component {
                         data={this.props.readBooks}
                     />
                 ),
-                icon: 'md-library',
+                icon: flagIcon,
+                activeIcon: flagIconOutline,
             },
         ];
     }

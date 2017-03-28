@@ -18,8 +18,18 @@
 }
 
 .back-button {
+    align-items: center;
+    color: var(--blueColor);
+    display: flex;
     position: absolute;
     left: 0;
-    padding-left: 10px;
 }
 
+.icon {
+    display: flex;
+    margin-right: -5px;
+}
+.icon svg {
+    height: 32px;
+    fill: var(--blueColor);
+}
