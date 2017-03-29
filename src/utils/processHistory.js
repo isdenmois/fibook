@@ -14,7 +14,7 @@ export default function processHistory(data) {
     let currentProgress = 0;
 
     each(data, (row) => {
-        const date = formatDate(row.date);
+        const date = formatDate(+row.date);
         if (date !== result.date) {
             if (result.date) {
                 result.speed = calculateSpeed(result.time, result.pages);
@@ -34,7 +34,7 @@ export default function processHistory(data) {
             result.percent = (start / end) * 100;
             result.progress = row.progress;
             result.pages += start - currentProgress;
-            result.time += row.time;
+            result.time += +row.time;
             currentProgress = start;
         }
     });
