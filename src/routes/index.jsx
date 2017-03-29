@@ -4,7 +4,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import AppComponent from '../containers/App';
 import HomePageComponent from '../containers/HomePage';
 import BookPageComponent from '../containers/BookPage';
-import NotFound from '../containers/NotFound';
 
 export default () => (
     <AppComponent>
@@ -12,7 +11,6 @@ export default () => (
             <div>
                 <Route path="/" component={HomePageComponent} />
                 <Route path="/book/:MD5" component={BookPageComponent} />
-                <Route path="*" component={NotFound} />
             </div>
         </BrowserRouter>
     </AppComponent>
