@@ -32,7 +32,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 use: [
-                    'webworker-loader',
+                    'worker-loader',
                     strip.loader('debug'),
                     'babel-loader',
                 ],

@@ -75,7 +75,7 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                use: ['webworker-loader', 'babel-loader'],
+                use: ['worker-loader', 'babel-loader'],
                 include: /workers/,
                 exclude: /workers\/tests/,
             },
