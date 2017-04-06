@@ -8,12 +8,9 @@ export default class BookProgress extends PureComponent {
         let progress = this.props.progress || '0/1';
         progress = progress.split('/');
         if (+progress[0] && progress[1] - progress[0] < 5) {
-            const lastRead = this.props.lastRead;
-            const date = new Date(lastRead).toLocaleDateString();
-
             return (
                 <div className={css.read}>
-                    Прочитано {date}
+                    Прочитано {this.props.lastRead}
                 </div>
             );
         }
@@ -33,7 +30,7 @@ export default class BookProgress extends PureComponent {
 
 BookProgress.propTypes = {
     progress: PropTypes.string,
-    lastRead: PropTypes.number,
+    lastRead: PropTypes.string,
 };
 
 BookProgress.defaultProps = {
