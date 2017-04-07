@@ -86,7 +86,7 @@ class Tabs extends PureComponent {
 }
 
 Tabs.propTypes = {
-    data: PropTypes.array.required,
+    data: PropTypes.array.isRequired,
 };
 
 export default Tabs;
