@@ -11,6 +11,9 @@ class Tabs extends PureComponent {
 
         this.renderTab = ::this.renderTab;
         this.renderButton = ::this.renderButton;
+        this.setActive = ::this.setActive;
+
+        this.tabs = {};
         this.state = {
             active: 0,
         };
@@ -28,9 +31,15 @@ class Tabs extends PureComponent {
         return css.tabActive;
     }
 
+    setActive(active) {
+        this.tabs[this.state.active].scrollTop = 0;
+        this.setState({ active });
+    }
+
     renderTab(data, i) {
         return (
             <div
+                ref={tab => (this.tabs[i] = tab)}
                 className={this.getClassName(i)}
                 key={i}
             >
@@ -49,7 +58,7 @@ class Tabs extends PureComponent {
         return (
             <div
                 key={i}
-                onClick={() => this.setState({ active: i })}
+                onClick={() => this.setActive(i)}
                 className={i === active ? css.buttonActive : css.button}
             >
                 <InlineSVG
