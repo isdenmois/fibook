@@ -93,7 +93,6 @@
         "strip-loader": "~0.1.2",
         "style-loader": "~0.16.1",
         "svg-inline-loader": "~0.7.1",
-        "uglify-js": "mishoo/UglifyJS2#harmony",
         "url-loader": "~0.5.8",
         "webpack": "~2.3.3",
         "webpack-dev-server": "~2.4.2",

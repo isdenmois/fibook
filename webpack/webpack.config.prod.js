@@ -99,20 +99,30 @@ module.exports = {
         new webpack.ProvidePlugin({
             'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
         }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false
+        }),
         new webpack.optimize.UglifyJsPlugin({
+            beautify: false,
+            mangle: {
+                screw_ie8: true,
+                keep_fnames: true
+            },
             compress: {
                 warnings: false,
+                dead_code: true,
                 drop_console: true,
                 drop_debugger: true,
                 sequences     : true,
                 booleans      : true,
                 loops         : true,
-                unused      : true,
+                unused        : true,
             },
             output: {
-                ascii_only: true,
                 comments: false
             },
+            comments: false,
             sourceMap: false,
             test: /vendors\.js/,
         }),
