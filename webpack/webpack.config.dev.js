@@ -65,12 +65,12 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 enforce: 'pre',
-                loader: 'eslint-loader',
+                use: 'eslint-loader',
                 include: /src/,
             },
             {
                 test: /\.jsx?$/,
-                loader: 'babel-loader',
+                use: 'babel-loader',
                 exclude: /(node_modules|workers)/,
             },
             {
@@ -88,13 +88,13 @@ module.exports = {
             },
             {
                 test: /\.svg$/,
-                loader: 'svg-inline-loader',
+                use: 'svg-inline-loader',
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract({
-                    fallbackLoader: 'style-loader',
-                    loader: 'css-loader',
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader',
                 }),
                 include: /node_modules/
             },

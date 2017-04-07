@@ -26,7 +26,7 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 enforce: 'pre',
-                loader: 'eslint-loader',
+                use: 'eslint-loader',
                 exclude: /(node_modules|workers)/,
             },
             {
@@ -56,17 +56,17 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract({
-                    fallbackLoader: 'style-loader',
-                    loader: 'css-loader',
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader',
                 }),
                 include: /node_modules/
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract({
-                    fallbackLoader: 'style-loader',
-                    loader: [
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
                         'css-loader?importLoaders=1&localIdentName=[hash:base64:5]&camelCase&modules',
                         'postcss-loader',
                     ],
@@ -75,11 +75,11 @@ module.exports = {
             },
             {
                 test: /\.json$/,
-                loader: 'json-loader',
+                use: 'json-loader',
             },
             {
                 test: /\.svg$/,
-                loader: 'svg-inline-loader',
+                use: 'svg-inline-loader',
             },
         ]
     },

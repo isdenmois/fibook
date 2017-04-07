@@ -95,11 +95,13 @@ export class BookPage extends Component {
 
         return [
             <Button
+                key="status"
                 onClick={this.updateItemStatus}
             >
                 {data.Status ? 'В новые' : 'В прочтенные' }
             </Button>,
             <Button
+                key="delete"
                 onClick={this.deleteBook}
             >
                 Удалить
