@@ -26,9 +26,10 @@
     },
     "dependencies": {
         "atob": "~2.0.3",
+        "hoist-non-react-statics": "^1.2.0",
         "immutable": "~3.8.1",
-        "react": "~15.4.2",
-        "react-dom": "~15.4.2",
+        "react": "^15.5.4",
+        "react-dom": "^15.5.4",
         "react-faux-dom": "~3.0.1",
         "react-redux": "~5.0.3",
         "react-router-dom": "~4.0.0",
@@ -45,6 +46,10 @@
         "xml-reader": "~2.4.3"
     },
     "devDependencies": {
+        "@types/node": "^7.0.27",
+        "@types/react": "^15.0.26",
+        "@types/react-dom": "^15.5.0",
+        "@types/react-router-dom": "^4.0.4",
         "add-asset-html-webpack-plugin": "~1.0.2",
         "babel-core": "~6.24.0",
         "babel-eslint": "~7.2.1",
@@ -93,12 +98,14 @@
         "strip-loader": "~0.1.2",
         "style-loader": "~0.16.1",
         "svg-inline-loader": "~0.7.1",
+        "ts-loader": "^2.1.0",
+        "typescript": "^2.3.4",
         "url-loader": "~0.5.8",
         "webpack": "~2.3.3",
         "webpack-dev-server": "~2.4.2",
         "webpack-hot-middleware": "~2.18.0",
-        "worker-loader": "~0.8.0",
-        "whatwg-fetch": "~2.0.3"
+        "whatwg-fetch": "~2.0.3",
+        "worker-loader": "~0.8.0"
     },
     "jest": {
         "automock": true,

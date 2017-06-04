@@ -33,7 +33,7 @@ module.exports = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
         modules: ['src', 'node_modules'],
     },
     plugins: [
@@ -80,6 +80,11 @@ module.exports = {
                 exclude: /workers\/tests/,
             },
             {
+                test: /\.tsx?$/,
+                use: ['babel-loader', 'ts-loader'],
+                exclude: /(node_modules|workers)/,
+            },
+            {
                 test: /\.(png|woff|woff2|eot|ttf)$/,
                 loader: 'url-loader',
                 options: {
@@ -102,7 +107,7 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     'style-loader',
-                    'css-loader?importLoaders=1&localIdentName=[path]--[local]&camelCase&modules&sourceMap',
+                    'css-loader?importLoaders=1&localIdentName=[path][name]--[local]&camelCase&modules&sourceMap',
                     'postcss-loader',
                 ],
                 include: /src/,

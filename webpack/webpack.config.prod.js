@@ -18,7 +18,7 @@ module.exports = {
         filename: '[name].js'
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
         modules: ['src', 'node_modules'],
     },
     module: {
@@ -46,6 +46,11 @@ module.exports = {
                     'babel-loader',
                 ],
                 exclude: /node_modules/,
+            },
+            {
+                test: /\.tsx?$/,
+                use: [strip.loader('debug'), 'babel-loader', 'ts-loader'],
+                exclude: /(node_modules|workers)/,
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf)$/,
