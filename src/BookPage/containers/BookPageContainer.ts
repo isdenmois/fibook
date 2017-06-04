@@ -5,7 +5,8 @@ import {renderView, ContainerBaseProps} from 'utils/container'
 import {fetchContainer, FetchProps} from 'utils/fetch'
 import {Book, BookHistory} from 'models/book'
 import {observer} from 'mobx-react'
-import {UPDATE} from 'utils/rsql'
+import {UPDATE} from 'services/rsql'
+import {deleteBook} from 'services/book'
 import BookStore from 'stores/BookStore'
 
 
@@ -20,6 +21,7 @@ export interface ContainerProps {
   lastRead: string
 
   onStatusChange: (status: number) => void
+  onDeleteBook: () => void
 }
 
 interface Props extends ContainerBaseProps, RouteComponentProps<BookPageParams> {
@@ -76,11 +78,19 @@ export default class BookPageContainer extends React.Component<Props, void> {
       fetching: fetching || !book,
       book, history, lastRead,
       onStatusChange: this.handleChangeStatus,
+      onDeleteBook: this.handleDeleteBook,
     })
   }
 
   private handleChangeStatus = (status: number) => {
     this.props.bookStore.changeStatus(status)
     UPDATE('library_metadata', {where: `MD5 = "${this.props.bookStore.book.MD5}"`, status})
+  }
+
+  private handleDeleteBook = () => {
+    if (confirm('Вы действительно хотите удалить книгу?')) {
+      this.props.history.push('/')
+      deleteBook(this.props.bookStore.book.MD5)
+    }
   }
 }

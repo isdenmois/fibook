@@ -1,5 +1,4 @@
-const queryParams = require('./queryParams').default
-const request = require('./request').default
+const request = require('utils/request').default
 
 const SQL_ENDPOINT = '/api/sql'
 

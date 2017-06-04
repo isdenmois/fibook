@@ -58,7 +58,7 @@ export default class BookPage extends React.Component<ContainerProps, void> {
       <Button key="status" onClick={this.handleStatusChange}>
         {book.status > 0 ? 'В новые' : 'В прочтенные'}
       </Button>,
-      <Button key="delete">Удалить</Button>,
+      <Button key="delete" onClick={this.props.onDeleteBook}>Удалить</Button>,
     ]
   }
 
