@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
+import DevTools from 'mobx-react-devtools';
 import Routes from '../../routes';
 
 /**
@@ -7,7 +8,10 @@ import Routes from '../../routes';
  */
 const Root = props => (
     <Provider store={props.store}>
-        <Routes />
+        <div>
+            <Routes />
+            <DevTools position={{ top: 50, right: 0 }} />
+        </div>
     </Provider>
 );
 

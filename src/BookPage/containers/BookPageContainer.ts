@@ -3,24 +3,28 @@ import {RouteComponentProps} from "react-router"
 
 import {renderView, ContainerBaseProps} from 'utils/container'
 import {fetchContainer, FetchProps} from 'utils/fetch'
-import {Book} from 'models/book'
-const processHistory = require('utils/processHistory').default
+import {Book, BookHistory} from 'models/book'
+import {observer} from 'mobx-react'
+import {UPDATE} from 'utils/rsql'
+import BookStore from 'stores/BookStore'
 
 
 interface BookPageParams {
   MD5: string
 }
 
-interface SharedProps {
-  book: Book
-}
-
-export interface ContainerProps extends SharedProps {
+export interface ContainerProps {
   fetching: boolean
+  book: Book
+  history: BookHistory[]
+  lastRead: string
+
+  onStatusChange: (status: number) => void
 }
 
-interface Props extends SharedProps, ContainerBaseProps, RouteComponentProps<BookPageParams> {
+interface Props extends ContainerBaseProps, RouteComponentProps<BookPageParams> {
   fetch: FetchProps
+  bookStore: BookStore
 }
 
 @fetchContainer({
@@ -56,8 +60,9 @@ interface Props extends SharedProps, ContainerBaseProps, RouteComponentProps<Boo
     },
   ],
   initialVariables: {},
-  mapFetchToProps,
+  store: 'bookStore'
 })
+@observer
 export default class BookPageContainer extends React.Component<Props, void> {
 
   componentWillMount() {
@@ -66,19 +71,16 @@ export default class BookPageContainer extends React.Component<Props, void> {
   }
 
   render() {
+    const {fetching, book, history, lastRead} = this.props.bookStore
     return renderView(this.props, {
-      fetching: this.props.fetch.fetching,
+      fetching: fetching || !book,
+      book, history, lastRead,
+      onStatusChange: this.handleChangeStatus,
     })
   }
-}
 
-function mapFetchToProps(data: any) {
-  const history = processHistory(data.history || [])
-  const book = data.book[0] || {}
-  if (history.length) {
-    book.lastRead = history[history.length - 1].date
+  private handleChangeStatus = (status: number) => {
+    this.props.bookStore.changeStatus(status)
+    UPDATE('library_metadata', {where: `MD5 = "${this.props.bookStore.book.MD5}"`, status})
   }
-  book.history = history
-
-  return {book}
 }

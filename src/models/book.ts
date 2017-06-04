@@ -4,7 +4,6 @@ export interface Book {
   title: string
   author: string
   lastRead: string
-  history?: BookHistory[]
   status: number
   progress: string
   size: number

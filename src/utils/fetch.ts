@@ -1,4 +1,7 @@
 import * as React from 'react'
+import {runInAction} from 'mobx'
+import {inject, observer} from 'mobx-react'
+import {FetchStore} from "../models/fetch";
 const request = require('./request').default
 const queryParams = require('./queryParams').default
 const each = require('./each').default
@@ -8,6 +11,9 @@ const ENDPOINT = '/api/sql'
 
 export function fetchContainer(params: FetchParams): ClassDecorator {
   return function (component: React.ComponentClass<any>): Function {
+
+    @inject(params.store)
+    @observer
     class FetchContainer extends React.Component<any, any> {
       state = {
         fetching: false,
@@ -28,9 +34,11 @@ export function fetchContainer(params: FetchParams): ClassDecorator {
         })
       }
 
-      private handleFetch = () => {
+      private handleFetch = async () => {
+        const store: FetchStore = this.props[params.store]
         const variables = this.state.variables
         const promiseList = []
+        store.setFetching(true)
 
         for (let q of params.queries) {
           const query = q.query(variables)
@@ -40,15 +48,10 @@ export function fetchContainer(params: FetchParams): ClassDecorator {
           promiseList.push(promise)
         }
 
-        Promise.all(promiseList).then((result: any) => {
-          const data: any = {}
-          each(result, (qr: any) => data[qr.key] = qr.data)
-
-          if (params.mapFetchToProps) {
-            this.setState({data: params.mapFetchToProps(data)})
-          } else {
-            this.setState({data})
-          }
+        const result: any = await Promise.all(promiseList)
+        runInAction('set book data', () => {
+          each(result, (qr: any) => store.setData(qr.key, qr.data))
+          store.setFetching(false)
         })
       }
 
@@ -66,6 +69,7 @@ export function fetchContainer(params: FetchParams): ClassDecorator {
 interface FetchParams {
   initialVariables: any
   queries: Query[]
+  store: string
   mapFetchToProps?: (data: any) => any
 }
 

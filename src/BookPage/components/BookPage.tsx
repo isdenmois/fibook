@@ -19,7 +19,7 @@ const s = require('./style/bookPage.css')
 export default class BookPage extends React.Component<ContainerProps, void> {
 
   render() {
-    if (this.props.fetching || !this.props.book) {
+    if (this.props.fetching) {
       return (
         <Page toolbar={this.renderToolbar()}>
           <Loading />
@@ -27,8 +27,7 @@ export default class BookPage extends React.Component<ContainerProps, void> {
       );
     }
 
-
-    const book = this.props.book
+    const {book, history, lastRead} = this.props
     return (
       <Page
         toolbar={this.renderToolbar()}
@@ -38,10 +37,10 @@ export default class BookPage extends React.Component<ContainerProps, void> {
         <div className={s.primary}>
           <div className={s.title}>{book.title}</div>
           <div className={s.author}>{book.author}</div>
-          <BookProgress lastRead={book.lastRead} progress={book.progress} />
+          <BookProgress lastRead={lastRead} progress={book.progress} />
         </div>
         <BookDetails book={book} />
-        <Timeline history={book.history} />
+        <Timeline history={history} />
       </Page>
     );
   }
@@ -53,11 +52,18 @@ export default class BookPage extends React.Component<ContainerProps, void> {
   }
 
   renderBottomToolbar() {
-    const book = this.props.book;
+    const book = this.props.book
 
     return [
-      <Button key="status">{book.status ? 'В новые' : 'В прочтенные'}</Button>,
+      <Button key="status" onClick={this.handleStatusChange}>
+        {book.status > 0 ? 'В новые' : 'В прочтенные'}
+      </Button>,
       <Button key="delete">Удалить</Button>,
-    ];
+    ]
+  }
+
+  private handleStatusChange = () => {
+    const status = this.props.book.status
+    this.props.onStatusChange(1 - status)
   }
 }
