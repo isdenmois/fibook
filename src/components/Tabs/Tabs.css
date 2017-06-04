@@ -1,6 +1,7 @@
 .tab-left,
 .tab-right,
 .tab-active {
+    background-color: white;
     bottom: 0;
     left: 0;
     position: fixed;

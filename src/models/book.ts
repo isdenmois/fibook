@@ -7,6 +7,8 @@ export interface Book {
   status: number
   progress: string
   size: number
+  LastAccess: number
+  LastModified: number
 }
 
 

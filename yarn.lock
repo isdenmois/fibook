@@ -1774,10 +1774,6 @@ decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
 
-deep-diff@0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-0.3.4.tgz#aac5c39952236abe5f037a2349060ba01b00ae48"
-
 deep-extend@~0.4.0:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.4.1.tgz#efe4113d08085f4e6f9687759810f807469e2253"
@@ -3025,10 +3021,6 @@ ignore@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.2.2.tgz#1c51e1ef53bab6ddc15db4d9ac4ec139eceb3410"
 
-immutable@~3.8.1:
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
-
 imports-loader@~0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/imports-loader/-/imports-loader-0.7.1.tgz#f204b5f34702a32c1db7d48d89d5e867a0441253"
@@ -3047,6 +3039,65 @@ indexes-of@^1.0.1:
 indexof@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/indexof/-/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
+
+inferno-compat@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/inferno-compat/-/inferno-compat-3.3.1.tgz#fe05d8465c04e65d8490ddc0823ef13175547453"
+  dependencies:
+    inferno "3.3.1"
+    inferno-component "3.3.1"
+    inferno-create-class "3.3.1"
+    inferno-create-element "3.3.1"
+    inferno-shared "3.1.1"
+    inferno-transition-group "2.1.0"
+    inferno-vnode-flags "^3.0.0"
+    rc-css-transition-group-modern "^2.1.6"
+
+inferno-component@3.3.1, inferno-component@^3.0.5:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/inferno-component/-/inferno-component-3.3.1.tgz#ddf28ff0bf195b641d77e8e8097ba488730adca5"
+  dependencies:
+    inferno "3.3.1"
+    inferno-shared "3.1.1"
+    inferno-vnode-flags "^3.0.0"
+
+inferno-create-class@3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/inferno-create-class/-/inferno-create-class-3.3.1.tgz#1bccf83a3318a0e4364f98c0402e32631176a251"
+  dependencies:
+    inferno-component "3.3.1"
+    inferno-shared "3.1.1"
+
+inferno-create-element@3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/inferno-create-element/-/inferno-create-element-3.3.1.tgz#0babdb85e4c11f259a6fd10886ffc58820330c48"
+  dependencies:
+    inferno "3.3.1"
+    inferno-component "3.3.1"
+    inferno-shared "3.1.1"
+    inferno-vnode-flags "^3.0.0"
+
+inferno-shared@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/inferno-shared/-/inferno-shared-3.1.1.tgz#70376e29a56c53f6ba1e942191fe5cb710654f73"
+
+inferno-transition-group@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/inferno-transition-group/-/inferno-transition-group-2.1.0.tgz#f29da09ed8353f2213aafb7afa7979cae527948f"
+  dependencies:
+    inferno "^3.0.5"
+    inferno-component "^3.0.5"
+
+inferno-vnode-flags@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/inferno-vnode-flags/-/inferno-vnode-flags-3.0.0.tgz#f396390f3dafae3b76eea04d04eed6cf2004473b"
+
+inferno@3.3.1, inferno@^3.0.5, inferno@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/inferno/-/inferno-3.3.1.tgz#376b7bcd065a1623c41904e42e0beb981e4552cd"
+  dependencies:
+    inferno-shared "3.1.1"
+    inferno-vnode-flags "^3.0.0"
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -3826,7 +3877,7 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
-lodash-es@^4.2.0, lodash-es@^4.2.1:
+lodash-es@^4.2.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.4.tgz#dcc1d7552e150a0640073ba9cb31d70f032950e7"
 
@@ -3943,7 +3994,7 @@ lodash@^3.6.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@~4.17.4:
+lodash@^4.0.0, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.2.0, lodash@^4.3.0, lodash@~4.17.4:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -5120,6 +5171,10 @@ raw-body@~2.2.0:
     iconv-lite "0.4.15"
     unpipe "1.0.0"
 
+rc-css-transition-group-modern@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/rc-css-transition-group-modern/-/rc-css-transition-group-modern-2.1.6.tgz#e34d63752110ee2ccf5185cd6ba4c774cfdf1bb7"
+
 rc@~1.1.6:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.1.7.tgz#c5ea564bb07aff9fd3a5b32e906c1d3a65940fea"
@@ -5286,29 +5341,6 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
-redux-logger@~3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.1.tgz#ae8ae4c3c55ed3dd7aa31509f0856c5d3751057a"
-  dependencies:
-    deep-diff "0.3.4"
-
-redux-saga@~0.14.5:
-  version "0.14.5"
-  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.14.5.tgz#8faa627e7d0ea9417455a6544f82d31fe610bbac"
-
-redux-thunk@~2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
-
-redux@~3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/redux/-/redux-3.6.0.tgz#887c2b3d0b9bd86eca2be70571c27654c19e188d"
-  dependencies:
-    lodash "^4.2.1"
-    lodash-es "^4.2.1"
-    loose-envify "^1.1.0"
-    symbol-observable "^1.0.2"
-
 regenerate@^1.2.1:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.3.2.tgz#d1941c67bad437e1be76433add5b385f95b19260"
@@ -5433,10 +5465,6 @@ require-uncached@^1.0.2:
 requires-port@1.0.x, requires-port@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
-
-reselect@~3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/reselect/-/reselect-3.0.0.tgz#b2e35977f03048700028eaee3a8c0639e40e8f35"
 
 resolve-dir@^0.1.0:
   version "0.1.1"
@@ -5910,10 +5938,6 @@ swap-case@^1.1.0:
   dependencies:
     lower-case "^1.1.1"
     upper-case "^1.1.1"
-
-symbol-observable@^1.0.2:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.4.tgz#29bf615d4aa7121bdd898b22d4b3f9bc4e2aa03d"
 
 symbol-tree@^3.2.1:
   version "3.2.2"

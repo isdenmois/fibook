@@ -4,19 +4,16 @@ import RedBox from 'redbox-react';
 import { Provider } from 'mobx-react';
 
 // Both configureStore and Root are required conditionally.
-import configureStore from './store/configureStore';
-import rootSaga from './sagas';
 import BookStore from './stores/BookStore';
+import HomePageStore from './stores/HomePageStore';
 import './theme/variables.css';
 
 /* global document */
 /* eslint-disable global-require */
 
-const store = configureStore();
-store.runSaga(rootSaga);
-
 const stores = {
     bookStore: new BookStore(),
+    homePageStore: new HomePageStore(),
 };
 
 const rootEl = document.getElementById('root');
@@ -26,7 +23,7 @@ let renderDom = () => {
     const Root = require('./containers/Root').default;
     ReactDOM.render(
         <Provider {...stores}>
-            <Root store={store} />
+            <Root />
         </Provider>,
         rootEl,
     );

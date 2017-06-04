@@ -10,9 +10,9 @@ export default class ListTab extends PureComponent {
     }
 
     renderRow(book) {
-        const MD5 = book.get('MD5');
-        const title = book.get('title');
-        const author = book.get('author');
+        const MD5 = book.MD5;
+        const title = book.title;
+        const author = book.author;
 
         return (
             <ListItem

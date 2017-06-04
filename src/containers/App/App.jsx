@@ -1,41 +1,12 @@
 /**
  * App.react.js
  */
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React from 'react';
 
-import { loadBooks } from 'actions/list';
-import { selectError } from '../../selectors/main';
-
-export class App extends Component {
-    componentDidMount() {
-        this.props.loadBooks();
-    }
-    render() {
-        const { children, error } = this.props;
-        return (
-            <div className="ios">
-                {error}
-                {children}
-            </div>
-        );
-    }
+export default function App(props) {
+    return (
+        <div className="ios">
+            {props.children}
+        </div>
+    );
 }
-
-App.propTypes = {
-    loadBooks: PropTypes.func.isRequired,
-    error: PropTypes.string,
-    children: PropTypes.node,
-};
-
-
-const mapStateToProps = createStructuredSelector({
-    error: selectError,
-});
-
-const mapActionsToProps = {
-    loadBooks,
-};
-
-export default connect(mapStateToProps, mapActionsToProps)(App);
