@@ -1,6 +1,6 @@
 import * as React from 'react'
 import DevTools from 'mobx-react-devtools'
-import Routes from 'routes/index'
+import Routes from 'routes'
 
 
 /**
