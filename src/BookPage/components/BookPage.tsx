@@ -27,7 +27,7 @@ export default class BookPage extends React.Component<ContainerProps, void> {
       );
     }
 
-    const {book, history, lastRead} = this.props
+    const {book, bookHistory, lastRead} = this.props
     return (
       <Page
         toolbar={this.renderToolbar()}
@@ -40,7 +40,7 @@ export default class BookPage extends React.Component<ContainerProps, void> {
           <BookProgress lastRead={lastRead} progress={book.progress} />
         </div>
         <BookDetails book={book} />
-        <Timeline history={history} />
+        <Timeline history={bookHistory} />
       </Page>
     );
   }

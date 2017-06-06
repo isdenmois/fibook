@@ -21,7 +21,7 @@ const rootEl = document.getElementById('root');
 
 // necessary for hot reloading
 let renderDom = () => {
-    const Root = require('./containers/Root').default;
+    const Root = require('./containers/Root/index').default;
     ReactDOM.render(
         <Provider {...stores}>
             <Root />

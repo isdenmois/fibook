@@ -1,15 +1,19 @@
 import * as React from 'react'
 import {observer} from 'mobx-react'
+import {RouteComponentProps} from 'react-router'
 
 import {renderView, ContainerBaseProps} from 'utils/container'
 import {FetchProps, fetchContainer} from 'utils/fetch'
-import {RouteComponentProps} from 'react-router'
 import HomePageStore from 'stores/HomePageStore'
 import {Book} from 'models/book'
 import {createBook} from 'services/book'
 
 
-export interface ContainerProps {
+interface SharedProps extends RouteComponentProps<void> {
+
+}
+
+export interface ContainerProps extends SharedProps {
   fetching: boolean
   news: Book[]
   read: Book[]
@@ -17,7 +21,7 @@ export interface ContainerProps {
   onCreateBook: (file: File) => void
 }
 
-interface Props extends ContainerBaseProps, RouteComponentProps<void> {
+interface Props extends ContainerBaseProps, SharedProps {
   fetch: FetchProps
   homePageStore: HomePageStore
 }

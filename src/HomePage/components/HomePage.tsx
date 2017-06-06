@@ -2,7 +2,7 @@ import * as React from 'react'
 const InlineSVG = require('svg-inline-react')
 
 import {container} from 'utils/container'
-import BookListContainer, {ContainerProps} from '../containers/HomePageContainer'
+import HomePageContainer, {ContainerProps} from '../containers/HomePageContainer'
 
 const Loading = require('components/Loading').default
 const FileInput = require('components/FileInput').default
@@ -17,7 +17,7 @@ const flagIconOutline = require('./icons/ios-flag-outline.svg')
 const s = require('./style/homePage.css')
 
 
-@container(BookListContainer)
+@container(HomePageContainer)
 export default class HomePage extends React.Component<ContainerProps, void> {
 
   render() {

@@ -14,17 +14,21 @@ interface BookPageParams {
   MD5: string
 }
 
-export interface ContainerProps {
+interface SharedProps extends RouteComponentProps<BookPageParams> {
+
+}
+
+export interface ContainerProps extends SharedProps {
   fetching: boolean
   book: Book
-  history: BookHistory[]
+  bookHistory: BookHistory[]
   lastRead: string
 
   onStatusChange: (status: number) => void
   onDeleteBook: () => void
 }
 
-interface Props extends ContainerBaseProps, RouteComponentProps<BookPageParams> {
+interface Props extends ContainerBaseProps, SharedProps {
   fetch: FetchProps
   bookStore: BookStore
 }
@@ -47,7 +51,7 @@ interface Props extends ContainerBaseProps, RouteComponentProps<BookPageParams> 
       }),
     },
     {
-      prop: 'history',
+      prop: 'bookHistory',
       query: (vars: any) => ({
         fields: [
           'StartTime as date',
@@ -73,10 +77,10 @@ export default class BookPageContainer extends React.Component<Props, void> {
   }
 
   render() {
-    const {fetching, book, history, lastRead} = this.props.bookStore
+    const {fetching, book, history: bookHistory, lastRead} = this.props.bookStore
     return renderView(this.props, {
       fetching: fetching || !book,
-      book, history, lastRead,
+      book, bookHistory, lastRead,
       onStatusChange: this.handleChangeStatus,
       onDeleteBook: this.handleDeleteBook,
     })
