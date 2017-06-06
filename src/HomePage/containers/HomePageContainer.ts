@@ -18,7 +18,14 @@ export interface ContainerProps extends SharedProps {
   news: Book[]
   read: Book[]
 
+  newsLoadingMore: boolean
+  readLoadingMore: boolean
+
+  newsCanLoadMore: boolean
+  readCanLoadMore: boolean
+
   onCreateBook: (file: File) => void
+  onLoadMore: (type: string) => void
 }
 
 interface Props extends ContainerBaseProps, SharedProps {
@@ -30,6 +37,7 @@ interface Props extends ContainerBaseProps, SharedProps {
   queries: [
     {
       prop: 'news',
+      pagination: true,
       query: () => ({
         fields: [
           'MD5',
@@ -42,11 +50,12 @@ interface Props extends ContainerBaseProps, SharedProps {
         table: 'library_metadata',
         where: 'Status = 0 OR Status IS NULL',
         order: 'LastModified DESC',
-        limit: 50,
+        limit: 20,
       })
     },
     {
       prop: 'read',
+      pagination: true,
       query: () => ({
         fields: [
           'MD5',
@@ -59,7 +68,7 @@ interface Props extends ContainerBaseProps, SharedProps {
         table: 'library_metadata',
         where: 'Status = 1',
         order: 'LastAccess DESC',
-        limit: 50,
+        limit: 20,
       })
     },
   ],
@@ -75,12 +84,18 @@ export default class HomePageContainer extends React.Component<Props, void> {
 
   render() {
     const {homePageStore} = this.props
+    const {news, read, newsTotal, readTotal, readLoadingMore, newsLoadingMore} = homePageStore
 
     return renderView(this.props, {
       fetching: homePageStore.fetching,
-      news: homePageStore.news,
-      read: homePageStore.read,
+      newsCanLoadMore: news.length < newsTotal,
+      readCanLoadMore: read.length < readTotal,
       onCreateBook: this.handleCreateBook,
+      onLoadMore: this.handleLoadMore,
+      newsLoadingMore,
+      readLoadingMore,
+      news,
+      read,
     })
   }
 
@@ -88,5 +103,9 @@ export default class HomePageContainer extends React.Component<Props, void> {
     this.props.homePageStore.setFetching(true)
     await createBook(file)
     this.props.fetch.fetchData()
+  }
+
+  private handleLoadMore = (type: string) => {
+    this.props.fetch.loadMore(type)
   }
 }

@@ -5,8 +5,15 @@ import {FetchStore} from 'models/fetch'
 
 export default class HomePageStore implements FetchStore {
   @observable fetching: boolean = false
+
   @observable news: Book[] = []
   @observable read: Book[] = []
+
+  @observable newsTotal: number = 0
+  @observable readTotal: number = 0
+
+  @observable newsLoadingMore: boolean = false
+  @observable readLoadingMore: boolean = false
 
   @action
   setFetching(fetching: boolean) {
@@ -27,6 +34,45 @@ export default class HomePageStore implements FetchStore {
   }
 
   @action
+  setTotal(prop: string, count: number) {
+    switch (prop) {
+      case 'news':
+        this.newsTotal = count
+        break
+
+      case 'read':
+        this.readTotal = count
+        break
+    }
+  }
+
+  @action
+  setLoadMore(prop: string, loadMore: boolean) {
+    switch (prop) {
+      case 'news':
+        this.newsLoadingMore = loadMore
+        break
+
+      case 'read':
+        this.readLoadingMore = loadMore
+        break
+    }
+  }
+
+  @action
+  appendData(prop: string, data: any) {
+    switch (prop) {
+      case 'news':
+        this.news = this.news.concat(data)
+        break
+
+      case 'read':
+        this.read = this.read.concat(data)
+        break
+    }
+  }
+
+  @action
   changeBookStatus(MD5: string, status: number) {
     const findPredicate = (book: Book) => book.MD5 === MD5
     const filterPredicate = (book: Book) => book.MD5 !== MD5
@@ -38,12 +84,16 @@ export default class HomePageStore implements FetchStore {
 
         this.news = this.news.filter(filterPredicate)
         this.read = this.read.sort((b1: Book, b2: Book) => b2.LastAccess - b1.LastAccess)
+        this.newsTotal--
+        this.readTotal++
       } else {
         const book = this.read.find(findPredicate)
         this.news.push(book)
 
         this.read = this.read.filter(filterPredicate)
         this.news = this.news.sort((b1: Book, b2: Book) => b2.LastModified - b1.LastModified)
+        this.readTotal--
+        this.newsTotal++
       }
     })
   }
@@ -52,10 +102,15 @@ export default class HomePageStore implements FetchStore {
   deleteBook(deletedBook: Book) {
     const filterPredicate = (book: Book) => book.MD5 !== deletedBook.MD5
 
-    if (deletedBook.status === 1) {
-      this.read = this.read.filter(filterPredicate)
-    } else {
-      this.news = this.news.filter(filterPredicate)
-    }
+
+    runInAction(() => {
+      if (deletedBook.status === 1) {
+        this.read = this.read.filter(filterPredicate)
+        this.readTotal--
+      } else {
+        this.news = this.news.filter(filterPredicate)
+        this.newsTotal--
+      }
+    })
   }
 }
