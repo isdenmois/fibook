@@ -48,7 +48,7 @@ interface Props extends ContainerBaseProps, SharedProps {
           'LastModified',
         ],
         table: 'library_metadata',
-        where: 'Status = 0 OR Status IS NULL',
+        where: '(Status = 0 OR Status IS NULL) AND (Name LIKE "%.fb2" OR Name LIKE "%.epub")',
         order: 'LastModified DESC',
         limit: 20,
       })
