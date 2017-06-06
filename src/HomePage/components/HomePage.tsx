@@ -55,6 +55,7 @@ export default class HomePage extends React.Component<ContainerProps, void> {
           <ListTab
             data={this.props.read}
             loadingMore={this.props.readLoadingMore}
+            canLoadMore={this.props.readCanLoadMore}
             onLoadMore={this.handleReadLoadMore}
           />
         ),
