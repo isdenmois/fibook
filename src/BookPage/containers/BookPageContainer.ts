@@ -51,7 +51,7 @@ interface Props extends ContainerBaseProps, SharedProps {
       }),
     },
     {
-      prop: 'bookHistory',
+      prop: 'history',
       query: (vars: any) => ({
         fields: [
           'StartTime as date',
