@@ -89,8 +89,10 @@ export default class BookPageContainer extends React.Component<Props, void> {
 
   private handleDeleteBook = () => {
     if (confirm('Вы действительно хотите удалить книгу?')) {
+      const MD5 = this.props.bookStore.book.MD5
+      this.props.bookStore.deleteBook()
       this.props.history.push('/')
-      deleteBook(this.props.bookStore.book.MD5)
+      deleteBook(MD5)
     }
   }
 }

@@ -11,9 +11,10 @@ import './theme/variables.css';
 /* global document */
 /* eslint-disable global-require */
 
+const homePageStore = new HomePageStore();
 const stores = {
-    bookStore: new BookStore(),
-    homePageStore: new HomePageStore(),
+    bookStore: new BookStore(homePageStore),
+    homePageStore,
 };
 
 const rootEl = document.getElementById('root');

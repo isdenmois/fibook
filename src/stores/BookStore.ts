@@ -1,13 +1,20 @@
 import {observable, action, computed} from 'mobx'
 import {Book, BookHistory} from "../models/book"
 import {FetchStore} from "../models/fetch"
+import HomePageStore from "./HomePageStore";
 const processHistory = require('utils/processHistory').default
 
 
 export default class BookStore implements FetchStore {
+  homePageStore: HomePageStore
+
   @observable fetching: boolean = false
   @observable book: Book = null
   @observable history: BookHistory[] = []
+
+  constructor(homePageStore: HomePageStore) {
+    this.homePageStore = homePageStore
+  }
 
   @computed get lastRead(): string {
     if (!!this.history && this.history.length > 0) {
@@ -38,5 +45,12 @@ export default class BookStore implements FetchStore {
   @action
   changeStatus(status: number) {
     this.book = {...this.book, status}
+    this.homePageStore.changeBookStatus(this.book.MD5, status)
+  }
+
+  @action
+  deleteBook() {
+    this.homePageStore.deleteBook(this.book)
+    this.book = null
   }
 }
