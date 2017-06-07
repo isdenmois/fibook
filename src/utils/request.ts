@@ -1,4 +1,3 @@
-/* global fetch */
 
 /**
  * Parses the JSON returned by a network request
@@ -7,8 +6,8 @@
  *
  * @return {object}          The parsed JSON from the request
  */
-function parseJSON(response) {
-    return response.json();
+function parseJSON(response: Response) {
+  return response.json()
 }
 
 /**
@@ -18,14 +17,12 @@ function parseJSON(response) {
  *
  * @return {object|undefined} Returns either the response, or throws an error
  */
-function checkStatus(response) {
-    if (response.status >= 200 && response.status < 300) {
-        return response;
-    }
+function checkStatus(response: Response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response
+  }
 
-    const error = new Error(response.statusText);
-    error.response = response;
-    throw error;
+  throw new Error(response.statusText)
 }
 
 /**
@@ -36,8 +33,8 @@ function checkStatus(response) {
  *
  * @return {object}           The response data
  */
-export default function request(url, options) {
-    return fetch(url, options)
-        .then(checkStatus)
-        .then(parseJSON);
+export default function request(url: string, options: any) {
+  return fetch(url, options)
+    .then(checkStatus)
+    .then(parseJSON)
 }

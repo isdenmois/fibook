@@ -30,16 +30,6 @@ module.exports = {
                 exclude: /(node_modules|workers)/,
             },
             {
-                test: /\.js$/,
-                use: [
-                    'worker-loader',
-                    strip.loader('debug'),
-                    'babel-loader',
-                ],
-                include: /workers/,
-                exclude: /workers\/tests/,
-            },
-            {
                 test: /\.jsx?$/,
                 use: [
                     strip.loader('debug'),
@@ -50,7 +40,7 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 use: [strip.loader('debug'), 'babel-loader', 'ts-loader'],
-                exclude: /(node_modules|workers)/,
+                exclude: /node_modules/,
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf)$/,

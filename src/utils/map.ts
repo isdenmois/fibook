@@ -1,4 +1,4 @@
-export default function map(array, func) {
+export default function map(array: Array<any>, func: any) {
     if (array) {
         return array.map(func);
     }

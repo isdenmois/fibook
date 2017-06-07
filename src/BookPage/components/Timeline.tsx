@@ -1,5 +1,5 @@
 import * as React from 'react'
-const map = require('utils/map').default
+import map from 'utils/map'
 import {BookHistory} from 'models/book'
 
 import TimeLineItem from './TimelineItem'

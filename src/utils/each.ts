@@ -1,4 +1,4 @@
-export default function each(array, func) {
+export default function each(array: any, func: Function) {
     if (array && Array.isArray(array)) {
         for (let i = 0; i < array.length; i++) {
             func(array[i], i);

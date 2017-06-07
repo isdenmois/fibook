@@ -15,8 +15,14 @@ export interface Book {
 export interface BookHistory {
   date: string
   pages: number
-  percent: number
-  progress: string
-  speed: number
+  percent?: number
+  progress?: string
+  speed?: number
   time: number
+}
+
+export interface RawHistory {
+  date: string
+  progress: string
+  time: string
 }

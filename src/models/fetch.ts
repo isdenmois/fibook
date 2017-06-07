@@ -5,3 +5,7 @@ export interface FetchStore {
   appendData?: (prop: string, data: any) => void
   setTotal?: (prop: string, count: number) => void
 }
+
+export interface QueryParams {
+  [index: string]: any
+}

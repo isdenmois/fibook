@@ -7,7 +7,7 @@ const TenMB = 10 * MB;
  * Convert bytes to human-readable format.
  * @param size
  */
-export default function convert(size) {
+export default function convert(size: number) {
     if (size < KB) {
         return `${size} Б`;
     }
