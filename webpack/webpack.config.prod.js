@@ -121,9 +121,10 @@ module.exports = {
             sourceMap: false,
             test: /vendors\.js/,
         }),
-        new BabiliPlugin({
-            test: /(main|worker).js$/,
+        new BabiliPlugin({}, {
+            test: /(main|worker)\.js$/,
             comments: false,
+            sourceMap: false,
         }),
         new ExtractTextPlugin({
             allChunks: true,

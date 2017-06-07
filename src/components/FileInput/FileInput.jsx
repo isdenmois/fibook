@@ -1,4 +1,3 @@
-/* global FileReader */
 import React, { Component, PropTypes } from 'react';
 
 import css from './FileInput.css';

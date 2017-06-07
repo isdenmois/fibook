@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RedBox from 'redbox-react';
 import { Provider } from 'mobx-react';
 
 // Both configureStore and Root are required conditionally.
@@ -32,6 +31,7 @@ let renderDom = () => {
 
 if (module.hot) {
     const renderApp = renderDom;
+    const RedBox = require('redbox-react').default;
     const renderError = (error) => {
         ReactDOM.render(
             <RedBox error={error} />,
