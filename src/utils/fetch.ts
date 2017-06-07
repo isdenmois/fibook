@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {runInAction} from 'mobx'
 import {inject, observer} from 'mobx-react'
-import {FetchStore} from "../models/fetch";
+import {FetchStore} from "../models/fetch"
 const request = require('./request').default
 const queryParams = require('./queryParams').default
 const each = require('./each').default
