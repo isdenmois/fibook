@@ -1,8 +1,8 @@
 /* global describe, it, expect */
 import { shallow } from 'enzyme';
-import Loading from './index';
+import Loading from '../Loading/index';
 import React from 'react';
-import css from './Loading.css';
+import css from '../Loading/Loading.css';
 
 describe('<Loading />', () => {
     it('should rendering', () => {

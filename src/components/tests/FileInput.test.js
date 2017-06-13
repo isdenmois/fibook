@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import FileInput from './index';
+import FileInput from '../FileInput/index';
 
 describe('<FileInput />', () => {
     const fn = jest.fn();

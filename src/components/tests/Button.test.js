@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Page from './index';
+import Button from '../Button/index';
 
 /* global describe, it, jest, expect */
-describe('<Page />', () => {
+describe('<Button />', () => {
     it('should render', () => {
-        const component = shallow(<Page />);
+        const component = shallow(<Button />);
         expect(component.length).toBeTruthy();
     });
 });

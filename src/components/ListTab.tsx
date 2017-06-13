@@ -2,8 +2,9 @@ import * as React from 'react'
 import {Book} from 'models/book'
 import Spinner from './Spinner'
 
-const {List, ListItem} = require('components/List')
-const EmptyList = require('./EmptyList').default
+import List from './List'
+import ListItem from './ListItem'
+import EmptyList from './EmptyList'
 const s = require('./style/listTab.css')
 
 

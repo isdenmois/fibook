@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Button from './index';
+import ListHeader from '../List/ListHeader/index';
 
 /* global describe, it, jest, expect */
-describe('<Button />', () => {
+describe('<ListHeader />', () => {
     it('should render', () => {
-        const component = shallow(<Button />);
+        const component = shallow(<ListHeader />);
         expect(component.length).toBeTruthy();
     });
 });

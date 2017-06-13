@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import List from './index';
+import List from '../List/index';
 import css from './List.css';
 
 /* global describe, it, jest, expect */

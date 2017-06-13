@@ -4,10 +4,10 @@ import {container} from 'utils/container'
 import BookPageContainer, {ContainerProps} from 'BookPage/containers/BookPageContainer'
 
 
-const Button = require('components/Button').default
-const Toolbar = require('components/Toolbar').default
-const Page = require('components/Page').default
-const Loading = require('components/Loading').default
+import Button from 'components/Button'
+import Toolbar from 'components/Toolbar'
+import Page from 'components/Page'
+import Loading from 'components/Loading'
 
 import BookProgress from './BookProgress'
 import BookDetails from './BookDetails'
@@ -32,7 +32,6 @@ export default class BookPage extends React.Component<ContainerProps, void> {
       <Page
         toolbar={this.renderToolbar()}
         tabbar={this.renderBottomToolbar()}
-        bottomToolbar={this.renderBottomToolbar}
       >
         <div className={s.primary}>
           <div className={s.title}>{book.title}</div>
@@ -47,7 +46,7 @@ export default class BookPage extends React.Component<ContainerProps, void> {
 
   renderToolbar() {
     return (
-      <Toolbar backButton title="Подробности" />
+      <Toolbar backButton title="Подробности"/>
     );
   }
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import ListHeader from './index';
+import Tabs from '../Tabs/index';
 
 /* global describe, it, jest, expect */
-describe('<ListHeader />', () => {
+describe('<Tabs />', () => {
     it('should render', () => {
-        const component = shallow(<ListHeader />);
+        const component = shallow(<Tabs />);
         expect(component.length).toBeTruthy();
     });
 });

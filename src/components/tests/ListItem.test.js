@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import ListItem from './index';
-import css from './ListItem.css';
+import ListItem from '../List/ListItem/index';
+import css from '../List/ListItem/ListItem.css';
 
 /* global describe, it, jest, expect */
 describe('<ListItem />', () => {

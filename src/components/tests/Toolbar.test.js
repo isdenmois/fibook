@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Toolbar from './index';
+import Toolbar from '../Toolbar/index';
 
 /* global describe, it, jest, expect */
 describe('<Toolbar />', () => {

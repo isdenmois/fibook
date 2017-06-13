@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-const {List} = require('../../components/List')
-const ListItem = require('../../components/List/ListItem').default
-const fileSizeConvert = require('utils/FileSize').default
+import List from 'components/List'
+import ListItem from 'components/ListItem'
+import fileSizeConvert from 'utils/FileSize'
 import {Book} from 'models/book'
 
 interface Props {
