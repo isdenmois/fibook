@@ -16,7 +16,7 @@ export async function createBook(file: File) {
     body.append('image', image);
     body.append('image-name', imageName);
   }
-  const options = {method: 'POST', body}
+  const options = {method: 'POST', body, headers: {}}
   await request(BOOKS_ENDPOINT, options)
 }
 

@@ -1,39 +1,45 @@
-/**
- * Parses the JSON returned by a network request
- *
- * @param  {object} response A response from a network request
- *
- * @return {object}          The parsed JSON from the request
- */
-function parseJSON(response: Response) {
-  return response.json()
-}
+import QueryParams from './queryParams'
 
-/**
- * Checks if a network request came back fine, and throws an error if not
- *
- * @param  {object} response   A response from a network request
- *
- * @return {object|undefined} Returns either the response, or throws an error
- */
-function checkStatus(response: Response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response
+interface RequestParams {
+  method?: string
+  headers?: {
+    [index: string]: string
   }
-
-  throw new Error(response.statusText)
+  params?: {
+    [index: string]: string
+  }
+  body?: any
 }
 
-/**
- * Requests a URL, returning a promise
- *
- * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
- *
- * @return {object}           The response data
- */
-export default function request(url: string, options: any) {
-  return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON)
+const defaults = <RequestParams>{
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+}
+
+export default function request(url: string, params?: RequestParams) {
+  return new Promise((resolve, reject) => {
+    const options: RequestParams = {...defaults, ...params}
+
+    const xhr = new XMLHttpRequest()
+    xhr.open(options.method, options.params ? `${url}?${QueryParams(options.params)}` : url, true)
+    xhr.addEventListener('load', () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        resolve(xhr.responseText && JSON.parse(xhr.responseText))
+      } else {
+        reject(xhr)
+      }
+    })
+
+    for (const k in options.headers) {
+      xhr.setRequestHeader(k, options.headers[k])
+    }
+
+    if (options.body) {
+      xhr.send(options.body)
+    } else {
+      xhr.send()
+    }
+  })
 }

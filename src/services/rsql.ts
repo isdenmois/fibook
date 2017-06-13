@@ -9,16 +9,7 @@ interface UpdateParams {
 
 export async function UPDATE(table: string, params: UpdateParams) {
   const requestURL =  `${SQL_ENDPOINT}/${table}`
-
-  /* global Headers */
-  const headers = new Headers();
-  headers.set('Content-type', 'application/json')
-
-  const options = {
-    body: JSON.stringify(params),
-    headers,
-    method: 'PATCH',
-  }
+  const options = {body: JSON.stringify(params), method: 'PATCH'}
 
   await request(requestURL, options)
 }

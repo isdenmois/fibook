@@ -56,9 +56,6 @@ module.exports = {
             allChunks: true,
             filename: '[name].css',
         }),
-        new webpack.ProvidePlugin({
-            'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
-        }),
     ],
     module: {
         rules: [
