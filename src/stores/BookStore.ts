@@ -1,11 +1,11 @@
 import {observable, action, computed} from 'mobx'
 import {Book, BookHistory} from "../models/book"
-import {FetchStore} from "../models/fetch"
+import {RSQLStore} from "../models/rsql"
 import HomePageStore from "./HomePageStore";
 const processHistory = require('utils/processHistory').default
 
 
-export default class BookStore implements FetchStore {
+export default class BookStore implements RSQLStore {
   homePageStore: HomePageStore
 
   @observable fetching: boolean = false

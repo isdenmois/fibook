@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {runInAction} from 'mobx'
 import {inject, observer} from 'mobx-react'
-import {FetchStore} from "../models/fetch"
+import {RSQLStore} from "../models/rsql"
 const request = require('./request').default
 const queryParams = require('./queryParams').default
 const each = require('./each').default
@@ -9,12 +9,12 @@ const each = require('./each').default
 
 const ENDPOINT = '/api/sql'
 
-export function fetchContainer(params: FetchParams): ClassDecorator {
+export function rsqlContainer(params: RSQLParams): ClassDecorator {
   return function (component: React.ComponentClass<any>): Function {
 
     @inject(params.store)
     @observer
-    class FetchContainer extends React.Component<any, any> {
+    class RSQLContainer extends React.Component<any, any> {
       private offsets: any = {}
 
       state = {
@@ -26,7 +26,7 @@ export function fetchContainer(params: FetchParams): ClassDecorator {
         return React.createElement(component, {
           ...this.props,
           ...this.state.data,
-          fetch: {
+          rsql: {
             variables: this.state.variables,
             fetchData: this.handleFetch,
             setVariables: this.handleSetVariables,
@@ -36,7 +36,7 @@ export function fetchContainer(params: FetchParams): ClassDecorator {
       }
 
       private handleFetch = async () => {
-        const store: FetchStore = this.props[params.store]
+        const store: RSQLStore = this.props[params.store]
         const variables = this.state.variables
         const promiseList = []
         const totalsPromiseList = []
@@ -82,7 +82,7 @@ export function fetchContainer(params: FetchParams): ClassDecorator {
       }
 
       private handleLoadMore = async (type: string, count: number = 20) => {
-        const store: FetchStore = this.props[params.store]
+        const store: RSQLStore = this.props[params.store]
         const variables = this.state.variables
 
         const q = params.queries.find(q => q.prop === type)
@@ -104,11 +104,11 @@ export function fetchContainer(params: FetchParams): ClassDecorator {
       }
     }
 
-    return (props: any) => React.createElement(FetchContainer, {...props})
+    return (props: any) => React.createElement(RSQLContainer, {...props})
   }
 }
 
-interface FetchParams {
+interface RSQLParams {
   initialVariables: any
   queries: Query[]
   store: string
@@ -129,7 +129,7 @@ interface QueryParams {
   offset?: number
 }
 
-export interface FetchProps {
+export interface RSQLProps {
   variables: any
   fetching: boolean
   fetchData: () => void

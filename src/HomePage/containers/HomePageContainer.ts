@@ -3,7 +3,7 @@ import {observer} from 'mobx-react'
 import {RouteComponentProps} from 'react-router'
 
 import {renderView, ContainerBaseProps} from 'utils/container'
-import {FetchProps, fetchContainer} from 'utils/fetch'
+import {RSQLProps, rsqlContainer} from 'utils/rsql'
 import HomePageStore from 'stores/HomePageStore'
 import {Book} from 'models/book'
 import {createBook} from 'services/book'
@@ -29,11 +29,11 @@ export interface ContainerProps extends SharedProps {
 }
 
 interface Props extends ContainerBaseProps, SharedProps {
-  fetch: FetchProps
+  rsql: RSQLProps
   homePageStore: HomePageStore
 }
 
-@fetchContainer({
+@rsqlContainer({
   queries: [
     {
       prop: 'news',
@@ -79,7 +79,7 @@ interface Props extends ContainerBaseProps, SharedProps {
 export default class HomePageContainer extends React.Component<Props, void> {
 
   componentWillMount() {
-    this.props.fetch.fetchData()
+    this.props.rsql.fetchData()
   }
 
   render() {
@@ -102,10 +102,10 @@ export default class HomePageContainer extends React.Component<Props, void> {
   private handleCreateBook = async (file: File) => {
     this.props.homePageStore.setFetching(true)
     await createBook(file)
-    this.props.fetch.fetchData()
+    this.props.rsql.fetchData()
   }
 
   private handleLoadMore = (type: string) => {
-    this.props.fetch.loadMore(type)
+    this.props.rsql.loadMore(type)
   }
 }

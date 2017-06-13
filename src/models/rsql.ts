@@ -1,4 +1,4 @@
-export interface FetchStore {
+export interface RSQLStore {
   setFetching: (fetching: boolean) => void
   setData: (prop: string, data: any) => void
   setLoadMore?: (prop: string, loadMore: boolean) => void

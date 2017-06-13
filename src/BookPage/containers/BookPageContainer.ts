@@ -2,10 +2,10 @@ import * as React from 'react'
 import {RouteComponentProps} from "react-router"
 
 import {renderView, ContainerBaseProps} from 'utils/container'
-import {fetchContainer, FetchProps} from 'utils/fetch'
+import {rsqlContainer, RSQLProps} from 'utils/rsql'
 import {Book, BookHistory} from 'models/book'
 import {observer} from 'mobx-react'
-import {UPDATE} from 'services/rsql'
+import {UPDATE} from 'services/sql'
 import {deleteBook} from 'services/book'
 import BookStore from 'stores/BookStore'
 
@@ -29,11 +29,11 @@ export interface ContainerProps extends SharedProps {
 }
 
 interface Props extends ContainerBaseProps, SharedProps {
-  fetch: FetchProps
+  rsql: RSQLProps
   bookStore: BookStore
 }
 
-@fetchContainer({
+@rsqlContainer({
   queries: [
     {
       prop: 'book',
@@ -73,7 +73,7 @@ export default class BookPageContainer extends React.Component<Props, void> {
 
   componentWillMount() {
     const MD5 = this.props.match.params.MD5
-    this.props.fetch.setVariables({MD5})
+    this.props.rsql.setVariables({MD5})
   }
 
   render() {

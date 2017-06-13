@@ -1,4 +1,4 @@
-import {QueryParams} from 'models/fetch'
+import {QueryParams} from 'models/rsql'
 
 export default function queryParams(data: QueryParams = {}) {
   return Object.keys(data).map((key) => {

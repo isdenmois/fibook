@@ -1,9 +1,9 @@
 import {observable, action, runInAction} from 'mobx'
 import {Book} from 'models/book'
-import {FetchStore} from 'models/fetch'
+import {RSQLStore} from 'models/rsql'
 
 
-export default class HomePageStore implements FetchStore {
+export default class HomePageStore implements RSQLStore {
   @observable fetching: boolean = false
 
   @observable news: Book[] = []
