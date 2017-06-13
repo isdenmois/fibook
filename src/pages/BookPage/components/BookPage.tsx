@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import {container} from 'utils/container'
-import BookPageContainer, {ContainerProps} from 'BookPage/containers/BookPageContainer'
+import BookPageContainer, {ContainerProps} from '../containers/BookPageContainer'
 
 
 import Button from 'components/Button'
