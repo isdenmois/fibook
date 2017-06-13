@@ -33,7 +33,7 @@ module.exports = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
         modules: ['src', 'node_modules'],
     },
     plugins: [
@@ -56,9 +56,6 @@ module.exports = {
             allChunks: true,
             filename: '[name].css',
         }),
-        new webpack.ProvidePlugin({
-            'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
-        }),
     ],
     module: {
         rules: [
@@ -74,10 +71,9 @@ module.exports = {
                 exclude: /(node_modules|workers)/,
             },
             {
-                test: /\.js$/,
-                use: ['worker-loader', 'babel-loader'],
-                include: /workers/,
-                exclude: /workers\/tests/,
+                test: /\.tsx?$/,
+                use: ['babel-loader', 'ts-loader'],
+                exclude: /node_modules/,
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf)$/,
@@ -102,7 +98,7 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     'style-loader',
-                    'css-loader?importLoaders=1&localIdentName=[path]--[local]&camelCase&modules&sourceMap',
+                    'css-loader?importLoaders=1&localIdentName=[path][name]--[local]&camelCase&modules&sourceMap',
                     'postcss-loader',
                 ],
                 include: /src/,

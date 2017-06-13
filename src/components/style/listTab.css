@@ -1,0 +1,12 @@
+.loadMore {
+    color: var(--blueColor);
+    height: 64px;
+    line-height: 64px;
+    text-align: center;
+}
+
+.spinner {
+    margin-top: 14px;
+    margin-bottom: 13px;
+    text-align: center;
+}

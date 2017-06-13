@@ -18,7 +18,7 @@ module.exports = {
         filename: '[name].js'
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
         modules: ['src', 'node_modules'],
     },
     module: {
@@ -30,21 +30,16 @@ module.exports = {
                 exclude: /(node_modules|workers)/,
             },
             {
-                test: /\.js$/,
-                use: [
-                    'worker-loader',
-                    strip.loader('debug'),
-                    'babel-loader',
-                ],
-                include: /workers/,
-                exclude: /workers\/tests/,
-            },
-            {
                 test: /\.jsx?$/,
                 use: [
                     strip.loader('debug'),
                     'babel-loader',
                 ],
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.tsx?$/,
+                use: [strip.loader('debug'), 'babel-loader', 'ts-loader'],
                 exclude: /node_modules/,
             },
             {
@@ -96,9 +91,6 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
         }),
-        new webpack.ProvidePlugin({
-            'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
-        }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
             debug: false
@@ -126,9 +118,10 @@ module.exports = {
             sourceMap: false,
             test: /vendors\.js/,
         }),
-        new BabiliPlugin({
-            test: /(main|worker).js$/,
+        new BabiliPlugin({}, {
+            test: /(main|worker)\.js$/,
             comments: false,
+            sourceMap: false,
         }),
         new ExtractTextPlugin({
             allChunks: true,

@@ -13,7 +13,11 @@
     "jsx-a11y/no-static-element-interactions": [0],
     "class-methods-use-this": [0],
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-    "default-case": [0]
+    "default-case": [0],
+    "import/no-extraneous-dependencies": [0],
+    "import/no-unresolved": [0],
+    "import/extensions": [0]
+
   },
   "parser": "babel-eslint",
   "settings": {

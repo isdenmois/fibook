@@ -1,31 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RedBox from 'redbox-react';
+import { Provider } from 'mobx-react';
 
 // Both configureStore and Root are required conditionally.
-import configureStore from './store/configureStore';
-import rootSaga from './sagas';
+import BookStore from './stores/BookStore';
+import HomePageStore from './stores/HomePageStore';
 import './theme/variables.css';
 
 /* global document */
 /* eslint-disable global-require */
 
-const store = configureStore();
-store.runSaga(rootSaga);
+const homePageStore = new HomePageStore();
+const stores = {
+    bookStore: new BookStore(homePageStore),
+    homePageStore,
+};
 
 const rootEl = document.getElementById('root');
 
 // necessary for hot reloading
 let renderDom = () => {
-    const Root = require('./containers/Root').default;
+    const Root = require('./containers/Root/index').default;
     ReactDOM.render(
-        <Root store={store} />,
+        <Provider {...stores}>
+            <Root />
+        </Provider>,
         rootEl,
     );
 };
 
 if (module.hot) {
     const renderApp = renderDom;
+    const RedBox = require('redbox-react').default;
     const renderError = (error) => {
         ReactDOM.render(
             <RedBox error={error} />,
