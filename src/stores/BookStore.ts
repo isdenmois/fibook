@@ -38,8 +38,8 @@ export default class BookStore implements RSQLStore {
         if (this.history.length > 0) {
           this.book = {
             ...this.book,
-            startRead: minBy(data, 'date'),
-            endRead: maxBy(data, 'EndTime'),
+            startRead: +minBy(data, 'date'),
+            endRead: +maxBy(data, 'EndTime'),
           }
         }
         break
