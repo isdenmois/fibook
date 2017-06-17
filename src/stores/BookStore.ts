@@ -11,6 +11,7 @@ export default class BookStore implements RSQLStore {
   @observable fetching: boolean = false
   @observable book: Book = null
   @observable history: BookHistory[] = []
+  @observable thumbnail?: string = null
 
   constructor(homePageStore: HomePageStore) {
     this.homePageStore = homePageStore
@@ -33,6 +34,10 @@ export default class BookStore implements RSQLStore {
 
       case 'history':
         this.history = processHistory(data || [])
+        break
+
+      case 'thumbnail':
+        this.thumbnail = data[0] && data[0].url
         break
     }
   }

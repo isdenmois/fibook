@@ -23,6 +23,7 @@ export interface ContainerProps extends SharedProps {
   book: Book
   bookHistory: BookHistory[]
   lastRead: string
+  thumbnail: string
 
   onStatusChange: (status: number) => void
   onDeleteBook: () => void
@@ -64,6 +65,15 @@ interface Props extends ContainerBaseProps, SharedProps {
         limit: -1,
       }),
     },
+    {
+      prop: 'thumbnail',
+      query: (vars: any) => ({
+        fields: ['_data AS url'],
+        table: 'library_thumbnail',
+        where: `Source_MD5 = "${vars.MD5}"`,
+        limit: 1,
+      }),
+    },
   ],
   initialVariables: {},
   store: 'bookStore'
@@ -77,10 +87,10 @@ export default class BookPageContainer extends React.Component<Props, void> {
   }
 
   render() {
-    const {fetching, book, history: bookHistory, lastRead} = this.props.bookStore
+    const {fetching, book, history: bookHistory, lastRead, thumbnail} = this.props.bookStore
     return renderView(this.props, {
       fetching: fetching || !book,
-      book, bookHistory, lastRead,
+      book, bookHistory, lastRead, thumbnail,
       onStatusChange: this.handleChangeStatus,
       onDeleteBook: this.handleDeleteBook,
     })

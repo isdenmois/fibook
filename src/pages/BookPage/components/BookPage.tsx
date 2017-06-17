@@ -12,6 +12,7 @@ import Loading from 'components/Loading'
 import BookProgress from './BookProgress'
 import BookDetails from './BookDetails'
 import Timeline from './Timeline'
+import Thumbnail from './Thumbnail'
 const s = require('./style/bookPage.css')
 
 
@@ -34,6 +35,7 @@ export default class BookPage extends React.Component<ContainerProps, void> {
         tabbar={this.renderBottomToolbar()}
       >
         <div className={s.primary}>
+          {this.props.thumbnail && <Thumbnail url={this.props.thumbnail}/>}
           <div className={s.title}>{book.title}</div>
           <div className={s.author}>{book.author}</div>
           <BookProgress lastRead={lastRead} progress={book.progress} />

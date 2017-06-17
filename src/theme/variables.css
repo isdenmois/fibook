@@ -3,4 +3,5 @@
     --fabBottom: 60px;
     --blueColor: #007aff;
     --greyColor: #929292;
+    --defaultBorder: 1px solid var(--greyColor);
 }
