@@ -46,6 +46,7 @@ interface Props extends ContainerBaseProps, SharedProps {
           'Progress AS progress',
           'Status AS status',
           'Size AS size',
+          'Location as location',
         ],
         table: 'library_metadata',
         where: `MD5 = "${vars.MD5}"`,

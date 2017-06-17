@@ -9,6 +9,7 @@ export interface Book {
   size: number
   LastAccess: number
   LastModified: number
+  location: string
 }
 
 

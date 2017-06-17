@@ -11,8 +11,12 @@ interface Props {
 
 export default class BookDetails extends React.PureComponent<Props, void> {
   render() {
-    const {author, title, status, progress, size} = this.props.book
+    const {author, title, status, progress, size, location} = this.props.book
     const Status = status ? 'Прочитано' : 'Непрочитано';
+    let separator = location.indexOf('/', 10)
+    if (separator === -1) {
+      separator = location.lastIndexOf('/')
+    }
 
     return (
       <List>
@@ -21,6 +25,7 @@ export default class BookDetails extends React.PureComponent<Props, void> {
         <ListItem center="Статус" right={Status}/>
         <ListItem center="Прогресс" right={progress}/>
         <ListItem center="Размер" right={fileSizeConvert(size)}/>
+        <ListItem center="Расположение" right={location.slice(0, separator)}/>
       </List>
     )
   }
