@@ -1,7 +1,8 @@
 import {observable, action, computed} from 'mobx'
 import {Book, BookHistory} from "../models/book"
 import {RSQLStore} from "../models/rsql"
-import HomePageStore from "./HomePageStore";
+import HomePageStore from "./HomePageStore"
+import {minBy, maxBy} from 'utils/minBy'
 const processHistory = require('utils/processHistory').default
 
 
@@ -34,6 +35,13 @@ export default class BookStore implements RSQLStore {
 
       case 'history':
         this.history = processHistory(data || [])
+        if (this.history.length > 0) {
+          this.book = {
+            ...this.book,
+            startRead: minBy(data, 'date'),
+            endRead: maxBy(data, 'EndTime'),
+          }
+        }
         break
 
       case 'thumbnail':

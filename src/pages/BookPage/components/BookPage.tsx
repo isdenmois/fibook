@@ -40,7 +40,7 @@ export default class BookPage extends React.Component<ContainerProps, void> {
           <div className={s.author}>{book.author}</div>
           <BookProgress lastRead={lastRead} progress={book.progress} />
         </div>
-        <BookDetails book={book} />
+        <BookDetails book={book} history={bookHistory}/>
         <Timeline history={bookHistory} />
       </Page>
     );

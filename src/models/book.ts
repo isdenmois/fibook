@@ -10,8 +10,9 @@ export interface Book {
   LastAccess: number
   LastModified: number
   location: string
+  startRead: number
+  endRead: number
 }
-
 
 export interface BookHistory {
   date: string

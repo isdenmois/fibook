@@ -57,6 +57,7 @@ interface Props extends ContainerBaseProps, SharedProps {
       query: (vars: any) => ({
         fields: [
           'StartTime as date',
+          'EndTime',
           '(EndTime - StartTime) AS time',
           'Progress AS progress',
         ],

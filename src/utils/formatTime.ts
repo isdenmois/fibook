@@ -13,3 +13,7 @@ export default function formatTime(time: number) {
   const m = Math.floor((time % hour) / minute)
   return `${h}ч ${m}м`
 }
+
+export function formatDaysLength(startTime: number, endTime: number) {
+  return Math.floor((endTime - startTime) / 1000 / 60 / 60 / 24) + 1
+}
