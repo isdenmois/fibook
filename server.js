@@ -17,7 +17,7 @@ app.use(logger('dev'));
  */
 app.use('/api/sql', require('./api/sql'));
 app.use('/api/book', require('./api/book'));
-app.use('/image', require('./api/image'));
+app.use('/thumbnail', require('./api/thumbnail'));
 
 /**
  * Add webpack middleware.

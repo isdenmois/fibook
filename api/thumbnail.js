@@ -6,12 +6,11 @@ const { resolve } = require('path');
  * Create router for images.
  */
 const router = express.Router();
-const file = resolve('api/book.svg');
 
-router.get('/', (req, res) => {
-    const path = req.query.path;
-    if (!path) {
-        return res.redirect('/image/book');
+router.get('*', (req, res) => {
+    let path = req.url;
+    if (path.indexOf('?') > 0) {
+        path = path.slice(0, path.indexOf('?'));
     }
 
     fs.exists(path, exist => {
@@ -19,14 +18,9 @@ router.get('/', (req, res) => {
             res.header('Cache-Control', 'max-age=2629000');
             res.sendFile(path);
         } else {
-            res.redirect('/image/book');
+            res.sendStatus(404);
         }
     });
-});
-
-router.get('/book', (req, res) => {
-    res.header('Cache-Control', 'max-age=2629000');
-    res.sendFile(file);
 });
 
 module.exports = router;
