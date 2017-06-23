@@ -35,16 +35,16 @@ export default class Page extends React.PureComponent<Props, State> {
       <div className={className}>
         {this.props.fixed}
         {this.props.toolbar &&
-          <div className={s.toolbar}>{this.props.toolbar}</div>
+          <div className={s.toolbar} onTouchMove={this.handleTouchStart}>{this.props.toolbar}</div>
         }
         <div className={s.content}>{this.props.children}</div>
         {this.props.tabs &&
-          <div className={s.tabs}>
+          <div className={s.tabs} onTouchMove={this.handleTouchStart}>
             {map(this.props.tabs, this.renderTabButton)}
           </div>
         }
         {this.props.tabbar &&
-          <div className={s.tabs}>{this.props.tabbar}</div>
+          <div className={s.tabs} onTouchMove={this.handleTouchStart}>{this.props.tabbar}</div>
         }
       </div>
     )
@@ -65,6 +65,10 @@ export default class Page extends React.PureComponent<Props, State> {
 
   private handleClick = (event: React.MouseEvent<HTMLElement>) => {
     this.setState({tab: +event.currentTarget.dataset.index})
+  }
+
+  private handleTouchStart = (event: React.TouchEvent<HTMLElement>) => {
+    event.preventDefault()
   }
 }
 
