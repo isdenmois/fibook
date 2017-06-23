@@ -1,4 +1,5 @@
-config = require('./webpack.config.dev')
+env = process.env.NODE_ENV
+config = if env == 'production' then require('./webpack.config.prod') else require('./webpack.config.dev')
 path = require('path')
 webpack = require('webpack')
 
