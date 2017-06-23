@@ -65,6 +65,6 @@ export default class BookPage extends React.Component<ContainerProps, void> {
 
   private handleStatusChange = () => {
     const status = this.props.book.status
-    this.props.onStatusChange(1 - status)
+    this.props.onStatusChange(status > 0 ? 0 : 1)
   }
 }
