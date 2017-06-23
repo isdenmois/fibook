@@ -12,6 +12,7 @@ export interface Book {
   location: string
   startRead: number
   endRead: number
+  readTime: number
 }
 
 export interface BookHistory {

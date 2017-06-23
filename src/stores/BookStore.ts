@@ -40,6 +40,7 @@ export default class BookStore implements RSQLStore {
             ...this.book,
             startRead: +minBy(data, 'date'),
             endRead: +maxBy(data, 'EndTime'),
+            readTime: this.history.reduce((time: number, item: BookHistory) => time + item.time, 0)
           }
         }
         break
