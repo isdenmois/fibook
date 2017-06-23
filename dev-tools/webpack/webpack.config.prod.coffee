@@ -33,20 +33,6 @@ conf =
     module:
         rules: [
             (
-                test: /\.jsx?$/
-                enforce: 'pre'
-                use: 'eslint-loader'
-                exclude: /(node_modules|workers)/
-            )
-            (
-                test: /\.jsx?$/
-                use: [
-                    strip.loader('debug')
-                    'babel-loader'
-                ]
-                exclude: /node_modules/
-            )
-            (
                 test: /\.tsx?$/
                 use: [strip.loader('debug'), 'ts-loader']
                 exclude: /node_modules/

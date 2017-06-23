@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 let loadedModule = null
 
 if (process.env.NODE_ENV === 'production') {

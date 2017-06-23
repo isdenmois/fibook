@@ -34,17 +34,6 @@ exports.resolve =
 exports.module =
     rules: [
         (
-            test: /\.jsx?$/
-            enforce: 'pre'
-            use: 'eslint-loader'
-            include: /src/
-        )
-        (
-            test: /\.jsx?$/
-            use: 'babel-loader'
-            exclude: /(node_modules|workers)/
-        )
-        (
             test: /\.tsx?$/
             use: 'ts-loader'
             exclude: /node_modules/
