@@ -7,19 +7,15 @@
     "author": "Denis Moiseev <isdenmois@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "analyze:clean": "rimraf stats.json",
-        "preanalyze": "npm run analyze:clean",
-        "analyze": "node ./scripts/analyze.js",
+        "analyze": "cross-env ANALYZE=1 npm start build",
         "postinstall": "npm run build:dll",
         "prebuild": "npm run build:clean",
-        "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.prod.js --color --progress",
+        "build": "cross-env NODE_ENV=production webpack --config dev-tools/webpack/webpack.config.prod.coffee --color --progress",
         "build:details": "npm run build -- --display-error-details",
         "build:clean": "rimraf ./build",
-        "build:dll": "node ./webpack/dependencies.js",
-        "compress": "node ./scripts/gzip.js",
-        "g": "npm run generate",
-        "generate": "plop --plopfile scripts/generators/index.js",
-        "start": "cross-env NODE_ENV=development node server",
+        "build:dll": "coffee ./dev-tools/webpack/dependencies.coffee",
+        "compress": "coffee ./dev-tools/gzip.coffee",
+        "start": "cross-env NODE_ENV=development coffee dev-tools/server.coffee",
         "start:prod": "cross-env NODE_ENV=production node server",
         "lint": "eslint src",
         "test": "jest"
@@ -48,11 +44,11 @@
         "babel-eslint": "~7.2.1",
         "babel-jest": "~19.0.0",
         "babel-loader": "~7.0.0",
-        "babel-plugin-transform-function-bind": "~6.22.0",
         "babel-preset-es2015": "~6.24.0",
         "babel-preset-react": "~6.24.1",
         "babili-webpack-plugin": "~0.1.1",
         "body-parser": "~1.17.2",
+        "coffeescript": "^1.12.6",
         "connect-multiparty": "~2.0.0",
         "cross-env": "~5.0.0",
         "css-loader": "~0.28.4",
@@ -76,7 +72,6 @@
         "morgan": "~1.8.1",
         "node-zopfli": "~2.0.2",
         "optimize-css-assets-webpack-plugin": "~2.0.0",
-        "plop": "~1.8.0",
         "postcss-import": "~10.0.0",
         "postcss-loader": "~2.0.5",
         "postcss-modules-values": "~1.2.2",
@@ -91,6 +86,7 @@
         "typescript": "~2.3.4",
         "url-loader": "~0.5.8",
         "webpack": "~2.6.1",
+        "webpack-bundle-analyzer": "^2.8.2",
         "webpack-dev-server": "~2.4.5",
         "webpack-hot-middleware": "~2.18.0",
         "worker-loader": "~0.8.0"
@@ -106,7 +102,7 @@
             "\\.css$": "identity-obj-proxy"
         },
         "transform": {
-            "~.+\\.svg$": "<rootDir>/scripts/fileTransformer.js",
+            "~.+\\.svg$": "<rootDir>/dev-tools/fileTransformer.js",
             "~.+\\.jsx?$": "babel-jest"
         },
         "roots": [
@@ -136,7 +132,7 @@
             "xml-reader",
             "xml-query",
             "src",
-            "<rootDir>/scripts/fileTransformer.js"
+            "<rootDir>/dev-tools/fileTransformer.js"
         ]
     }
 }

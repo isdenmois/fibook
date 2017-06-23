@@ -23,7 +23,7 @@
   "settings": {
     "import/resolver": {
       "webpack": {
-        "config": "webpack/webpack.config.dev.js"
+        "config": "dev-tools/webpack/webpack.config.dev.coffee"
       }
     }
   }

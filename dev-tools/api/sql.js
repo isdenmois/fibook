@@ -52,8 +52,6 @@ router.get('/', (req, res) => {
 
     query += `LIMIT ${offset}, ${limit}\n`;
 
-    console.log(query);
-
     // Execute query.
     db.all(query, function(err, data) {
         if (err) {

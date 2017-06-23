@@ -1,6 +1,5 @@
 {
   "presets": ["react"],
-  "plugins": ["babel-plugin-transform-function-bind"],
   "env": {
     "production": {
       "minified": true
