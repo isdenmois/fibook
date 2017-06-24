@@ -1,9 +1,8 @@
-const express = require('express');
+const router = require('express').Router();
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
-const db = new sqlite3.Database('onyx.db');
+const db = require('./db');
 
-const router = express.Router();
 
 router.use(bodyParser.json());
 

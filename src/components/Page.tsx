@@ -4,6 +4,7 @@ import map from 'utils/map'
 const s = require('./style/page.css')
 
 interface Props {
+  name: string
   tabbar?: React.ReactNode
   toolbar?: React.ReactNode
   className?: string
@@ -32,7 +33,7 @@ export default class Page extends React.PureComponent<Props, State> {
     }
 
     return (
-      <div className={className}>
+      <div className={className} data-page={this.props.name}>
         {this.props.fixed}
         {this.props.toolbar &&
           <div className={s.toolbar} onTouchMove={this.handleTouchStart}>{this.props.toolbar}</div>

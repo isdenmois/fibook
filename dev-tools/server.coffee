@@ -15,7 +15,7 @@ app.use('/api/book', require('./api/book'))
 app.use('/thumbnail', require('./api/thumbnail'))
 
 # Add webpack middleware.
-webpackMiddleware(app);
+webpackMiddleware(app)
 
 # Run app
 app.listen(PORT, () -> console.log("listen on *:#{PORT}"))

@@ -4,10 +4,9 @@ const util = require('util');
 const fs = require('fs');
 const { resolve } = require('path');
 const map = require('lodash/map');
-
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('onyx.db');
 const md5 = require('md5-file');
+
+const db = require('./db');
 
 /**
  * Create router for book API.
