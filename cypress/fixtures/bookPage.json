@@ -1,0 +1,18 @@
+[
+  {
+    "MD5": "test_md5",
+    "author": "Нормас",
+    "title": "Книжуля",
+    "status": null,
+    "LastAccess": 1505433844000,
+    "LastModified": 1507679157201
+  },
+  {
+    "MD5": "some_read_md5",
+    "author": "Отличный автор",
+    "title": "Бестселлер",
+    "status": null,
+    "LastAccess": 1505433843999,
+    "LastModified": 1507679157200
+  }
+]

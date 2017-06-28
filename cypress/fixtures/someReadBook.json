@@ -1,0 +1,11 @@
+[
+  {
+    "MD5": "some_read_md5",
+    "author": "Отличный автор",
+    "title": "Бестселлер",
+    "progress": "100/150",
+    "status": null,
+    "size": 2440096,
+    "location": "/flash/Books/test.fb2"
+  }
+]

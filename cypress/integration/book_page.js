@@ -1,12 +1,34 @@
 describe('Book page', () => {
     beforeEach(function(){
         cy.viewport('iphone-6')
-    })
-
-    it('should render book', () => {
         cy
             .server()
+            .route("GET", /api\/sql\?(.*)MD5(.*)Status = 0(.*)limit=20$/, "fixture:bookPage.json")
+            .route("GET", /api\/sql\?(.*)COUNT(.*)Status = 0/, "fixture:bookPageCount.json")
+            .route("GET", /api\/sql\?(.*)MD5(.*)Status = 1(.*)limit=20$/, "fixture:emptyList.json")
+            .route("GET", /api\/sql\?(.*)COUNT(.*)Status = 1/, "fixture:emptyListCount.json")
             .route("GET", /api\/sql\?(.*)library_metadata(.*)MD5 = "test_md5"/, "fixture:newBook.json")
+            .route("GET", /api\/sql\?(.*)library_metadata(.*)MD5 = "some_read_md5"/, "fixture:someReadBook.json")
+    })
+
+    it('should open and close book', () => {
+
+        cy.visit('http://localhost:4000')
+
+        cy.get('.components-style-tabs--tab-active .components-style-listItem--listItem:last-child')
+            .as('read-book')
+            .contains('Бестселлер')
+
+        cy.get('@read-book').click()
+
+        cy.url().should('contain', '/book/some_read_md5')
+
+        cy.get('.components-style-toolbar--back-button').click()
+
+        cy.url().should('eq', 'http://localhost:4000/')
+    })
+
+    it('should render new book', () => {
 
         cy.visit('http://localhost:4000/book/test_md5')
 
@@ -49,5 +71,22 @@ describe('Book page', () => {
             .eq(4)
             .find('.components-style-listItem--right')
             .contains('/flash/Books')
+    })
+
+    it('should change book status', () => {
+
+        cy.visit('http://localhost:4000/book/some_read_md5')
+
+        cy.get('[data-page="book"] .components-style-page--content .components-style-listItem--listItem:nth-child(3)')
+            .as('status')
+            .contains('Непрочитано')
+
+        cy.get('.components-style-page--tabs .components-style-button--wrapper:first-child').click()
+
+        cy.get('@status').contains('Прочитано')
+
+        cy.get('.components-style-toolbar--back-button').click()
+
+        cy.get('.components-style-tabs--tab-active .components-style-listItem--listItem').should('have.length', 1)
     })
 })
