@@ -88,5 +88,11 @@ describe('Book page', () => {
         cy.get('.components-style-toolbar--back-button').click()
 
         cy.get('.components-style-tabs--tab-active .components-style-listItem--listItem').should('have.length', 1)
+
+        cy.get('.components-style-tabs--tab-right .components-style-listItem--listItem')
+            .as('readBook')
+            .should('have.length', 1)
+
+        cy.get('@readBook').contains('Бестселлер')
     })
 })
