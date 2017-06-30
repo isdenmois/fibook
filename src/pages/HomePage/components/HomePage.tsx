@@ -27,7 +27,7 @@ export default class HomePage extends React.Component<ContainerProps, void> {
 
     return (
       <span>
-        <Tabs data={this.getData()}/>
+        <Tabs name="home" data={this.getData()}/>
         {this.props.children}
       </span>
     )

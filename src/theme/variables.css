@@ -1,7 +1,17 @@
 :root {
     --fabRight: 15px;
     --fabBottom: 60px;
-    --blueColor: #007aff;
-    --greyColor: #929292;
-    --defaultBorder: 1px solid var(--greyColor);
+
+    --backgroundColor: #f9f9f9;
+    --blue: #007aff;
+    --black: #1f1f21;
+    --darkGrey: #555;
+    --grey: #929292;
+
+    --border: 1px solid #ccc;
+
+    --fontXS: 12px;
+    --fontS: 14px;
+    --fontM: 17px;
+    --fontL: 25px;
 }

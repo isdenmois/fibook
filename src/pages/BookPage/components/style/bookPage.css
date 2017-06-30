@@ -1,9 +1,5 @@
 .title {
-    font-size: 24px;
-}
-
-.author {
-    font-size: 16px;
+    font-size: var(--fontL);
 }
 
 .primary {

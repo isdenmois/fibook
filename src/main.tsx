@@ -5,6 +5,7 @@ import {Provider} from 'mobx-react'
 // Both configureStore and Root are required conditionally.
 import BookStore from './stores/BookStore'
 import HomePageStore from './stores/HomePageStore'
+require('./theme/global.css')
 require('./theme/variables.css')
 
 

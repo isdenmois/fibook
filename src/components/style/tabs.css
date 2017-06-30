@@ -37,25 +37,25 @@
 
 .button, .button-active {
     align-items: center;
-    color: var(--greyColor);
+    color: var(--grey);
     display: flex;
     justify-content: center;
     flex-direction: column;
-    font-size: 12px;
+    font-size: var(--fontXS);
     height: 100%;
     width: 100%;
 }
 
-.icon svg {
+.icon > svg {
     height: 32px;
     margin-bottom: -5px;
-    fill: var(--greyColor);
+    fill: var(--grey);
 }
 
-.button-active svg {
-    fill: var(--blueColor);
+.button-active > i > svg {
+    fill: var(--blue);
 }
 
 .button-active {
-    color: var(--blueColor);
+    color: var(--blue);
 }

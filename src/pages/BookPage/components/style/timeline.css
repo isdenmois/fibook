@@ -1,7 +1,6 @@
 .wrapper {
     margin: 10px 0 35px;
     padding: 0 15px;
-    box-sizing: border-box;
 }
 
 .item {
@@ -9,7 +8,6 @@
     justify-content: flex-start;
     overflow: hidden;
     padding: 2px 0 15px;
-    box-sizing: border-box;
     position: relative;
 }
 
@@ -18,25 +16,23 @@
 }
 
 .divider {
-    position: relative;
-    flex-shrink: 0;
-    width: 10px;
-    height: 10px;
-    background: #bbb;
+    background: var(--grey);
     border-radius: 50%;
-    margin: 3px 15px 0;
+    height: 10px;
+    flex-shrink: 0;
+    margin: 5px 15px 0;
+    position: relative;
+    width: 10px;
 }
 
 .divider:after,
 .divider:before {
-    content: ' ';
-    width: 1px;
-    height: 100vh;
-    position: absolute;
-    left: 50%;
     background: inherit;
-    -webkit-transform: translate3d(-50%,0,0);
-    transform: translate3d(-50%,0,0);
+    content: ' ';
+    height: 200px;
+    left: 50%;
+    position: absolute;
+    width: 1px;
 }
 
 .divider:before {
@@ -48,8 +44,6 @@
 }
 
 .item-date {
-    flex-shrink: 0;
-    width: 100px;
     text-align: right;
-    box-sizing: border-box;
+    width: 100px;
 }

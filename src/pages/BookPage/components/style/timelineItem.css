@@ -1,12 +1,9 @@
 .content {
     flex-shrink: 10;
-    position: relative;
-    margin: 2px;
     border-radius: 7px;
     max-width: 300px;
     padding: 8px 15px;
-    background: #fff;
-    box-sizing: border-box;
+    background: white;
     width: 100%;
 }
 

@@ -1,4 +1,3 @@
-/* Toolbar */
 .wrapper {
     align-items: center;
     display: flex;
@@ -13,13 +12,9 @@
     line-height: 44px;
 }
 
-.title {
-    font-size: 17px;
-}
-
 .back-button {
     align-items: center;
-    color: var(--blueColor);
+    color: var(--blue);
     display: flex;
     position: absolute;
     left: 0;
@@ -31,5 +26,5 @@
 }
 .icon svg {
     height: 32px;
-    fill: var(--blueColor);
+    fill: var(--blue);
 }

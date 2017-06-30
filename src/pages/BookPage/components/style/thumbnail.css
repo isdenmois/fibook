@@ -1,5 +1,5 @@
 .thumbnail {
-    border: var(--defaultBorder);
+    border: var(--border);
     border-radius: 10px;
     margin-bottom: 20px;
     max-height: 240px;
