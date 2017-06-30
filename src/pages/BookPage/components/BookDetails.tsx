@@ -33,16 +33,16 @@ export default class BookDetails extends React.PureComponent<Props, void> {
           <ListItem center="Время чтения" right={formatTime(readTime)}/>
         }
         {startRead &&
-          <ListItem center="Начало чтения: " right={new Date(startRead).toLocaleDateString()}/>
+          <ListItem center="Начало чтения" right={new Date(startRead).toLocaleDateString()}/>
         }
         {endRead &&
-          <ListItem center="Конец чтения: " right={new Date(endRead).toLocaleDateString()}/>
+          <ListItem center="Конец чтения" right={new Date(endRead).toLocaleDateString()}/>
         }
         {endRead && startRead &&
-          <ListItem center="Дней чтения: " right={formatDaysLength(startRead, endRead)}/>
+          <ListItem center="Дней чтения" right={formatDaysLength(startRead, endRead)}/>
         }
         {history.length > 0 &&
-          <ListItem center="Реальных дней чтения: " right={history.length}/>
+          <ListItem center="Реальных дней чтения" right={history.length}/>
         }
         <ListItem center="Размер" right={fileSizeConvert(size)}/>
         <ListItem center="Расположение" right={location.slice(0, separator)}/>
