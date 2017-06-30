@@ -7,6 +7,7 @@ const s = require('./style/tabs.css')
 
 interface Props {
   data: TabData[]
+  name: string
 }
 
 interface State {
@@ -23,7 +24,7 @@ export default class Tabs extends React.PureComponent<Props, State> {
     const tab = this.props.data[active]
 
     return (
-      <Page tabbar={map(this.props.data, this.renderButton)} fixed={tab.fixed}>
+      <Page name={this.props.name} tabbar={map(this.props.data, this.renderButton)} fixed={tab.fixed}>
         {map(this.props.data, this.renderTab)}
       </Page>
     )
@@ -37,7 +38,7 @@ export default class Tabs extends React.PureComponent<Props, State> {
     )
   }
 
-  private renderButton = (data: TabData, i: number) => {
+  private renderButton = (data: TabData, i: number): React.ReactNode => {
     const active = this.state.active
     let icon = data.icon
     if (active && data.activeIcon) {
