@@ -1,4 +1,10 @@
 body {
     color: var(--black);
     font-size: var(--fontM);
+    font-family: -apple-system, Helvetica, sans-serif;
+}
+
+* {
+    -webkit-user-select: none;
+    user-select: none;
 }

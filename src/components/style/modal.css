@@ -1,0 +1,61 @@
+.modal {
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 101;
+}
+
+.overlay {
+    background-color: var(--darkGrey);
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    opacity: 0.4;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.inner {
+    background: white;
+    border-radius: 13px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100px;
+    opacity: 0.95;
+    overflow: hidden;
+    width: 290px;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 70px;
+    padding: 15px;
+}
+
+.buttons {
+    border-top: var(--border);
+    color: var(--blue);
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    border-left: var(--border);
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    width: 100%;
+}
+
+.button:first-child {
+    border: none;
+}

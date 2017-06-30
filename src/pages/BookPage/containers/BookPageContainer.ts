@@ -1,8 +1,11 @@
 import * as React from 'react'
-import {RouteComponentProps} from "react-router"
+import {func} from 'prop-types'
+import {RouteComponentProps} from 'react-router'
 
 import {renderView, ContainerBaseProps} from 'utils/container'
 import {rsqlContainer, RSQLProps} from 'utils/rsql'
+import {AppContext} from 'containers/App'
+
 import {Book, BookHistory} from 'models/book'
 import {observer} from 'mobx-react'
 import {UPDATE} from 'services/sql'
@@ -83,6 +86,12 @@ interface Props extends ContainerBaseProps, SharedProps {
 @observer
 export default class BookPageContainer extends React.Component<Props, void> {
 
+  static contextTypes = {
+    confirm: func
+  }
+
+  context: AppContext
+
   componentWillMount() {
     const MD5 = this.props.match.params.MD5
     this.props.rsql.setVariables({MD5})
@@ -104,11 +113,13 @@ export default class BookPageContainer extends React.Component<Props, void> {
   }
 
   private handleDeleteBook = () => {
-    if (confirm('Вы действительно хотите удалить книгу?')) {
-      const MD5 = this.props.bookStore.book.MD5
-      this.props.bookStore.deleteBook()
-      this.props.history.push('/')
-      deleteBook(MD5)
-    }
+    this.context.confirm('Вы действительно хотите удалить книгу?').then(selected => {
+      if (selected) {
+        const MD5 = this.props.bookStore.book.MD5
+        this.props.bookStore.deleteBook()
+        this.props.history.push('/')
+        deleteBook(MD5)
+      }
+    })
   }
 }

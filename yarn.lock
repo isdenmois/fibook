@@ -10,6 +10,10 @@
   version "7.0.32"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.32.tgz#6afe6c66520a4c316623a14aef123908d01b4bba"
 
+"@types/prop-types@^15.5.1":
+  version "15.5.1"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.1.tgz#1ecf52621299e65b855374337fb11fd2d1066fc1"
+
 "@types/react-dom@15.5.0":
   version "15.5.0"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-15.5.0.tgz#7f4fb9613d4051141773242f7b6b5f1a46b34bd9"
@@ -6083,7 +6087,7 @@ xml-reader@~2.4.3:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
 
-"xvfb@github:cypress-io/node-xvfb":
+xvfb@cypress-io/node-xvfb:
   version "0.3.0"
   resolved "https://codeload.github.com/cypress-io/node-xvfb/tar.gz/22e3783c31d81ebe64d8c0df491ea00cdc74726a"
 
