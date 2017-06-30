@@ -33,7 +33,7 @@ describe('Book page', () => {
         cy.visit('http://localhost:4000/book/test_md5')
 
         cy.get('.pages-BookPage-components-style-bookPage--title').contains('Книжуля')
-        cy.get('.pages-BookPage-components-style-bookPage--author').contains('Нормас')
+        cy.get('.pages-BookPage-components-style-bookPage--primary > div:nth-child(2)').contains('Нормас')
 
         cy.get('[data-page="book"] .components-style-page--content .components-style-listItem--listItem')
             .as('details')

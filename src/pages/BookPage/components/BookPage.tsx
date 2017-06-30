@@ -38,7 +38,7 @@ export default class BookPage extends React.Component<ContainerProps, void> {
         <div className={s.primary}>
           {this.props.thumbnail && <Thumbnail url={this.props.thumbnail}/>}
           <div className={s.title}>{book.title}</div>
-          <div className={s.author}>{book.author}</div>
+          <div>{book.author}</div>
           <BookProgress lastRead={lastRead} progress={book.progress} />
         </div>
         <BookDetails book={book} history={bookHistory}/>
