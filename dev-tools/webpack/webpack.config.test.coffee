@@ -1,13 +1,23 @@
 path = require('path')
 webpack = require('webpack')
 strip = require('strip-loader')
+BabiliPlugin = require('babili-webpack-plugin')
 HtmlWebpackPlugin = require('html-webpack-plugin')
 AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 ExtractTextPlugin = require('extract-text-webpack-plugin')
+OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 fs = require('fs')
 
 ROOT_PATH = path.join(__dirname, '../..')
 APP_PATH = "#{ROOT_PATH}/src"
+
+isExternal = (module) ->
+    userRequest = module.userRequest
+
+    if typeof userRequest != 'string'
+        return false
+
+    return userRequest.indexOf('node_modules') >= 0
 
 exports.context = APP_PATH
 
@@ -15,12 +25,15 @@ exports.entry = "#{APP_PATH}/main"
 
 exports.output =
     path: "#{ROOT_PATH}/build"
-    filename: 'bundle.js'
-    publicPath: '/'
+    publicPath: '/public/'
+    filename: '[name].js'
 
 exports.resolve =
     extensions: ['.js', '.jsx', '.ts', '.tsx']
     modules: ['src', 'node_modules']
+    alias:
+        react: 'preact-compat'
+        'react-dom': 'preact-compat'
 
 exports.module =
     rules: [
@@ -62,11 +75,51 @@ exports.module =
     ]
 
 exports.plugins = [
-    new webpack.HotModuleReplacementPlugin()
     new webpack.DefinePlugin('process.env.NODE_ENV': JSON.stringify('production'))
-    new HtmlWebpackPlugin(template: "#{APP_PATH}/index.html")
+    new HtmlWebpackPlugin(
+        template: "#{APP_PATH}/index.html"
+        minify:
+            collapseWhitespace: true
+            removeComments: true
+            removeRedundantAttributes: true
+            removeScriptTypeAttributes: true
+    )
+    new webpack.LoaderOptionsPlugin(
+        minimize: true
+        debug: false
+    )
     new ExtractTextPlugin(
         allChunks: true
         filename: '[name].css'
+    )
+    new webpack.optimize.UglifyJsPlugin(
+        beautify: false
+        mangle:
+            screw_ie8: true
+            keep_fnames: true
+        compress:
+            warnings: false
+            dead_code: true
+            drop_console: true
+            drop_debugger: true
+            sequences     : true
+            booleans      : true
+            loops         : true
+            unused        : true
+        output:
+            comments: false
+        comments: false
+        sourceMap: false
+        test: /vendors\.js/
+    )
+    new BabiliPlugin({},
+        test: /(main|worker)\.js$/
+        comments: false
+        sourceMap: false
+    )
+    new OptimizeCssAssetsPlugin()
+    new webpack.optimize.CommonsChunkPlugin(
+        name: 'vendors'
+        minChunks: isExternal
     )
 ]
