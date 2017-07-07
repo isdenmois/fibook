@@ -41,6 +41,8 @@
         "xml-reader": "~2.4.3"
     },
     "devDependencies": {
+        "@types/enzyme": "/home/isden2.8.1",
+        "@types/jest": "/home/isden20.0.2",
         "@types/node": "~7.0.29",
         "@types/prop-types": "~15.5.1",
         "@types/react": "15.0.27",
@@ -58,12 +60,12 @@
         "cross-env": "~5.0.1",
         "css-loader": "~0.28.4",
         "cypress-cli": "^0.13.1",
-        "enzyme": "~2.8.0",
+        "enzyme": "/home/isden2.9.1",
         "express": "~4.15.3",
         "extract-text-webpack-plugin": "~2.1.2",
         "html-webpack-plugin": "~2.28.0",
         "identity-obj-proxy": "~3.0.0",
-        "jest": "~19.0.2",
+        "jest": "/home/isden20.0.4",
         "json-loader": "~0.5.4",
         "lodash": "~4.17.4",
         "md5-file": "~3.1.1",
@@ -94,20 +96,28 @@
         "automock": true,
         "collectCoverage": true,
         "collectCoverageFrom": [
-            "src/**/*.js",
-            "src/**/*.jsx"
+            "src/**/*.ts",
+            "src/**/*.tsx",
+            "!**/*.d.ts"
         ],
+        "moduleDirectories": ["node_modules", "src"],
         "moduleNameMapper": {
             "\\.css$": "identity-obj-proxy"
         },
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js"
+        ],
         "transform": {
-            "~.+\\.svg$": "<rootDir>/dev-tools/fileTransformer.js",
-            "~.+\\.jsx?$": "babel-jest"
+            "\\.svg$": "<rootDir>/dev-tools/fileTransformer.js",
+            "~.+\\.jsx?$": "babel-jest",
+            "\\.(ts|tsx)$": "<rootDir>/dev-tools/tsProcessor.js"
         },
         "roots": [
             "src"
         ],
-        "testRegex": "(/test/.*|(\\.|/)(test|spec))\\.jsx?$",
+        "testRegex": "(/test/.*|(\\.|/)(test|spec))\\.tsx?$",
         "unmockedModulePathPatterns": [
             "atob",
             "immutable",
@@ -131,7 +141,8 @@
             "xml-reader",
             "xml-query",
             "src",
-            "<rootDir>/dev-tools/fileTransformer.js"
+            "<rootDir>/dev-tools/fileTransformer.js",
+            "<rootDir>/dev-tools/tsProcessor.js"
         ]
     }
 }

@@ -71,7 +71,7 @@ export default class Tabs extends React.PureComponent<Props, State> {
   }
 }
 
-interface TabData {
+export interface TabData {
   title: string
   content: React.ReactNode
   icon: any
