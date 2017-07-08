@@ -12,7 +12,7 @@ interface Props {
   to?: string
 }
 
-export default class ListItem extends React.PureComponent<Props, void> {
+export default class ListItem extends React.PureComponent<Props> {
   render() {
     const Component = this.props.to ? Link : 'div'
 

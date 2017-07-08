@@ -84,7 +84,7 @@ interface Props extends ContainerBaseProps, SharedProps {
   store: 'bookStore'
 })
 @observer
-export default class BookPageContainer extends React.Component<Props, void> {
+export default class BookPageContainer extends React.Component<Props> {
 
   static contextTypes = {
     confirm: func

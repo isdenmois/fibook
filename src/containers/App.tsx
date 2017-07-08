@@ -9,7 +9,7 @@ export interface AppContext {
   confirm: (text: string, buttons?: string[]) => Promise<number>;
 }
 
-export default class App extends React.Component<Props, void> {
+export default class App extends React.Component<Props> {
 
   static childContextTypes = {
     confirm: func,

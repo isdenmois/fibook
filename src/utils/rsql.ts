@@ -10,11 +10,11 @@ const each = require('./each').default
 const ENDPOINT = '/api/sql'
 
 export function rsqlContainer(params: RSQLParams): ClassDecorator {
-  return function (component: React.ComponentClass<any>): Function {
+  return function (component: any): any {
 
     @inject(params.store)
     @observer
-    class RSQLContainer extends React.Component<any, any> {
+    class RSQLContainer extends React.Component<any> {
       private offsets: any = {}
 
       state = {

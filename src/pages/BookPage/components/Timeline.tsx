@@ -9,7 +9,7 @@ interface Props {
   history: BookHistory[]
 }
 
-export default class Timeline extends React.PureComponent<Props, void> {
+export default class Timeline extends React.PureComponent<Props> {
 
   render() {
     return (

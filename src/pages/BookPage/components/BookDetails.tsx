@@ -11,7 +11,7 @@ interface Props {
   history: BookHistory[]
 }
 
-export default class BookDetails extends React.PureComponent<Props, void> {
+export default class BookDetails extends React.PureComponent<Props> {
   render() {
     const history = this.props.history
     const {author, title, status, progress, size, location, startRead, endRead, readTime} = this.props.book

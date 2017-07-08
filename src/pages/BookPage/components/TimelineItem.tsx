@@ -7,7 +7,7 @@ interface Props {
   historyItem: BookHistory
 }
 
-export default class TimelineItem extends React.PureComponent<Props, void> {
+export default class TimelineItem extends React.PureComponent<Props> {
   render() {
     const {progress, percent, pages, speed, time} = this.props.historyItem
 

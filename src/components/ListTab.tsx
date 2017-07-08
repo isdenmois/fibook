@@ -15,7 +15,7 @@ interface Props {
   onLoadMore?: () => void
 }
 
-export default class ListTab extends React.PureComponent<Props, void> {
+export default class ListTab extends React.PureComponent<Props> {
   constructor(props: Props) {
     super(props)
     this.renderRow = this.renderRow.bind(this)

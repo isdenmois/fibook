@@ -10,7 +10,7 @@ interface Props {
   lastRead: string
 }
 
-export default class BookProgress extends React.PureComponent<Props, void> {
+export default class BookProgress extends React.PureComponent<Props> {
 
   render() {
     const progress = this.props.progress || '0/1'

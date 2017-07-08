@@ -14,7 +14,7 @@ interface State {
   active: number
 }
 
-export default class Tabs extends React.PureComponent<Props, State> {
+export default class Tabs extends React.PureComponent<Props> {
 
   state: State = {active: 0}
   private tabs: HTMLElement[] = []

@@ -8,7 +8,7 @@ interface Props {
   open: boolean
 }
 
-export default class Modal extends React.Component<Props, void> {
+export default class Modal extends React.Component<Props> {
 
   render() {
     if (!this.props.open) {

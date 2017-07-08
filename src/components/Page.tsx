@@ -16,7 +16,7 @@ interface State {
   tab: number
 }
 
-export default class Page extends React.PureComponent<Props, State> {
+export default class Page extends React.PureComponent<Props> {
 
   state: State = {tab: 0}
 

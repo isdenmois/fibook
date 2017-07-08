@@ -6,7 +6,7 @@ interface Props {
   empty?: JSX.Element
 }
 
-export default class List extends React.PureComponent<Props, void> {
+export default class List extends React.PureComponent<Props> {
   render() {
     if (!this.props.children) {
       return this.props.empty

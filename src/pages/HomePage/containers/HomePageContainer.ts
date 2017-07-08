@@ -76,7 +76,7 @@ interface Props extends ContainerBaseProps, SharedProps {
   store: 'homePageStore'
 })
 @observer
-export default class HomePageContainer extends React.Component<Props, void> {
+export default class HomePageContainer extends React.Component<Props> {
 
   componentWillMount() {
     this.props.rsql.fetchData()

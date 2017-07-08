@@ -10,7 +10,7 @@ interface State {
   text: string
 }
 
-export default class Confirm extends React.PureComponent<Props, State> {
+export default class Confirm extends React.PureComponent<Props> {
 
   state: State = {
     buttons: [],

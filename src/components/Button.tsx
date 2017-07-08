@@ -7,7 +7,7 @@ interface Props {
   onClick: () => void
 }
 
-export default class Button extends React.PureComponent<Props, void> {
+export default class Button extends React.PureComponent<Props> {
 
   render() {
     return (

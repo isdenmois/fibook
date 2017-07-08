@@ -8,7 +8,7 @@ interface Props {
 }
 
 
-export default class Thumbnail extends React.Component<Props, void> {
+export default class Thumbnail extends React.Component<Props> {
 
   render() {
     let url = this.props.url

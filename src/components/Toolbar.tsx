@@ -9,7 +9,7 @@ interface Props {
   backButton?: boolean
 }
 
-export default class Toolbar extends React.PureComponent<Props, void> {
+export default class Toolbar extends React.PureComponent<Props> {
 
   static contextTypes = {
     router: (): any => null

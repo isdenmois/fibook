@@ -3,7 +3,7 @@ const hoistStatics = require('hoist-non-react-statics')
 
 
 export function container(containerComponent: React.ComponentClass<any>): ClassDecorator {
-  return function (component: Function): Function {
+  return function (component: Function): any {
     const resultComponent: any = (props: any) => React.createElement(
       containerComponent,
       {...props, view: component}
