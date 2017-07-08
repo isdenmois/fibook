@@ -77,6 +77,7 @@
         "postcss-loader": "~2.0.6",
         "postcss-modules-values": "~1.2.2",
         "react-addons-test-utils": "~15.4.2",
+        "react-test-renderer": "/home/isden15.6.1",
         "rimraf": "~2.6.1",
         "shelljs": "~0.7.8",
         "sqlite3": "~3.1.8",
@@ -100,7 +101,10 @@
             "src/**/*.tsx",
             "!**/*.d.ts"
         ],
-        "moduleDirectories": ["node_modules", "src"],
+        "moduleDirectories": [
+            "node_modules",
+            "src"
+        ],
         "moduleNameMapper": {
             "\\.css$": "identity-obj-proxy"
         },
@@ -140,6 +144,7 @@
             "translit-russian",
             "xml-reader",
             "xml-query",
+            "worker-loader",
             "src",
             "<rootDir>/dev-tools/fileTransformer.js",
             "<rootDir>/dev-tools/tsProcessor.js"

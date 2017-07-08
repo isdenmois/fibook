@@ -9,7 +9,7 @@ describe('<Tabs />', () => {
     const data: TabData[] = [{
       title: 'super-tab-1',
       content: <div/>,
-      icon: <div/>,
+      icon: '',
       activeIcon: '',
     }]
 
