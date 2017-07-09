@@ -1,5 +1,5 @@
 import * as React from 'react'
-const InlineSVG = require('svg-inline-react')
+import InlineSVG from './InlineSvg'
 
 const s = require('./style/toolbar.css')
 const svg = require('./style/ios-arrow-back.svg')

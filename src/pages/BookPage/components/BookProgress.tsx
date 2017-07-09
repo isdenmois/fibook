@@ -1,6 +1,7 @@
 import * as React from 'react'
 
-const InlineSVG = require('svg-inline-react')
+import InlineSVG from 'components/InlineSvg'
+
 const svg = require('./style/bookProgress.svg')
 const s = require('./style/bookProgress.css')
 

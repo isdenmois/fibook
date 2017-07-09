@@ -1,5 +1,5 @@
 import * as React from 'react'
-const InlineSVG = require('svg-inline-react')
+import InlineSVG from 'components/InlineSvg'
 
 import {container} from 'utils/container'
 import HomePageContainer, {ContainerProps} from '../containers/HomePageContainer'

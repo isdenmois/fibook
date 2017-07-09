@@ -1,5 +1,6 @@
 import * as React from 'react'
-const InlineSVG = require('svg-inline-react')
+
+import InlineSVG from './InlineSvg'
 
 const s = require('./style/loading.css')
 const svg = require('./style/loading.svg')
