@@ -23,6 +23,7 @@ exports.entry = [
 ]
 
 exports.output =
+    devtoolModuleFilenameTemplate: '/[resource-path]'
     path: "#{ROOT_PATH}/build"
     filename: 'bundle.js'
     publicPath: '/'

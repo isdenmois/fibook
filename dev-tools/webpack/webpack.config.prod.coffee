@@ -24,6 +24,8 @@ isExternal = (module) ->
 conf =
     context: APP_PATH
     entry: "#{APP_PATH}/main"
+    stats:
+        children: false
     output:
         path: "#{ ROOT_PATH }/build"
         publicPath: '/public/'
