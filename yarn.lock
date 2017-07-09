@@ -1433,6 +1433,13 @@ commander@^2.8.1, commander@^2.9.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
 
+common-shake@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/common-shake/-/common-shake-2.0.0.tgz#505fbc74e995c0c76ffd7b97a929b393e28991a1"
+  dependencies:
+    debug "^2.6.8"
+    escope "^3.6.0"
+
 compressible@~2.0.8:
   version "2.0.10"
   resolved "https://registry.yarnpkg.com/compressible/-/compressible-2.0.10.tgz#feda1c7f7617912732b29bf8cf26252a20b9eecd"
@@ -5981,6 +5988,15 @@ webpack-bundle-analyzer@~2.8.2:
     mkdirp "^0.5.1"
     opener "^1.4.3"
     ws "^2.3.1"
+
+webpack-common-shake@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/webpack-common-shake/-/webpack-common-shake-1.5.0.tgz#aef1de8272305e99b63ad535c9ab501621a97e50"
+  dependencies:
+    acorn "^5.0.3"
+    common-shake "^2.0.0"
+    webpack "^3.1.0"
+    webpack-sources "^1.0.1"
 
 webpack-dev-middleware@^1.11.0, webpack-dev-middleware@~1.11.0:
   version "1.11.0"

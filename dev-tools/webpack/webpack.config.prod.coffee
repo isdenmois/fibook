@@ -6,6 +6,7 @@ ExtractTextPlugin = require('extract-text-webpack-plugin')
 OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 BabiliPlugin = require('babili-webpack-plugin')
 {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
+ShakePlugin = require('webpack-common-shake').Plugin
 
 ROOT_PATH = path.join(__dirname, '../..')
 APP_PATH = "#{ROOT_PATH}/src"
@@ -122,6 +123,7 @@ conf =
             name: 'vendors'
             minChunks: isExternal
         )
+        new ShakePlugin()
     ]
 
 if process.env.ANALYZE

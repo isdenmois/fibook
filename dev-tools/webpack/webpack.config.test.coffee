@@ -3,9 +3,9 @@ webpack = require('webpack')
 strip = require('strip-loader')
 BabiliPlugin = require('babili-webpack-plugin')
 HtmlWebpackPlugin = require('html-webpack-plugin')
-AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 ExtractTextPlugin = require('extract-text-webpack-plugin')
 OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+ShakePlugin = require('webpack-common-shake').Plugin
 fs = require('fs')
 
 ROOT_PATH = path.join(__dirname, '../..')
@@ -122,4 +122,5 @@ exports.plugins = [
         name: 'vendors'
         minChunks: isExternal
     )
+    new ShakePlugin()
 ]
