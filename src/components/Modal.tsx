@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as TransitionGroup from 'react-addons-css-transition-group'
 
 const s = require('./style/modal.css')
 
@@ -6,20 +7,17 @@ interface Props {
   buttons: string[]
   onSelect: (button: number) => void
   open: boolean
+  positive?: boolean
 }
 
 export default class Modal extends React.Component<Props> {
 
   render() {
-    if (!this.props.open) {
-      return null
-    }
+    let inner = null
 
-    const {buttons, onSelect, children} = this.props
-
-    return (
-      <div className={s.modal}>
-        <div className={s.overlay} onClick={() => onSelect(0)}/>
+    const {buttons, onSelect, children, open, positive} = this.props
+    if (open) {
+      inner = (
         <div className={s.inner}>
           <div className={s.content}>
             {children}
@@ -30,6 +28,26 @@ export default class Modal extends React.Component<Props> {
             )}
           </div>
         </div>
+      )
+    }
+
+    return (
+      <div className={open ? `${s.modal} ${s.modalIn}` : s.modal}>
+        <div className={s.overlay} onClick={() => onSelect(0)}/>
+        <TransitionGroup
+          transitionName={{
+            enter: s.enter,
+            enterActive: s.enterActive,
+            leave: s.leave,
+            leaveActive: positive ? s.leaveActive : s.leaveNActive,
+          }}
+          transitionEnter={true}
+          transitionLeave={true}
+          transitionEnterTimeout={250}
+          transitionLeaveTimeout={250}
+        >
+          {inner}
+        </TransitionGroup>
       </div>
     )
   }
