@@ -6,7 +6,7 @@ const s = require('./style/fileInput.css')
 interface Props {
   name: string,
   accept?: string
-  onFileSelect: (file: File) => void
+  onFileSelect: (file: File[]) => void
 }
 
 export default class FileInput extends React.PureComponent<Props> {
@@ -22,6 +22,7 @@ export default class FileInput extends React.PureComponent<Props> {
           ref="fileInput"
           className={s.input}
           type="file"
+          multiple={true}
           name={name}
           onChange={this.onChange}
           accept={accept}
@@ -35,10 +36,15 @@ export default class FileInput extends React.PureComponent<Props> {
     const target = event.target
 
     if (target.files.length) {
-      const file = target.files[0]
+      const files: File[] = []
+
+      for (let i = 0; i < target.files.length; i++) {
+        files[i] = target.files[i];
+      }
+
       target.value = ''
 
-      this.props.onFileSelect(file)
+      this.props.onFileSelect(files)
     }
   }
 }

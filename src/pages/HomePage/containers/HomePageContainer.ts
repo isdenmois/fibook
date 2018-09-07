@@ -24,7 +24,7 @@ export interface ContainerProps extends SharedProps {
   newsCanLoadMore: boolean
   readCanLoadMore: boolean
 
-  onCreateBook: (file: File) => void
+  onCreateBook: (files: File[]) => void
   onLoadMore: (type: string) => void
 }
 
@@ -99,9 +99,13 @@ export default class HomePageContainer extends React.Component<Props> {
     })
   }
 
-  private handleCreateBook = async (file: File) => {
+  private handleCreateBook = async (files: File[]) => {
     this.props.homePageStore.setFetching(true)
-    await createBook(file)
+
+    for (let i = 0; i < files.length; i++) {
+      await createBook(files[i])
+    }
+
     this.props.rsql.fetchData()
   }
 
