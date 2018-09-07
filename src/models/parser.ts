@@ -4,4 +4,5 @@ export interface ParsedFB2 {
   title: string
   image?: any
   imageName?: string
+  file?: Blob
 }

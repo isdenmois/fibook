@@ -4,13 +4,13 @@ import bookDataParser from 'utils/bookData'
 const BOOKS_ENDPOINT = '/api/book'
 
 
-export async function createBook(file: File) {
-  const {author, image, imageName, title} = await bookDataParser(file)
+export async function createBook(f: File) {
+  const {author, image, imageName, title, file} = await bookDataParser(f)
 
   const body = new FormData()
   body.append('author', author)
   body.append('title', title)
-  body.append('file', file)
+  body.append('file', file || f)
 
   if (image) {
     body.append('image', image);

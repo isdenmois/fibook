@@ -1,4 +1,5 @@
 import {ParsedFB2} from 'models/parser'
+import * as JSZip from 'jszip'
 const BookParser = require('utils/BookParser').default
 const base64 = require('utils/base64').default
 
@@ -28,26 +29,46 @@ function readFile(file: File, callback: Function, encode = 'utf-8') {
   reader.readAsText(file, encode)
 }
 
+async function unzipFile(file: Blob, callback: Function) {
+  const zip = new JSZip()
+
+  await zip.loadAsync(file)
+
+  const zipFile = zip.file(/\.fb2$/)[0],
+        content = await zipFile.async('text'),
+        blob    = await zipFile.async('blob'),
+        book    = new File([blob], zipFile.name)
+
+  callback(content, book)
+}
+
+function parseBook(content: any, file: Blob) {
+  const book = new BookParser(content)
+  const result: ParsedFB2 = {
+    author: book.author,
+    title: book.title,
+    file
+  }
+  const imageData = book.image
+
+  if (imageData) {
+    result.image = base64(imageData.data, imageData.type)
+    result.imageName = imageData.fileName
+  }
+
+  postMessage(result)
+  close()
+}
+
 addEventListener('message', (event: any) => {
   const {file, type} = event.data
   if (type !== 'PARSE_FILE') {
     return
   }
 
-  readFile(file, (content: any) => {
-    const book = new BookParser(content)
-    const result: ParsedFB2 = {
-      author: book.author,
-      title: book.title,
-    }
-    const imageData = book.image
-
-    if (imageData) {
-      result.image = base64(imageData.data, imageData.type)
-      result.imageName = imageData.fileName
-    }
-
-    postMessage(result)
-    close()
-  })
+  if (file.name.toLowerCase().endsWith('.zip')) {
+    unzipFile(file, parseBook)
+  } else {
+    readFile(file, parseBook)
+  }
 })

@@ -11,7 +11,7 @@ interface Props {
 
 export default class FileInput extends React.PureComponent<Props> {
 
-  static defaultProps = {accept: '.fb2'}
+  static defaultProps = {accept: '.fb2,.fb2.zip'}
 
   render() {
     const {name, accept, children} = this.props
