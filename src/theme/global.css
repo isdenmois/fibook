@@ -8,3 +8,48 @@ body {
     -webkit-user-select: none;
     user-select: none;
 }
+
+@media (min-width: 800px) {
+    body {
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        background: radial-gradient(500.00px at 50% 50%, #14464E 0%, rgba(102, 146, 154, 0.2) 100%), #14464E;
+    }
+
+    .app {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        top: 20%;
+        left: calc(50% - 300px);
+        max-height: 600px;
+        min-width: 600px;
+        min-height: 100px;
+
+        border: 1px solid #F1F6FA;
+        box-sizing: border-box;
+        box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        background: white;
+    }
+
+    ::-webkit-scrollbar {
+        width: 3px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+    }
+}

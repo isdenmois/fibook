@@ -17,3 +17,13 @@
     --fontM: 17px;
     --fontL: 25px;
 }
+
+
+@media (min-width: 800px) {
+    :root {
+        --fontXS: 10px;
+        --fontS: 12px;
+        --fontM: 14px;
+        --fontL: 17px;
+    }
+}

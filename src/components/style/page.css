@@ -69,3 +69,39 @@
 :global(.toolbar) .content {
     top: 44px;
 }
+
+@media (min-width: 800px) {
+    .page {
+        position: relative;
+        flex: 1;
+        width: 602px;
+        padding-top: 40px;
+        padding-bottom: 5px;
+    }
+
+    .content {
+        position: static;
+        max-height: 540px;
+    }
+
+    .toolbar {
+        border-bottom: none;
+        background: none;
+    }
+
+    .tabs {
+        background: none;
+        height: 40px;
+    }
+
+    .tabs-top .tabs {
+        top: 0;
+        bottom: initial;
+        height: 38px;
+        justify-content: flex-start;
+        align-items: flex-end;
+        left: 15px;
+        box-shadow: none !important;
+        border-bottom: 1px solid #E9E9E9
+    }
+}

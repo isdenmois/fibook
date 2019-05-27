@@ -11,3 +11,13 @@
     margin: 15px;
     text-align: center;
 }
+
+@media (min-width: 800px) {
+    .book-page {
+        width: 310px;
+        flex: none;
+        padding-top: 10px;
+        padding-bottom: 40px;
+        border-left: 1px solid #E9E9E9;
+    }
+}

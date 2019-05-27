@@ -62,11 +62,16 @@
 }
 
 .button {
+    cursor: pointer;
     border-left: var(--border);
     height: 44px;
     line-height: 44px;
     text-align: center;
     width: 100%;
+}
+
+.button:hover {
+    opacity: 0.5;
 }
 
 .button:first-child {

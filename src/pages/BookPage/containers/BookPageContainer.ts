@@ -89,10 +89,23 @@ export default class BookPageContainer extends React.Component<Props> {
     confirm: func
   }
 
+  MD5: string = null
   context: AppContext
 
-  componentWillMount() {
+  componentDidMount() {
+    this.loadData(this.props.match.params.MD5)
+  }
+
+  componentDidUpdate() {
     const MD5 = this.props.match.params.MD5
+
+    if (this.MD5 !== MD5) {
+      this.loadData(MD5)
+    }
+  }
+
+  loadData(MD5: string) {
+    this.MD5 = MD5
     this.props.rsql.setVariables({MD5})
   }
 

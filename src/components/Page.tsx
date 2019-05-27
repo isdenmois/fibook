@@ -11,6 +11,7 @@ interface Props {
   fixed?: React.ReactNode
   tabs?: TabData[]
   shadow?: boolean
+  tabsTop?: boolean
 }
 
 interface State {
@@ -34,6 +35,9 @@ export default class Page extends React.PureComponent<Props> {
     }
     if (this.props.shadow) {
       className = `${className} ${s.shadow}`
+    }
+    if (this.props.tabsTop) {
+      className = `${className} ${s.tabsTop}`
     }
 
     return (

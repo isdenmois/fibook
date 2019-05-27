@@ -22,7 +22,7 @@ export default class BookDetails extends React.PureComponent<Props> {
     }
 
     return (
-      <List noBorder>
+      <List strong>
         <ListItem small center="Автор" right={author}/>
         <ListItem small center="Название" right={title}/>
         <ListItem small center="Статус" right={Status}/>

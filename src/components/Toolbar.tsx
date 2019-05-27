@@ -4,6 +4,7 @@ const { withRouter } = require('react-router')
 
 const s = require('./style/toolbar.css')
 const svg = require('./style/ios-arrow-back.svg')
+const close = require('./style/close.svg')
 
 interface Props {
   title: React.ReactNode
@@ -23,6 +24,11 @@ export default class Toolbar extends React.PureComponent<Props> {
           </div>
         }
         <div className={s.title}>{this.props.title}</div>
+        {this.props.backButton &&
+          <div className={s.closeButton} onClick={this.goBack}>
+            <InlineSVG src={close}/>
+          </div>
+        }
       </div>
     )
   }

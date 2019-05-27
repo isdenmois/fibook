@@ -46,3 +46,9 @@
     text-align: right;
     width: 100px;
 }
+
+@media (min-width: 800px) {
+    .wrapper {
+        margin-bottom: 0;
+    }
+}

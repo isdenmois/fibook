@@ -11,6 +11,10 @@
     text-align: center;
 }
 
+.wrapper:hover {
+    opacity: 0.7;
+}
+
 .wrapper:active {
     color: white;
     background-color: var(--blue);

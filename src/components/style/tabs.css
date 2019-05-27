@@ -59,3 +59,40 @@
 .button-active {
     color: var(--blue);
 }
+
+.button:not(.button-active) {
+    cursor: pointer;
+}
+
+@media (min-width: 800px) {
+    .tab-left,
+    .tab-right,
+    .tab-active {
+        position: static;
+        display: none;
+        transition: none;
+        width: auto;
+    }
+    .tab-active {
+        display: block;
+    }
+
+    .icon {
+        display: none;
+    }
+
+    .button, .button-active {
+        font-size: var(--fontM);
+        width: auto;
+        height: auto;
+        padding-top: 15px;
+        padding-bottom: 5px;
+        margin-right: 15px;
+        border-bottom: 1px solid white;
+        color: black;
+    }
+
+    .button-active {
+        border-bottom-color: #F9973C;
+    }
+}

@@ -24,7 +24,7 @@ export default class Tabs extends React.PureComponent<Props> {
     const tab = this.props.data[active]
 
     return (
-      <Page shadow name={this.props.name} tabbar={map(this.props.data, this.renderButton)} fixed={tab.fixed}>
+      <Page shadow tabsTop name={this.props.name} tabbar={map(this.props.data, this.renderButton)} fixed={tab.fixed}>
         {map(this.props.data, this.renderTab)}
       </Page>
     )

@@ -16,6 +16,7 @@ dllDepPath = path.resolve(dllPath, 'fibookDeps.dll.js')
 
 exports.context = APP_PATH
 exports.devtool = 'source-map'
+exports.mode = 'development'
 
 exports.entry = [
     'webpack-hot-middleware/client'

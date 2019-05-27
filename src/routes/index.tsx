@@ -7,10 +7,12 @@ import { HomePage } from "pages/HomePage/components/HomePage";
 
 import AppComponent from "containers/App";
 
+const s = require('theme/global.css')
+
 export default () => (
   <AppComponent>
     <BrowserRouter>
-      <div>
+      <div className={s.app}>
         <Route path="/" component={HomePage as any} />
         <Route path="/book/:MD5" component={BookPage as any} />
       </div>

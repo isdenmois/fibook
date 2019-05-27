@@ -22,7 +22,7 @@ export class BookPage extends React.Component<ContainerProps> {
   render() {
     if (this.props.fetching) {
       return (
-        <Page name="book" toolbar={this.renderToolbar()}>
+        <Page name="book" className={s.bookPage} toolbar={this.renderToolbar()}>
           <Loading />
         </Page>
       );
@@ -32,6 +32,7 @@ export class BookPage extends React.Component<ContainerProps> {
     return (
       <Page
         name="book"
+        className={s.bookPage}
         toolbar={this.renderToolbar()}
         tabbar={this.renderBottomToolbar()}
       >

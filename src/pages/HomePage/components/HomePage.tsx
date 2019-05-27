@@ -26,10 +26,10 @@ export class HomePage extends React.Component<ContainerProps> {
     }
 
     return (
-      <span>
+      <>
         <Tabs name="home" data={this.getData()}/>
         {this.props.children}
-      </span>
+      </>
     )
   }
 

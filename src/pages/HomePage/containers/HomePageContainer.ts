@@ -103,6 +103,7 @@ export default class HomePageContainer extends React.Component<Props> {
 
   private handleCreateBook = async (files: File[]) => {
     this.props.homePageStore.setFetching(true)
+    this.props.history.replace('/')
 
     for (let i = 0; i < files.length; i++) {
       try {

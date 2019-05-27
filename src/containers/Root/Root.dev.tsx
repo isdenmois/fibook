@@ -1,6 +1,5 @@
 import * as React from 'react'
 import Routes from 'routes'
-const DevTools = require('mobx-react-devtools').default
 
 
 /**
@@ -9,7 +8,6 @@ const DevTools = require('mobx-react-devtools').default
 const Root = () => (
   <div>
     <Routes />
-    <DevTools position={{top: 50, right: 0}}/>
   </div>
 )
 
