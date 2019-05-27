@@ -60,7 +60,16 @@ exports.module =
             test: /\.css$/
             use: [
                 'style-loader'
-                'css-loader?importLoaders=1&localIdentName=[path][name]--[local]&camelCase&modules&sourceMap'
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 1,
+                        localIdentName: '[path][name]--[local]',
+                        camelCase: true,
+                        modules: true,
+                        sourceMap: true
+                    }
+                }
                 'postcss-loader'
             ]
             include: /src/

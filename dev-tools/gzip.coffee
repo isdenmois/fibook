@@ -1,4 +1,4 @@
-zopfli = require('node-zopfli-es')
+zopfli = require('node-zopfli')
 fs = require('fs')
 
 files = fs.readdirSync('./build')

@@ -17,7 +17,7 @@ const s = require('./style/bookPage.css')
 
 
 @container(BookPageContainer)
-export default class BookPage extends React.Component<ContainerProps> {
+export class BookPage extends React.Component<ContainerProps> {
 
   render() {
     if (this.props.fetching) {

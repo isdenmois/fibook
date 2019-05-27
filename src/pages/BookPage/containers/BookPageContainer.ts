@@ -18,7 +18,6 @@ interface BookPageParams {
 }
 
 interface SharedProps extends RouteComponentProps<BookPageParams> {
-
 }
 
 export interface ContainerProps extends SharedProps {

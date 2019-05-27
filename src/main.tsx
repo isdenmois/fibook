@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import {Provider} from 'mobx-react'
+const { Provider } = require('mobx-react')
 
 // Both configureStore and Root are required conditionally.
 import BookStore from './stores/BookStore'

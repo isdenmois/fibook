@@ -18,7 +18,7 @@ const s = require('./style/homePage.css')
 
 
 @container(HomePageContainer)
-export default class HomePage extends React.Component<ContainerProps> {
+export class HomePage extends React.Component<ContainerProps> {
 
   render() {
     if (this.props.fetching) {

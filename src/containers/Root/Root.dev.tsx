@@ -1,6 +1,6 @@
 import * as React from 'react'
-import DevTools from 'mobx-react-devtools'
 import Routes from 'routes'
+const DevTools = require('mobx-react-devtools').default
 
 
 /**

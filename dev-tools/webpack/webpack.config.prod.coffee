@@ -7,6 +7,7 @@ OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 BabiliPlugin = require('babili-webpack-plugin')
 {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 ShakePlugin = require('webpack-common-shake').Plugin
+TerserPlugin = require('terser-webpack-plugin')
 
 ROOT_PATH = path.join(__dirname, '../..')
 APP_PATH = "#{ROOT_PATH}/src"
@@ -62,7 +63,15 @@ conf =
                 use: ExtractTextPlugin.extract(
                     fallback: 'style-loader'
                     use: [
-                        'css-loader?importLoaders=1&localIdentName=[hash:base64:5]&camelCase&modules'
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 1,
+                                localIdentName: '[hash:base64:5]',
+                                camelCase: true,
+                                modules: true
+                            }
+                        }
                         'postcss-loader'
                     ]
                 )
@@ -77,6 +86,23 @@ conf =
                 use: 'svg-inline-loader'
             )
         ]
+    optimization:
+        minimizer: [
+            new TerserPlugin(
+                cache: true,
+                parallel: true
+                sourceMap: true # Must be set to true if using source-maps in production
+                terserOptions: {
+                    # https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
+                }
+            )
+        ]
+        splitChunks:
+            cacheGroups:
+                vendor:
+                    test: /[\\/]node_modules[\\/]/
+                    name: 'vendors'
+                    chunks: 'all'
     plugins: [
         new HtmlWebpackPlugin(
             template: "#{APP_PATH}/index.html"
@@ -91,40 +117,36 @@ conf =
             minimize: true
             debug: false
         )
-        new webpack.optimize.UglifyJsPlugin(
-            beautify: false
-            mangle:
-                screw_ie8: true
-                keep_fnames: true
-            compress:
-                warnings: false
-                dead_code: true
-                drop_console: true
-                drop_debugger: true
-                sequences     : true
-                booleans      : true
-                loops         : true
-                unused        : true
-            output:
-                comments: false
-            comments: false
-            sourceMap: false
-            test: /vendors\.js/
-        )
-        new BabiliPlugin({},
-            test: /(main|worker)\.js$/
-            comments: false
-            sourceMap: false
-        )
+        # new webpack.optimize.UglifyJsPlugin(
+        #     beautify: false
+        #     mangle:
+        #         screw_ie8: true
+        #         keep_fnames: true
+        #     compress:
+        #         warnings: false
+        #         dead_code: true
+        #         drop_console: true
+        #         drop_debugger: true
+        #         sequences     : true
+        #         booleans      : true
+        #         loops         : true
+        #         unused        : true
+        #     output:
+        #         comments: false
+        #     comments: false
+        #     sourceMap: false
+        #     test: /vendors\.js/
+        # )
+        # new BabiliPlugin({},
+        #     test: /(main|worker)\.js$/
+        #     comments: false
+        #     sourceMap: false
+        # )
         new ExtractTextPlugin(
             allChunks: true
             filename: '[name].css'
         )
         new OptimizeCssAssetsPlugin()
-        new webpack.optimize.CommonsChunkPlugin(
-            name: 'vendors'
-            minChunks: isExternal
-        )
         new ShakePlugin()
     ]
 
