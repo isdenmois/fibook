@@ -81,7 +81,7 @@
 
     .content {
         position: static;
-        max-height: 540px;
+        max-height: calc(60vh - 60px);
     }
 
     .toolbar {
