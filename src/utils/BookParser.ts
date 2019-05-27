@@ -58,7 +58,7 @@ class BookParser {
     }
 
     id = id.replace('#', '')
-    const binary = this.findByAttr('binary', 'id', id)
+    const binary = this.findByAttr('binary', 'id', id).first()
 
     if (binary.length === 0) {
       return null

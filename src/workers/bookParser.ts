@@ -6,6 +6,12 @@ const base64 = require('utils/base64').default
 
 function readFile(file: File, callback: Function, encode = 'utf-8') {
   const reader = new FileReader()
+  let resolve: any, reject: any;
+
+  const promise = new Promise((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
 
   reader.onload = (event: any) => {
     const result = event.target.result
@@ -20,13 +26,21 @@ function readFile(file: File, callback: Function, encode = 'utf-8') {
     }
 
     if (encoding !== encode) {
-      readFile(file, callback, encoding)
+      resolve(readFile(file, callback, encoding))
     } else {
-      callback(result)
+      try {
+        resolve(callback(result))
+      } catch (e) {
+        reject(e)
+      }
     }
   }
 
+  reader.onerror = reject;
+
   reader.readAsText(file, encode)
+
+  return promise;
 }
 
 async function unzipFile(file: Blob, callback: Function) {
@@ -36,18 +50,17 @@ async function unzipFile(file: Blob, callback: Function) {
 
   const zipFile = zip.file(/\.fb2$/)[0],
         content = await zipFile.async('text'),
-        blob    = await zipFile.async('blob'),
-        book    = new File([blob], zipFile.name)
+        blob    = await zipFile.async('blob')
 
-  callback(content, book)
+  callback(content, blob, zipFile.name)
 }
 
-function parseBook(content: any, file: Blob) {
+function parseBook(content: any, file: Blob, filename: string) {
   const book = new BookParser(content)
   const result: ParsedFB2 = {
     author: book.author,
     title: book.title,
-    file
+    file, filename
   }
   const imageData = book.image
 
@@ -60,15 +73,19 @@ function parseBook(content: any, file: Blob) {
   close()
 }
 
-addEventListener('message', (event: any) => {
+addEventListener('message', async (event: any) => {
   const {file, type} = event.data
   if (type !== 'PARSE_FILE') {
     return
   }
 
-  if (file.name.toLowerCase().endsWith('.zip')) {
-    unzipFile(file, parseBook)
-  } else {
-    readFile(file, parseBook)
+  try {
+    if (file.name.toLowerCase().endsWith('.zip')) {
+      await unzipFile(file, parseBook)
+    } else {
+      await readFile(file, parseBook)
+    }
+  } catch(error) {
+    postMessage({error: error.stack ? `${error.message}\n${error.stack}` : error.toString()})
   }
 })

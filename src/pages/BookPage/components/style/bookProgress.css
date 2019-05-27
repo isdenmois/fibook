@@ -1,7 +1,7 @@
 .progress {
     background: linear-gradient(90deg, #ccc, #ccc 100%) center no-repeat;
     background-size: 100% 1px;
-    margin: 15px 30px 0 30px;
+    margin-top: 15px;
     overflow: hidden;
 }
 

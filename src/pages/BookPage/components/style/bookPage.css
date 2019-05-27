@@ -1,9 +1,13 @@
 .title {
-    font-size: var(--fontL);
+    font-size: var(--fontM);
+}
+
+.author {
+    color: #555555;
+    font-size: var(--fontS);
 }
 
 .primary {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 15px;
     text-align: center;
 }

@@ -46,6 +46,7 @@ interface Props extends ContainerBaseProps, SharedProps {
           'ifnull(Status, 0) AS status',
           'LastAccess',
           'LastModified',
+          '(SELECT _data FROM library_thumbnail WHERE Source_MD5 = MD5) as thumbnail'
         ],
         table: 'library_metadata',
         where: '(Status = 0 OR Status IS NULL) AND (Name LIKE "%.fb2" OR Name LIKE "%.epub")',
@@ -64,6 +65,7 @@ interface Props extends ContainerBaseProps, SharedProps {
           'Status AS status',
           'LastAccess',
           'LastModified',
+          '(SELECT _data FROM library_thumbnail WHERE Source_MD5 = MD5) as thumbnail'
         ],
         table: 'library_metadata',
         where: 'Status = 1',
@@ -103,7 +105,11 @@ export default class HomePageContainer extends React.Component<Props> {
     this.props.homePageStore.setFetching(true)
 
     for (let i = 0; i < files.length; i++) {
-      await createBook(files[i])
+      try {
+        await createBook(files[i])
+      } catch (e) {
+        window.alert(e);
+      }
     }
 
     this.props.rsql.fetchData()

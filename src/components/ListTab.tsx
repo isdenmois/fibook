@@ -42,12 +42,12 @@ export default class ListTab extends React.PureComponent<Props> {
   }
 
   private renderRow(book: Book) {
-    const MD5 = book.MD5
-    const title = book.title
-    const author = book.author
+    const {MD5, title, author} = book
+    let thumbnail = book.thumbnail ? `/thumbnail/${book.thumbnail}` : null
 
     return (
       <ListItem
+        thumbnail={thumbnail}
         center={title}
         subtitle={author}
         to={`/book/${MD5}`}

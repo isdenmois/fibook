@@ -23,16 +23,19 @@
 .tabs {
     align-items: center;
     background-color: white;
-    border-top: var(--border);
     bottom: 0;
     display: flex;
-    height: 50px;
+    height: 55px;
     justify-content: space-around;
     left: 0;
     margin: 0;
     padding: 0;
     position: absolute;
     right: 0;
+}
+
+.shadow .tabs {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 }
 
 .tab {

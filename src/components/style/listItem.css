@@ -4,21 +4,52 @@
     color: var(--black);
     display: flex;
     justify-content: flex-start;
+    align-items: flex-end;
     margin: 1px 0 -1px 0;
     padding: 0 0 0 14px;
     position: relative;
     text-decoration: none;
 }
 
+.small {
+    font-size: var(--fontS);
+    align-items: center;
+    padding-right: 9px;
+}
+
 .listItem:first-child {
-    border-top: 1px solid #ccc;
     margin-top: 0;
+}
+
+.left {
+    margin-right: 15px;
+}
+
+.thumbnail {
+    width: 61px;
+    border-radius: 5px;
+    margin-top: 20px;
 }
 
 .center, .right {
     border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: column;
+}
+
+.small .center,
+.small .right {
+    border-bottom: none;
+    padding: 8px 6px 8px 0;
+}
+
+.listItem:last-child .center,
+.listItem:last-child .right {
+    border-bottom: none;
+}
+
+.listItem:last-child {
+    padding-bottom: 36px;
 }
 
 .center {

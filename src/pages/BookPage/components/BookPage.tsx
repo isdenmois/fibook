@@ -38,7 +38,7 @@ export class BookPage extends React.Component<ContainerProps> {
         <div className={s.primary}>
           {this.props.thumbnail && <Thumbnail url={this.props.thumbnail}/>}
           <div className={s.title}>{book.title}</div>
-          <div>{book.author}</div>
+          <div className={s.author}>{book.author}</div>
           <BookProgress lastRead={lastRead} progress={book.progress} />
         </div>
         <BookDetails book={book} history={bookHistory}/>
@@ -60,7 +60,7 @@ export class BookPage extends React.Component<ContainerProps> {
       <Button key="status" onClick={this.handleStatusChange}>
         {book.status > 0 ? 'В новые' : 'В прочтенные'}
       </Button>,
-      <Button key="delete" onClick={this.props.onDeleteBook}>Удалить</Button>,
+      <Button key="delete" dangerous onClick={this.props.onDeleteBook}>Удалить</Button>,
     ]
   }
 

@@ -59,6 +59,7 @@ export class HomePage extends React.Component<ContainerProps> {
             onLoadMore={this.handleReadLoadMore}
           />
         ),
+        fixed: this.renderFixed(),
         icon: flagIcon,
         activeIcon: flagIconOutline,
       },

@@ -4,6 +4,7 @@ const s = require('./style/list.css')
 
 interface Props {
   empty?: JSX.Element
+  noBorder?: boolean
 }
 
 export default class List extends React.PureComponent<Props> {
@@ -12,8 +13,10 @@ export default class List extends React.PureComponent<Props> {
       return this.props.empty
     }
 
+    const className = this.props.noBorder ? `${s.list} ${s.noBorder}` : s.list
+
     return (
-      <div className={s.list}>
+      <div className={className}>
         {this.props.children}
       </div>
     )

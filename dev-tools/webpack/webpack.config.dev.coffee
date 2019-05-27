@@ -27,6 +27,7 @@ exports.output =
     path: "#{ROOT_PATH}/build"
     filename: 'bundle.js'
     publicPath: '/'
+    globalObject: 'this'
 
 exports.resolve =
     extensions: ['.js', '.jsx', '.ts', '.tsx']

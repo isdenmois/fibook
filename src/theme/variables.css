@@ -1,12 +1,14 @@
 :root {
-    --fabRight: 15px;
-    --fabBottom: 60px;
+    --fabLeft: calc(50% - 56px/2);
+    --fabBottom: 28px;
+    --fabBackground: linear-gradient(180deg, rgba(255, 255, 255, 0.49) 0%, rgba(255, 255, 255, 0) 100%), #007AFF;
 
-    --backgroundColor: #f9f9f9;
+    --backgroundColor: #fff;
     --blue: #007aff;
     --black: #1f1f21;
     --darkGrey: #555;
     --grey: #929292;
+    --red: #EB5757;
 
     --border: 1px solid #ccc;
 

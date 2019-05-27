@@ -22,12 +22,12 @@ export default class FileInput extends React.PureComponent<Props> {
           ref="fileInput"
           className={s.input}
           type="file"
-          multiple={true}
+          multiple
           name={name}
           onChange={this.onChange}
           accept={accept}
         />
-        <span className={s.icon}>{children}</span>
+        <div className={s.icon}>{children}</div>
       </div>
     )
   }

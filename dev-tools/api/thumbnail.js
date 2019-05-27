@@ -1,6 +1,6 @@
 const express = require('express');
 const fs = require('fs');
-const { resolve } = require('path');
+const os = require('os');
 
 /**
  * Create router for images.
@@ -11,6 +11,10 @@ router.get('*', (req, res) => {
     let path = req.url;
     if (path.indexOf('?') > 0) {
         path = path.slice(0, path.indexOf('?'));
+    }
+
+    if (os.platform() === 'win32') {
+        path = path.slice(1);
     }
 
     fs.exists(path, exist => {

@@ -13,6 +13,7 @@ export interface Book {
   startRead: number
   endRead: number
   readTime: number
+  thumbnail: string
 }
 
 export interface BookHistory {

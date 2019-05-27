@@ -22,30 +22,30 @@ export default class BookDetails extends React.PureComponent<Props> {
     }
 
     return (
-      <List>
-        <ListItem center="Автор" right={author}/>
-        <ListItem center="Название" right={title}/>
-        <ListItem center="Статус" right={Status}/>
+      <List noBorder>
+        <ListItem small center="Автор" right={author}/>
+        <ListItem small center="Название" right={title}/>
+        <ListItem small center="Статус" right={Status}/>
         {progress &&
-          <ListItem center="Прогресс" right={progress}/>
+          <ListItem small center="Прогресс" right={progress}/>
         }
         {readTime &&
-          <ListItem center="Время чтения" right={formatTime(readTime)}/>
+          <ListItem small center="Время чтения" right={formatTime(readTime)}/>
         }
         {startRead &&
-          <ListItem center="Начало чтения" right={new Date(startRead).toLocaleDateString()}/>
+          <ListItem small center="Начало чтения" right={new Date(startRead).toLocaleDateString()}/>
         }
         {endRead &&
-          <ListItem center="Конец чтения" right={new Date(endRead).toLocaleDateString()}/>
+          <ListItem small center="Конец чтения" right={new Date(endRead).toLocaleDateString()}/>
         }
         {endRead && startRead &&
-          <ListItem center="Дней чтения" right={formatDaysLength(startRead, endRead)}/>
+          <ListItem small center="Дней чтения" right={formatDaysLength(startRead, endRead)}/>
         }
         {history.length > 0 &&
-          <ListItem center="Реальных дней чтения" right={history.length}/>
+          <ListItem small center="Реальных дней чтения" right={history.length}/>
         }
-        <ListItem center="Размер" right={fileSizeConvert(size)}/>
-        <ListItem center="Расположение" right={location.slice(0, separator)}/>
+        <ListItem small center="Размер" right={fileSizeConvert(size)}/>
+        <ListItem small center="Расположение" right={location.slice(0, separator)}/>
       </List>
     )
   }

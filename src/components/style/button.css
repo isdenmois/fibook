@@ -15,3 +15,12 @@
     color: white;
     background-color: var(--blue);
 }
+
+.dangerous {
+    color: var(--red);
+    border: 1px solid var(--red);
+}
+
+.dangerous:active {
+    background-color: var(--red);
+}
