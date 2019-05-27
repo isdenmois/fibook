@@ -50,7 +50,7 @@ export class BookPage extends React.Component<ContainerProps> {
 
   renderToolbar() {
     return (
-      <Toolbar backButton title="Подробности"/>
+      <Toolbar backButton history={this.props.history} title="Подробности"/>
     );
   }
 

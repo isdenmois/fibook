@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-const { Provider } = require('mobx-react')
+import { Provider as MobxProvider } from 'mobx-react'
 
 // Both configureStore and Root are required conditionally.
 import BookStore from './stores/BookStore'
@@ -20,6 +20,8 @@ const rootEl = document.getElementById('root')
 // necessary for hot reloading
 let renderDom = () => {
   const Root = require('./containers/Root/index').default
+  const Provider: any = MobxProvider
+
   ReactDOM.render(
     <Provider {...stores}>
       <Root />

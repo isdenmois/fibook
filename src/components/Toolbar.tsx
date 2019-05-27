@@ -1,6 +1,5 @@
 import * as React from 'react'
 import InlineSVG from './InlineSvg'
-const { withRouter } = require('react-router')
 
 const s = require('./style/toolbar.css')
 const svg = require('./style/ios-arrow-back.svg')
@@ -12,7 +11,6 @@ interface Props {
   history?: any
 }
 
-@withRouter
 export default class Toolbar extends React.PureComponent<Props> {
   render() {
     return (
