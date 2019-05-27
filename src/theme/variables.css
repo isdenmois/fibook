@@ -19,7 +19,7 @@
 }
 
 
-@media (min-width: 800px) {
+@media (min-width: 960px) {
     :root {
         --fontXS: 10px;
         --fontS: 12px;

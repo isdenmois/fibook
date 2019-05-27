@@ -47,7 +47,7 @@
     width: 100px;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 960px) {
     .wrapper {
         margin-bottom: 0;
     }

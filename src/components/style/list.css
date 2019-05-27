@@ -4,7 +4,7 @@
     -webkit-overflow-scrolling: touch;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 960px) {
     .list:not(.strong) {
         display: flex;
         flex-direction: row;

@@ -12,7 +12,7 @@
     text-align: center;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 960px) {
     .book-page {
         width: 310px;
         flex: none;

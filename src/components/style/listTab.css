@@ -13,7 +13,7 @@
     width: 100%;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 960px) {
     .loadMore {
         height: 40px;
         line-height: 40px;

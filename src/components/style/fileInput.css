@@ -34,7 +34,7 @@
     left: 0;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 960px) {
     .wrapper {
         box-shadow: none;
         background: none;

@@ -64,7 +64,7 @@
     cursor: pointer;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 960px) {
     .tab-left,
     .tab-right,
     .tab-active {

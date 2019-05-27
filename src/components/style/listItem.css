@@ -67,7 +67,7 @@
     font-size: var(--fontS);
 }
 
-@media (min-width: 800px) {
+@media (min-width: 960px) {
     .listItem:not(.small) {        
         flex-direction: column;
         align-items: center;
