@@ -5,15 +5,15 @@ const BOOKS_ENDPOINT = '/api/book'
 
 
 export async function createBook(f: File) {
-  const {author, image, imageName, title, file} = await bookDataParser(f)
+  const { author, image, imageName, title, file, fileName } = await bookDataParser(f)
 
   const body = new FormData()
   body.append('author', author)
   body.append('title', title)
-  body.append('file', file || f)
+  body.append('file', file || f, fileName)
 
   if (image) {
-    body.append('image', image);
+    body.append('image', image, imageName);
     body.append('image-name', imageName);
   }
   const options = {method: 'POST', body, headers: {}}

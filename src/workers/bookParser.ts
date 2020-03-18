@@ -1,76 +1,35 @@
 import {ParsedFB2} from 'models/parser'
-import * as JSZip from 'jszip'
-const BookParser = require('utils/BookParser').default
 const base64 = require('utils/base64').default
+import { BookParser } from 'utils/parsers/base'
+import { FB2Parser } from 'utils/parsers/fb2'
+import { EpubParser } from 'utils/parsers/epub'
 
+async function parseBook(file: File) {
+  const fileName = file.name.toLowerCase()
+  let parser: BookParser;
 
-function readFile(file: File, callback: Function, encode = 'utf-8') {
-  const reader = new FileReader()
-  let resolve: any, reject: any;
-
-  const promise = new Promise((res, rej) => {
-    resolve = res;
-    reject = rej;
-  });
-
-  reader.onload = (event: any) => {
-    const result = event.target.result
-
-    // Find file encoding.
-    const match = result.slice(0, 200).match(/encoding="(.*?)"/)
-    let encoding
-    if (match) {
-      encoding = match[1].toLowerCase()
-    } else {
-      encoding = 'utf-8'
-    }
-
-    if (encoding !== encode) {
-      resolve(readFile(file, callback, encoding))
-    } else {
-      try {
-        resolve(callback(result))
-      } catch (e) {
-        reject(e)
-      }
-    }
+  if (fileName.endsWith('.epub')) {
+    parser = new EpubParser(file, fileName)
+  } else {
+    parser = new FB2Parser(file, fileName)
   }
 
-  reader.onerror = reject;
+  await parser.parse()
 
-  reader.readAsText(file, encode)
-
-  return promise;
-}
-
-async function unzipFile(file: Blob, callback: Function) {
-  const zip = new JSZip()
-
-  await zip.loadAsync(file)
-
-  const zipFile = zip.file(/\.fb2$/)[0],
-        content = await zipFile.async('text'),
-        blob    = await zipFile.async('blob')
-
-  callback(content, blob, zipFile.name)
-}
-
-function parseBook(content: any, file: Blob, filename: string) {
-  const book = new BookParser(content)
   const result: ParsedFB2 = {
-    author: book.author,
-    title: book.title,
-    file, filename
+    author: parser.author,
+    title: parser.title,
+    file: parser.file, 
+    fileName: parser.fileName
   }
-  const imageData = book.image
+  const cover = parser.cover
 
-  if (imageData) {
-    result.image = base64(imageData.data, imageData.type)
-    result.imageName = imageData.fileName
+  if (cover) {
+    result.image = base64(cover.data, cover.type)
+    result.imageName = cover.fileName
   }
 
-  postMessage(result)
-  close()
+  return result
 }
 
 addEventListener('message', async (event: any) => {
@@ -80,11 +39,10 @@ addEventListener('message', async (event: any) => {
   }
 
   try {
-    if (file.name.toLowerCase().endsWith('.zip')) {
-      await unzipFile(file, parseBook)
-    } else {
-      await readFile(file, parseBook)
-    }
+    const result = await parseBook(file)
+
+    postMessage(result)
+    close()
   } catch(error) {
     postMessage({error: error.stack ? `${error.message}\n${error.stack}` : error.toString()})
   }

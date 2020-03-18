@@ -1,4 +1,4 @@
-import BookParser from '../BookParser';
+import { FB2Parser } from 'utils/parsers/fb2';
 
 const firstName = 'Тестовый';
 const lastName = 'Автор';
@@ -24,7 +24,7 @@ describe('BookParser', () => {
     <binary id="cover.jpg" content-type="${contentType}">${bookImage}</binary>
     <binary id="test.jpg" content-type="${contentType}">123</binary>
     </FictionBook>`;
-    const parser = new BookParser(bookData);
+    const parser = new FB2Parser(new Blob([bookData]), '');
 
     it('should parse author', () => {
         expect(parser.author).toEqual(`${firstName} ${lastName}`);
@@ -35,7 +35,7 @@ describe('BookParser', () => {
     });
 
     it('should parse book image', () => {
-        expect(parser.image).toEqual({
+        expect(parser.cover).toEqual({
             data: bookImage,
             fileName: 'testovyy_avtor_testovoe_nazvanie.jpg',
             type: contentType,
@@ -56,8 +56,8 @@ describe('BookParser', () => {
         </description>
         </FictionBook>
         `;
-        const badParser = new BookParser(badBookData);
-        expect(badParser.image).toBeFalsy();
+        const badParser = new FB2Parser(new Blob([badBookData]), '');
+        expect(badParser.cover).toBeFalsy();
     });
 
     it('should parse empty book when coverpage is bad', () => {
@@ -77,7 +77,7 @@ describe('BookParser', () => {
         </description>
         </FictionBook>
         `;
-        const badParser = new BookParser(badBookData);
-        expect(badParser.image).toBeFalsy();
+        const badParser = new FB2Parser(new Blob([badBookData]), '');
+        expect(badParser.cover).toBeFalsy();
     });
 });
