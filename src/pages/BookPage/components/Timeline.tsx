@@ -1,6 +1,6 @@
 import * as React from 'react'
 import map from 'utils/map'
-import {BookHistory} from 'models/book'
+import { BookHistory } from 'models/book'
 
 import TimeLineItem from './TimelineItem'
 const s = require('./style/timeline.css')
@@ -10,13 +10,8 @@ interface Props {
 }
 
 export default class Timeline extends React.PureComponent<Props> {
-
   render() {
-    return (
-      <div className={s.wrapper}>
-        {map(this.props.history, this.renderItem)}
-      </div>
-    );
+    return <div className={s.wrapper}>{map(this.props.history, this.renderItem)}</div>
   }
 
   renderItem(item: BookHistory) {
@@ -24,8 +19,8 @@ export default class Timeline extends React.PureComponent<Props> {
       <div className={s.item} key={item.date}>
         <div className={s.itemDate}>{item.date}</div>
         <div className={s.divider} />
-        <TimeLineItem historyItem={item}/>
+        <TimeLineItem historyItem={item} />
       </div>
-    );
+    )
   }
 }

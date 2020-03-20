@@ -1,10 +1,9 @@
-import {observable, action, computed} from 'mobx'
-import {Book, BookHistory} from "../models/book"
-import {RSQLStore} from "../models/rsql"
-import HomePageStore from "./HomePageStore"
-import {minBy, maxBy} from 'utils/minBy'
+import { observable, action, computed } from 'mobx'
+import { Book, BookHistory } from '../models/book'
+import { RSQLStore } from '../models/rsql'
+import HomePageStore from './HomePageStore'
+import { minBy, maxBy } from 'utils/minBy'
 const processHistory = require('utils/processHistory').default
-
 
 export default class BookStore implements RSQLStore {
   homePageStore: HomePageStore
@@ -40,7 +39,7 @@ export default class BookStore implements RSQLStore {
             ...this.book,
             startRead: +minBy(data, 'date'),
             endRead: +maxBy(data, 'EndTime'),
-            readTime: this.history.reduce((time: number, item: BookHistory) => time + item.time, 0)
+            readTime: this.history.reduce((time: number, item: BookHistory) => time + item.time, 0),
           }
         }
         break
@@ -58,7 +57,7 @@ export default class BookStore implements RSQLStore {
 
   @action
   changeStatus(status: number) {
-    this.book = {...this.book, status}
+    this.book = { ...this.book, status }
     this.homePageStore.changeBookStatus(this.book.MD5, status)
   }
 

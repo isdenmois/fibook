@@ -1,8 +1,8 @@
 import * as React from 'react'
 import InlineSVG from 'components/InlineSvg'
 
-import {container} from 'utils/container'
-import HomePageContainer, {ContainerProps} from '../containers/HomePageContainer'
+import { container } from 'utils/container'
+import HomePageContainer, { ContainerProps } from '../containers/HomePageContainer'
 import ListTab from 'components/ListTab'
 
 import Loading from 'components/Loading'
@@ -16,10 +16,8 @@ const flagIcon = require('./icons/ios-flag.svg')
 const flagIconOutline = require('./icons/ios-flag-outline.svg')
 const s = require('./style/homePage.css')
 
-
 @container(HomePageContainer)
 export class HomePage extends React.Component<ContainerProps> {
-
   render() {
     if (this.props.fetching) {
       return <Loading />
@@ -27,7 +25,7 @@ export class HomePage extends React.Component<ContainerProps> {
 
     return (
       <>
-        <Tabs name="home" data={this.getData()}/>
+        <Tabs name='home' data={this.getData()} />
         {this.props.children}
       </>
     )
@@ -68,11 +66,8 @@ export class HomePage extends React.Component<ContainerProps> {
 
   renderFixed() {
     return (
-      <FileInput name="book-upload" onFileSelect={this.props.onCreateBook}>
-        <InlineSVG
-          className={s.icon}
-          src={fileUpload}
-        />
+      <FileInput name='book-upload' onFileSelect={this.props.onCreateBook}>
+        <InlineSVG className={s.icon} src={fileUpload} />
       </FileInput>
     )
   }

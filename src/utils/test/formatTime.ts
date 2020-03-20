@@ -1,4 +1,4 @@
-import formatTime, {formatDaysLength} from '../formatTime'
+import formatTime, { formatDaysLength } from '../formatTime'
 
 describe('formatTime util', () => {
   it('should format time', () => {

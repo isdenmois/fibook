@@ -2,14 +2,11 @@ import * as React from 'react'
 
 const s = require('./style/thumbnail.css')
 
-
 interface Props {
   url: string
 }
 
-
 export default class Thumbnail extends React.Component<Props> {
-
   render() {
     let url = this.props.url
     if (url.startsWith('/')) {
@@ -17,8 +14,6 @@ export default class Thumbnail extends React.Component<Props> {
     }
 
     const imageURL = `/thumbnail/${url}`
-    return (
-      <img className={s.thumbnail} src={imageURL}/>
-    )
+    return <img className={s.thumbnail} src={imageURL} />
   }
 }

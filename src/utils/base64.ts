@@ -24,5 +24,5 @@ export default function convertToBlob(data: string, contentType: string = ''): B
   }
 
   /* global Blob */
-  return new Blob(byteArrays, {type: contentType})
+  return new Blob(byteArrays, { type: contentType })
 }

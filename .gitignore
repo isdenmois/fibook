@@ -7,3 +7,4 @@ npm-debug.log
 stats.json
 uploads
 coverage
+yarn.lock

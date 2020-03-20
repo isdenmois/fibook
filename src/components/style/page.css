@@ -1,107 +1,107 @@
 .page {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow-x: visible;
-    overflow-y: hidden;
-    z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: visible;
+  overflow-y: hidden;
+  z-index: 2;
 }
 
 .content {
-    background-color: var(--backgroundColor);
-    bottom: 0;
-    left: 0;
-    overflow: auto;
-    position: absolute;
-    right: 0;
-    top: 0;
-    -webkit-overflow-scrolling: touch;
+  background-color: var(--backgroundColor);
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
 .tabs {
-    align-items: center;
-    background-color: white;
-    bottom: 0;
-    display: flex;
-    height: 55px;
-    justify-content: space-around;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: 0;
+  align-items: center;
+  background-color: white;
+  bottom: 0;
+  display: flex;
+  height: 55px;
+  justify-content: space-around;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
 }
 
 .shadow .tabs {
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 }
 
 .tab {
-    align-items: center;
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    height: 100%;
-    justify-content: center;
-    width: 100%;
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
 }
 
 .tabSelected {
-    color: var(--blue);
+  color: var(--blue);
 }
 
 .toolbar {
-    background: white;
-    border-bottom: var(--border);
-    display: block;
-    height: 44px;
-    position: absolute;
-    width: 100%;
-    z-index: 2;
+  background: white;
+  border-bottom: var(--border);
+  display: block;
+  height: 44px;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
 }
 
 :global(.tabbar) .content {
-    bottom: 51px;
+  bottom: 51px;
 }
 
 :global(.toolbar) .content {
-    top: 44px;
+  top: 44px;
 }
 
 @media (min-width: 960px) {
-    .page {
-        position: relative;
-        flex: 1;
-        width: 602px;
-        padding-top: 40px;
-        padding-bottom: 5px;
-    }
+  .page {
+    position: relative;
+    flex: 1;
+    width: 602px;
+    padding-top: 40px;
+    padding-bottom: 5px;
+  }
 
-    .content {
-        position: static;
-        max-height: calc(60vh - 60px);
-    }
+  .content {
+    position: static;
+    max-height: calc(60vh - 60px);
+  }
 
-    .toolbar {
-        border-bottom: none;
-        background: none;
-    }
+  .toolbar {
+    border-bottom: none;
+    background: none;
+  }
 
-    .tabs {
-        background: none;
-        height: 40px;
-    }
+  .tabs {
+    background: none;
+    height: 40px;
+  }
 
-    .tabs-top .tabs {
-        top: 0;
-        bottom: initial;
-        height: 38px;
-        justify-content: flex-start;
-        align-items: flex-end;
-        left: 15px;
-        box-shadow: none !important;
-        border-bottom: 1px solid #E9E9E9
-    }
+  .tabs-top .tabs {
+    top: 0;
+    bottom: initial;
+    height: 38px;
+    justify-content: flex-start;
+    align-items: flex-end;
+    left: 15px;
+    box-shadow: none !important;
+    border-bottom: 1px solid #e9e9e9;
+  }
 }

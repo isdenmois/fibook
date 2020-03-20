@@ -4,7 +4,6 @@ import { shallow } from 'enzyme'
 import Loading from '../Loading'
 const s = require('../Loading/Loading.css')
 
-
 describe('<Loading />', () => {
   it('should rendering', () => {
     const node = shallow(<Loading />)

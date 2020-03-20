@@ -1,8 +1,8 @@
 .empty-list {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    font-size: var(--fontL);
-    height: calc(50vh - 50px);
-    justify-content: flex-end;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: var(--fontL);
+  height: calc(50vh - 50px);
+  justify-content: flex-end;
 }

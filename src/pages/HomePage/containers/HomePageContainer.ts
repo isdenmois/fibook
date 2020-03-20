@@ -1,17 +1,14 @@
 import * as React from 'react'
-import {observer} from 'mobx-react'
-import {RouteComponentProps} from 'react-router'
+import { observer } from 'mobx-react'
+import { RouteComponentProps } from 'react-router'
 
-import {renderView, ContainerBaseProps} from 'utils/container'
-import {RSQLProps, rsqlContainer} from 'utils/rsql'
+import { renderView, ContainerBaseProps } from 'utils/container'
+import { RSQLProps, rsqlContainer } from 'utils/rsql'
 import HomePageStore from 'stores/HomePageStore'
-import {Book} from 'models/book'
-import {createBook} from 'services/book'
+import { Book } from 'models/book'
+import { createBook } from 'services/book'
 
-
-interface SharedProps extends RouteComponentProps<void> {
-
-}
+interface SharedProps extends RouteComponentProps<void> {}
 
 export interface ContainerProps extends SharedProps {
   fetching: boolean
@@ -46,13 +43,13 @@ interface Props extends ContainerBaseProps, SharedProps {
           'ifnull(Status, 0) AS status',
           'LastAccess',
           'LastModified',
-          '(SELECT _data FROM library_thumbnail WHERE Source_MD5 = MD5) as thumbnail'
+          '(SELECT _data FROM library_thumbnail WHERE Source_MD5 = MD5) as thumbnail',
         ],
         table: 'library_metadata',
         where: '(Status = 0 OR Status IS NULL) AND (Name LIKE "%.fb2" OR Name LIKE "%.epub")',
         order: 'LastModified DESC',
         limit: 20,
-      })
+      }),
     },
     {
       prop: 'read',
@@ -65,28 +62,27 @@ interface Props extends ContainerBaseProps, SharedProps {
           'Status AS status',
           'LastAccess',
           'LastModified',
-          '(SELECT _data FROM library_thumbnail WHERE Source_MD5 = MD5) as thumbnail'
+          '(SELECT _data FROM library_thumbnail WHERE Source_MD5 = MD5) as thumbnail',
         ],
         table: 'library_metadata',
         where: 'Status = 1',
         order: 'LastAccess DESC',
         limit: 20,
-      })
+      }),
     },
   ],
   initialVariables: {},
-  store: 'homePageStore'
+  store: 'homePageStore',
 })
 @observer
 export default class HomePageContainer extends React.Component<Props> {
-
   componentWillMount() {
     this.props.rsql.fetchData()
   }
 
   render() {
-    const {homePageStore} = this.props
-    const {news, read, newsTotal, readTotal, readLoadingMore, newsLoadingMore} = homePageStore
+    const { homePageStore } = this.props
+    const { news, read, newsTotal, readTotal, readLoadingMore, newsLoadingMore } = homePageStore
 
     return renderView(this.props, {
       fetching: homePageStore.fetching,
@@ -109,7 +105,7 @@ export default class HomePageContainer extends React.Component<Props> {
       try {
         await createBook(files[i])
       } catch (e) {
-        window.alert(e);
+        window.alert(e)
       }
     }
 

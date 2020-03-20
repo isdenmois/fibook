@@ -20,7 +20,7 @@ const defaults = <RequestParams>{
 
 export default function request(url: string, params?: RequestParams) {
   return new Promise((resolve, reject) => {
-    const options: RequestParams = {...defaults, ...params}
+    const options: RequestParams = { ...defaults, ...params }
 
     const xhr = new XMLHttpRequest()
     xhr.open(options.method, options.params ? `${url}?${QueryParams(options.params)}` : url, true)

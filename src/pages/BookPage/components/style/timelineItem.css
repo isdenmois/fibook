@@ -1,19 +1,19 @@
 .content {
-    flex-shrink: 10;
-    border-radius: 7px;
-    max-width: 300px;
-    padding: 8px 15px;
-    background: white;
-    width: 100%;
+  flex-shrink: 10;
+  border-radius: 7px;
+  max-width: 300px;
+  padding: 8px 15px;
+  background: white;
+  width: 100%;
 }
 
 .row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 .row:first-child {
-    font-weight: bold;
-    margin-top: 0;
+  font-weight: bold;
+  margin-top: 0;
 }

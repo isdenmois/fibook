@@ -2,26 +2,24 @@ import * as React from 'react'
 
 const s = require('./style/fileInput.css')
 
-
 interface Props {
-  name: string,
+  name: string
   accept?: string
   onFileSelect: (file: File[]) => void
 }
 
 export default class FileInput extends React.PureComponent<Props> {
-
-  static defaultProps = {accept: '.fb2,.fb2.zip,.epub'}
+  static defaultProps = { accept: '.fb2,.fb2.zip,.epub' }
 
   render() {
-    const {name, accept, children} = this.props
+    const { name, accept, children } = this.props
 
     return (
       <div className={s.wrapper}>
         <input
-          ref="fileInput"
+          ref='fileInput'
           className={s.input}
-          type="file"
+          type='file'
           multiple
           name={name}
           onChange={this.onChange}
@@ -39,7 +37,7 @@ export default class FileInput extends React.PureComponent<Props> {
       const files: File[] = []
 
       for (let i = 0; i < target.files.length; i++) {
-        files[i] = target.files[i];
+        files[i] = target.files[i]
       }
 
       target.value = ''

@@ -11,21 +11,20 @@ interface Props {
 }
 
 export default class Modal extends React.Component<Props> {
-
   render() {
     let inner = null
 
-    const {buttons, onSelect, children, open, positive} = this.props
+    const { buttons, onSelect, children, open, positive } = this.props
     if (open) {
       inner = (
         <div className={s.inner}>
-          <div className={s.content}>
-            {children}
-          </div>
+          <div className={s.content}>{children}</div>
           <div className={s.buttons}>
-            {buttons.map((title, index) =>
-              <div className={s.button} key={index} onClick={() => onSelect(index)}>{title}</div>
-            )}
+            {buttons.map((title, index) => (
+              <div className={s.button} key={index} onClick={() => onSelect(index)}>
+                {title}
+              </div>
+            ))}
           </div>
         </div>
       )
@@ -33,7 +32,7 @@ export default class Modal extends React.Component<Props> {
 
     return (
       <div className={open ? `${s.modal} ${s.modalIn}` : s.modal}>
-        <div className={s.overlay} onClick={() => onSelect(0)}/>
+        <div className={s.overlay} onClick={() => onSelect(0)} />
         <TransitionGroup
           transitionName={{
             enter: s.enter,

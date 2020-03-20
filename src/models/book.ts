@@ -1,4 +1,3 @@
-
 export interface Book {
   MD5: string
   title: string

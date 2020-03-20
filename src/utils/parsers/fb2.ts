@@ -10,7 +10,7 @@ export class FB2Parser extends BookParser {
   private titleInfo: any
   private publishInfo: any
   private t = translit(translitRussian)
-  private content: string;
+  private content: string
 
   get author() {
     const author = this.titleInfo.find('author')
@@ -95,12 +95,12 @@ async function unzipFile(file: Blob) {
 // TODO: refactor
 function readFile(file: File, callback: Function, encode = 'utf-8') {
   const reader = new FileReader()
-  let resolve: any, reject: any;
+  let resolve: any, reject: any
 
   const promise = new Promise((res, rej) => {
-    resolve = res;
-    reject = rej;
-  });
+    resolve = res
+    reject = rej
+  })
 
   reader.onload = (event: any) => {
     const result = event.target.result
@@ -125,9 +125,9 @@ function readFile(file: File, callback: Function, encode = 'utf-8') {
     }
   }
 
-  reader.onerror = reject;
+  reader.onerror = reject
 
   reader.readAsText(file, encode)
 
-  return promise;
+  return promise
 }

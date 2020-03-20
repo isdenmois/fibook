@@ -5,14 +5,12 @@ import InlineSVG from 'components/InlineSvg'
 const svg = require('./style/bookProgress.svg')
 const s = require('./style/bookProgress.css')
 
-
 interface Props {
   progress: string
   lastRead: string
 }
 
 export default class BookProgress extends React.PureComponent<Props> {
-
   render() {
     const progress = this.props.progress || '0/1'
     const parts = progress.split('/')
@@ -20,11 +18,7 @@ export default class BookProgress extends React.PureComponent<Props> {
     const total = +parts[1]
 
     if (position > 0 && total - position < 5) {
-      return (
-        <div className={s.read}>
-          Прочитано {this.props.lastRead}
-        </div>
-      );
+      return <div className={s.read}>Прочитано {this.props.lastRead}</div>
     }
     const percent = (position / total) * 100 - 100
 
@@ -32,6 +26,6 @@ export default class BookProgress extends React.PureComponent<Props> {
       <div className={s.progress}>
         <InlineSVG className={s.wrapper} src={svg} style={{ left: `${percent}%` }} />
       </div>
-    );
+    )
   }
 }

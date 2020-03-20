@@ -1,13 +1,13 @@
 .list {
-    background: transparent;
-    overflow: hidden;
-    -webkit-overflow-scrolling: touch;
+  background: transparent;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (min-width: 960px) {
-    .list:not(.strong) {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
+  .list:not(.strong) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }

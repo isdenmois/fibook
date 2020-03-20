@@ -1,98 +1,100 @@
 .tab-left,
 .tab-right,
 .tab-active {
-    background-color: white;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-    transition: transform 200ms ease;
-    width: 100vw;
+  background-color: white;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: transform 200ms ease;
+  width: 100vw;
 }
 
 :global(.toolbar) .tab-left,
 :global(.toolbar) .tab-right,
 :global(.toolbar) .tab-active {
-    top: 44px;
+  top: 44px;
 }
 
 :global(.tabbar) .tab-left,
 :global(.tabbar) .tab-right,
 :global(.tabbar) .tab-active {
-    bottom: 51px;
+  bottom: 51px;
 }
 
 .tab-left {
-    transform: translateX(-40vw);
+  transform: translateX(-40vw);
 }
 
 .tab-right {
-    transform: translateX(100vw);
+  transform: translateX(100vw);
 }
 
 .tab-active {
-    overflow-y: auto;
+  overflow-y: auto;
 }
 
-.button, .button-active {
-    align-items: center;
-    color: var(--grey);
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    font-size: var(--fontXS);
-    height: 100%;
-    width: 100%;
+.button,
+.button-active {
+  align-items: center;
+  color: var(--grey);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: var(--fontXS);
+  height: 100%;
+  width: 100%;
 }
 
 .icon > svg {
-    height: 32px;
-    margin-bottom: -5px;
-    fill: var(--grey);
+  height: 32px;
+  margin-bottom: -5px;
+  fill: var(--grey);
 }
 
 .button-active > i > svg {
-    fill: var(--blue);
+  fill: var(--blue);
 }
 
 .button-active {
-    color: var(--blue);
+  color: var(--blue);
 }
 
 .button:not(.button-active) {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 @media (min-width: 960px) {
-    .tab-left,
-    .tab-right,
-    .tab-active {
-        position: static;
-        display: none;
-        transition: none;
-        width: auto;
-    }
-    .tab-active {
-        display: block;
-    }
+  .tab-left,
+  .tab-right,
+  .tab-active {
+    position: static;
+    display: none;
+    transition: none;
+    width: auto;
+  }
+  .tab-active {
+    display: block;
+  }
 
-    .icon {
-        display: none;
-    }
+  .icon {
+    display: none;
+  }
 
-    .button, .button-active {
-        font-size: var(--fontM);
-        width: auto;
-        height: auto;
-        padding-top: 15px;
-        padding-bottom: 5px;
-        margin-right: 15px;
-        border-bottom: 1px solid white;
-        color: black;
-    }
+  .button,
+  .button-active {
+    font-size: var(--fontM);
+    width: auto;
+    height: auto;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    margin-right: 15px;
+    border-bottom: 1px solid white;
+    color: black;
+  }
 
-    .button-active {
-        border-bottom-color: #F9973C;
-    }
+  .button-active {
+    border-bottom-color: #f9973c;
+  }
 }

@@ -15,10 +15,6 @@ export default class List extends React.PureComponent<Props> {
 
     const className = this.props.strong ? `${s.list} ${s.strong}` : s.list
 
-    return (
-      <div className={className}>
-        {this.props.children}
-      </div>
-    )
+    return <div className={className}>{this.props.children}</div>
   }
 }

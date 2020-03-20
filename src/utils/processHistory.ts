@@ -1,5 +1,5 @@
 import each from 'utils/each'
-import {BookHistory, RawHistory} from 'models/book'
+import { BookHistory, RawHistory } from 'models/book'
 
 export function formatDate(date: number) {
   return new Date(date).toLocaleDateString()
@@ -11,7 +11,7 @@ export function calculateSpeed(time: number, pages: number) {
 
 export default function processHistory(data: RawHistory[]) {
   const history: BookHistory[] = []
-  let result: BookHistory = {date: '', time: 0, pages: 0}
+  let result: BookHistory = { date: '', time: 0, pages: 0 }
   let currentProgress = 0
 
   each(data, (row: RawHistory) => {

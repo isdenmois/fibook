@@ -25,7 +25,7 @@ describe('Each', () => {
 
   it('Should iterate object', () => {
     const iteratee = jest.fn()
-    each({test: 'name'}, iteratee)
+    each({ test: 'name' }, iteratee)
 
     expect(iteratee).toHaveBeenCalledTimes(1)
   })

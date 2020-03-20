@@ -15,18 +15,18 @@ export default class Toolbar extends React.PureComponent<Props> {
   render() {
     return (
       <div className={s.wrapper}>
-        {this.props.backButton &&
+        {this.props.backButton && (
           <div className={s.backButton} onClick={this.goBack}>
-            <InlineSVG className={s.icon} src={svg}/>
+            <InlineSVG className={s.icon} src={svg} />
             Назад
           </div>
-        }
+        )}
         <div className={s.title}>{this.props.title}</div>
-        {this.props.backButton &&
+        {this.props.backButton && (
           <div className={s.closeButton} onClick={this.goBack}>
-            <InlineSVG src={close}/>
+            <InlineSVG src={close} />
           </div>
-        }
+        )}
       </div>
     )
   }

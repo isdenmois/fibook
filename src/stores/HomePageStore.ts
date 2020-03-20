@@ -1,7 +1,6 @@
-import {observable, action, runInAction} from 'mobx'
-import {Book} from 'models/book'
-import {RSQLStore} from 'models/rsql'
-
+import { observable, action, runInAction } from 'mobx'
+import { Book } from 'models/book'
+import { RSQLStore } from 'models/rsql'
 
 export default class HomePageStore implements RSQLStore {
   @observable fetching: boolean = false
@@ -101,7 +100,6 @@ export default class HomePageStore implements RSQLStore {
   @action
   deleteBook(deletedBook: Book) {
     const filterPredicate = (book: Book) => book.MD5 !== deletedBook.MD5
-
 
     runInAction(() => {
       if (deletedBook.status === 1) {

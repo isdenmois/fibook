@@ -1,23 +1,23 @@
 .title {
-    font-size: var(--fontM);
+  font-size: var(--fontM);
 }
 
 .author {
-    color: #555555;
-    font-size: var(--fontS);
+  color: #555555;
+  font-size: var(--fontS);
 }
 
 .primary {
-    margin: 15px;
-    text-align: center;
+  margin: 15px;
+  text-align: center;
 }
 
 @media (min-width: 960px) {
-    .book-page {
-        width: 310px;
-        flex: none;
-        padding-top: 10px;
-        padding-bottom: 40px;
-        border-left: 1px solid #E9E9E9;
-    }
+  .book-page {
+    width: 310px;
+    flex: none;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    border-left: 1px solid #e9e9e9;
+  }
 }

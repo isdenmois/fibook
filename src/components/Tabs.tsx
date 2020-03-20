@@ -15,8 +15,7 @@ interface State {
 }
 
 export default class Tabs extends React.PureComponent<Props> {
-
-  state: State = {active: 0}
+  state: State = { active: 0 }
   private tabs: HTMLElement[] = []
 
   render() {
@@ -47,7 +46,7 @@ export default class Tabs extends React.PureComponent<Props> {
 
     return (
       <div key={i} onClick={() => this.setActive(i)} className={i === active ? s.buttonActive : s.button}>
-        <InlineSVG className={s.icon} src={icon}/>
+        <InlineSVG className={s.icon} src={icon} />
         {data.title}
       </div>
     )
@@ -67,7 +66,7 @@ export default class Tabs extends React.PureComponent<Props> {
 
   private setActive(active: number) {
     this.tabs[this.state.active].scrollTop = 0
-    this.setState({active})
+    this.setState({ active })
   }
 }
 

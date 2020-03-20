@@ -1,12 +1,12 @@
 .loading {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    position: absolute;
-    width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  position: absolute;
+  width: 100%;
 }
 
 .loading i {
-    width: 50px;
+  width: 50px;
 }

@@ -2,7 +2,6 @@ import * as React from 'react'
 
 const s = require('./style/button.css')
 
-
 interface Props {
   dangerous?: boolean
   positive?: boolean
@@ -10,11 +9,10 @@ interface Props {
 }
 
 export default class Button extends React.PureComponent<Props> {
-
   render() {
-    let className = s.wrapper;
+    let className = s.wrapper
 
-    const {children, dangerous, positive, ...props} = this.props
+    const { children, dangerous, positive, ...props } = this.props
 
     if (dangerous) {
       className = `${className} ${s.dangerous}`

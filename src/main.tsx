@@ -8,7 +8,6 @@ import HomePageStore from './stores/HomePageStore'
 require('./theme/global.css')
 require('./theme/variables.css')
 
-
 const homePageStore = new HomePageStore()
 const stores = {
   bookStore: new BookStore(homePageStore),
@@ -33,7 +32,7 @@ let renderDom = () => {
 if ((module as any).hot) {
   const renderApp = renderDom
   const RedBox = require('redbox-react').default
-  const renderError = (error: any) => ReactDOM.render(<RedBox error={error}/>, rootEl)
+  const renderError = (error: any) => ReactDOM.render(<RedBox error={error} />, rootEl)
 
   renderDom = () => {
     try {
@@ -42,8 +41,7 @@ if ((module as any).hot) {
       renderError(error)
     }
   }
-
-  (module as any).hot.accept('./containers/Root', () => setTimeout(renderDom))
+  ;(module as any).hot.accept('./containers/Root', () => setTimeout(renderDom))
 }
 
 renderDom()

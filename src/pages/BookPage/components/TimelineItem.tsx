@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from 'react'
 const formatTime = require('utils/formatTime').default
-import {BookHistory} from 'models/book'
+import { BookHistory } from 'models/book'
 const s = require('./style/timelineItem.css')
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 
 export default class TimelineItem extends React.PureComponent<Props> {
   render() {
-    const {progress, percent, pages, speed, time} = this.props.historyItem
+    const { progress, percent, pages, speed, time } = this.props.historyItem
 
     return (
       <div className={s.content}>
@@ -29,6 +29,6 @@ export default class TimelineItem extends React.PureComponent<Props> {
           <span>{formatTime(time)}</span>
         </div>
       </div>
-    );
+    )
   }
 }

@@ -12,7 +12,7 @@ export class EpubParser extends BookParser {
     return this.getDcText('title')
   }
 
-  cover: BookCover = null;
+  cover: BookCover = null
 
   async parse() {
     const epub = new JSZip()
@@ -20,15 +20,15 @@ export class EpubParser extends BookParser {
 
     const contents = epub.file(/\.opf$/)
 
-    if (!contents.length) return;
+    if (!contents.length) return
     const contentPath = contents[0].name
     const dir = contentPath.substring(0, contentPath.lastIndexOf('/'))
     const xml: string = await contents[0].async('text')
     const ast = XmlReader.parseSync(xml)
 
     this.xq = xmlQuery(ast)
-    const author = this.author.replace(/\s+/g, '-').toLowerCase();
-    const title = this.title.replace(/\s+/g, '-').toLowerCase();
+    const author = this.author.replace(/\s+/g, '-').toLowerCase()
+    const title = this.title.replace(/\s+/g, '-').toLowerCase()
 
     this.fileName = `${author}_${title}.epub`
     this.cover = await this.parseCover(epub, dir, `${author}_${title}`)
@@ -38,13 +38,13 @@ export class EpubParser extends BookParser {
     const coverNode = this.findByAttr('meta', 'name', 'cover')
     const coverId = coverNode.attr('content')
 
-    if (!coverId) return null;
+    if (!coverId) return null
 
     const itemNode = this.findByAttr('item', 'id', coverId)
     const href = itemNode.attr('href')
     const fileZip = zip.file(dir ? `${dir}/${href}` : href)
 
-    if (!fileZip) return null;
+    if (!fileZip) return null
 
     const file = await fileZip.async('base64')
     const ext = href.slice(href.lastIndexOf('.'))
@@ -52,7 +52,7 @@ export class EpubParser extends BookParser {
     return {
       data: file,
       fileName: fileName + ext,
-      type: itemNode.attr('media-type')
+      type: itemNode.attr('media-type'),
     }
   }
 

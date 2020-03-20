@@ -1,4 +1,4 @@
-import {ParsedFB2} from 'models/parser'
+import { ParsedFB2 } from 'models/parser'
 const base64 = require('utils/base64').default
 import { BookParser } from 'utils/parsers/base'
 import { FB2Parser } from 'utils/parsers/fb2'
@@ -6,7 +6,7 @@ import { EpubParser } from 'utils/parsers/epub'
 
 async function parseBook(file: File) {
   const fileName = file.name.toLowerCase()
-  let parser: BookParser;
+  let parser: BookParser
 
   if (fileName.endsWith('.epub')) {
     parser = new EpubParser(file, fileName)
@@ -19,8 +19,8 @@ async function parseBook(file: File) {
   const result: ParsedFB2 = {
     author: parser.author,
     title: parser.title,
-    file: parser.file, 
-    fileName: parser.fileName
+    file: parser.file,
+    fileName: parser.fileName,
   }
   const cover = parser.cover
 
@@ -33,7 +33,7 @@ async function parseBook(file: File) {
 }
 
 addEventListener('message', async (event: any) => {
-  const {file, type} = event.data
+  const { file, type } = event.data
   if (type !== 'PARSE_FILE') {
     return
   }
@@ -43,7 +43,7 @@ addEventListener('message', async (event: any) => {
 
     postMessage(result)
     close()
-  } catch(error) {
-    postMessage({error: error.stack ? `${error.message}\n${error.stack}` : error.toString()})
+  } catch (error) {
+    postMessage({ error: error.stack ? `${error.message}\n${error.stack}` : error.toString() })
   }
 })

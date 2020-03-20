@@ -1,17 +1,15 @@
 import * as React from 'react'
-import {runInAction} from 'mobx'
-import {inject, observer} from 'mobx-react'
-import {RSQLStore} from "../models/rsql"
+import { runInAction } from 'mobx'
+import { inject, observer } from 'mobx-react'
+import { RSQLStore } from '../models/rsql'
 const request = require('./request').default
 const queryParams = require('./queryParams').default
 const each = require('./each').default
 
-
 const ENDPOINT = '/api/sql'
 
 export function rsqlContainer(params: RSQLParams): ClassDecorator {
-  return function (component: any): any {
-
+  return function(component: any): any {
     @inject(params.store)
     @observer
     class RSQLContainer extends React.Component<any> {
@@ -31,7 +29,7 @@ export function rsqlContainer(params: RSQLParams): ClassDecorator {
             fetchData: this.handleFetch,
             setVariables: this.handleSetVariables,
             loadMore: this.handleLoadMore,
-          }
+          },
         })
       }
 
@@ -49,8 +47,7 @@ export function rsqlContainer(params: RSQLParams): ClassDecorator {
             query.limit += offset
           }
 
-          const promise = request(`${ENDPOINT}?${queryParams(query)}`)
-            .then((data: any[]) => ({key: q.prop, data}))
+          const promise = request(`${ENDPOINT}?${queryParams(query)}`).then((data: any[]) => ({ key: q.prop, data }))
           promiseList.push(promise)
 
           if (q.pagination && store.setTotal) {
@@ -60,8 +57,7 @@ export function rsqlContainer(params: RSQLParams): ClassDecorator {
               where: query.where,
             })
             totalsPromiseList.push(
-              request(`${ENDPOINT}?${totalParams}`)
-                .then((data: any[]) => ({key: q.prop, count: data[0].count}))
+              request(`${ENDPOINT}?${totalParams}`).then((data: any[]) => ({ key: q.prop, count: data[0].count })),
             )
           }
         }
@@ -76,7 +72,7 @@ export function rsqlContainer(params: RSQLParams): ClassDecorator {
       }
 
       private handleSetVariables = (newVariables: any) => {
-        this.setState({variables: {...this.state.variables, ...newVariables}}, () => {
+        this.setState({ variables: { ...this.state.variables, ...newVariables } }, () => {
           this.handleFetch()
         })
       }
@@ -86,7 +82,9 @@ export function rsqlContainer(params: RSQLParams): ClassDecorator {
         const variables = this.state.variables
 
         const q = params.queries.find(q => q.prop === type)
-        if (!q) { return }
+        if (!q) {
+          return
+        }
         store.setLoadMore(type, true)
 
         const query = q.query(variables)
@@ -95,7 +93,7 @@ export function rsqlContainer(params: RSQLParams): ClassDecorator {
         query.limit = count
         this.offsets[q.prop] = offset + count
 
-        const result =  await request(`${ENDPOINT}?${queryParams(query)}`)
+        const result = await request(`${ENDPOINT}?${queryParams(query)}`)
 
         runInAction(() => {
           store.appendData(q.prop, result)
@@ -104,7 +102,7 @@ export function rsqlContainer(params: RSQLParams): ClassDecorator {
       }
     }
 
-    return (props: any) => React.createElement(RSQLContainer, {...props})
+    return (props: any) => React.createElement(RSQLContainer, { ...props })
   }
 }
 
@@ -121,11 +119,11 @@ interface Query {
 }
 
 interface QueryParams {
-  fields: string[],
-  table: string,
-  where?: string,
-  order?: string,
-  limit?: number,
+  fields: string[]
+  table: string
+  where?: string
+  order?: string
+  limit?: number
   offset?: number
 }
 

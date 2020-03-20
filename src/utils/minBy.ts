@@ -16,5 +16,5 @@ function compareBy(array: any[], field: string, max: boolean): any {
   return result
 }
 
-export const minBy = (array: any, field: string):any => compareBy(array, field, false)
-export const maxBy = (array: any, field: string):any => compareBy(array, field, true)
+export const minBy = (array: any, field: string): any => compareBy(array, field, false)
+export const maxBy = (array: any, field: string): any => compareBy(array, field, true)

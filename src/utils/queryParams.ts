@@ -1,15 +1,17 @@
-import {QueryParams} from 'models/rsql'
+import { QueryParams } from 'models/rsql'
 
 export default function queryParams(data: QueryParams = {}) {
-  return Object.keys(data).map((key) => {
-    const value = data[key]
+  return Object.keys(data)
+    .map(key => {
+      const value = data[key]
 
-    if (Array.isArray(value)) {
-      const k = `${key}[]`
-      const v = value.map(encodeURIComponent).join(`&${k}=`)
-      return `${k}=${v}`
-    }
+      if (Array.isArray(value)) {
+        const k = `${key}[]`
+        const v = value.map(encodeURIComponent).join(`&${k}=`)
+        return `${k}=${v}`
+      }
 
-    return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-  }).join('&')
+      return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+    })
+    .join('&')
 }

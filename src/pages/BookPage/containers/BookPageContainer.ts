@@ -1,24 +1,22 @@
 import * as React from 'react'
-import {func} from 'prop-types'
-import {RouteComponentProps} from 'react-router'
+import { func } from 'prop-types'
+import { RouteComponentProps } from 'react-router'
 
-import {renderView, ContainerBaseProps} from 'utils/container'
-import {rsqlContainer, RSQLProps} from 'utils/rsql'
-import {AppContext} from 'containers/App'
+import { renderView, ContainerBaseProps } from 'utils/container'
+import { rsqlContainer, RSQLProps } from 'utils/rsql'
+import { AppContext } from 'containers/App'
 
-import {Book, BookHistory} from 'models/book'
-import {observer} from 'mobx-react'
-import {UPDATE} from 'services/sql'
-import {deleteBook} from 'services/book'
+import { Book, BookHistory } from 'models/book'
+import { observer } from 'mobx-react'
+import { UPDATE } from 'services/sql'
+import { deleteBook } from 'services/book'
 import BookStore from 'stores/BookStore'
-
 
 interface BookPageParams {
   MD5: string
 }
 
-interface SharedProps extends RouteComponentProps<BookPageParams> {
-}
+interface SharedProps extends RouteComponentProps<BookPageParams> {}
 
 export interface ContainerProps extends SharedProps {
   fetching: boolean
@@ -57,12 +55,7 @@ interface Props extends ContainerBaseProps, SharedProps {
     {
       prop: 'history',
       query: (vars: any) => ({
-        fields: [
-          'StartTime as date',
-          'EndTime',
-          '(EndTime - StartTime) AS time',
-          'Progress AS progress',
-        ],
+        fields: ['StartTime as date', 'EndTime', '(EndTime - StartTime) AS time', 'Progress AS progress'],
         table: 'library_history',
         where: `MD5 = "${vars.MD5}" AND time > 30000 AND progress <>  "5/5"`,
         order: 'StartTime',
@@ -80,13 +73,12 @@ interface Props extends ContainerBaseProps, SharedProps {
     },
   ],
   initialVariables: {},
-  store: 'bookStore'
+  store: 'bookStore',
 })
 @observer
 export default class BookPageContainer extends React.Component<Props> {
-
   static contextTypes = {
-    confirm: func
+    confirm: func,
   }
 
   MD5: string = null
@@ -106,14 +98,17 @@ export default class BookPageContainer extends React.Component<Props> {
 
   loadData(MD5: string) {
     this.MD5 = MD5
-    this.props.rsql.setVariables({MD5})
+    this.props.rsql.setVariables({ MD5 })
   }
 
   render() {
-    const {fetching, book, history: bookHistory, lastRead, thumbnail} = this.props.bookStore
+    const { fetching, book, history: bookHistory, lastRead, thumbnail } = this.props.bookStore
     return renderView(this.props, {
       fetching: fetching || !book,
-      book, bookHistory, lastRead, thumbnail,
+      book,
+      bookHistory,
+      lastRead,
+      thumbnail,
       onStatusChange: this.handleChangeStatus,
       onDeleteBook: this.handleDeleteBook,
     })
@@ -121,7 +116,7 @@ export default class BookPageContainer extends React.Component<Props> {
 
   private handleChangeStatus = (status: number) => {
     this.props.bookStore.changeStatus(status)
-    UPDATE('library_metadata', {where: `MD5 = "${this.props.bookStore.book.MD5}"`, status})
+    UPDATE('library_metadata', { where: `MD5 = "${this.props.bookStore.book.MD5}"`, status })
   }
 
   private handleDeleteBook = () => {

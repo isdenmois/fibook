@@ -19,8 +19,7 @@ interface State {
 }
 
 export default class Page extends React.PureComponent<Props> {
-
-  state: State = {tab: 0}
+  state: State = { tab: 0 }
 
   render() {
     let className = s.page
@@ -43,18 +42,22 @@ export default class Page extends React.PureComponent<Props> {
     return (
       <div className={className} data-page={this.props.name}>
         {this.props.fixed}
-        {this.props.toolbar &&
-          <div className={s.toolbar} onTouchMove={this.handleTouchStart}>{this.props.toolbar}</div>
-        }
+        {this.props.toolbar && (
+          <div className={s.toolbar} onTouchMove={this.handleTouchStart}>
+            {this.props.toolbar}
+          </div>
+        )}
         <div className={s.content}>{this.props.children}</div>
-        {this.props.tabs &&
+        {this.props.tabs && (
           <div className={s.tabs} onTouchMove={this.handleTouchStart}>
             {map(this.props.tabs, this.renderTabButton)}
           </div>
-        }
-        {this.props.tabbar &&
-          <div className={s.tabs} onTouchMove={this.handleTouchStart}>{this.props.tabbar}</div>
-        }
+        )}
+        {this.props.tabbar && (
+          <div className={s.tabs} onTouchMove={this.handleTouchStart}>
+            {this.props.tabbar}
+          </div>
+        )}
       </div>
     )
   }
@@ -73,7 +76,7 @@ export default class Page extends React.PureComponent<Props> {
   }
 
   private handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    this.setState({tab: +event.currentTarget.dataset.index})
+    this.setState({ tab: +event.currentTarget.dataset.index })
   }
 
   private handleTouchStart = (event: React.TouchEvent<HTMLElement>) => {
@@ -84,4 +87,3 @@ export default class Page extends React.PureComponent<Props> {
 interface TabData {
   label: string
 }
-

@@ -1,22 +1,22 @@
 .progress {
-    background: linear-gradient(90deg, #ccc, #ccc 100%) center no-repeat;
-    background-size: 100% 1px;
-    margin-top: 15px;
-    overflow: hidden;
+  background: linear-gradient(90deg, #ccc, #ccc 100%) center no-repeat;
+  background-size: 100% 1px;
+  margin-top: 15px;
+  overflow: hidden;
 }
 
 .wrapper {
-    align-items: center;
-    display: flex;
-    position: relative;
+  align-items: center;
+  display: flex;
+  position: relative;
 }
 
 .wrapper :global(.line) {
-    fill: var(--blue);
-    stroke: var(--blue);
-    stroke-width: 1;
+  fill: var(--blue);
+  stroke: var(--blue);
+  stroke-width: 1;
 }
 
 .read {
-    font-size: var(--fontXS);
+  font-size: var(--fontXS);
 }
