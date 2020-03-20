@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import List from 'components/List'
-import ListItem from 'components/ListItem'
+import { List } from 'components/list'
+import { ListItem } from 'components/list-item'
 import fileSizeConvert from 'utils/FileSize'
 import formatTime, { formatDaysLength } from 'utils/formatTime'
 import { Book, BookHistory } from 'models/book'

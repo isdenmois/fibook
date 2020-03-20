@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import Modal from './Modal'
+import { Modal } from './modal'
 
 interface Props {}
 

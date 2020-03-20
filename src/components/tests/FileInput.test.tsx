@@ -26,6 +26,6 @@ describe('<FileInput />', () => {
     const target = { files: ['test file'] }
 
     input.simulate('change', { target })
-    expect(fn).toHaveBeenCalledWith('test file')
+    expect(fn).toHaveBeenCalledWith(['test file'])
   })
 })

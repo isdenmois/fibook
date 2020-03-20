@@ -6,11 +6,13 @@ export interface BookCover {
   type: string
 }
 
-export abstract class BookParser {
-  abstract author: string
-  abstract title: string
-  abstract cover: BookCover
+interface IBookParser {
+  author: string
+  title: string
+  cover: BookCover
+}
 
+export abstract class BookParser implements IBookParser {
   protected xq: any
 
   constructor(public file: Blob, public fileName: string) {}

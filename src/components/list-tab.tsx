@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { Book } from 'models/book'
-import Spinner from './Spinner'
+import { Spinner } from './spinner'
 
-import List from './List'
-import ListItem from './ListItem'
-import EmptyList from './EmptyList'
+import { List } from './list'
+import { ListItem } from './list-item'
+import { EmptyList } from './empty-list'
 const s = require('./style/listTab.css')
 
 interface Props {

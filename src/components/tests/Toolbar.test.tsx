@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
 
-import Toolbar from '../Toolbar'
+import { Toolbar } from '../toolbar'
 
 describe('<Toolbar />', () => {
   it('should render', () => {

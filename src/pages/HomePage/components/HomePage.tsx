@@ -1,13 +1,13 @@
 import * as React from 'react'
-import InlineSVG from 'components/InlineSvg'
+import { InlineSvg } from 'components/inline-svg'
 
 import { container } from 'utils/container'
 import HomePageContainer, { ContainerProps } from '../containers/HomePageContainer'
-import ListTab from 'components/ListTab'
+import ListTab from 'components/list-tab'
 
-import Loading from 'components/Loading'
+import { Loading } from 'components/loading'
 import FileInput from 'components/FileInput'
-import Tabs from 'components/Tabs'
+import Tabs from 'components/tabs'
 
 const fileUpload = require('./icons/file_upload.svg')
 const bookIcon = require('./icons/ios-book.svg')
@@ -67,7 +67,7 @@ export class HomePage extends React.Component<ContainerProps> {
   renderFixed() {
     return (
       <FileInput name='book-upload' onFileSelect={this.props.onCreateBook}>
-        <InlineSVG className={s.icon} src={fileUpload} />
+        <InlineSvg className={s.icon} src={fileUpload} />
       </FileInput>
     )
   }

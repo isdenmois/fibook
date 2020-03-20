@@ -6,26 +6,25 @@ interface Props {
   dangerous?: boolean
   positive?: boolean
   onClick: () => void
+  children?: React.ReactChildren
 }
 
-export default class Button extends React.PureComponent<Props> {
-  render() {
-    let className = s.wrapper
+export const Button = (props: Props) => {
+  let className = s.wrapper
 
-    const { children, dangerous, positive, ...props } = this.props
+  const { children, dangerous, positive, ...otherProps } = props
 
-    if (dangerous) {
-      className = `${className} ${s.dangerous}`
-    }
-
-    if (positive) {
-      className = `${className} ${s.positive}`
-    }
-
-    return (
-      <div {...props} className={className}>
-        {children}
-      </div>
-    )
+  if (dangerous) {
+    className = `${className} ${s.dangerous}`
   }
+
+  if (positive) {
+    className = `${className} ${s.positive}`
+  }
+
+  return (
+    <div {...otherProps} className={className}>
+      {children}
+    </div>
+  )
 }

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import InlineSVG from 'components/InlineSvg'
+import { InlineSvg } from 'components/inline-svg'
 
 const svg = require('./style/bookProgress.svg')
 const s = require('./style/bookProgress.css')
@@ -24,7 +24,7 @@ export default class BookProgress extends React.PureComponent<Props> {
 
     return (
       <div className={s.progress}>
-        <InlineSVG className={s.wrapper} src={svg} style={{ left: `${percent}%` }} />
+        <InlineSvg className={s.wrapper} src={svg} style={{ left: `${percent}%` }} />
       </div>
     )
   }

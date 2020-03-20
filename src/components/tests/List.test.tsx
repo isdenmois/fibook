@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
 
-import List from '../List'
-const s = require('./List.css')
+import { List } from '../list'
+const s = require('./list.css')
 
 describe('<List />', () => {
   it('should render', () => {

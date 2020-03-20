@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
-import InlineSvg from '../InlineSvg'
+import { InlineSvg } from '../inline-svg'
 
 describe('<Svg/>', () => {
   it('should render svg', () => {

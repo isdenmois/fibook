@@ -32,10 +32,6 @@ exports.output = {
 exports.resolve = {
   extensions: ['.js', '.jsx', '.ts', '.tsx'],
   modules: ['src', 'node_modules'],
-  alias: {
-    react: 'preact-compat',
-    'react-dom': 'preact-compat',
-  },
 }
 
 exports.module = {

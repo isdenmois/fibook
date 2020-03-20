@@ -1,7 +1,7 @@
 import * as React from 'react'
-import InlineSVG from './InlineSvg'
+import { InlineSvg } from './inline-svg'
 import map from 'utils/map'
-import Page from './Page'
+import Page from './page'
 
 const s = require('./style/tabs.css')
 
@@ -46,7 +46,7 @@ export default class Tabs extends React.PureComponent<Props> {
 
     return (
       <div key={i} onClick={() => this.setActive(i)} className={i === active ? s.buttonActive : s.button}>
-        <InlineSVG className={s.icon} src={icon} />
+        <InlineSvg className={s.icon} src={icon} />
         {data.title}
       </div>
     )

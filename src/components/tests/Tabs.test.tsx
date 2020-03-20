@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
 
-import Tabs, { TabData } from '../Tabs'
+import Tabs, { TabData } from '../tabs'
 
 describe('<Tabs />', () => {
   it('should render', () => {

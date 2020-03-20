@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
 
-import ListItem from '../ListItem'
+import { ListItem } from '../list-item'
 const s = require('../style/listItem.css')
 
 describe('<ListItem />', () => {
