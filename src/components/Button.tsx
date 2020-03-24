@@ -6,7 +6,7 @@ interface Props {
   dangerous?: boolean
   positive?: boolean
   onClick: () => void
-  children?: React.ReactChildren
+  children?: React.ReactNode
 }
 
 export const Button = (props: Props) => {

@@ -3,7 +3,7 @@ import map from 'utils/map'
 import { BookHistory } from 'models/book'
 
 import TimeLineItem from './TimelineItem'
-const s = require('./style/timeline.css')
+const s = require('../style/timeline.css')
 
 interface Props {
   history: BookHistory[]

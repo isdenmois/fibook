@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-const s = require('./style/thumbnail.css')
+const s = require('../style/thumbnail.css')
 
 interface Props {
   url: string

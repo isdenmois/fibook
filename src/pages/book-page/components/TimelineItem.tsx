@@ -1,7 +1,7 @@
 import * as React from 'react'
 const formatTime = require('utils/formatTime').default
 import { BookHistory } from 'models/book'
-const s = require('./style/timelineItem.css')
+const s = require('../style/timelineItem.css')
 
 interface Props {
   historyItem: BookHistory

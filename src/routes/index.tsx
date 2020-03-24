@@ -2,8 +2,8 @@ import * as React from 'react'
 import { Route } from 'react-router'
 import { BrowserRouter } from 'react-router-dom'
 
-import { BookPage } from 'pages/BookPage/components/BookPage'
-import { HomePage } from 'pages/HomePage/components/HomePage'
+import { BookPage } from 'pages/book-page/book-page'
+import { HomePage } from 'pages/home-page/home-page'
 
 import AppComponent from 'containers/App'
 
