@@ -7,12 +7,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ROOT_PATH = path.join(__dirname, '../..')
 const APP_PATH = ROOT_PATH + '/src'
 
-const dllConfig = require('./config').dllPlugin
-const dllPath = path.resolve(process.cwd(), dllConfig.path)
-
-const manifestPath = path.resolve(dllPath, 'fibookDeps.json')
-const dllDepPath = path.resolve(dllPath, 'fibookDeps.dll.js')
-
 exports.context = APP_PATH
 
 exports.devtool = 'source-map'
@@ -95,18 +89,6 @@ exports.plugins = [
   }),
   new HtmlWebpackPlugin({
     template: APP_PATH + '/index.html',
-  }),
-  new AddAssetHtmlPlugin({
-    filepath: dllDepPath,
-    includeSourcemap: false,
-  }),
-  new webpack.DllReferencePlugin({
-    context: process.cwd(),
-    manifest: require(manifestPath),
-    //   }), new ExtractTextPlugin({
-    //     allChunks: true,
-    //     filename: '[name].css'
-    //   })
   }),
   new MiniCssExtractPlugin({
     filename: '[name].css',

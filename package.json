@@ -8,13 +8,11 @@
   "license": "MIT",
   "scripts": {
     "analyze": "cross-env ANALYZE=1 npm run build:prod",
-    "postinstall": "npm run build:dll",
     "prebuild": "npm run build:clean",
     "build": "npm run build:prod && npm run compress",
     "build:prod": "cross-env NODE_ENV=production webpack --config dev-tools/webpack/webpack.config.prod.js --color --progress",
     "build:details": "npm run build -- --display-error-details",
     "build:clean": "rimraf ./build",
-    "build:dll": "node ./dev-tools/webpack/dependencies.js",
     "compress": "node ./dev-tools/gzip.js",
     "start": "cross-env NODE_ENV=development node dev-tools/server.js",
     "start:prod": "cross-env NODE_ENV=production node dev-tools/server.js",
