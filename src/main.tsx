@@ -31,14 +31,12 @@ let renderDom = () => {
 
 if ((module as any).hot) {
   const renderApp = renderDom
-  const RedBox = require('redbox-react').default
-  const renderError = (error: any) => ReactDOM.render(<RedBox error={error} />, rootEl)
 
   renderDom = () => {
     try {
       renderApp()
     } catch (error) {
-      renderError(error)
+      console.error(error)
     }
   }
   ;(module as any).hot.accept('./containers/Root', () => setTimeout(renderDom))
