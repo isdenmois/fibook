@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Routes from '../../routes'
+import Routes from 'pages'
 
 /**
  * Component is exported for conditional usage in Root.js
