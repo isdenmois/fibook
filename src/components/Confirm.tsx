@@ -10,9 +10,13 @@ interface State {
   positive: boolean
 }
 
-// const context
+export interface ConfirmProvider {
+  confirm: (text: string, buttons?: string[]) => Promise<number>
+}
 
-export default class Confirm extends React.PureComponent<Props> {
+export const ConfirmContext = React.createContext<ConfirmProvider>(null)
+
+export class Confirm extends React.PureComponent<Props> {
   state: State = {
     buttons: [],
     text: '',
@@ -20,24 +24,30 @@ export default class Confirm extends React.PureComponent<Props> {
   }
 
   private toSelect: (n: number) => void
+  private provider = {
+    confirm: (text: string, buttons: string[] = ['Отмена', 'ОК']): Promise<number> => {
+      this.setState({ text, buttons })
+
+      return new Promise(resolve => {
+        this.toSelect = n => {
+          this.setState({ text: '', buttons: [], positive: n })
+          resolve(n)
+        }
+      })
+    },
+  }
 
   render() {
     const { buttons, text, positive } = this.state
+
     return (
-      <Modal buttons={buttons} open={!!text} onSelect={this.toSelect} positive={positive}>
-        {text}
-      </Modal>
+      <ConfirmContext.Provider value={this.provider}>
+        <Modal buttons={buttons} open={!!text} onSelect={this.toSelect} positive={positive}>
+          {text}
+        </Modal>
+
+        {this.props.children}
+      </ConfirmContext.Provider>
     )
-  }
-
-  toConfirm(text: string, buttons: string[]): Promise<number> {
-    return new Promise(resolve => {
-      this.toSelect = n => {
-        this.setState({ text: '', buttons: [], positive: n })
-        resolve(n)
-      }
-
-      this.setState({ text, buttons })
-    })
   }
 }

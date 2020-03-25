@@ -1,8 +1,5 @@
 import * as React from 'react'
-import { func } from 'prop-types'
 import { RouteComponentProps } from 'react-router'
-
-import { AppContext } from 'containers/App'
 
 import { Book, BookHistory } from 'models/book'
 import { UPDATE } from 'services/sql'
@@ -12,6 +9,7 @@ import processHistory from 'utils/processHistory'
 import { minBy, maxBy } from 'utils/minBy'
 import { EventBus } from 'utils/event-bus'
 
+import { ConfirmContext } from 'components/confirm'
 import { Button } from 'components/button'
 import { Toolbar } from 'components/toolbar'
 import Page from 'components/page'
@@ -27,18 +25,7 @@ interface BookPageParams {
   MD5: string
 }
 
-interface Props extends RouteComponentProps<BookPageParams> {}
-
-interface ContainerProps {
-  fetching: boolean
-  book: Book
-  bookHistory: BookHistory[]
-  lastRead: string
-  thumbnail: string
-
-  onStatusChange: (status: number) => void
-  onDeleteBook: () => void
-}
+type Props = RouteComponentProps<BookPageParams>
 
 const queries = [
   {
@@ -79,14 +66,11 @@ const queries = [
 ]
 
 export class BookPage extends React.Component<Props> {
-  static contextTypes = {
-    confirm: func,
-  }
+  static contextType = ConfirmContext
 
   state = { MD5: this.props.match.params.MD5 }
 
   MD5: string = null
-  context: AppContext
   rsqlRef = React.createRef<RsqlFetcher>()
 
   componentDidUpdate() {
