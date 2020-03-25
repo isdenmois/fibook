@@ -6,7 +6,7 @@ import Page from './page'
 const s = require('./style/tabs.css')
 
 interface Props {
-  data: TabData[]
+  children: TabData[]
   name: string
 }
 
@@ -20,11 +20,17 @@ export default class Tabs extends React.PureComponent<Props> {
 
   render() {
     const active = this.state.active
-    const tab = this.props.data[active]
+    const tab = this.props.children[active]
 
     return (
-      <Page shadow tabsTop name={this.props.name} tabbar={map(this.props.data, this.renderButton)} fixed={tab.fixed}>
-        {map(this.props.data, this.renderTab)}
+      <Page
+        shadow
+        tabsTop
+        name={this.props.name}
+        tabbar={map(this.props.children, this.renderButton)}
+        fixed={tab.fixed}
+      >
+        {map(this.props.children, this.renderTab)}
       </Page>
     )
   }

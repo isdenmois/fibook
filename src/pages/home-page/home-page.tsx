@@ -1,15 +1,13 @@
 import * as React from 'react'
-import { observer, inject } from 'mobx-react'
 import { RouteComponentProps } from 'react-router'
 
-import HomePageStore from 'stores/HomePageStore'
+import { EventBus } from 'utils/event-bus'
 import { Book } from 'models/book'
 import { createBook } from 'services/book'
 import { RsqlFetcher } from 'components/rsql'
 
 import ListTab from 'components/list-tab'
 import { InlineSvg } from 'components/inline-svg'
-import { Loading } from 'components/loading'
 import FileInput from 'components/FileInput'
 import Tabs from 'components/tabs'
 
@@ -20,22 +18,7 @@ const flagIcon = require('./icons/ios-flag.svg')
 const flagIconOutline = require('./icons/ios-flag-outline.svg')
 const s = require('./style/homePage.css')
 
-interface Props extends RouteComponentProps<void> {
-  fetching: boolean
-  news: Book[]
-  read: Book[]
-
-  newsLoadingMore: boolean
-  readLoadingMore: boolean
-
-  newsCanLoadMore: boolean
-  readCanLoadMore: boolean
-
-  onCreateBook: (files: File[]) => void
-  onLoadMore: (type: string) => void
-
-  homePageStore: HomePageStore
-}
+type Props = RouteComponentProps<void>
 
 const queries = [
   {
@@ -78,40 +61,27 @@ const queries = [
   },
 ]
 
-@inject('homePageStore')
-@observer
 export class HomePage extends React.Component<Props> {
   rsqlRef = React.createRef<RsqlFetcher>()
 
-  componentDidMount() {
-    this.rsqlRef.current.fetchData()
-  }
+  refresh = () => this.rsqlRef.current.fetchData(false)
+
+  componentWillUnmount = EventBus.addEventListener('refresh', this.refresh)
 
   render() {
     return (
-      <RsqlFetcher store={this.props.homePageStore} queries={queries} ref={this.rsqlRef}>
-        {() => this.renderData()}
+      <RsqlFetcher queries={queries} ref={this.rsqlRef}>
+        {(data, total, loadMore) => (
+          <>
+            <Tabs name='home'>{this.getTabsData(data, total, loadMore)}</Tabs>
+            {this.props.children}
+          </>
+        )}
       </RsqlFetcher>
     )
   }
 
-  renderData() {
-    const { fetching } = this.props.homePageStore
-
-    if (fetching) {
-      return <Loading />
-    }
-
-    return (
-      <>
-        <Tabs name='home' data={this.getData()} />
-        {this.props.children}
-      </>
-    )
-  }
-
-  getData() {
-    const { news, read, newsTotal, readTotal, readLoadingMore, newsLoadingMore } = this.props.homePageStore
+  getTabsData([news, read]: Book[][], [newsTotal, readTotal]: number[], [readLoadingMore, newsLoadingMore]: boolean[]) {
     const newsCanLoadMore = news.length < newsTotal
     const readCanLoadMore = read.length < readTotal
 
@@ -164,7 +134,6 @@ export class HomePage extends React.Component<Props> {
   }
 
   private createBook = async (files: File[]) => {
-    this.props.homePageStore.setFetching(true)
     this.props.history.replace('/')
 
     for (let i = 0; i < files.length; i++) {
@@ -175,6 +144,6 @@ export class HomePage extends React.Component<Props> {
       }
     }
 
-    this.rsqlRef.current.fetchData()
+    this.refresh()
   }
 }

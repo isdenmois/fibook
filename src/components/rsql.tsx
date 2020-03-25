@@ -1,17 +1,16 @@
 import * as React from 'react'
-import { runInAction } from 'mobx'
-import { RSQLStore } from 'models/rsql'
+import { Loading } from './loading'
 const request = require('utils/request').default
 const queryParams = require('utils/queryParams').default
-const each = require('utils/each').default
 
 const ENDPOINT = '/api/sql'
 
 interface Props {
-  variables: any
-  children: (params: any) => any
-  store: RSQLStore
-  queries: any
+  queries: any[]
+  children: (data: any[], totals?: number[], loadMores?: boolean[]) => any
+  variables?: any
+  mapData?: (data: any[]) => any[]
+  loading?: React.ReactNode
 }
 
 export class RsqlFetcher extends React.Component<Props> {
@@ -23,19 +22,29 @@ export class RsqlFetcher extends React.Component<Props> {
 
   state = {
     variables: this.props.variables,
-    data: {},
+    data: [],
+    totals: [],
+    loadMores: [],
+    fetching: true,
+  }
+
+  componentDidMount() {
+    this.fetchData()
   }
 
   render() {
-    return this.props.children(this.state.data)
+    if (this.state.fetching) {
+      return this.props.loading || <Loading />
+    }
+
+    return this.props.children(this.state.data, this.state.totals, this.state.loadMores)
   }
 
-  async fetchData() {
-    const store: RSQLStore = this.props.store
+  async fetchData(fetching = true) {
     const variables = this.state.variables
     const promiseList = []
     const totalsPromiseList = []
-    store.setFetching(true)
+    this.setState({ fetching })
 
     for (let q of this.props.queries) {
       const query = q.query(variables)
@@ -44,10 +53,10 @@ export class RsqlFetcher extends React.Component<Props> {
         query.limit += offset
       }
 
-      const promise = request(`${ENDPOINT}?${queryParams(query)}`).then((data: any[]) => ({ key: q.prop, data }))
+      const promise = request(`${ENDPOINT}?${queryParams(query)}`)
       promiseList.push(promise)
 
-      if (q.pagination && store.setTotal) {
+      if (q.pagination) {
         const totalParams = queryParams({
           fields: ['COUNT(*) as count'],
           table: query.table,
@@ -59,14 +68,14 @@ export class RsqlFetcher extends React.Component<Props> {
       }
     }
 
-    const result: any = await Promise.all(promiseList)
-    const totals: any = await Promise.all(totalsPromiseList)
-    runInAction('set book data', () => {
-      each(result, (qr: any) => store.setData(qr.key, qr.data))
-      each(totals, (tr: any) => store.setTotal(tr.key, tr.count))
-      store.setFetching(false)
-      this.setState({})
-    })
+    let data: any = await Promise.all(promiseList)
+    const totals: any = await Promise.all(totalsPromiseList).then(result => result.map(r => r?.count ?? 0))
+
+    if (this.props.mapData) {
+      data = this.props.mapData(data)
+    }
+
+    this.setState({ data, totals, fetching: false })
   }
 
   setVariables(newVariables: any) {
@@ -76,28 +85,51 @@ export class RsqlFetcher extends React.Component<Props> {
   }
 
   async loadMore(type: string, count: number = 20) {
-    const store: RSQLStore = this.props.store
     const variables = this.state.variables
+    const index = this.getIndex(type)
 
-    const q = this.props.queries.find(q => q.prop === type)
+    if (index < 0) return
+    const q = this.props.queries[index]
 
-    if (!q) {
-      return
-    }
-    store.setLoadMore(type, true)
+    this.setLoadMore(index, true)
 
     const query = q.query(variables)
     let offset = (this.offsets[q.prop] || 0) as number
-    query.offset = (store as any)[type].length
+    query.offset = this.state.data[index].length
     query.limit = count
     this.offsets[q.prop] = offset + count
 
-    const result = await request(`${ENDPOINT}?${queryParams(query)}`)
+    const data = await request(`${ENDPOINT}?${queryParams(query)}`)
 
-    runInAction(() => {
-      store.appendData(q.prop, result)
-      store.setLoadMore(type, false)
-      this.setState({})
-    })
+    this.appendData(index, data)
+    this.setLoadMore(index, false)
+  }
+
+  getData(prop: string) {
+    return this.state.data[this.getIndex(prop)]
+  }
+
+  updateData(prop: string, data) {
+    this.state.data[this.getIndex(prop)] = data
+
+    this.setState({ data: [...this.state.data] })
+  }
+
+  private getIndex(prop: string) {
+    return this.props.queries.findIndex(q => q.prop === prop)
+  }
+
+  private setLoadMore(index: number, value: boolean) {
+    const loadMores = [...this.state.loadMores]
+    loadMores[index] = value
+
+    this.setState({ loadMores })
+  }
+
+  private appendData(index: number, data: any[]) {
+    const result = [...this.state.data]
+    result[index] = result[index].concat(data)
+
+    this.setState({ data: result })
   }
 }

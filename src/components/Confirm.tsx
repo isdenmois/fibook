@@ -10,6 +10,8 @@ interface State {
   positive: boolean
 }
 
+// const context
+
 export default class Confirm extends React.PureComponent<Props> {
   state: State = {
     buttons: [],

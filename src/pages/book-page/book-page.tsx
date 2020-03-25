@@ -5,18 +5,19 @@ import { RouteComponentProps } from 'react-router'
 import { AppContext } from 'containers/App'
 
 import { Book, BookHistory } from 'models/book'
-import { observer, inject } from 'mobx-react'
 import { UPDATE } from 'services/sql'
 import { deleteBook } from 'services/book'
-import BookStore from 'stores/BookStore'
 import { RsqlFetcher } from 'components/rsql'
+import processHistory from 'utils/processHistory'
+import { minBy, maxBy } from 'utils/minBy'
+import { EventBus } from 'utils/event-bus'
 
 import { Button } from 'components/button'
 import { Toolbar } from 'components/toolbar'
 import Page from 'components/page'
 import { Loading } from 'components/loading'
 
-import BookProgress from './components/BookProgress'
+import { BookProgress } from './components/book-progress'
 import BookDetails from './components/BookDetails'
 import Timeline from './components/Timeline'
 import Thumbnail from './components/Thumbnail'
@@ -26,9 +27,9 @@ interface BookPageParams {
   MD5: string
 }
 
-interface SharedProps extends RouteComponentProps<BookPageParams> {}
+interface Props extends RouteComponentProps<BookPageParams> {}
 
-interface ContainerProps extends SharedProps {
+interface ContainerProps {
   fetching: boolean
   book: Book
   bookHistory: BookHistory[]
@@ -37,10 +38,6 @@ interface ContainerProps extends SharedProps {
 
   onStatusChange: (status: number) => void
   onDeleteBook: () => void
-}
-
-interface Props extends SharedProps {
-  bookStore: BookStore
 }
 
 const queries = [
@@ -81,106 +78,101 @@ const queries = [
   },
 ]
 
-@inject('bookStore')
-@observer
 export class BookPage extends React.Component<Props> {
   static contextTypes = {
     confirm: func,
   }
 
+  state = { MD5: this.props.match.params.MD5 }
+
   MD5: string = null
   context: AppContext
   rsqlRef = React.createRef<RsqlFetcher>()
 
-  componentDidMount() {
-    this.loadData(this.props.match.params.MD5)
-  }
-
   componentDidUpdate() {
     const MD5 = this.props.match.params.MD5
 
-    if (this.MD5 !== MD5) {
-      this.loadData(MD5)
+    if (this.state.MD5 !== MD5) {
+      this.setState({ MD5 })
     }
   }
 
-  loadData(MD5: string) {
-    this.MD5 = MD5
-    this.rsqlRef.current.setVariables({ MD5 })
-  }
-
   render() {
-    const { fetching, book, history: bookHistory, lastRead, thumbnail } = this.props.bookStore
+    const toolbar = <Toolbar backButton history={this.props.history} title='Подробности' />
+    const loading = (
+      <Page name='book' className={s.bookPage} toolbar={toolbar}>
+        <Loading />
+      </Page>
+    )
 
     return (
-      <RsqlFetcher store={this.props.bookStore} queries={queries} ref={this.rsqlRef}>
-        {() =>
-          this.renderData({
-            fetching: fetching || !book,
-            book,
-            bookHistory,
-            lastRead,
-            thumbnail,
-          })
-        }
+      <RsqlFetcher variables={this.state} queries={queries} loading={loading} mapData={this.mapData} ref={this.rsqlRef}>
+        {([book, history, thumbnail, lastRead]) => (
+          <Page name='book' className={s.bookPage} toolbar={toolbar} tabbar={this.renderBottomToolbar(book)}>
+            <div className={s.primary}>
+              {thumbnail && <Thumbnail url={thumbnail} />}
+              <div className={s.title}>{book.title}</div>
+              <div className={s.author}>{book.author}</div>
+
+              <BookProgress status={book.status} lastRead={lastRead} progress={book.progress} />
+            </div>
+            <BookDetails book={book} history={history} />
+            <Timeline history={history} />
+          </Page>
+        )}
       </RsqlFetcher>
     )
   }
 
-  renderData({ fetching, book, bookHistory, lastRead, thumbnail }) {
-    if (fetching) {
-      return (
-        <Page name='book' className={s.bookPage} toolbar={this.renderToolbar()}>
-          <Loading />
-        </Page>
-      )
+  renderBottomToolbar(book: Book) {
+    return book
+      ? [
+          <Button key='status' onClick={this.changeStatus}>
+            {book.status > 0 ? 'В новые' : 'В прочтенные'}
+          </Button>,
+          <Button key='delete' dangerous onClick={this.deleteBook}>
+            Удалить
+          </Button>,
+        ]
+      : null
+  }
+
+  private mapData([book, history, thumbnail]) {
+    const processedHistory = processHistory(history || [])
+    book = book[0]
+
+    if (processedHistory.length > 0) {
+      book.startRead = +minBy(history, 'date')
+      book.endRead = +maxBy(history, 'EndTime')
+      book.readTime = processedHistory.reduce((time: number, item: BookHistory) => time + item.time, 0)
     }
 
-    return (
-      <Page name='book' className={s.bookPage} toolbar={this.renderToolbar()} tabbar={this.renderBottomToolbar()}>
-        <div className={s.primary}>
-          {thumbnail && <Thumbnail url={thumbnail} />}
-          <div className={s.title}>{book.title}</div>
-          <div className={s.author}>{book.author}</div>
-          <BookProgress lastRead={lastRead} progress={book.progress} />
-        </div>
-        <BookDetails book={book} history={bookHistory} />
-        <Timeline history={bookHistory} />
-      </Page>
-    )
+    const lastRead = processedHistory.length > 0 ? processedHistory[processedHistory.length - 1].date : ''
+
+    return [book, processedHistory, thumbnail?.[0]?.url, lastRead]
   }
 
-  renderToolbar() {
-    return <Toolbar backButton history={this.props.history} title='Подробности' />
-  }
+  private changeStatus = async () => {
+    const book: Book = this.rsqlRef.current.getData('book')
+    const status = book.status > 0 ? 0 : 1
 
-  renderBottomToolbar() {
-    const book = this.props.bookStore.book
+    this.rsqlRef.current.updateData('book', { ...book, status })
 
-    return [
-      <Button key='status' onClick={this.changeStatus}>
-        {book.status > 0 ? 'В новые' : 'В прочтенные'}
-      </Button>,
-      <Button key='delete' dangerous onClick={this.deleteBook}>
-        Удалить
-      </Button>,
-    ]
-  }
+    await UPDATE('library_metadata', { where: `MD5 = "${book.MD5}"`, status })
 
-  private changeStatus = () => {
-    const status = this.props.bookStore.book.status
-
-    this.props.bookStore.changeStatus(status > 0 ? 0 : 1)
-    UPDATE('library_metadata', { where: `MD5 = "${this.props.bookStore.book.MD5}"`, status })
+    EventBus.dispatch('refresh')
   }
 
   private deleteBook = () => {
-    this.context.confirm('Вы действительно хотите удалить книгу?').then(selected => {
+    this.context.confirm('Вы действительно хотите удалить книгу?').then(async selected => {
       if (selected) {
-        const MD5 = this.props.bookStore.book.MD5
-        this.props.bookStore.deleteBook()
+        const book: Book = this.rsqlRef.current.getData('book')
+
         this.props.history.push('/')
-        deleteBook(MD5)
+
+        await deleteBook(book.MD5)
+
+        EventBus.dispatch('refresh')
       }
     })
   }
