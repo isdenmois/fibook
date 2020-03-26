@@ -1,5 +1,5 @@
 import { ParsedFB2 } from 'models/parser'
-const base64 = require('utils/base64').default
+import base64 from 'utils/base64'
 import { BookParser } from 'utils/parsers/base'
 import { FB2Parser } from 'utils/parsers/fb2'
 import { EpubParser } from 'utils/parsers/epub'

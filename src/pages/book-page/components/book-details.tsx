@@ -2,8 +2,8 @@ import * as React from 'react'
 
 import { List } from 'components/list'
 import { ListItem } from 'components/list-item'
-import fileSizeConvert from 'utils/FileSize'
-import formatTime, { formatDaysLength } from 'utils/formatTime'
+import fileSizeConvert from 'utils/file-size'
+import formatTime, { formatDaysLength } from 'utils/format-time'
 import { Book, BookHistory } from 'models/book'
 
 interface Props {

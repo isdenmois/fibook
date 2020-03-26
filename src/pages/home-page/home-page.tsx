@@ -8,7 +8,7 @@ import { RsqlFetcher } from 'components/rsql'
 
 import ListTab from 'components/list-tab'
 import { InlineSvg } from 'components/inline-svg'
-import FileInput from 'components/FileInput'
+import { FileInput } from 'components/file-input'
 import Tabs from 'components/tabs'
 
 const fileUpload = require('./icons/file_upload.svg')
@@ -16,7 +16,7 @@ const bookIcon = require('./icons/ios-book.svg')
 const bookIconOutline = require('./icons/ios-book-outline.svg')
 const flagIcon = require('./icons/ios-flag.svg')
 const flagIconOutline = require('./icons/ios-flag-outline.svg')
-const s = require('./style/homePage.css')
+const s = require('./style/home-page.css')
 
 type Props = RouteComponentProps<void>
 

@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { HomePage } from './home-page/home-page'
 import { BookPage } from './book-page/book-page'
 
-import AppComponent from 'containers/App'
+import AppComponent from 'containers/app'
 
 const s = require('theme/global.css')
 

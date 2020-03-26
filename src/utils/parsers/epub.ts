@@ -1,6 +1,6 @@
 import * as JSZip from 'jszip'
-const XmlReader = require('xml-reader')
-const xmlQuery = require('xml-query')
+import * as XmlReader from 'xml-reader'
+import * as xmlQuery from 'xml-query'
 import { BookParser, BookCover } from './base'
 
 export class EpubParser extends BookParser {

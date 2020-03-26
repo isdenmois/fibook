@@ -5,7 +5,7 @@ import { Spinner } from './spinner'
 import { List } from './list'
 import { ListItem } from './list-item'
 import { EmptyList } from './empty-list'
-const s = require('./style/listTab.css')
+const s = require('./style/list-tab.css')
 
 interface Props {
   data: Book[]

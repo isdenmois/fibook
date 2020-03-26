@@ -1,4 +1,4 @@
-import { minBy, maxBy } from '../minBy'
+import { minBy, maxBy } from '../min-by'
 
 describe('minBy', () => {
   it('Should returns null on empty array', () => {

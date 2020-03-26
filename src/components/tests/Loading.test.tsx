@@ -2,7 +2,7 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 
 import { Loading } from '../loading'
-const s = require('../Loading/Loading.css')
+const s = require('../styles/loading.css')
 
 describe('<Loading />', () => {
   it('should rendering', () => {

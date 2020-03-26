@@ -1,4 +1,4 @@
-import convert from '../FileSize'
+import convert from '../file-size'
 
 describe('FileSize convert', () => {
   it('should works', () => {

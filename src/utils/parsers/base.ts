@@ -1,4 +1,4 @@
-const xmlQuery = require('xml-query')
+import * as xmlQuery from 'xml-query'
 
 export interface BookCover {
   data: string

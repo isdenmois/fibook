@@ -14,7 +14,7 @@ describe('<Tabs />', () => {
       },
     ]
 
-    const component = shallow(<Tabs name='super-tab' data={data} />)
+    const component = shallow(<Tabs name='super-tab'>{data}</Tabs>)
     expect(component.length).toBeTruthy()
   })
 })

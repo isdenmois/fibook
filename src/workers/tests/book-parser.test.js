@@ -1,5 +1,3 @@
-import { PARSE_FILE } from '../../constants/BookParser'
-
 describe('bookParser worker', () => {
   // Mock BookParser.
   jest.mock('../../utils/BookParser', () => {
@@ -43,7 +41,7 @@ describe('bookParser worker', () => {
     const file = 'file'
     window.onmessage({
       data: {
-        type: PARSE_FILE,
+        type: 'PARSE_FILE',
         file,
       },
     })
@@ -59,7 +57,7 @@ describe('bookParser worker', () => {
     global.self.mockedMessage.mockReset()
     window.onmessage({
       data: {
-        type: PARSE_FILE,
+        type: 'PARSE_FILE',
         file,
       },
     })
@@ -77,7 +75,7 @@ describe('bookParser worker', () => {
     global.self.mockedMessage.mockReset()
     window.onmessage({
       data: {
-        type: PARSE_FILE,
+        type: 'PARSE_FILE',
         file,
       },
     })

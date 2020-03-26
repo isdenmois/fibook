@@ -8,7 +8,7 @@ interface Props {
   onFileSelect: (file: File[]) => void
 }
 
-export default class FileInput extends React.PureComponent<Props> {
+export class FileInput extends React.PureComponent<Props> {
   static defaultProps = { accept: '.fb2,.fb2.zip,.epub' }
 
   render() {

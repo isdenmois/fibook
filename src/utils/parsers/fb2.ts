@@ -1,8 +1,8 @@
 import * as JSZip from 'jszip'
-const XmlReader = require('xml-reader')
-const xmlQuery = require('xml-query')
-const translit = require('translit')
-const translitRussian = require('translit-russian')
+import * as XmlReader from 'xml-reader'
+import * as xmlQuery from 'xml-query'
+import * as translit from 'translit'
+import * as translitRussian from 'translit-russian'
 import { BookParser } from './base'
 
 export class FB2Parser extends BookParser {

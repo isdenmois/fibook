@@ -2,8 +2,8 @@ import * as React from 'react'
 
 import { InlineSvg } from 'components/inline-svg'
 
-const svg = require('../style/bookProgress.svg')
-const s = require('../style/bookProgress.css')
+const svg = require('../style/book-progress.svg')
+const s = require('../style/book-progress.css')
 
 interface Props {
   status: number

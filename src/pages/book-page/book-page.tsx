@@ -5,8 +5,8 @@ import { Book, BookHistory } from 'models/book'
 import { UPDATE } from 'services/sql'
 import { deleteBook } from 'services/book'
 import { RsqlFetcher } from 'components/rsql'
-import processHistory from 'utils/processHistory'
-import { minBy, maxBy } from 'utils/minBy'
+import processHistory from 'utils/process-history'
+import { minBy, maxBy } from 'utils/min-by'
 import { EventBus } from 'utils/event-bus'
 
 import { ConfirmContext } from 'components/confirm'
@@ -16,10 +16,10 @@ import Page from 'components/page'
 import { Loading } from 'components/loading'
 
 import { BookProgress } from './components/book-progress'
-import BookDetails from './components/BookDetails'
-import Timeline from './components/Timeline'
-import Thumbnail from './components/Thumbnail'
-const s = require('./style/bookPage.css')
+import BookDetails from './components/book-details'
+import Timeline from './components/timeline'
+import Thumbnail from './components/thumbnail'
+const s = require('./style/book-page.css')
 
 interface BookPageParams {
   MD5: string

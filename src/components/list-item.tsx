@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-const s = require('./style/listItem.css')
+const s = require('./style/list-item.css')
 
 interface Props {
   small?: boolean

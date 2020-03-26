@@ -1,4 +1,4 @@
-const request = require('utils/request').default
+import request from 'utils/request'
 
 const SQL_ENDPOINT = '/api/sql'
 

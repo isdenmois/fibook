@@ -1,4 +1,4 @@
-import queryParams from '../queryParams'
+import queryParams from '../query-params'
 
 describe('queryParams', () => {
   it('should work on empty data', () => {

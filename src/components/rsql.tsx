@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Loading } from './loading'
-const request = require('utils/request').default
-const queryParams = require('utils/queryParams').default
+import request from 'utils/request'
+import queryParams from 'utils/query-params'
 
 const ENDPOINT = '/api/sql'
 

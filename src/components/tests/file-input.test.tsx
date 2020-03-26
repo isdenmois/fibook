@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
-import FileInput from '../FileInput'
+import { FileInput } from '../file-input'
 
 describe('<FileInput />', () => {
   const fn = jest.fn()
@@ -12,7 +12,7 @@ describe('<FileInput />', () => {
   const input = file.find('input')
 
   it('should render without errors', () => {
-    expect(file).toBeDefined()
+    expect(input.length).toBe(1)
   })
 
   it('should correctly works when file is not selected', () => {

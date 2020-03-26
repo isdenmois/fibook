@@ -1,4 +1,4 @@
-import QueryParams from './queryParams'
+import QueryParams from './query-params'
 
 interface RequestParams {
   method?: string

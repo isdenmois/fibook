@@ -2,7 +2,7 @@ import * as React from 'react'
 import map from 'utils/map'
 import { BookHistory } from 'models/book'
 
-import TimeLineItem from './TimelineItem'
+import TimeLineItem from './time-line-item'
 const s = require('../style/timeline.css')
 
 interface Props {

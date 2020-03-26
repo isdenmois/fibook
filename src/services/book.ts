@@ -1,5 +1,5 @@
-const request = require('utils/request').default
-import bookDataParser from 'utils/bookData'
+import request from 'utils/request'
+import bookDataParser from 'utils/book-data'
 
 const BOOKS_ENDPOINT = '/api/book'
 
