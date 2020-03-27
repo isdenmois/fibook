@@ -18,19 +18,26 @@ const defaults = <RequestParams>{
   },
 }
 
-export default function request(url: string, params?: RequestParams) {
+export default function request(url: string, params?: RequestParams, onprogress?: (ev: ProgressEvent) => any) {
   return new Promise((resolve, reject) => {
     const options: RequestParams = { ...defaults, ...params }
 
     const xhr = new XMLHttpRequest()
-    xhr.open(options.method, options.params ? `${url}?${QueryParams(options.params)}` : url, true)
-    xhr.addEventListener('load', () => {
+    xhr.upload.onprogress = onprogress
+    xhr.onerror = reject
+    xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status < 300) {
-        resolve(xhr.responseText && JSON.parse(xhr.responseText))
+        try {
+          resolve(xhr.responseText && JSON.parse(xhr.responseText))
+        } catch (e) {
+          reject(xhr.responseText)
+        }
       } else {
-        reject(xhr)
+        reject(xhr.responseText)
       }
-    })
+    }
+
+    xhr.open(options.method, options.params ? `${url}?${QueryParams(options.params)}` : url, true)
 
     for (const k in options.headers) {
       xhr.setRequestHeader(k, options.headers[k])

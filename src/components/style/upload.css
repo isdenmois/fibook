@@ -1,0 +1,86 @@
+.page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 3;
+  background: white;
+}
+
+.title {
+  font-size: 18px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.result {
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 13px;
+  margin-top: 15px;
+  color: var(--darkGrey);
+}
+
+.files {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.file {
+  margin-top: 15px;
+}
+
+.file:first-child {
+  margin-top: 0;
+}
+
+.file-title {
+  font-size: 14px;
+}
+
+.info {
+  font-size: 10px;
+  color: var(--grey);
+}
+
+.progress {
+  position: relative;
+  border-radius: 10px;
+  margin-top: 5px;
+  height: 3px;
+  background: var(--lightGrey);
+}
+
+.progress:after {
+  content: '';
+  position: absolute;
+  width: var(--progress);
+  background-color: var(--lightBlue);
+  border-radius: 10px;
+  height: 3px;
+}
+
+.progress_done:after {
+  background: var(--green);
+}
+
+.error {
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--red);
+}
+
+.button {
+  background-color: var(--blue);
+  text-align: center;
+  color: white;
+  padding: 10px;
+}
+
+.button:active {
+  background-color: var(--lightBlue);
+}

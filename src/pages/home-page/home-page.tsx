@@ -3,9 +3,9 @@ import { RouteComponentProps } from 'react-router'
 
 import { EventBus } from 'utils/event-bus'
 import { Book } from 'models/book'
-import { createBook } from 'services/book'
 import { RsqlFetcher } from 'components/rsql'
 
+import { FileUploaderContext } from 'components/uploader'
 import ListTab from 'components/list-tab'
 import { InlineSvg } from 'components/inline-svg'
 import { FileInput } from 'components/file-input'
@@ -62,6 +62,8 @@ const queries = [
 ]
 
 export class HomePage extends React.Component<Props> {
+  static contextType = FileUploaderContext
+
   rsqlRef = React.createRef<RsqlFetcher>()
 
   refresh = () => this.rsqlRef.current.fetchData(false)
@@ -136,13 +138,7 @@ export class HomePage extends React.Component<Props> {
   private createBook = async (files: File[]) => {
     this.props.history.replace('/')
 
-    for (let i = 0; i < files.length; i++) {
-      try {
-        await createBook(files[i])
-      } catch (e) {
-        window.alert(e)
-      }
-    }
+    await this.context.upload(files)
 
     this.refresh()
   }
