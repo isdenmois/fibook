@@ -16,15 +16,7 @@ export class FileInput extends React.PureComponent<Props> {
 
     return (
       <div className={s.wrapper}>
-        <input
-          ref='fileInput'
-          className={s.input}
-          type='file'
-          multiple
-          name={name}
-          onChange={this.onChange}
-          accept={accept}
-        />
+        <input className={s.input} type='file' multiple name={name} onChange={this.onChange} accept={accept} />
         <div className={s.icon}>{children}</div>
       </div>
     )

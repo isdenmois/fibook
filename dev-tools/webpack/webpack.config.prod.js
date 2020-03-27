@@ -4,24 +4,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const strip = require('strip-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const BabiliPlugin = require('babili-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const ShakePlugin = require('webpack-common-shake').Plugin
 const TerserPlugin = require('terser-webpack-plugin')
 const ROOT_PATH = path.join(__dirname, '../..')
 const APP_PATH = ROOT_PATH + '/src'
 
-function isExternal({ userRequest }) {
-  if (typeof userRequest !== 'string') {
-    return false
-  }
-
-  return userRequest.indexOf('node_modules') >= 0
-}
-
 const conf = {
   context: APP_PATH,
-  mode: 'development',
+  mode: 'production',
   entry: APP_PATH + '/main',
   devtool: false,
   stats: {
@@ -35,10 +26,10 @@ const conf = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     modules: ['src', 'node_modules'],
-    // alias: {
-    //     react: "preact-compat",
-    //     "react-dom": "preact-compat"
-    // }
+    alias: {
+      react: 'preact/compat',
+      'react-dom': 'preact/compat',
+    },
   },
   module: {
     rules: [
