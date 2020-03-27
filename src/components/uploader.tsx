@@ -33,29 +33,6 @@ export class FileUploader extends React.Component<any, State> implements FileUpl
   state: State = {
     type: null,
     files: [],
-    // files: [
-    //   {
-    //     id: 'stephen.king.temnaya.bashnya',
-    //     title: 'stephen.king.temnaya.bashnya',
-    //     progress: 100,
-    //   },
-    //   {
-    //     id: 'oldos',
-    //     title: 'Олдос Хаксли. О дивный новый мир',
-    //     progress: 70,
-    //     error: 'The storage is full',
-    //   },
-    //   {
-    //     id: 'yod',
-    //     title: 'Элиезер Юдковский. Гарри Поттер и методы рационального мышления',
-    //     progress: 'PARSE',
-    //   },
-    //   {
-    //     id: 'sam',
-    //     title: 'Сэмюел Дилэни. Вавилон-17',
-    //     progress: 'WAITS',
-    //   },
-    // ],
   }
 
   render() {
@@ -72,24 +49,26 @@ export class FileUploader extends React.Component<any, State> implements FileUpl
 
     return (
       <div className={s.page}>
-        <div className={s.title}>{titles[type]}</div>
-        {type === 'HAS_ERRORS' && (
-          <div className={s.result}>
-            {files.length} загружено, {files.filter(f => f.error).length} с ошибкой
-          </div>
-        )}
+        <div className={s.content}>
+          <div className={s.title}>{titles[type]}</div>
+          {type === 'HAS_ERRORS' && (
+            <div className={s.result}>
+              {files.length} загружено, {files.filter(f => f.error).length} с ошибкой
+            </div>
+          )}
 
-        <div className={s.files}>
-          {files.map(file => (
-            <FileLine key={file.id} file={file}></FileLine>
-          ))}
+          <div className={s.files}>
+            {files.map(file => (
+              <FileLine key={file.id} file={file}></FileLine>
+            ))}
+          </div>
+
+          {type !== 'UPLOAD' && (
+            <div className={s.button} onClick={this.finish}>
+              Продолжить
+            </div>
+          )}
         </div>
-
-        {type !== 'UPLOAD' && (
-          <div className={s.button} onClick={this.finish}>
-            Продолжить
-          </div>
-        )}
       </div>
     )
   }
