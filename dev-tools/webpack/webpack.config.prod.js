@@ -101,7 +101,12 @@ const conf = {
         cache: true,
         parallel: true,
         sourceMap: true,
-        terserOptions: {},
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
+        extractComments: false,
       }),
     ],
     splitChunks: {

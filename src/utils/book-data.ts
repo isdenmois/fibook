@@ -1,4 +1,4 @@
-import * as BookParserWorker from 'worker-loader!workers/book-parser'
+import * as BookParserWorker from 'worker-loader?name=worker.js!workers/book-parser'
 import { ParsedFB2 } from 'models/parser'
 
 export default function parseBookData(file: File): Promise<ParsedFB2> {

@@ -31,6 +31,7 @@ export function BookPage({ match, history }: Props) {
 
   const toolbar = <Toolbar backButton history={history} title='Подробности' />
   const tabbar = book ? <BookPageButtons book={book} history={history} /> : null
+  const hasHistory = Boolean(book?.debugHistory.length)
 
   return (
     <Page name='book' className={s.bookPage} toolbar={toolbar} tabbar={tabbar}>
@@ -45,12 +46,16 @@ export function BookPage({ match, history }: Props) {
           </div>
           <BookDetails book={book} />
 
-          <div className={s.primary}>
-            <Checkbox value={debug} onChange={setDebug}>
-              {debug ? 'Дебаг' : 'История'}
-            </Checkbox>
-          </div>
-          <Timeline history={debug ? book.debugHistory : book.history} />
+          {hasHistory && (
+            <>
+              <div className={s.primary}>
+                <Checkbox value={debug} onChange={setDebug}>
+                  {debug ? 'Дебаг' : 'История'}
+                </Checkbox>
+              </div>
+              <Timeline history={debug ? book.debugHistory : book.history} />
+            </>
+          )}
         </>
       )}
       {loading && <Loading />}

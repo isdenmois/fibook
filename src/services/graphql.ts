@@ -104,7 +104,11 @@ const resolvers = {
 
       return { id, status }
     },
-    deleteBook: (_, { id }) => deleteBook(id).then(() => id),
+    async deleteBook(_, { id, status }) {
+      await deleteBook(id)
+
+      return { id, status }
+    },
   },
 }
 

@@ -45,7 +45,10 @@ export const UPDATE_STATUS = gql`
 `
 export const DELETE_BOOK = gql`
   mutation DeleteBook($id: ID!, $status: Int) {
-    deleteBook(id: $id, status: $status)
+    deleteBook(id: $id, status: $status) {
+      id
+      status
+    }
   }
 `
 const NEW_QUERY = { query: BOOKS_QUERY, variables: NEW_LIST_VARS }
