@@ -123,7 +123,9 @@ export class BookPage extends React.Component<Props> {
 
   private mapData([book, history, thumbnail]) {
     const processedHistory = processHistory(history || [])
+
     book = book[0]
+    book.status = +book.status
 
     if (processedHistory.length > 0) {
       book.startRead = +minBy(history, 'date')
