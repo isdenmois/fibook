@@ -8,13 +8,11 @@ import { Book, BookHistory } from 'models/book'
 
 interface Props {
   book: Book
-  history: BookHistory[]
 }
 
 export default class BookDetails extends React.PureComponent<Props> {
   render() {
-    const history = this.props.history
-    const { author, title, status, progress, size, location, startRead, endRead, readTime } = this.props.book
+    const { author, title, status, progress, size, location, startRead, endRead, readTime, history } = this.props.book
     const Status = status ? 'Прочитано' : 'Непрочитано'
     let separator = location.indexOf('/', 10)
     if (separator === -1) {

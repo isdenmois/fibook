@@ -14,7 +14,7 @@ export default () => (
     <BrowserRouter>
       <div className={s.app}>
         <Route path='/' component={HomePage as any} />
-        <Route path='/book/:MD5' component={BookPage as any} />
+        <Route path='/book/:id' component={BookPage as any} />
       </div>
     </BrowserRouter>
   </AppComponent>

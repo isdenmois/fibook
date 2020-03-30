@@ -30,7 +30,7 @@ exports.output = {
 }
 
 exports.resolve = {
-  extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx'],
   modules: ['src', 'node_modules'],
 }
 
@@ -40,6 +40,10 @@ exports.module = {
       test: /\.tsx?$/,
       use: [strip.loader('debug'), 'babel-loader'],
       exclude: /node_modules/,
+    },
+    {
+      test: /\.graphql$/i,
+      use: 'raw-loader',
     },
     {
       test: /\.(png|woff|woff2|eot|ttf)$/,

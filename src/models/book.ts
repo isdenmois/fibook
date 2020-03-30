@@ -1,8 +1,7 @@
 export interface Book {
-  MD5: string
+  id: string
   title: string
   author: string
-  lastRead: string
   status: number
   progress: string
   size: number
@@ -13,6 +12,8 @@ export interface Book {
   endRead: number
   readTime: number
   thumbnail: string
+  lastRead: string
+  history: BookHistory[]
 }
 
 export interface BookHistory {

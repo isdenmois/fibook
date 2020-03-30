@@ -1,0 +1,41 @@
+type Query {
+  books(where: String!, order: String, limit: Int, offset: Int): BookResult!
+  book(id: String!): Book
+}
+
+type Mutation {
+  changeStatus(id: ID!, status: Int!): Book!
+  deleteBook(id: ID!, status: Int): Book!
+}
+
+type Book {
+  id: ID!
+  title: String
+  author: String
+  status: Int
+  progress: String
+  size: Int
+  LastAccess: Float
+  LastModified: Float
+  location: String
+  startRead: Int
+  endRead: Int
+  readTime: Int
+  lastRead: String
+  thumbnail: String
+  history: [BookHistory]
+}
+
+type BookHistory {
+  date: String!
+  pages: Int!
+  percent: Int
+  progress: String
+  speed: Int
+  time: Int!
+}
+
+type BookResult {
+  total: Int!
+  items: [Book]
+}

@@ -1,6 +1,4 @@
-import { QueryParams } from 'models/rsql'
-
-export default function queryParams(data: QueryParams = {}) {
+export default function queryParams(data: Record<string, any> = {}) {
   return Object.keys(data)
     .map(key => {
       const value = data[key]

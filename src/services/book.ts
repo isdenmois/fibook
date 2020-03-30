@@ -28,8 +28,8 @@ export async function createBook(
   await request(BOOKS_ENDPOINT, options, onProgress)
 }
 
-export async function deleteBook(MD5: string) {
-  const requestURL = `${BOOKS_ENDPOINT}/${MD5}`
+export async function deleteBook(id: string) {
+  const requestURL = `${BOOKS_ENDPOINT}/${id}`
   const options = { method: 'DELETE' }
   await request(requestURL, options)
 }

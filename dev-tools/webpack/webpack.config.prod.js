@@ -24,7 +24,7 @@ const conf = {
     filename: '[name].js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx'],
     modules: ['src', 'node_modules'],
     alias: {
       react: 'preact/compat',
@@ -37,6 +37,10 @@ const conf = {
         test: /\.tsx?$/,
         use: [strip.loader('debug'), 'babel-loader'],
         exclude: /node_modules/,
+      },
+      {
+        test: /\.graphql$/i,
+        use: 'raw-loader',
       },
       {
         test: /\.(png|woff|woff2|eot|ttf)$/,
