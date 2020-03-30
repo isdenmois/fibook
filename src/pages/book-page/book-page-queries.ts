@@ -15,6 +15,14 @@ export const BOOK_QUERY = gql`
       location
       thumbnail
       lastRead
+      debugHistory {
+        date
+        pages
+        percent
+        progress
+        speed
+        time
+      }
       history {
         date
         pages

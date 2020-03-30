@@ -14,6 +14,7 @@ export interface Book {
   thumbnail: string
   lastRead: string
   history: BookHistory[]
+  debugHistory: BookHistory[]
 }
 
 export interface BookHistory {

@@ -1,24 +1,30 @@
-import each from 'utils/each'
 import { BookHistory, RawHistory } from 'models/book'
+const HOUR = 3600
+const MAX_SPEED = 15
 
 export function formatDate(date: number) {
   return new Date(date).toLocaleDateString()
 }
 
-export function calculateSpeed(time: number, pages: number) {
-  return Math.round(time / pages / 1000)
+export function getSpeed(time: number, pages: number) {
+  return time / pages / 1000
 }
 
-export default function processHistory(data: RawHistory[]) {
+export function getPagesSpeed(time: number, pages: number) {
+  return Math.round(HOUR / getSpeed(time, pages))
+}
+
+export default function processHistory(data: RawHistory[], debug?: boolean) {
   const history: BookHistory[] = []
   let result: BookHistory = { date: '', time: 0, pages: 0 }
   let currentProgress = 0
 
-  each(data, (row: RawHistory) => {
+  data.forEach((row: RawHistory) => {
     const date = formatDate(+row.date)
+
     if (date !== result.date) {
-      if (result.date) {
-        result.speed = calculateSpeed(result.time, result.pages)
+      if (result.time > 0) {
+        result.speed = getPagesSpeed(result.time, result.pages)
         result.percent = Math.round(result.percent)
         history.push(result)
       }
@@ -32,17 +38,20 @@ export default function processHistory(data: RawHistory[]) {
 
     const [start, end] = row.progress.split('/')
     if (start && end) {
-      result.percent = (+start / +end) * 100
-      result.progress = row.progress
-      result.pages += +start - currentProgress
-      result.time += +row.time
+      if (getSpeed(+row.time, +start - currentProgress) > MAX_SPEED || debug) {
+        result.percent = (+start / +end) * 100
+        result.progress = row.progress
+        result.pages += +start - currentProgress
+        result.time += +row.time
+      }
+
       currentProgress = +start
     }
   })
 
   const date = history.length > 0 ? history[history.length - 1].date : ''
   if (result.date !== date) {
-    result.speed = calculateSpeed(result.time, result.pages)
+    result.speed = getPagesSpeed(result.time, result.pages)
     result.percent = Math.round(result.percent)
     history.push(result)
   }

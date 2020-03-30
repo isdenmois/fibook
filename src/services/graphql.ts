@@ -67,7 +67,7 @@ function fetchBook(_, vars, __, info) {
   const historyQuery = {
     fields: ['StartTime as date', 'EndTime', '(EndTime - StartTime) AS time', 'Progress AS progress'],
     table: 'library_history',
-    where: `MD5 = "${vars.id}" AND time > 30000 AND progress <>  "5/5"`,
+    where: `MD5 = "${vars.id}"`,
     order: 'StartTime',
     limit: -1,
   }
@@ -79,6 +79,7 @@ function fetchBook(_, vars, __, info) {
     book.status = +book.status
 
     book.history = processHistory(history || [])
+    book.debugHistory = processHistory(history || [], true)
 
     if (book.history.length > 0) {
       book.startRead = +minBy(history, 'date')
