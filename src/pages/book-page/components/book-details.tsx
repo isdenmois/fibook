@@ -11,9 +11,8 @@ interface Props {
 }
 
 export const BookDetails = React.memo(({ book }: Props) => {
-  const { author, title, progress, size, location, startRead, endRead, readTime, history } = book
+  const { author, title, progress, size, location, startRead, endRead, readTime, history, speed } = book
   const status = book.status ? 'Прочитано' : 'Непрочитано'
-  // const readTime = history?.length
   let separator = location.indexOf('/', 10)
 
   if (separator === -1) {
@@ -27,6 +26,8 @@ export const BookDetails = React.memo(({ book }: Props) => {
       <ListItem small center='Статус' right={status} />
       {progress && <ListItem small center='Прогресс' right={progress} />}
       {readTime && <ListItem small center='Время чтения' right={formatTime(readTime)} />}
+      {book.readPages > 0 && <ListItem small center='Прочтено страниц' right={book.readPages} />}
+      {speed > 0 && <ListItem small center='Скорость чтения' right={speed} />}
       {startRead && <ListItem small center='Начало чтения' right={new Date(startRead).toLocaleDateString()} />}
       {endRead && <ListItem small center='Конец чтения' right={new Date(endRead).toLocaleDateString()} />}
       {endRead && startRead && <ListItem small center='Дней чтения' right={formatDaysLength(startRead, endRead)} />}

@@ -4,7 +4,7 @@ import { SchemaLink } from 'apollo-link-schema'
 import { makeExecutableSchema } from 'graphql-tools'
 import queryParams from 'utils/query-params'
 import request from 'utils/request'
-import processHistory from 'utils/process-history'
+import processHistory, { getPagesSpeed } from 'utils/process-history'
 import { minBy, maxBy } from 'utils/min-by'
 import typeDefs from '../../dev-tools/schema.graphql'
 import { Book, RawHistory, BookHistory } from 'models/book'
@@ -58,7 +58,7 @@ function getFields(node, map: Record<string, string>): any {
 }
 
 function fetchBook(_, vars, __, info) {
-  const omit = ['history', 'rawHistory', 'startRead', 'endRead', 'readTime', 'lastRead']
+  const omit = ['history', 'rawHistory', 'startRead', 'endRead', 'readTime', 'lastRead', 'speed', 'readPages']
   const bookQuery = {
     fields: getFields(info.fieldNodes[0], booksMap).filter(f => typeof f === 'string' && !omit.includes(f)),
     table: 'library_metadata',
@@ -84,7 +84,9 @@ function fetchBook(_, vars, __, info) {
     if (book.history.length > 0) {
       book.startRead = +minBy(history, 'date')
       book.endRead = +maxBy(history, 'EndTime')
+      book.readPages = book.history.reduce((pages: number, item: BookHistory) => pages + item.pages, 0)
       book.readTime = book.history.reduce((time: number, item: BookHistory) => time + item.time, 0)
+      book.speed = book.readPages > 0 && book.readTime > 0 ? getPagesSpeed(book.readTime, book.readPages) : 0
     }
 
     book.lastRead = book.history.length > 0 ? book.history[book.history.length - 1].date : ''

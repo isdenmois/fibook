@@ -18,6 +18,8 @@ export const BOOK_QUERY = gql`
       endRead
       readTime
       lastRead
+      readPages
+      speed
       debugHistory {
         date
         pages

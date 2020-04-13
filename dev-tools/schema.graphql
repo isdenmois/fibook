@@ -21,6 +21,8 @@ type Book {
   startRead: Float
   endRead: Float
   readTime: Int
+  readPages: Int
+  speed: Int
   lastRead: String
   thumbnail: String
   history: [BookHistory]

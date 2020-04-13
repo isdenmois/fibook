@@ -11,6 +11,8 @@ export interface Book {
   startRead: number
   endRead: number
   readTime: number
+  readPages: number
+  speed: number
   thumbnail: string
   lastRead: string
   history: BookHistory[]
