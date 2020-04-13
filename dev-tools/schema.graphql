@@ -18,8 +18,8 @@ type Book {
   LastAccess: Float
   LastModified: Float
   location: String
-  startRead: Int
-  endRead: Int
+  startRead: Float
+  endRead: Float
   readTime: Int
   lastRead: String
   thumbnail: String

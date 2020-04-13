@@ -1,17 +1,16 @@
 import * as React from 'react'
 
 import { InlineSvg } from 'components/inline-svg'
+import { Book } from 'models/book'
 
 const svg = require('../style/book-progress.svg')
 const s = require('../style/book-progress.css')
 
 interface Props {
-  status: number
-  progress: string
-  lastRead: string
+  book: Book
 }
 
-export function BookProgress({ status, progress, lastRead }: Props) {
+export const BookProgress = React.memo(({ book: { progress, lastRead, status } }: Props) => {
   const parts = progress ? progress.split('/') : [0, 1]
   const position = +parts[0]
   const total = +parts[1]
@@ -32,4 +31,4 @@ export function BookProgress({ status, progress, lastRead }: Props) {
       <InlineSvg className={s.wrapper} src={svg} style={{ left: `${percent}%` }} />
     </div>
   )
-}
+})

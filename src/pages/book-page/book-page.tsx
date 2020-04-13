@@ -10,7 +10,7 @@ import { Loading } from 'components/loading'
 import { Checkbox } from 'components/checkbox'
 
 import { BookProgress } from './components/book-progress'
-import BookDetails from './components/book-details'
+import { BookDetails } from './components/book-details'
 import Timeline from './components/timeline'
 import Thumbnail from './components/thumbnail'
 import { BookPageButtons } from './components/book-page-buttons'
@@ -42,8 +42,9 @@ export function BookPage({ match, history }: Props) {
             <div className={s.title}>{book.title}</div>
             <div className={s.author}>{book.author}</div>
 
-            <BookProgress status={book.status} lastRead={book.lastRead} progress={book.progress} />
+            <BookProgress book={book} />
           </div>
+
           <BookDetails book={book} />
 
           {hasHistory && (
