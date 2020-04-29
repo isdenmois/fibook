@@ -122,6 +122,7 @@ const conf = {
   plugins: [
     new HtmlWebpackPlugin({
       template: APP_PATH + '/index.html',
+      favicon: ROOT_PATH + '/dev-tools/favicon.ico',
       minify: {
         collapseWhitespace: true,
         removeComments: true,

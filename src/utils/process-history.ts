@@ -1,6 +1,6 @@
 import { BookHistory, RawHistory } from 'models/book'
 const HOUR = 3600
-const MAX_SPEED = 15
+const MAX_SPEED = 10
 
 export function formatDate(date: number) {
   return new Date(date).toLocaleDateString()
@@ -38,7 +38,7 @@ export default function processHistory(data: RawHistory[], debug?: boolean) {
 
     const [start, end] = row.progress.split('/')
     if (start && end) {
-      if (getSpeed(+row.time, +start - currentProgress) > MAX_SPEED || debug) {
+      if (getSpeed(+row.time, +start - currentProgress) > MAX_SPEED || +row.time > 20000 || debug) {
         result.percent = (+start / +end) * 100
         result.progress = row.progress
         result.pages += +start - currentProgress

@@ -16,7 +16,7 @@ const booksMap = {
   id: 'MD5',
   author: 'Authors',
   title: 'Title',
-  thumbnail: '(SELECT _data FROM library_thumbnail WHERE Source_MD5 = MD5)',
+  thumbnail: '(SELECT COUNT(*) FROM library_thumbnail WHERE Source_MD5 = MD5 LIMIT 1)',
   progress: 'Progress',
   status: 'Status',
   size: 'Size',

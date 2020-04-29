@@ -12,7 +12,7 @@ import { Checkbox } from 'components/checkbox'
 import { BookProgress } from './components/book-progress'
 import { BookDetails } from './components/book-details'
 import Timeline from './components/timeline'
-import Thumbnail from './components/thumbnail'
+import { Thumbnail } from './components/thumbnail'
 import { BookPageButtons } from './components/book-page-buttons'
 import { BOOK_QUERY } from './book-page-queries'
 const s = require('./style/book-page.css')
@@ -38,7 +38,7 @@ export function BookPage({ match, history }: Props) {
       {book && (
         <>
           <div className={s.primary}>
-            {book.thumbnail && <Thumbnail url={book.thumbnail} />}
+            {book.thumbnail && <Thumbnail id={book.id} />}
             <div className={s.title}>{book.title}</div>
             <div className={s.author}>{book.author}</div>
 

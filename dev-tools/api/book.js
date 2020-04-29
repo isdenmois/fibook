@@ -27,10 +27,10 @@ function insertBook(options, callback) {
   db.run(query, callback)
 }
 
-function insertThumbnail(path, MD5) {
+function insertThumbnail(MD5) {
   let query = `
     INSERT INTO library_thumbnail (_data, Source_MD5, Thumbnail_Kind)
-    VALUES ("${path}", "${MD5}", "Original")`
+    VALUES ("${MD5}", "${MD5}", "Original")`
 
   db.run(query)
 }
@@ -39,7 +39,7 @@ function insertThumbnail(path, MD5) {
  * POST-request handler.
  */
 router.post('/', multipart(), (req, res) => {
-  const { author, title, 'image-name': imageName } = req.body
+  const { author, title } = req.body
   const { file, image } = req.files
   const path = resolve(`uploads/${file.name}`)
   const date = Date.now()
@@ -58,9 +58,9 @@ router.post('/', multipart(), (req, res) => {
     })
 
     if (image) {
-      const imagePath = resolve(`uploads/${imageName}`)
+      const imagePath = resolve(`uploads/${hash}.jpg`)
       fs.createReadStream(image.path).pipe(fs.createWriteStream(imagePath))
-      insertThumbnail(imagePath, hash)
+      insertThumbnail(hash)
     }
     res.send({ message: 'ok' })
   })

@@ -1,6 +1,6 @@
 const express = require('express')
 const fs = require('fs')
-const os = require('os')
+const { resolve } = require('path')
 
 /**
  * Create router for images.
@@ -13,9 +13,7 @@ router.get('*', (req, res) => {
     path = path.slice(0, path.indexOf('?'))
   }
 
-  if (os.platform() === 'win32') {
-    path = path.slice(1)
-  }
+  path = resolve(`uploads/${path.slice(1)}.jpg`)
 
   fs.exists(path, exist => {
     if (exist) {

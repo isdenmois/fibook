@@ -46,7 +46,7 @@ export default class ListTab extends React.Component<Props> {
 
   private renderRow(book: Book) {
     const { id, title, author } = book
-    let thumbnail = book.thumbnail ? `/thumbnail/${book.thumbnail}` : null
+    let thumbnail = book.thumbnail ? `/thumbnail/${book.id}` : null
 
     return <ListItem thumbnail={thumbnail} center={title} subtitle={author} to={`/book/${id}`} key={id} />
   }

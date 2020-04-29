@@ -92,6 +92,7 @@ exports.plugins = [
   }),
   new HtmlWebpackPlugin({
     template: APP_PATH + '/index.html',
+    favicon: ROOT_PATH + '/dev-tools/favicon.ico',
   }),
   new MiniCssExtractPlugin({
     filename: '[name].css',

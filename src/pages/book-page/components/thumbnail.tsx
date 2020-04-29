@@ -3,17 +3,11 @@ import * as React from 'react'
 const s = require('../style/thumbnail.css')
 
 interface Props {
-  url: string
+  id: string
 }
 
-export default class Thumbnail extends React.Component<Props> {
-  render() {
-    let url = this.props.url
-    if (url.startsWith('/')) {
-      url = url.slice(1)
-    }
+export function Thumbnail({ id }: Props) {
+  const imageURL = `/thumbnail/${id}`
 
-    const imageURL = `/thumbnail/${url}`
-    return <img className={s.thumbnail} src={imageURL} />
-  }
+  return <img className={s.thumbnail} src={imageURL} />
 }

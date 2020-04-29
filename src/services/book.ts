@@ -22,7 +22,6 @@ export async function createBook(
 
   if (image) {
     body.append('image', image, imageName)
-    body.append('image-name', imageName)
   }
   const options = { method: 'POST', body, headers: {} }
   await request(BOOKS_ENDPOINT, options, onProgress)
