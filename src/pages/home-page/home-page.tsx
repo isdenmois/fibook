@@ -25,9 +25,13 @@ export function HomePage({ history, children }) {
   }
 
   const fixed = (
-    <FileInput name='book-upload' onFileSelect={createBook}>
-      <InlineSvg className={s.icon} src={fileUpload} />
-    </FileInput>
+    <>
+      <FileInput name='book-upload' onFileSelect={createBook}>
+        <InlineSvg className={s.icon} src={fileUpload} />
+      </FileInput>
+
+      <div className={s.version}>{VERSION}</div>
+    </>
   )
 
   return (
